@@ -35,7 +35,7 @@ load_dotenv()
 BOT_TOKEN = os.getenv("BOT_TOKEN", "")
 CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME", "@Auezov_data")
 ADMIN_USERNAME = "@Saman2611"
-ADMIN_PHONE = "+998996844483"
+ADMIN_PHONE = "+998996454617"
 DB_PATH = "universitet.db"
 
 logging.basicConfig(
@@ -178,7 +178,7 @@ async def start(update, context):
             await context.bot.send_message(
                 chat_id=CHANNEL_USERNAME,
                 text=(
-                    f"🔔 *YANGI FOYDALANUVCHI MIAVJUO!*\nf*{SEP}*\n\n"
+                    f"🔔 *YANGI FOYDALANUVCHI !*\nf*{SEP}*\n\n"
                     f"👤 *Ismi:* {user.first_name} {user.last_name or ''}\n"
                     f"🆔 *ID:* `{user.id}`\n"
                     f"💬 *Username:* @{user.username or 'yoq'}\n"
