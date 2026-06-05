@@ -34,8 +34,8 @@ from telegram.ext import (
 load_dotenv()
 BOT_TOKEN = os.getenv("BOT_TOKEN", "")
 CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME", "@Auezov_data")
-ADMIN_USERNAME = "@Su1tonov0"
-ADMIN_PHONE = "+998996454671"
+ADMIN_USERNAME = "@Saman2611"
+ADMIN_PHONE = "+998996844483"
 DB_PATH = "universitet.db"
 
 logging.basicConfig(
@@ -423,7 +423,7 @@ async def hujjat_handler(update, context, step):
         await update.message.reply_text(
             f"🎉 *Barcha hujjatlar qabul qilindi!*\n{SEP}\n\n"
             "📍 Endi asl nusxalarni papkaga solib, quyidagi manzilga olib keling:\n\n"
-            "👉 https://maps.app.goo.gl/rm7LTHWLpZ7JsKmu6\n\n"
+            "👉 https://maps.app.goo.gl/rm7LTHWLpZ7JsKmu6\n\n\n\n"
             "✅ _Tez orada siz bilan bog'lanamiz!_",
             parse_mode="Markdown",
             reply_markup=main_menu_markup()
@@ -489,10 +489,11 @@ async def sorov_telefon(update, context):
     user = update.message.from_user
     con = db_connect()
     cur = con.cursor()
+    # Tuzatildi: Ustunlar soni jadvalga moslab 9 taga tenglashtirildi
     cur.execute(
         "INSERT OR REPLACE INTO sorovnama VALUES (?,?,?,?,?,?,?,?,?)",
         (
-            user.id, user.first_name, user.last_name or "", user.username or "",
+            user.id, user.first_name or "", user.last_name or "", user.username or "",
             datetime.datetime.now().strftime('%d.%m.%Y %H:%M'),
             context.user_data.get('sorov_ism', ''),
             context.user_data.get('sorov_familya', ''),
@@ -614,17 +615,14 @@ async def callback_data(update, context):
     await query.answer()
     data = query.data
 
-    if data.startswith("format_"):
-        return await format_callback(update, context)
-
     if data == "bekor":
         await query.edit_message_text("❌ *Bekor qilindi.*", parse_mode="Markdown")
-        return
+        return TANLA
 
     yonalish = YONALISH_MAP.get(data)
     if not yonalish:
         await query.edit_message_text("⚠️ Noma'lum tanlov.", parse_mode="Markdown")
-        return
+        return TANLA
 
     context.user_data['yonalish'] = yonalish
 
@@ -634,7 +632,7 @@ async def callback_data(update, context):
             "⚠️ *Ma'lumotlar topilmadi.*\nIltimos, qaytadan boshlang: /start",
             parse_mode="Markdown"
         )
-        return
+        return TANLA
 
     user_id = context.user_data.get('id', query.message.chat_id)
     con = db_connect()
@@ -687,6 +685,7 @@ async def callback_data(update, context):
         parse_mode="Markdown",
         reply_markup=main_menu_markup()
     )
+    return TANLA
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 🔙  MENYUGA QAYTISH
@@ -731,31 +730,46 @@ def main():
     conv = ConversationHandler(
         entry_points=[CommandHandler('start', start)],
         states={
-            TANLA: [MessageHandler(filters.TEXT & ~filters.COMMAND, text)],
+            TANLA: [
+                MessageHandler(filters.TEXT & ~filters.COMMAND, text),
+                CallbackQueryHandler(callback_data)  # Yo'nalish inline tugmalarini shu yerda tutamiz
+            ],
 
-            HUJJAT_FORMAT_1: [MessageHandler(back_filter, menyuga_qaytish)],
-            HUJJAT_FORMAT_2: [MessageHandler(back_filter, menyuga_qaytish)],
-            HUJJAT_FORMAT_3: [MessageHandler(back_filter, menyuga_qaytish)],
-            HUJJAT_FORMAT_4: [MessageHandler(back_filter, menyuga_qaytish)],
+            # Tuzatildi: Har bir format tanlash stepida CallbackQueryHandler o'z statiga biriktirildi!
+            HUJJAT_FORMAT_1: [
+                MessageHandler(back_filter, menyuga_qaytish),
+                CallbackQueryHandler(format_callback)
+            ],
+            HUJJAT_FORMAT_2: [
+                MessageHandler(back_filter, menyuga_qaytish),
+                CallbackQueryHandler(format_callback)
+            ],
+            HUJJAT_FORMAT_3: [
+                MessageHandler(back_filter, menyuga_qaytish),
+                CallbackQueryHandler(format_callback)
+            ],
+            HUJJAT_FORMAT_4: [
+                MessageHandler(back_filter, menyuga_qaytish),
+                CallbackQueryHandler(format_callback)
+            ],
 
-      async def hujjat_1(update, context):
-    await update.message.reply_text("✅ HUJJAT_1 ISHLADI")
-    return TANLA
+            HUJJAT_1: [
+                MessageHandler(back_filter, menyuga_qaytish),
+                MessageHandler(media_filter | (filters.TEXT & ~filters.COMMAND), hujjat_1),
+            ],
+            HUJJAT_2: [
+                MessageHandler(back_filter, menyuga_qaytish),
+                MessageHandler(media_filter | (filters.TEXT & ~filters.COMMAND), hujjat_2),
+            ],
+            HUJJAT_3: [
+                MessageHandler(back_filter, menyuga_qaytish),
+                MessageHandler(media_filter | (filters.TEXT & ~filters.COMMAND), hujjat_3),
+            ],
+            HUJJAT_4: [
+                MessageHandler(back_filter, menyuga_qaytish),
+                MessageHandler(media_filter | (filters.TEXT & ~filters.COMMAND), hujjat_4),
+            ],
 
-HUJJAT_FORMAT_2: [
-    CallbackQueryHandler(format_callback, pattern="^format_"),
-    MessageHandler(back_filter, menyuga_qaytish),
-],
-
-HUJJAT_FORMAT_3: [
-    CallbackQueryHandler(format_callback, pattern="^format_"),
-    MessageHandler(back_filter, menyuga_qaytish),
-],
-
-HUJJAT_FORMAT_4: [
-    CallbackQueryHandler(format_callback, pattern="^format_"),
-    MessageHandler(back_filter, menyuga_qaytish),
-],
             SOROV_ISM:     [MessageHandler(back_filter, menyuga_qaytish),
                             MessageHandler(filters.TEXT & ~filters.COMMAND, sorov_ism)],
             SOROV_FAMILYA: [MessageHandler(back_filter, menyuga_qaytish),
@@ -783,7 +797,6 @@ HUJJAT_FORMAT_4: [
     )
 
     app.add_handler(conv)
-    app.add_handler(CallbackQueryHandler(callback_data))
 
     logger.info("✅ Bot ishga tushdi!")
     app.run_polling()
