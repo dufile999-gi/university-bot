@@ -13,6 +13,7 @@ threading.Thread(
     target=lambda: HTTPServer(('0.0.0.0', 8080), Handler).serve_forever(),
     daemon=True
 ).start()
+
 import os
 import sqlite3
 import datetime
@@ -27,9 +28,9 @@ from telegram.ext import (
     MessageHandler, ConversationHandler, filters
 )
 
-# ─────────────────────────────────────────────
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # ⚙️  SOZLAMALAR
-# ─────────────────────────────────────────────
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 load_dotenv()
 BOT_TOKEN = os.getenv("BOT_TOKEN", "")
 CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME", "@Auezov_data")
@@ -43,9 +44,9 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# ─────────────────────────────────────────────
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 🗄️  MA'LUMOTLAR BAZASI
-# ─────────────────────────────────────────────
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 def db_connect():
     return sqlite3.connect(DB_PATH)
 
@@ -89,47 +90,50 @@ def init_db():
     con.commit()
     con.close()
 
-# ─────────────────────────────────────────────
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 🎨  DIZAYN ELEMENTLARI
-# ─────────────────────────────────────────────
-SEPARATOR = "═" * 30
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SEP = "┄" * 28
 
-YONALISHLAR_TEXT = f"""
-🎓 *TA'LIM YO'NALISHLARI*
-{SEPARATOR}
+YONALISHLAR_TEXT = (
+    "🎓 *TA'LIM YO'NALISHLARI*\n"
+    f"{SEP}\n\n"
+    "🔬 *6B05120* — Biotexnologiya\n"
+    "🌍 *6B05210* — Ekologiya\n"
+    "💻 *6B06120* — Axborot tizimlar\n"
+    "⚙️ *6B07150* — Avtomatizatsiya va boshqaruv\n"
+    "🚚 *6B07130* — Transport texnikasi\n"
+    "⚡ *6B07110* — Elektroenergetika\n"
+    "🧑‍🏫 *6B01310* — Pedagogika va boshlang'ich ta'lim\n"
+    "🧠 *6B06121* — Sun'iy intellekt texnologiyalari\n"
+    "💼 *6B04130* — Hisob va audit\n"
+    "✈️ *6B11110* — Turizm\n\n"
+    f"{SEP}\n"
+    "📌 _Hujjat topshirish uchun pastdagi menyudan foydalaning._"
+)
 
-🔬 *6B05120* — Biotexnologiya
-🌍 *6B05210* — Ekologiya
-💻 *6B06120* — Axborot tizimlar
-⚙️ *6B07150* — Avtomatizatsiya va boshqaruv
-🚚 *6B07130* — Transport texnikasi
-⚡ *6B07110* — Elektroenergetika
-🧑‍🏫 *6B01310* — Pedagogika va boshlang'ich ta'lim
-🧠 *6B06121* — Sun'iy intellekt texnologiyalari
-💼 *6B04130* — Hisob va audit
-✈️ *6B11110* — Turizm
-
-{SEPARATOR}
-📌 _Hujjat topshirish uchun pastdagi menyudan foydalaning._
-"""
-
-HUJJATLAR_ROYXATI = f"""
-📋 *KERAKLI HUJJATLAR RO'YXATI*
-{SEPARATOR}
-
-1️⃣ 📗 Diplom yoki Atestat
-2️⃣ 🪪 Pasport nusxasi
-3️⃣ 🗂 0.86 Meditsina ma'lumotnomasi
-4️⃣ 📸 3×4 — 6 dona oq-qora rasm
-
-{SEPARATOR}
-"""
+HUJJATLAR_ROYXATI = (
+    "📋 *KERAKLI HUJJATLAR RO'YXATI*\n"
+    f"{SEP}\n\n"
+    "1️⃣ 📗 Diplom yoki Atestat\n"
+    "2️⃣ 🪪 Pasport nusxasi\n"
+    "3️⃣ 🗂 0.86 Meditsina ma'lumotnomasi\n"
+    "4️⃣ 📸 3×4 — 6 dona oq-qora rasm\n\n"
+    f"{SEP}"
+)
 
 # Conversation states
 TANLA = "tanla"
+HUJJAT_FORMAT_1, HUJJAT_FORMAT_2, HUJJAT_FORMAT_3, HUJJAT_FORMAT_4 = (
+    "hujjat_format_1", "hujjat_format_2", "hujjat_format_3", "hujjat_format_4"
+)
 HUJJAT_1, HUJJAT_2, HUJJAT_3, HUJJAT_4 = "hujjat_1", "hujjat_2", "hujjat_3", "hujjat_4"
-SOROV_ISM, SOROV_FAMILYA, SOROV_YOSH, SOROV_TELEFON = "sorov_ism", "sorov_familya", "sorov_yosh", "sorov_telefon"
-YONALISH_ISM, YONALISH_FAMILYA, YONALISH_YOSH, YONALISH_TELEFON = "yonalish_ism", "yonalish_familya", "yonalish_yosh", "yonalish_telefon"
+SOROV_ISM, SOROV_FAMILYA, SOROV_YOSH, SOROV_TELEFON = (
+    "sorov_ism", "sorov_familya", "sorov_yosh", "sorov_telefon"
+)
+YONALISH_ISM, YONALISH_FAMILYA, YONALISH_YOSH, YONALISH_TELEFON = (
+    "yonalish_ism", "yonalish_familya", "yonalish_yosh", "yonalish_telefon"
+)
 
 def main_menu_markup():
     buttons = [
@@ -140,9 +144,17 @@ def main_menu_markup():
     ]
     return ReplyKeyboardMarkup(buttons, resize_keyboard=True)
 
-# ─────────────────────────────────────────────
+def format_tanlash_keyboard(step_num):
+    return InlineKeyboardMarkup([
+        [
+            InlineKeyboardButton("🖼 Rasm ko'rinishida", callback_data=f"format_rasm_{step_num}"),
+            InlineKeyboardButton("📎 Fayl ko'rinishida", callback_data=f"format_fayl_{step_num}"),
+        ]
+    ])
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 🚀  /start
-# ─────────────────────────────────────────────
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def start(update, context):
     user = update.message.from_user
     con = db_connect()
@@ -166,7 +178,7 @@ async def start(update, context):
             await context.bot.send_message(
                 chat_id=CHANNEL_USERNAME,
                 text=(
-                    f"🆕 *Yangi foydalanuvchi!*\n{SEPARATOR}\n"
+                    f"🆕 *Yangi foydalanuvchi!*\n{SEP}\n"
                     f"🆔 ID: `{user.id}`\n"
                     f"👤 Ismi: {user.first_name} {user.last_name or ''}\n"
                     f"💬 Username: @{user.username or 'yoq'}\n"
@@ -180,31 +192,31 @@ async def start(update, context):
 
     await update.message.reply_text(
         f"👋 *Assalomu alaykum, {user.first_name}!*\n\n"
-        f"{SEPARATOR}\n\n"
-        f"🎓 Siz hozirda *M.Auezov nomidagi Janubiy Qozog'iston universiteti*\n"
-        f"Chirchiq filialiga hujjat topshirish botiga ulangansiz.\n\n"
-        f"📌 *Bu yerda siz:*\n"
-        f"✅ Ta'lim yo'nalishlarini ko'rasiz\n"
-        f"✅ Hujjatlarni onlayn topshirasiz\n"
-        f"✅ So'rovnomani to'ldirasiz\n"
-        f"✅ Yo'nalish tanlaysiz\n\n"
-        f"{SEPARATOR}\n\n"
-        f"👇 *Quyidagi menyudan boshlang:*",
+        f"{SEP}\n\n"
+        "🎓 Siz hozirda *M.Auezov nomidagi Janubiy Qozog'iston universiteti*\n"
+        "Chirchiq filialiga hujjat topshirish botiga ulangansiz.\n\n"
+        "📌 *Bu yerda siz:*\n"
+        "✅ Ta'lim yo'nalishlarini ko'rasiz\n"
+        "✅ Hujjatlarni onlayn topshirasiz\n"
+        "✅ So'rovnomani to'ldirasiz\n"
+        "✅ Yo'nalish tanlaysiz\n\n"
+        f"{SEP}\n\n"
+        "👇 *Quyidagi menyudan boshlang:*",
         parse_mode="Markdown",
         reply_markup=main_menu_markup()
     )
     return TANLA
 
-# ─────────────────────────────────────────────
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 📋  ASOSIY MENYU
-# ─────────────────────────────────────────────
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def text(update, context):
     msg = update.message.text
 
     if msg == "🎓 Universitet haqida":
         await update.message.reply_text(
             "🏛 *M.Auezov nomidagi Janubiy Qozog'iston universiteti*\n"
-            f"{SEPARATOR}\n"
+            f"{SEP}\n"
             "📍 Chirchiqda filial tashkil etilmoqda!\n\n"
             "🔗 Batafsil: [oliygoh.uz](https://oliygoh.uz/post/chirchiqda-mauezov-nomidagi-janubiy-qozogiston-universiteti-filiali-tashkil-etiladi)",
             parse_mode="Markdown",
@@ -218,14 +230,17 @@ async def text(update, context):
 
     elif msg == "📝 Hujjat topshirish":
         await update.message.reply_text(
-            HUJJATLAR_ROYXATI + "\n📗 *Birinchi navbatda Diplom yoki Atestat rasmini yuboring:*",
-            parse_mode="Markdown"
+            f"{HUJJATLAR_ROYXATI}\n\n"
+            "📗 *1-hujjat: Diplom yoki Atestat*\n\n"
+            "📤 Qanday formatda yubormoqchisiz?",
+            parse_mode="Markdown",
+            reply_markup=format_tanlash_keyboard(1)
         )
-        return HUJJAT_1
+        return HUJJAT_FORMAT_1
 
     elif msg == "📍 Manzil":
         await update.message.reply_text(
-            f"📍 *Universitetning manzili:*\n{SEPARATOR}\n"
+            f"📍 *Universitetning manzili:*\n{SEP}\n"
             "🗺 Quyidagi havolani bosib, Google Maps orqali yo'l toping:\n\n"
             "👉 https://maps.app.goo.gl/rm7LTHWLpZ7JsKmu6",
             parse_mode="Markdown"
@@ -246,7 +261,7 @@ async def text(update, context):
             )
             return TANLA
         await update.message.reply_text(
-            f"📝 *SO'ROVNOMA*\n{SEPARATOR}\n\n"
+            f"📝 *SO'ROVNOMA*\n{SEP}\n\n"
             "👤 *To'liq ismingizni* kiriting:\n_(Masalan: Abdullayev Ali)_",
             parse_mode="Markdown"
         )
@@ -266,7 +281,7 @@ async def text(update, context):
             )
             return TANLA
         await update.message.reply_text(
-            f"📋 *YO'NALISH TANLASH*\n{SEPARATOR}\n\n"
+            f"📋 *YO'NALISH TANLASH*\n{SEP}\n\n"
             "👤 *To'liq ismingizni* kiriting:\n_(Masalan: Abdullayev Ali)_",
             parse_mode="Markdown"
         )
@@ -274,7 +289,7 @@ async def text(update, context):
 
     elif msg == "👤 Admin bilan bog'lanish":
         await update.message.reply_text(
-            f"👤 *ADMIN BILAN BOG'LANISH*\n{SEPARATOR}\n\n"
+            f"👤 *ADMIN BILAN BOG'LANISH*\n{SEP}\n\n"
             f"💬 Telegram: {ADMIN_USERNAME}\n"
             f"📞 Telefon: `{ADMIN_PHONE}`\n\n"
             "⚡️ Admin ish vaqti: *09:00 — 18:00*",
@@ -291,81 +306,145 @@ async def text(update, context):
         )
         return TANLA
 
-# ─────────────────────────────────────────────
-# 📸  HUJJAT TOPSHIRISH
-# ─────────────────────────────────────────────
-async def _send_photo_to_channel(context, update, caption):
-    user = update.message.from_user
-    photo = update.message.photo[-1]
-    try:
-        await context.bot.send_photo(
-            chat_id=CHANNEL_USERNAME,
-            photo=photo.file_id,
-            caption=(
-                f"📎 {caption}\n{SEPARATOR}\n"
-                f"👤 {user.full_name}\n"
-                f"🆔 ID: `{user.id}`\n"
-                f"⏰ {datetime.datetime.now().strftime('%d.%m.%Y %H:%M')}"
-            ),
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 📤  FORMAT TANLASH CALLBACK
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HUJJAT_NOMLAR = {
+    1: "📗 Diplom / Atestat",
+    2: "🪪 Pasport nusxasi",
+    3: "🗂 0.86 Meditsina ma'lumotnomasi",
+    4: "📸 3×4 oq-qora rasm (6 dona)",
+}
+
+HUJJAT_NEXT_MSG = {
+    1: "2️⃣ Endi *Pasport nusxasi* ni yuboring: 🪪\n\n📤 Qanday formatda yubormoqchisiz?",
+    2: "3️⃣ Endi *0.86 Meditsina ma'lumotnomasi* ni yuboring: 🗂\n\n📤 Qanday formatda yubormoqchisiz?",
+    3: "4️⃣ Endi *3×4 formatdagi 6 dona oq-qora rasm* ni yuboring: 📸\n\n📤 Qanday formatda yubormoqchisiz?",
+}
+
+HUJJAT_STATES = {1: HUJJAT_1, 2: HUJJAT_2, 3: HUJJAT_3, 4: HUJJAT_4}
+HUJJAT_FORMAT_STATES = {1: HUJJAT_FORMAT_1, 2: HUJJAT_FORMAT_2, 3: HUJJAT_FORMAT_3, 4: HUJJAT_FORMAT_4}
+
+async def format_callback(update, context):
+    query = update.callback_query
+    await query.answer()
+    data = query.data
+
+    parts = data.split("_")
+    format_turi = parts[1]
+    step = int(parts[2])
+
+    context.user_data[f'hujjat_format_{step}'] = format_turi
+
+    if format_turi == "rasm":
+        await query.edit_message_text(
+            f"✅ *Rasm ko'rinishida yuborasiz*\n\n"
+            f"📤 {HUJJAT_NOMLAR[step]} rasmini yuboring:",
             parse_mode="Markdown"
         )
+    else:
+        await query.edit_message_text(
+            f"✅ *Fayl ko'rinishida yuborasiz*\n\n"
+            f"📎 {HUJJAT_NOMLAR[step]} faylini yuboring:",
+            parse_mode="Markdown"
+        )
+
+    return HUJJAT_STATES[step]
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 📸  HUJJAT TOPSHIRISH
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+async def _send_to_channel(context, update, caption, step):
+    user = update.message.from_user
+    format_turi = context.user_data.get(f'hujjat_format_{step}', 'rasm')
+    full_caption = (
+        f"📎 {caption}\n{SEP}\n"
+        f"👤 {user.full_name}\n"
+        f"🆔 ID: `{user.id}`\n"
+        f"⏰ {datetime.datetime.now().strftime('%d.%m.%Y %H:%M')}"
+    )
+    try:
+        if update.message.document:
+            await context.bot.send_document(
+                chat_id=CHANNEL_USERNAME,
+                document=update.message.document.file_id,
+                caption=full_caption,
+                parse_mode="Markdown"
+            )
+        elif update.message.photo:
+            if format_turi == "fayl":
+                photo = update.message.photo[-1]
+                file = await context.bot.get_file(photo.file_id)
+                await context.bot.send_document(
+                    chat_id=CHANNEL_USERNAME,
+                    document=file.file_id,
+                    caption=full_caption,
+                    parse_mode="Markdown"
+                )
+            else:
+                photo = update.message.photo[-1]
+                await context.bot.send_photo(
+                    chat_id=CHANNEL_USERNAME,
+                    photo=photo.file_id,
+                    caption=full_caption,
+                    parse_mode="Markdown"
+                )
     except Exception as e:
-        logger.warning(f"Kanalga rasm yuborishda xato: {e}")
+        logger.warning(f"Kanalga yuborishda xato: {e}")
+
+async def hujjat_handler(update, context, step):
+    format_turi = context.user_data.get(f'hujjat_format_{step}', 'rasm')
+
+    if format_turi == "rasm":
+        if not update.message.photo:
+            await update.message.reply_text(
+                "🖼️ Iltimos, *rasm* yuboring!", parse_mode="Markdown"
+            )
+            return HUJJAT_STATES[step]
+    else:
+        if not update.message.document and not update.message.photo:
+            await update.message.reply_text(
+                "📎 Iltimos, *fayl* yuboring!", parse_mode="Markdown"
+            )
+            return HUJJAT_STATES[step]
+
+    await _send_to_channel(context, update, HUJJAT_NOMLAR[step], step)
+
+    if step < 4:
+        next_step = step + 1
+        await update.message.reply_text(
+            f"✅ *Qabul qilindi!*\n{SEP}\n\n"
+            f"{HUJJAT_NEXT_MSG[step]}",
+            parse_mode="Markdown",
+            reply_markup=format_tanlash_keyboard(next_step)
+        )
+        return HUJJAT_FORMAT_STATES[next_step]
+    else:
+        await update.message.reply_text(
+            f"🎉 *Barcha hujjatlar qabul qilindi!*\n{SEP}\n\n"
+            "📍 Endi asl nusxalarni papkaga solib, quyidagi manzilga olib keling:\n\n"
+            "👉 https://maps.app.goo.gl/rm7LTHWLpZ7JsKmu6\n\n"
+            "✅ _Tez orada siz bilan bog'lanamiz!_",
+            parse_mode="Markdown",
+            reply_markup=main_menu_markup()
+        )
+        return TANLA
 
 async def hujjat_1(update, context):
-    if not update.message.photo:
-        await update.message.reply_text("🖼️ Iltimos, faqat *rasm* yuboring!", parse_mode="Markdown")
-        return HUJJAT_1
-    await _send_photo_to_channel(context, update, "📗 Diplom / Atestat")
-    await update.message.reply_text(
-        f"✅ *Qabul qilindi!*\n{SEPARATOR}\n\n"
-        "2️⃣ Endi *Pasport nusxasi* rasmini yuboring: 🪪",
-        parse_mode="Markdown"
-    )
-    return HUJJAT_2
+    return await hujjat_handler(update, context, 1)
 
 async def hujjat_2(update, context):
-    if not update.message.photo:
-        await update.message.reply_text("🖼️ Iltimos, faqat *rasm* yuboring!", parse_mode="Markdown")
-        return HUJJAT_2
-    await _send_photo_to_channel(context, update, "🪪 Pasport nusxasi")
-    await update.message.reply_text(
-        f"✅ *Qabul qilindi!*\n{SEPARATOR}\n\n"
-        "3️⃣ Endi *0.86 Meditsina ma'lumotnomasi* rasmini yuboring: 🗂",
-        parse_mode="Markdown"
-    )
-    return HUJJAT_3
+    return await hujjat_handler(update, context, 2)
 
 async def hujjat_3(update, context):
-    if not update.message.photo:
-        await update.message.reply_text("🖼️ Iltimos, faqat *rasm* yuboring!", parse_mode="Markdown")
-        return HUJJAT_3
-    await _send_photo_to_channel(context, update, "🗂 0.86 Meditsina ma'lumotnomasi")
-    await update.message.reply_text(
-        f"✅ *Qabul qilindi!*\n{SEPARATOR}\n\n"
-        "4️⃣ *3×4 formatdagi 6 dona oq-qora rasmning* bitta fotosuratini yuboring: 📸",
-        parse_mode="Markdown"
-    )
-    return HUJJAT_4
+    return await hujjat_handler(update, context, 3)
 
 async def hujjat_4(update, context):
-    if not update.message.photo:
-        await update.message.reply_text("🖼️ Iltimos, faqat *rasm* yuboring!", parse_mode="Markdown")
-        return HUJJAT_4
-    await _send_photo_to_channel(context, update, "📸 3×4 oq-qora rasm (6 dona)")
-    await update.message.reply_text(
-        f"🎉 *Barcha hujjatlar qabul qilindi!*\n{SEPARATOR}\n\n"
-        "📍 Endi asl nusxalarni papkaga solib, quyidagi manzilga olib keling:\n\n"
-        "👉 https://maps.app.goo.gl/rm7LTHWLpZ7JsKmu6\n\n"
-        "✅ _Tez orada siz bilan bog'lanamiz!_",
-        parse_mode="Markdown",
-        reply_markup=main_menu_markup()
-    )
-    return TANLA
+    return await hujjat_handler(update, context, 4)
 
-# ─────────────────────────────────────────────
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 📝  SO'ROVNOMA
-# ─────────────────────────────────────────────
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def sorov_ism(update, context):
     context.user_data['sorov_ism'] = update.message.text.strip()
     await update.message.reply_text(
@@ -428,7 +507,7 @@ async def sorov_telefon(update, context):
         await context.bot.send_message(
             chat_id=CHANNEL_USERNAME,
             text=(
-                f"📝 *SO'ROVNOMA TO'LDIRILDI*\n{SEPARATOR}\n"
+                f"📝 *SO'ROVNOMA TO'LDIRILDI*\n{SEP}\n"
                 f"🆔 ID: `{user.id}`\n"
                 f"👤 Telegram: {user.first_name} {user.last_name or ''}\n"
                 f"💬 @{user.username or 'yoq'}\n"
@@ -444,7 +523,7 @@ async def sorov_telefon(update, context):
         logger.warning(f"Kanalga xabar yuborishda xato: {e}")
 
     await update.message.reply_text(
-        f"🎉 *So'rovnoma muvaffaqiyatli yuborildi!*\n{SEPARATOR}\n\n"
+        f"🎉 *So'rovnoma muvaffaqiyatli yuborildi!*\n{SEP}\n\n"
         "✅ Tez orada siz bilan bog'lanamiz.\n"
         "📋 *Yo'nalish tanlash* uchun menyudan foydalaning.",
         parse_mode="Markdown",
@@ -452,9 +531,9 @@ async def sorov_telefon(update, context):
     )
     return TANLA
 
-# ─────────────────────────────────────────────
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 🎓  YO'NALISH TANLASH
-# ─────────────────────────────────────────────
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def yonalish_ism(update, context):
     context.user_data['yonalish_ism'] = update.message.text.strip()
     await update.message.reply_text(
@@ -497,7 +576,7 @@ async def yonalish_telefon(update, context):
         ("🔬 6B05120 — Biotexnologiya", "Biotexnologiya"),
         ("🌍 6B05210 — Ekologiya", "Ekologiya"),
         ("💻 6B06120 — Axborot tizimlar", "Axborot_tizimlar"),
-        ("⚙️ 6B07150 — Avtomatizatsiya va boshqaruv", "Avtomatizatsiya"),
+        ("⚙️ 6B07150 — Avtomatizatsiya", "Avtomatizatsiya"),
         ("🚚 6B07130 — Transport texnikasi", "Transport"),
         ("⚡ 6B07110 — Elektroenergetika", "Elektroenergetika"),
         ("🧑‍🏫 6B01310 — Pedagogika", "Pedagogika"),
@@ -508,15 +587,15 @@ async def yonalish_telefon(update, context):
     keyboard = [[InlineKeyboardButton(t, callback_data=cb)] for t, cb in yonalishlar]
     keyboard.append([InlineKeyboardButton("❌ Bekor qilish", callback_data="bekor")])
     await update.message.reply_text(
-        f"🎓 *YO'NALISHNI TANLANG:*\n{SEPARATOR}",
+        f"🎓 *YO'NALISHNI TANLANG:*\n{SEP}",
         parse_mode="Markdown",
         reply_markup=InlineKeyboardMarkup(keyboard)
     )
     return TANLA
 
-# ─────────────────────────────────────────────
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 🎛️  CALLBACK
-# ─────────────────────────────────────────────
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 YONALISH_MAP = {
     "Biotexnologiya": "🔬 6B05120 — Biotexnologiya",
     "Ekologiya": "🌍 6B05210 — Ekologiya",
@@ -534,6 +613,9 @@ async def callback_data(update, context):
     query = update.callback_query
     await query.answer()
     data = query.data
+
+    if data.startswith("format_"):
+        return await format_callback(update, context)
 
     if data == "bekor":
         await query.edit_message_text("❌ *Bekor qilindi.*", parse_mode="Markdown")
@@ -579,7 +661,7 @@ async def callback_data(update, context):
         await context.bot.send_message(
             chat_id=CHANNEL_USERNAME,
             text=(
-                f"🎓 *YO'NALISH TANLANDI*\n{SEPARATOR}\n"
+                f"🎓 *YO'NALISH TANLANDI*\n{SEP}\n"
                 f"🆔 ID: `{user_id}`\n"
                 f"📌 Ism: {context.user_data['yonalish_ism']}\n"
                 f"📌 Familiya: {context.user_data['yonalish_familya']}\n"
@@ -594,7 +676,7 @@ async def callback_data(update, context):
         logger.warning(f"Kanalga xabar yuborishda xato: {e}")
 
     await query.edit_message_text(
-        f"✅ *Ro'yxatdan o'tdingiz!*\n{SEPARATOR}\n\n"
+        f"✅ *Ro'yxatdan o'tdingiz!*\n{SEP}\n\n"
         f"🎯 Tanlangan yo'nalish:\n*{yonalish}*\n\n"
         "📞 Tez orada siz bilan bog'lanamiz!",
         parse_mode="Markdown"
@@ -606,9 +688,9 @@ async def callback_data(update, context):
         reply_markup=main_menu_markup()
     )
 
-# ─────────────────────────────────────────────
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 🔙  MENYUGA QAYTISH
-# ─────────────────────────────────────────────
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def menyuga_qaytish(update, context):
     await update.message.reply_text(
         "🏠 *Asosiy menyu:*",
@@ -632,9 +714,9 @@ async def tugash(update, context):
     )
     return ConversationHandler.END
 
-# ─────────────────────────────────────────────
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 🤖  MAIN
-# ─────────────────────────────────────────────
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 def main():
     if not BOT_TOKEN:
         raise ValueError("❌ BOT_TOKEN topilmadi! .env faylini tekshiring.")
@@ -644,27 +726,33 @@ def main():
     app = Application.builder().token(BOT_TOKEN).build()
 
     back_filter = filters.Regex("^🔙 Menyuga qaytish$")
+    media_filter = filters.PHOTO | filters.Document.ALL
 
     conv = ConversationHandler(
         entry_points=[CommandHandler('start', start)],
         states={
             TANLA: [MessageHandler(filters.TEXT & ~filters.COMMAND, text)],
 
+            HUJJAT_FORMAT_1: [MessageHandler(back_filter, menyuga_qaytish)],
+            HUJJAT_FORMAT_2: [MessageHandler(back_filter, menyuga_qaytish)],
+            HUJJAT_FORMAT_3: [MessageHandler(back_filter, menyuga_qaytish)],
+            HUJJAT_FORMAT_4: [MessageHandler(back_filter, menyuga_qaytish)],
+
             HUJJAT_1: [
                 MessageHandler(back_filter, menyuga_qaytish),
-                MessageHandler(filters.PHOTO | (filters.TEXT & ~filters.COMMAND), hujjat_1),
+                MessageHandler(media_filter | (filters.TEXT & ~filters.COMMAND), hujjat_1),
             ],
             HUJJAT_2: [
                 MessageHandler(back_filter, menyuga_qaytish),
-                MessageHandler(filters.PHOTO | (filters.TEXT & ~filters.COMMAND), hujjat_2),
+                MessageHandler(media_filter | (filters.TEXT & ~filters.COMMAND), hujjat_2),
             ],
             HUJJAT_3: [
                 MessageHandler(back_filter, menyuga_qaytish),
-                MessageHandler(filters.PHOTO | (filters.TEXT & ~filters.COMMAND), hujjat_3),
+                MessageHandler(media_filter | (filters.TEXT & ~filters.COMMAND), hujjat_3),
             ],
             HUJJAT_4: [
                 MessageHandler(back_filter, menyuga_qaytish),
-                MessageHandler(filters.PHOTO | (filters.TEXT & ~filters.COMMAND), hujjat_4),
+                MessageHandler(media_filter | (filters.TEXT & ~filters.COMMAND), hujjat_4),
             ],
 
             SOROV_ISM:     [MessageHandler(back_filter, menyuga_qaytish),
@@ -696,10 +784,8 @@ def main():
     app.add_handler(conv)
     app.add_handler(CallbackQueryHandler(callback_data))
 
-    app.bot.set_my_commands  # commands set via post_init instead
     logger.info("✅ Bot ishga tushdi!")
     app.run_polling()
 
 if __name__ == '__main__':
     main()
-  
