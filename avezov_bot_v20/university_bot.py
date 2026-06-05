@@ -738,19 +738,23 @@ def main():
             HUJJAT_FORMAT_3: [MessageHandler(back_filter, menyuga_qaytish)],
             HUJJAT_FORMAT_4: [MessageHandler(back_filter, menyuga_qaytish)],
 
-         HUJJAT_1: [
-    MessageHandler(filters.ALL, hujjat_1),
-],
-          HUJJAT_2: [
-    MessageHandler(filters.ALL, hujjat_2),
+      async def hujjat_1(update, context):
+    await update.message.reply_text("✅ HUJJAT_1 ISHLADI")
+    return TANLA
+
+HUJJAT_FORMAT_2: [
+    CallbackQueryHandler(format_callback, pattern="^format_"),
+    MessageHandler(back_filter, menyuga_qaytish),
 ],
 
-HUJJAT_3: [
-    MessageHandler(filters.ALL, hujjat_3),
+HUJJAT_FORMAT_3: [
+    CallbackQueryHandler(format_callback, pattern="^format_"),
+    MessageHandler(back_filter, menyuga_qaytish),
 ],
 
-HUJJAT_4: [
-    MessageHandler(filters.ALL, hujjat_4),
+HUJJAT_FORMAT_4: [
+    CallbackQueryHandler(format_callback, pattern="^format_"),
+    MessageHandler(back_filter, menyuga_qaytish),
 ],
             SOROV_ISM:     [MessageHandler(back_filter, menyuga_qaytish),
                             MessageHandler(filters.TEXT & ~filters.COMMAND, sorov_ism)],
