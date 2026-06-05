@@ -34,8 +34,8 @@ from telegram.ext import (
 load_dotenv()
 BOT_TOKEN = os.getenv("BOT_TOKEN", "")
 CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME", "@Auezov_data")
-ADMIN_USERNAME = "@Saman2611"
-ADMIN_PHONE = "+998996844483"
+ADMIN_USERNAME = "@Su1tonov0"
+ADMIN_PHONE = "+998996454671"
 DB_PATH = "universitet.db"
 
 logging.basicConfig(
