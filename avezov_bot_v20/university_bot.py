@@ -738,23 +738,20 @@ def main():
             HUJJAT_FORMAT_3: [MessageHandler(back_filter, menyuga_qaytish)],
             HUJJAT_FORMAT_4: [MessageHandler(back_filter, menyuga_qaytish)],
 
-            HUJJAT_1: [
-                MessageHandler(back_filter, menyuga_qaytish),
-                MessageHandler(media_filter | (filters.TEXT & ~filters.COMMAND), hujjat_1),
-            ],
-            HUJJAT_2: [
-                MessageHandler(back_filter, menyuga_qaytish),
-                MessageHandler(media_filter | (filters.TEXT & ~filters.COMMAND), hujjat_2),
-            ],
-            HUJJAT_3: [
-                MessageHandler(back_filter, menyuga_qaytish),
-                MessageHandler(media_filter | (filters.TEXT & ~filters.COMMAND), hujjat_3),
-            ],
-            HUJJAT_4: [
-                MessageHandler(back_filter, menyuga_qaytish),
-                MessageHandler(media_filter | (filters.TEXT & ~filters.COMMAND), hujjat_4),
-            ],
+         HUJJAT_1: [
+    MessageHandler(filters.ALL, hujjat_1),
+],
+          HUJJAT_2: [
+    MessageHandler(filters.ALL, hujjat_2),
+],
 
+HUJJAT_3: [
+    MessageHandler(filters.ALL, hujjat_3),
+],
+
+HUJJAT_4: [
+    MessageHandler(filters.ALL, hujjat_4),
+],
             SOROV_ISM:     [MessageHandler(back_filter, menyuga_qaytish),
                             MessageHandler(filters.TEXT & ~filters.COMMAND, sorov_ism)],
             SOROV_FAMILYA: [MessageHandler(back_filter, menyuga_qaytish),
