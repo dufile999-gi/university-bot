@@ -61,7 +61,8 @@ YONALISHLAR_TEXT = (
     "🧑‍🏫 *6B01310* — Pedagogika va boshlang'ich ta'lim\n"
     "🧠 *6B06121* — Sun'iy intellekt texnologiyalari\n"
     "💼 *6B04130* — Hisob va audit\n"
-    "✈️ *6B11110* — Turizm\n\n"
+    "✈️ *6B11110* — Turizm\n"
+    "⚖️ *6B04210* — Yurisprudensiya\n\n"
     f"*{SEP}*\n"
     "📌 _Hujjat topshirishni boshlash uchun asosiy menyudan 📝 *Hujjat topshirish* tugmasini bosing._"
 )
