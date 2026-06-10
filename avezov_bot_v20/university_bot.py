@@ -8,7 +8,7 @@ import logging
 from dotenv import load_dotenv
 from telegram import (
     InlineKeyboardButton, InlineKeyboardMarkup, 
-    ReplyKeyboardMarkup, KeyboardButton
+    ReplyKeyboardMarkup, KeyboardButton, Update
 )
 from telegram.ext import (
     Application, CommandHandler, CallbackQueryHandler,
@@ -35,7 +35,7 @@ threading.Thread(
 # ⚙️  SOZLAMALAR & LOGGING
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 load_dotenv()
-BOT_TOKEN = os.getenv("BOT_TOKEN", "7314275083:AAHe_G3...") # O'zingizning tokeningizni qo'ying
+BOT_TOKEN = os.getenv("BOT_TOKEN", "7314275083:AAHe_G3...")
 CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME", "@Auezov_data")
 ADMIN_USERNAME = "@Saman2611"
 ADMIN_PHONE = "+998996844483"
@@ -46,57 +46,187 @@ logging.basicConfig(format="%(asctime)s | %(levelname)s | %(message)s", level=lo
 logger = logging.getLogger(__name__)
 
 # Konversiya holatlari (States)
-TIL_TANLASH, TANLA = "til_tanlash", "tanla"
+TIL_TANLASH = "til_tanlash"
+TANLA = "tanla"
 HUJJAT_FORMAT_1, HUJJAT_FORMAT_2, HUJJAT_FORMAT_3, HUJJAT_FORMAT_4 = "hf1", "hf2", "hf3", "hf4"
 HUJJAT_1, HUJJAT_2, HUJJAT_3, HUJJAT_4 = "h1", "h2", "h3", "h4"
 SOROV_ISM, SOROV_FAMILYA, SOROV_YOSH, SOROV_TELEFON = "si", "sf", "sy", "st"
 YONALISH_ISM, YONALISH_FAMILYA, YONALISH_YOSH, YONALISH_TELEFON, YONALISH_TANLASH = "yi", "yf", "yy", "yt", "yonalish_tanlash"
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🌐  TIL LUG'ATI
+# 🌐  TIL LUG'ATI (UZ, RU, KK)
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 LANG_TEXTS = {
     'uz': {
-        'welcome': "🏛 *M.Auezov nomidagi Janubiy Qozog'iston universiteti* Chirchiq filialining rasmiy qabul botiga xush kelibsiz!\n\n👇 _Davom etish uchun quyidagi menyudan foydalaning:_",
-        'menu_about': "🎓 Universitet haqida", 'menu_yonalish': "🗃️ Yo'nalishlar",
-        'menu_hujjat': "📝 Hujjat topshirish", 'menu_manzil': "📍 Manzil",
-        'menu_sorov': "🗂 So'rovnoma", 'menu_tanlash': "📋 Yo'nalish tanlash",
-        'menu_admin': "👤 Admin bilan bog'lanish", 'back': "🔙 Menyuga qaytish", 'cancel': "❌ Bekor qilish",
+        'welcome': "🏛 *M.Auezov nomidagi Janubiy Qozog'iston universiteti* Chirchiq filialining rasmiy qabul botiga xush kelibsiz!\n\n👇 _Davom etish uchun tilni tanlang:_",
+        'lang_selected': "✅ *O'zbek tili* tanlandi!",
+        'menu_about': "🎓 Universitet haqida",
+        'menu_yonalish': "🗃️ Yo'nalishlar",
+        'menu_hujjat': "📝 Hujjat topshirish",
+        'menu_manzil': "📍 Manzil",
+        'menu_sorov': "🗂 So'rovnoma",
+        'menu_tanlash': "📋 Yo'nalish tanlash",
+        'menu_admin': "👤 Admin bilan bog'lanish",
+        'back': "🔙 Menyuga qaytish",
+        'cancel': "❌ Bekor qilish",
+        'change_lang': "🌐 Tilni o'zgartirish",
         'about_text': "🏛 *M.Auezov nomidagi Janubiy Qozog'iston universiteti Chirchiq filiali*\n\nChirchiq shahrida universitetning yangi zamonaviy filiali o'z ishini boshlamoqda!\n\n🔗 [Batafsil ma'lumot (Oliygoh.uz)](https://oliygoh.uz/post/chirchiqda-mauezov-nomidagi-janubiy-qozogiston-universiteti-filiali-tashkil-etiali)",
         'yonalish_text': "👑 *TA'LIM YO'NALISHLARI*\n\n🔬 Biotexnologiya\n🌍 Ekologiya\n💻 Axborot tizimlar\n⚙️ Avtomatizatsiya\n🚚 Transport\n⚡ Elektroenergetika\n🧑‍🏫 Pedagogika\n🧠 Sun'iy intellekt\n💼 Hisob va audit\n✈️ Turizm",
         'hujjat_intro': "📋 *KERAKLI HUJJATLAR RO'YXATI*\n\n1️⃣ Diplom/Attestat\n2️⃣ Pasport\n3️⃣ 0.86 Med-ma'lumotnoma\n4️⃣ 3x4 rasm (6 dona)\n\n🟢 *1-Bosqich: Diplom yoki Attestat*\n❓ Formatni tanlang:",
-        'format_rasm': "🖼️ Rasm ko'rinishida", 'format_fayl': "📎 Fayl ko'rinishida",
-        'sorov_allready': "✨ *Siz so'rovnomani to'ldirib bo'lgansiz!*", 
+        'format_rasm': "🖼️ Rasm ko'rinishida",
+        'format_fayl': "📎 Fayl ko'rinishida",
+        'sorov_allready': "✨ *Siz so'rovnomani to'ldirib bo'lgansiz!*",
         'yonalish_allready': "✨ *Siz yo'nalishni tanlab bo'lgansiz!*",
-        'enter_name': "✍️ *To'liq ismingizni kiriting:*", 'enter_surname': "✍️ *Familiyangizni kiriting:*",
-        'enter_age': "✍️ *Yoshingizni kiriting (faqat raqamlarda):*", 
+        'enter_name': "✍️ *Ismingizni kiriting:*",
+        'enter_surname': "✍️ *Familiyangizni kiriting:*",
+        'enter_age': "✍️ *Yoshingizni kiriting (faqat raqamlarda):*",
         'invalid_age': "⚠️ *Xatolik:* Noto'g'ri yosh! 14 va 60 yosh oralig'ida faqat raqam kiriting.",
-        'send_phone': "📞 Telefon raqamni yuborish", 
+        'send_phone': "📞 Telefon raqamni yuborish",
         'phone_intro': "📞 *Telefon raqamingizni kiriting:*\n\nPastdagi tugmani bosing yoki qo'lda yozing.\n📝 *Namuna:* `+998901234567`",
         'invalid_phone': "⚠️ *Xatolik:* Raqam formati noto'g'ri! Qayta urinib ko'ring.",
-        'success_received': "✨ Muvaffaqiyatli qabul qilindi!", 'all_docs_success': "🎉 Barcha hujjatlar topshirildi! Tez orada bog'lanamiz.",
+        'success_received': "✨ Muvaffaqiyatli qabul qilindi!",
+        'all_docs_success': "🎉 Barcha hujjatlar topshirildi! Tez orada bog'lanamiz.",
         'select_yonalish_title': "🎓 *RO'YXATDAGI YO'NALISHLARDAN BIRINI TANLANG:*",
         'unknown': "❓ Noma'lum xabar yoki buyruq. Iltimos, pastdagi menyu tugmalaridan foydalaning.",
         'error_need_file': "⚠️ *Xatolik:* Siz fayl formatini tanlagansiz! Hujjatni fayl (Document) sifatida biriktirib yuboring.",
         'error_need_photo': "⚠️ *Xatolik:* Siz rasm formatini tanlagansiz! Hujjatni oddiy rasm (Photo) ko'rinishida yuboring.",
         'channel_caption': "📋 *Yangi Hujjat Keldi!*\n\n👤 Foydalanuvchi: {user}\n🆔 ID: `{uid}`\n📂 Hujjat turi: *{doc_name}*",
-        'reg_cancelled': "❌ Jarayon bekor qilindi va bosh menyuga qaytildi.", 'reg_success': "🎉 Ro'yxatdan muvaffaqiyatli o'tdingiz!",
+        'yonalish_channel_caption': "🎓 *YANGI YO'NALISH TANLANDI!*\n\n👤 Foydalanuvchi: {user}\n🆔 ID: `{uid}`\n📞 Telefon: `{phone}`\n📚 Tanlangan yo'nalish: *{yonalish}*\n👤 Ism: {ism}\n👤 Familiya: {familya}\n🎂 Yosh: {yosh}",
+        'reg_cancelled': "❌ Jarayon bekor qilindi va bosh menyuga qaytildi.",
+        'reg_success': "🎉 Yo'nalish muvaffaqiyatli tanlandi!",
         'manzil_text': "📍 *Universitet manzili:*\nChirchiq shahri, Toshkent viloyati.\n🗺 [Google Maps Xaritasi](http://maps.google.com)",
         'warning_in_progress': "⚠️ *Siz hozir ro'yxatdan o'tish jarayonidasiz!*\n\nIltimos, joriy so'ralgan ma'lumotni yuboring. Agar jarayonni to'xtatmoqchi bo'lsangiz, **❌ Bekor qilish** yoki **🔙 Menyuga qaytish** tugmasini bosing."
+    },
+    'ru': {
+        'welcome': "🏛 *Южно-Казахстанский университет имени М.Ауезова* Добро пожаловать в официальный бот приема Чирчикского филиала!\n\n👇 _Для продолжения выберите язык:_",
+        'lang_selected': "✅ *Выбран русский язык*!",
+        'menu_about': "🎓 Об университете",
+        'menu_yonalish': "🗃️ Направления",
+        'menu_hujjat': "📝 Подать документы",
+        'menu_manzil': "📍 Адрес",
+        'menu_sorov': "🗂 Анкета",
+        'menu_tanlash': "📋 Выбрать направление",
+        'menu_admin': "👤 Связаться с админом",
+        'back': "🔙 Вернуться в меню",
+        'cancel': "❌ Отменить",
+        'change_lang': "🌐 Сменить язык",
+        'about_text': "🏛 *Южно-Казахстанский университет имени М.Ауезова Чирчикский филиал*\n\nВ городе Чирчик открывается новый современный филиал университета!\n\n🔗 [Подробнее (Oliygoh.uz)](https://oliygoh.uz/post/chirchiqda-mauezov-nomidagi-janubiy-qozogiston-universiteti-filiali-tashkil-etiali)",
+        'yonalish_text': "👑 *НАПРАВЛЕНИЯ ОБУЧЕНИЯ*\n\n🔬 Биотехнология\n🌍 Экология\n💻 Информационные системы\n⚙️ Автоматизация\n🚚 Транспорт\n⚡ Электроэнергетика\n🧑‍🏫 Педагогика\n🧠 Искусственный интеллект\n💼 Учет и аудит\n✈️ Туризм",
+        'hujjat_intro': "📋 *СПИСОК НЕОБХОДИМЫХ ДОКУМЕНТОВ*\n\n1️⃣ Диплом/Аттестат\n2️⃣ Паспорт\n3️⃣ Мед-справка 0.86\n4️⃣ Фото 3x4 (6 шт)\n\n🟢 *1-этап: Диплом или Аттестат*\n❓ Выберите формат:",
+        'format_rasm': "🖼️ В виде изображения",
+        'format_fayl': "📎 В виде файла",
+        'sorov_allready': "✨ *Вы уже заполнили анкету!*",
+        'yonalish_allready': "✨ *Вы уже выбрали направление!*",
+        'enter_name': "✍️ *Введите ваше имя:*",
+        'enter_surname': "✍️ *Введите вашу фамилию:*",
+        'enter_age': "✍️ *Введите ваш возраст (только цифры):*",
+        'invalid_age': "⚠️ *Ошибка:* Неверный возраст! Введите число от 14 до 60.",
+        'send_phone': "📞 Отправить номер телефона",
+        'phone_intro': "📞 *Введите ваш номер телефона:*\n\nНажмите кнопку ниже или введите вручную.\n📝 *Пример:* `+998901234567`",
+        'invalid_phone': "⚠️ *Ошибка:* Неверный формат номера! Попробуйте снова.",
+        'success_received': "✨ Успешно принято!",
+        'all_docs_success': "🎉 Все документы поданы! Мы свяжемся с вами в ближайшее время.",
+        'select_yonalish_title': "🎓 *ВЫБЕРИТЕ ОДНО ИЗ НАПРАВЛЕНИЙ:*",
+        'unknown': "❓ Неизвестное сообщение или команда. Пожалуйста, используйте кнопки меню.",
+        'error_need_file': "⚠️ *Ошибка:* Вы выбрали формат файла! Отправьте документ как файл.",
+        'error_need_photo': "⚠️ *Ошибка:* Вы выбрали формат изображения! Отправьте документ как фото.",
+        'channel_caption': "📋 *Новый документ!*\n\n👤 Пользователь: {user}\n🆔 ID: `{uid}`\n📂 Тип документа: *{doc_name}*",
+        'yonalish_channel_caption': "🎓 *ВЫБРАНО НОВОЕ НАПРАВЛЕНИЕ!*\n\n👤 Пользователь: {user}\n🆔 ID: `{uid}`\n📞 Телефон: `{phone}`\n📚 Выбранное направление: *{yonalish}*\n👤 Имя: {ism}\n👤 Фамилия: {familya}\n🎂 Возраст: {yosh}",
+        'reg_cancelled': "❌ Процесс отменен, возврат в главное меню.",
+        'reg_success': "🎉 Направление успешно выбрано!",
+        'manzil_text': "📍 *Адрес университета:*\nГород Чирчик, Ташкентская область.\n🗺 [Карта Google Maps](http://maps.google.com)",
+        'warning_in_progress': "⚠️ *Вы находитесь в процессе регистрации!*\n\nПожалуйста, отправьте запрашиваемую информацию. Чтобы остановить процесс, нажмите **❌ Отменить** или **🔙 Вернуться в меню**."
+    },
+    'kk': {
+        'welcome': "🏛 *М.Әуезов атындағы Оңтүстік Қазақстан университеті* Шыршық филиалының ресми қабылдау ботына қош келдіңіз!\n\n👇 _Жалғастыру үшін тілді таңдаңыз:_",
+        'lang_selected': "✅ *Қазақ тілі* таңдалды!",
+        'menu_about': "🎓 Университет туралы",
+        'menu_yonalish': "🗃️ Бағыттар",
+        'menu_hujjat': "📝 Құжат тапсыру",
+        'menu_manzil': "📍 Мекенжай",
+        'menu_sorov': "🗂 Сауалнама",
+        'menu_tanlash': "📋 Бағыт таңдау",
+        'menu_admin': "👤 Әкіммен байланысу",
+        'back': "🔙 Мәзірге оралу",
+        'cancel': "❌ Болдырмау",
+        'change_lang': "🌐 Тілді өзгерту",
+        'about_text': "🏛 *М.Әуезов атындағы Оңтүстік Қазақстан университеті Шыршық филиалы*\n\nШыршық қаласында университеттің заманауи филиалы өз жұмысын бастайды!\n\n🔗 [Толық ақпарат (Oliygoh.uz)](https://oliygoh.uz/post/chirchiqda-mauezov-nomidagi-janubiy-qozogiston-universiteti-filiali-tashkil-etiali)",
+        'yonalish_text': "👑 *ОҚУ БАҒЫТТАРЫ*\n\n🔬 Биотехнология\n🌍 Экология\n💻 Ақпараттық жүйелер\n⚙️ Автоматтандыру\n🚚 Көлік\n⚡ Электроэнергетика\n🧑‍🏫 Педагогика\n🧠 Жасанды интеллект\n💼 Есеп және аудит\n✈️ Туризм",
+        'hujjat_intro': "📋 *ҚАЖЕТТІ ҚҰЖАТТАР ТІЗІМІ*\n\n1️⃣ Диплом/Аттестат\n2️⃣ Паспорт\n3️⃣ 0.86 Мед-анықтама\n4️⃣ 3x4 сурет (6 дана)\n\n🟢 *1-кезең: Диплом немесе Аттестат*\n❓ Форматты таңдаңыз:",
+        'format_rasm': "🖼️ Сурет түрінде",
+        'format_fayl': "📎 Файл түрінде",
+        'sorov_allready': "✨ *Сіз сауалнаманы толтырып қойғансыз!*",
+        'yonalish_allready': "✨ *Сіз бағытты таңдап қойғансыз!*",
+        'enter_name': "✍️ *Атыңызды жазыңыз:*",
+        'enter_surname': "✍️ *Тегіңізді жазыңыз:*",
+        'enter_age': "✍️ *Жасыңызды жазыңыз (тек сандармен):*",
+        'invalid_age': "⚠️ *Қате:* Жас дұрыс емес! 14 пен 60 аралығындағы санды жазыңыз.",
+        'send_phone': "📞 Телефон нөмірін жіберу",
+        'phone_intro': "📞 *Телефон нөміріңізді жазыңыз:*\n\nТөмендегі түймені басыңыз немесе қолмен жазыңыз.\n📝 *Мысалы:* `+998901234567`",
+        'invalid_phone': "⚠️ *Қате:* Нөмір форматы дұрыс емес! Қайтадан көріңіз.",
+        'success_received': "✨ Сәтті қабылданды!",
+        'all_docs_success': "🎉 Барлық құжаттар тапсырылды! Біз сізге жақын арада хабарласамыз.",
+        'select_yonalish_title': "🎓 *ТІЗІМДЕГІ БАҒЫТТАРДЫҢ БІРІН ТАҢДАҢЫЗ:*",
+        'unknown': "❓ Белгісіз хабар немесе бұйрық. Төмендегі мәзір түймелерін пайдаланыңыз.",
+        'error_need_file': "⚠️ *Қате:* Сіз файл форматын таңдадыңыз! Құжатты файл түрінде жіберіңіз.",
+        'error_need_photo': "⚠️ *Қате:* Сіз сурет форматын таңдадыңыз! Құжатты сурет түрінде жіберіңіз.",
+        'channel_caption': "📋 *Жаңа Құжат Келді!*\n\n👤 Пайдаланушы: {user}\n🆔 ID: `{uid}`\n📂 Құжат түрі: *{doc_name}*",
+        'yonalish_channel_caption': "🎓 *ЖАҢА БАҒЫТ ТАҢДАЛДЫ!*\n\n👤 Пайдаланушы: {user}\n🆔 ID: `{uid}`\n📞 Телефон: `{phone}`\n📚 Таңдалған бағыт: *{yonalish}*\n👤 Аты: {ism}\n👤 Тегі: {familya}\n🎂 Жасы: {yosh}",
+        'reg_cancelled': "❌ Процесс болдырылды және бас мәзірге оралды.",
+        'reg_success': "🎉 Бағыт сәтті таңдалды!",
+        'manzil_text': "📍 *Университет мекенжайы:*\nШыршық қаласы, Ташкент облысы.\n🗺 [Google Maps Картасы](http://maps.google.com)",
+        'warning_in_progress': "⚠️ *Сіз қазір тіркелу процесіндесіз!*\n\nӨтінеміз, сұралған ақпаратты жіберіңіз. Процесті тоқтату үшін **❌ Болдырмау** немесе **🔙 Мәзірге оралу** түймесін басыңыз."
     }
 }
 
-LANG_TEXTS['ru'] = LANG_TEXTS['uz']
-LANG_TEXTS['kk'] = LANG_TEXTS['uz']
-
 HUJJAT_NOMLAR = {
-    'uz': {1: "📗 Diplom / Attestat", 2: "🪪 Pasport nusxasi", 3: "🗂 0.86 Med-ma'lumotnoma", 4: "📸 3×4 rasm (6 dona)"}
+    'uz': {1: "📗 Diplom / Attestat", 2: "🪪 Pasport nusxasi", 3: "🗂 0.86 Med-ma'lumotnoma", 4: "📸 3×4 rasm (6 dona)"},
+    'ru': {1: "📗 Диплом / Аттестат", 2: "🪪 Копия паспорта", 3: "🗂 Мед-справка 0.86", 4: "📸 Фото 3×4 (6 шт)"},
+    'kk': {1: "📗 Диплом / Аттестат", 2: "🪪 Паспорт көшірмесі", 3: "🗂 0.86 Мед-анықтама", 4: "📸 3×4 сурет (6 дана)"}
 }
-HUJJAT_NOMLAR['ru'] = HUJJAT_NOMLAR['uz']
-HUJJAT_NOMLAR['kk'] = HUJJAT_NOMLAR['uz']
 
 HUJJAT_STATES = {1: HUJJAT_1, 2: HUJJAT_2, 3: HUJJAT_3, 4: HUJJAT_4}
 HUJJAT_FORMAT_STATES = {1: HUJJAT_FORMAT_1, 2: HUJJAT_FORMAT_2, 3: HUJJAT_FORMAT_3, 4: HUJJAT_FORMAT_4}
+
+# Yo'nalishlar nomlari (3 tilda)
+YONALISH_NAMES = {
+    'uz': {
+        "Biotexnologiya": "🔬 Biotexnologiya",
+        "Ekologiya": "🌍 Ekologiya",
+        "Axborot_tizimlar": "💻 Axborot tizimlar",
+        "Avtomatizatsiya": "⚙️ Avtomatizatsiya",
+        "Transport": "🚚 Transport",
+        "Elektroenergetika": "⚡ Elektroenergetika",
+        "Pedagogika": "🧑‍🏫 Pedagogika",
+        "Suniy_intellekt": "🧠 Sun'iy intellekt",
+        "Hisob_audit": "💼 Hisob va audit",
+        "Turizm": "✈️ Turizm"
+    },
+    'ru': {
+        "Biotexnologiya": "🔬 Биотехнология",
+        "Ekologiya": "🌍 Экология",
+        "Axborot_tizimlar": "💻 Информационные системы",
+        "Avtomatizatsiya": "⚙️ Автоматизация",
+        "Transport": "🚚 Транспорт",
+        "Elektroenergetika": "⚡ Электроэнергетика",
+        "Pedagogika": "🧑‍🏫 Педагогика",
+        "Suniy_intellekt": "🧠 Искусственный интеллект",
+        "Hisob_audit": "💼 Учет и аудит",
+        "Turizm": "✈️ Туризм"
+    },
+    'kk': {
+        "Biotexnologiya": "🔬 Биотехнология",
+        "Ekologiya": "🌍 Экология",
+        "Axborot_tizimlar": "💻 Ақпараттық жүйелер",
+        "Avtomatizatsiya": "⚙️ Автоматтандыру",
+        "Transport": "🚚 Көлік",
+        "Elektroenergetika": "⚡ Электроэнергетика",
+        "Pedagogika": "🧑‍🏫 Педагогика",
+        "Suniy_intellekt": "🧠 Жасанды интеллект",
+        "Hisob_audit": "💼 Есеп және аудит",
+        "Turizm": "✈️ Туризм"
+    }
+}
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 🗄️  MA'LUMOTLAR BAZASI BILAN ISHLASH
@@ -122,16 +252,20 @@ def check_already_registered(user_id, table_name):
     con.close()
     return bool(res)
 
-def get_lang(context, update=None):
-    if update and update.effective_user:
-        con = db_connect()
-        cur = con.cursor()
-        cur.execute("SELECT lang FROM foydalanuvchilar WHERE id=?", (update.effective_user.id,))
-        row = cur.fetchone()
-        con.close()
-        if row and row[0]:
-            return row[0]
-    return 'uz'
+def get_user_lang(user_id):
+    con = db_connect()
+    cur = con.cursor()
+    cur.execute("SELECT lang FROM foydalanuvchilar WHERE id=?", (user_id,))
+    row = cur.fetchone()
+    con.close()
+    return row[0] if row and row[0] else 'uz'
+
+def set_user_lang(user_id, lang):
+    con = db_connect()
+    cur = con.cursor()
+    cur.execute("UPDATE foydalanuvchilar SET lang=? WHERE id=?", (lang, user_id))
+    con.commit()
+    con.close()
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 🎛️  KLAVIATURA INTERFEYSLARI
@@ -142,7 +276,7 @@ def main_menu_markup(lang):
         [t['menu_about'], t['menu_yonalish']],
         [t['menu_hujjat'], t['menu_manzil']],
         [t['menu_sorov'], t['menu_tanlash']],
-        [t['menu_admin']],
+        [t['menu_admin'], t['change_lang']],
     ], resize_keyboard=True)
 
 def cancel_back_markup(lang):
@@ -158,36 +292,35 @@ def format_tanlash_keyboard(lang, step_num):
         ]
     ])
 
-def yonalish_tanlash_keyboard():
-    yonalishlar = [
-        ("🔬 Biotexnologiya", "Biotexnologiya"), ("🌍 Ekologiya", "Ekologiya"),
-        ("💻 Axborot tizimlar", "Axborot_tizimlar"), ("⚙️ Avtomatizatsiya", "Avtomatizatsiya"),
-        ("🚚 Transport", "Transport"), ("⚡ Elektroenergetika", "Elektroenergetika"),
-        ("🧑‍🏫 Pedagogika", "Pedagogika"), ("🧠 Sun'iy intellekt", "Suniy_intellekt"),
-        ("💼 Hisob va audit", "Hisob_audit"), ("✈️ Turizm", "Turizm"),
-    ]
-    
+def yonalish_tanlash_keyboard(lang):
     keyboard = []
+    yonalishlar = list(YONALISH_NAMES[lang].items())
     for i in range(0, len(yonalishlar), 2):
-        row = [InlineKeyboardButton(yonalishlar[i][0], callback_data=yonalishlar[i][1])]
+        row = [InlineKeyboardButton(yonalishlar[i][1], callback_data=yonalishlar[i][0])]
         if i + 1 < len(yonalishlar):
-            row.append(InlineKeyboardButton(yonalishlar[i+1][0], callback_data=yonalishlar[i+1][1]))
+            row.append(InlineKeyboardButton(yonalishlar[i+1][1], callback_data=yonalishlar[i+1][0]))
         keyboard.append(row)
     return InlineKeyboardMarkup(keyboard)
 
-def is_any_menu_button(text_to_check):
-    if not text_to_check: return False
-    for lang in LANG_TEXTS:
-        for key, value in LANG_TEXTS[lang].items():
-            if key.startswith('menu_'):
-                if text_to_check == value: return True
-    return False
+def lang_tanlash_keyboard():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton("🇺🇿 O'zbek tili", callback_data="lang_uz")],
+        [InlineKeyboardButton("🇷🇺 Русский язык", callback_data="lang_ru")],
+        [InlineKeyboardButton("🇰🇿 Қазақ тілі", callback_data="lang_kk")],
+    ])
 
-def is_cancel_or_back(text_to_check):
+def is_any_menu_button(text_to_check, lang):
     if not text_to_check: return False
-    for lang in LANG_TEXTS:
-        if text_to_check in [LANG_TEXTS[lang]['cancel'], LANG_TEXTS[lang]['back']]: return True
-    return False
+    t = LANG_TEXTS[lang]
+    menu_buttons = [t['menu_about'], t['menu_yonalish'], t['menu_hujjat'], 
+                    t['menu_manzil'], t['menu_sorov'], t['menu_tanlash'], 
+                    t['menu_admin'], t['change_lang']]
+    return text_to_check in menu_buttons
+
+def is_cancel_or_back(text_to_check, lang):
+    if not text_to_check: return False
+    t = LANG_TEXTS[lang]
+    return text_to_check in [t['cancel'], t['back']]
 
 def validate_phone(phone_str):
     clean_phone = re.sub(r'[\s\-()]+', '', phone_str)
@@ -195,19 +328,20 @@ def validate_phone(phone_str):
     return None
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🛡️  PIPELINE GUARD (JARAYONNI NAZORAT QILISH)
+# 🛡️  PIPELINE GUARD
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def process_step_guard(update, context, current_state):
-    lang = get_lang(context, update)
+    user_id = update.effective_user.id
+    lang = get_user_lang(user_id)
     t = LANG_TEXTS[lang]
     msg_text = update.message.text if (update.message and update.message.text) else None
     
     if msg_text:
-        if is_cancel_or_back(msg_text):
+        if is_cancel_or_back(msg_text, lang):
             await update.message.reply_text(t['reg_cancelled'], reply_markup=main_menu_markup(lang))
             return "FORCE_CAN_MENU"
             
-        if is_any_menu_button(msg_text):
+        if is_any_menu_button(msg_text, lang):
             await update.message.reply_text(t['warning_in_progress'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
             return "FORCE_STAY"
             
@@ -217,35 +351,78 @@ async def process_step_guard(update, context, current_state):
 # 🚀  START COMMAND
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def start(update, context):
-    lang = 'uz'
-    context.user_data['lang'] = lang
     user = update.effective_user
-
+    
     con = db_connect()
     cur = con.cursor()
-    cur.execute("SELECT id FROM foydalanuvchilar WHERE id=?", (user.id,))
-    if not cur.fetchone():
-        cur.execute("INSERT INTO foydalanuvchilar VALUES (?,?,?,?,?,?)", (user.id, user.first_name, user.last_name, user.username, lang, str(datetime.datetime.now())))
+    cur.execute("SELECT id, lang FROM foydalanuvchilar WHERE id=?", (user.id,))
+    row = cur.fetchone()
+    
+    if not row:
+        cur.execute("INSERT INTO foydalanuvchilar VALUES (?,?,?,?,?,?)", 
+                   (user.id, user.first_name, user.last_name, user.username, 'uz', str(datetime.datetime.now())))
+        lang = 'uz'
     else:
-        cur.execute("UPDATE foydalanuvchilar SET lang=? WHERE id=?", (lang, user.id))
+        lang = row[1] if row[1] else 'uz'
     con.commit()
     con.close()
+    
+    context.user_data['lang'] = lang
+    
+    # Til tanlash uchun inline keyboard
+    await update.message.reply_text(
+        LANG_TEXTS[lang]['welcome'], 
+        parse_mode="Markdown", 
+        reply_markup=lang_tanlash_keyboard()
+    )
+    return TIL_TANLASH
 
-    await update.message.reply_text(LANG_TEXTS[lang]['welcome'], parse_mode="Markdown", reply_markup=main_menu_markup(lang))
-    return TANLA
+async def lang_callback(update, context):
+    query = update.callback_query
+    await query.answer()
+    data = query.data
+    
+    if data.startswith("lang_"):
+        lang = data.split("_")[1]
+        user_id = query.from_user.id
+        set_user_lang(user_id, lang)
+        context.user_data['lang'] = lang
+        
+        await query.edit_message_text(
+            LANG_TEXTS[lang]['lang_selected'],
+            parse_mode="Markdown"
+        )
+        await query.message.reply_text(
+            LANG_TEXTS[lang]['welcome'].replace("tilni tanlang", "quyidagi menyudan foydalaning"),
+            parse_mode="Markdown",
+            reply_markup=main_menu_markup(lang)
+        )
+        return TANLA
+    
+    return TIL_TANLASH
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 📋  BOSH MENYU DISPATCHER
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def main_menu_dispatcher(update, context):
     msg = update.message.text if update.message else None
-    lang = get_lang(context, update)
+    user_id = update.effective_user.id
+    lang = get_user_lang(user_id)
     t = LANG_TEXTS[lang]
     uid = update.message.from_user.id if update.message else None
 
     if not msg:
         await update.message.reply_text(t['unknown'], reply_markup=main_menu_markup(lang))
         return TANLA
+
+    # Tilni o'zgartirish
+    if msg == t['change_lang']:
+        await update.message.reply_text(
+            "🌐 *Tilni tanlang / Выберите язык / Тілді таңдаңыз:*",
+            parse_mode="Markdown",
+            reply_markup=lang_tanlash_keyboard()
+        )
+        return TIL_TANLASH
 
     if msg == t['menu_about']:
         try:
@@ -295,7 +472,8 @@ async def format_callback(update, context):
     query = update.callback_query
     await query.answer()
     data = query.data
-    lang = get_lang(context)
+    user_id = query.from_user.id
+    lang = get_user_lang(user_id)
     parts = data.split("_")
     format_turi, step = parts[1], int(parts[2])
     context.user_data[f'hujjat_format_{step}'] = format_turi
@@ -307,7 +485,8 @@ async def format_callback(update, context):
     return HUJJAT_STATES[step]
 
 async def hujjat_handler(update, context, step):
-    lang = get_lang(context, update)
+    user_id = update.effective_user.id
+    lang = get_user_lang(user_id)
     t = LANG_TEXTS[lang]
     
     guard = await process_step_guard(update, context, HUJJAT_STATES[step])
@@ -352,7 +531,8 @@ async def hujjat_4(update, context): return await hujjat_handler(update, context
 # 📝  SO'ROVNOMA OQIMI 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def sorov_ism(update, context):
-    lang = get_lang(context, update)
+    user_id = update.effective_user.id
+    lang = get_user_lang(user_id)
     guard = await process_step_guard(update, context, SOROV_ISM)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return SOROV_ISM
@@ -366,7 +546,8 @@ async def sorov_ism(update, context):
     return SOROV_FAMILYA
 
 async def sorov_familya(update, context):
-    lang = get_lang(context, update)
+    user_id = update.effective_user.id
+    lang = get_user_lang(user_id)
     guard = await process_step_guard(update, context, SOROV_FAMILYA)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return SOROV_FAMILYA
@@ -380,7 +561,8 @@ async def sorov_familya(update, context):
     return SOROV_YOSH
 
 async def sorov_yosh(update, context):
-    lang = get_lang(context, update)
+    user_id = update.effective_user.id
+    lang = get_user_lang(user_id)
     guard = await process_step_guard(update, context, SOROV_YOSH)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return SOROV_YOSH
@@ -396,7 +578,8 @@ async def sorov_yosh(update, context):
     return SOROV_TELEFON
 
 async def sorov_telefon(update, context):
-    lang = get_lang(context, update)
+    user_id = update.effective_user.id
+    lang = get_user_lang(user_id)
     guard = await process_step_guard(update, context, SOROV_TELEFON)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return SOROV_TELEFON
@@ -427,10 +610,11 @@ async def sorov_telefon(update, context):
     return TANLA
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🎓  YO'NALISH TANLASH OQIMI 
+# 🎓  YO'NALISH TANLASH OQIMI (KANALGA XABAR YUBORADI)
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def yonalish_ism(update, context):
-    lang = get_lang(context, update)
+    user_id = update.effective_user.id
+    lang = get_user_lang(user_id)
     guard = await process_step_guard(update, context, YONALISH_ISM)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return YONALISH_ISM
@@ -444,7 +628,8 @@ async def yonalish_ism(update, context):
     return YONALISH_FAMILYA
 
 async def yonalish_familya(update, context):
-    lang = get_lang(context, update)
+    user_id = update.effective_user.id
+    lang = get_user_lang(user_id)
     guard = await process_step_guard(update, context, YONALISH_FAMILYA)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return YONALISH_FAMILYA
@@ -458,7 +643,8 @@ async def yonalish_familya(update, context):
     return YONALISH_YOSH
 
 async def yonalish_yosh(update, context):
-    lang = get_lang(context, update)
+    user_id = update.effective_user.id
+    lang = get_user_lang(user_id)
     guard = await process_step_guard(update, context, YONALISH_YOSH)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return YONALISH_YOSH
@@ -474,7 +660,8 @@ async def yonalish_yosh(update, context):
     return YONALISH_TELEFON
 
 async def yonalish_telefon(update, context):
-    lang = get_lang(context, update)
+    user_id = update.effective_user.id
+    lang = get_user_lang(user_id)
     guard = await process_step_guard(update, context, YONALISH_TELEFON)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return YONALISH_TELEFON
@@ -496,43 +683,64 @@ async def yonalish_telefon(update, context):
     await update.message.reply_text(
         LANG_TEXTS[lang]['select_yonalish_title'], 
         parse_mode="Markdown", 
-        reply_markup=yonalish_tanlash_keyboard()
+        reply_markup=yonalish_tanlash_keyboard(lang)
     )
     return YONALISH_TANLASH
 
 async def yonalish_tanlash_callback(update, context):
-    """Yo'nalish tanlash callback handler"""
+    """Yo'nalish tanlash callback handler - kanalga xabar yuboradi"""
     query = update.callback_query
     await query.answer()
     data = query.data
-    lang = get_lang(context)
     user_id = query.from_user.id
-
-    # Faqat yo'nalish callback'larini ishlaymiz
-    YONALISH_MAP = {
-        "Biotexnologiya": "🔬 Biotexnologiya", "Ekologiya": "🌍 Ekologiya", 
-        "Axborot_tizimlar": "💻 Axborot tizimlar", "Avtomatizatsiya": "⚙️ Avtomatizatsiya",
-        "Transport": "🚚 Transport", "Elektroenergetika": "⚡ Elektroenergetika",
-        "Pedagogika": "🧑‍🏫 Pedagogika", "Suniy_intellekt": "🧠 Sun'iy intellekt", 
-        "Hisob_audit": "💼 Hisob va audit", "Turizm": "✈️ Turizm",
-    }
+    lang = get_user_lang(user_id)
     
-    if data not in YONALISH_MAP:
+    # Tekshirish: foydalanuvchi oldin tanlaganmi?
+    if check_already_registered(user_id, "yonalish_royxat"):
+        await query.edit_message_text(LANG_TEXTS[lang]['yonalish_allready'], parse_mode="Markdown")
+        return TANLA
+    
+    # Yo'nalishni tekshirish
+    if data not in YONALISH_NAMES[lang]:
         return TANLA
         
-    yonalish = YONALISH_MAP[data]
-
+    yonalish = YONALISH_NAMES[lang][data]
+    
+    # Bazaga saqlash
     con = db_connect()
     cur = con.cursor()
     cur.execute("""INSERT OR REPLACE INTO yonalish_royxat 
                   (id, first_name, last_name, user_name, vaqt, ism, familya, yosh, telefon, yonalish) 
                   VALUES (?,?,?,?,?,?,?,?,?,?)""", 
-                (user_id, "", "", "", str(datetime.datetime.now()), 
+                (user_id, query.from_user.first_name, query.from_user.last_name, 
+                 query.from_user.username, str(datetime.datetime.now()), 
                  context.user_data.get('yonalish_ism'), context.user_data.get('yonalish_familya'), 
                  context.user_data.get('yonalish_yosh'), context.user_data.get('yonalish_telefon'), yonalish))
     con.commit()
     con.close()
-
+    
+    # KANALGA XABAR YUBORISH (barcha ma'lumotlar bilan)
+    username = f"@{query.from_user.username}" if query.from_user.username else f"[{query.from_user.first_name}](tg://user?id={user_id})"
+    caption_txt = LANG_TEXTS[lang]['yonalish_channel_caption'].format(
+        user=username,
+        uid=user_id,
+        phone=context.user_data.get('yonalish_telefon'),
+        yonalish=yonalish,
+        ism=context.user_data.get('yonalish_ism'),
+        familya=context.user_data.get('yonalish_familya'),
+        yosh=context.user_data.get('yonalish_yosh')
+    )
+    
+    try:
+        await context.bot.send_message(
+            chat_id=CHANNEL_USERNAME,
+            text=caption_txt,
+            parse_mode="Markdown"
+        )
+        logger.info(f"Yo'nalish tanlash kanalga yuborildi: {yonalish}")
+    except Exception as e:
+        logger.error(f"Kanalga yuborishda xato: {e}")
+    
     await query.edit_message_text(LANG_TEXTS[lang]['reg_success'], parse_mode="Markdown")
     await context.bot.send_message(
         chat_id=user_id, 
@@ -567,7 +775,7 @@ async def admin_statistika(update, context):
     await update.message.reply_text(matn, parse_mode="Markdown")
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🤖  MAIN RUNNER (MUKAMMAL STRUKTURA)
+# 🤖  MAIN RUNNER
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 def main():
     if not BOT_TOKEN or BOT_TOKEN == "7314275083:AAHe_G3...":
@@ -579,9 +787,13 @@ def main():
     conv = ConversationHandler(
         entry_points=[CommandHandler('start', start)],
         states={
+            TIL_TANLASH: [
+                CallbackQueryHandler(lang_callback),
+                MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)
+            ],
             TANLA: [
                 MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher), 
-                CallbackQueryHandler(yonalish_tanlash_callback)  # Faqat yo'nalish callback'lari
+                CallbackQueryHandler(yonalish_tanlash_callback)
             ],
             
             HUJJAT_FORMAT_1: [CallbackQueryHandler(format_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
@@ -603,7 +815,7 @@ def main():
             YONALISH_FAMILYA: [MessageHandler(filters.TEXT & ~filters.COMMAND, yonalish_familya)],
             YONALISH_YOSH:    [MessageHandler(filters.TEXT & ~filters.COMMAND, yonalish_yosh)],
             YONALISH_TELEFON: [MessageHandler(filters.ALL, yonalish_telefon)],
-            YONALISH_TANLASH: [CallbackQueryHandler(yonalish_tanlash_callback)],  # Yo'nalish tanlash state
+            YONALISH_TANLASH: [CallbackQueryHandler(yonalish_tanlash_callback)],
         },
         fallbacks=[
             CommandHandler('start', start),
@@ -614,10 +826,8 @@ def main():
 
     app.add_handler(conv)
     
-    # Webhook emas, polling ishlatamiz
     print("✅ Bot ishga tushdi! Polling orqali ishlayapti...")
     app.run_polling(allowed_updates=Update.ALL_TYPES)
 
 if __name__ == '__main__':
-    from telegram import Update
     main()
