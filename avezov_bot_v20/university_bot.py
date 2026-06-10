@@ -84,21 +84,21 @@ LANG_TEXTS = {
         'invalid_phone': "⚠️ *Xatolik:* Telefon raqami formati noto'g'ri! Iltimos, raqamni namuna bo'yicha to'g'ri yozing.\n\n📝 *Namuna:* `+998901234567`",
         'success_received': "✨ Muvaffaqiyatli qabul qilindi!", 'all_docs_success': "🎉 Barcha hujjatlar topshirildi! Tez orada bog'lanamiz.",
         'select_yonalish_title': "🎓 *RO'YXATDAGI YO'NALISHLARDAN BIRINI TANLANG:*", 'cancel': "❌ Bekor qilish",
-        'ariza_success': "🎉 Arizangiz muvaffaqiyatli ro'yxatga olindi va saqlandi!", 'unknown': "❓ Noma'lum buyruq.",
+        'ariza_success': "🎉 Arizangiz muvaffaqiyatli ro'yxatga olindi va saqlandi!", 'unknown': "❓ Noma'lum buyruq. Iltimos, menyudagi tugmalardan foydalaning.",
         'error_need_file': "⚠️ *Xatolik:* Siz fayl (Document) ko'rinishida yuborishni tanlagansiz! Iltimos, hujjatni rasm qilib emas, fayl sifatida biriktirib yuboring.",
         'error_need_photo': "⚠️ *Xatolik:* Siz rasm (Photo) ko'rinishida yuborishni tanlagansiz! Iltimos, hujjatni fayl qilib emas, oddiy rasm ko'rinishida yuboring.",
         'channel_caption': "📋 *Yangi Hujjat Keldi!*\n\n👤 Foydalanuvchi: {user}\n🆔 ID: `{uid}`\n📂 Hujjat turi: *{doc_name}*",
         'reg_cancelled': "❌ Jarayon bekor qilindi.", 'reg_success': "🎉 Ro'yxatdan muvaffaqiyatli o'tdingiz!",
-        'manzil_text': "📍 *Universitet manzili:*\nChirchiq shahri, Toshkent viloyati, O'zbekiston.\n\n🗺 *Google Maps orqali aniq lokatsiya:* [Xaritani ochish](https://maps.google.com/?q=Chirchiq)"
+        'manzil_text': "📍 *Universitet manzili:*\nChirchiq shahri, Toshkent viloyati, O'zbekiston.\n\n🗺 *Google Maps orqali aniq lokatsiya:* [Xaritani ochish](http://maps.google.com)"
     },
     'ru': {
-        'welcome': "🏛 Добро пожаловать в официальный bot приема Чирчикского филиала *Южно-Казахстанского университета имени М. Ауэзова*!\n\n👇 _Используйте меню ниже для продолжения:_ ",
+        'welcome': "🏛 Добро пожаловать в официальный бот приема Чирчикского филиала *Южно-Казахстанского университета имени М. Ауэзова*!\n\n👇 _Используйте меню ниже для продолжения:_ ",
         'menu_about': "🎓 Об университете", 'menu_yonalish': "🗃️ Направления",
         'menu_hujjat': "📝 Подача документов", 'menu_manzil': "📍 Адрес",
         'menu_sorov': "🗂 Анкета", 'menu_tanlash': "📋 Выбор направления",
         'menu_admin': "👤 Связь с админом", 'back': "🔙 Назад в меню",
         'about_text': "🏛 *Чирчикский филиал Южно-Казахстанского университета имени М. Ауэзова*\n\nВ городе Чирчик начинает работу новый современный филиал университета! Здесь созданы все условия для получения студентами образования, соответствующего международным стандартам.\n\n🔗 [Подробнее на сайте Oliygoh.uz](https://oliygoh.uz/post/chirchiqda-mauezov-nomidagi-janubiy-qozogiston-universiteti-filiali-tashkil-etiladi)",
-        'yonalish_text': "👑 *НАПРАВЛЕНИЯ ОБУЧЕНИЯ*\n\n🔬 Биотехнология\n🌍 Экология\n💻 Информационные системы\n⚙️ Автоматизация\n🚚 Трaнспорт\n⚡ Электроэнергетика\n🧑‍🏫 Администрация\n🧠 Искусственный интеллект\n💼 Учет и аудит\n✈️ Туризм",
+        'yonalish_text': "👑 *НАПРАВЛЕНИЯ ОБУЧЕНИЯ*\n\n🔬 Биотехнология\n🌍 Экология\n💻 Информационные системы\n⚙️ Автоматизация\n🚚 Трaнспорт\n⚡ Электроэнергетика\n🧑‍🏫 Педагогика\n🧠 Искусственный интеллект\n💼 Учет и аудит\n✈️ Туризм",
         'hujjat_intro': "📋 *СПИСОК НЕОБХОДИМЫХ ДОКУМЕНТОВ*\n\n1️⃣ Диплом/Аттестат\n2️⃣ Копия паспорта\n3️⃣ Мед. справка 0.86\n4️⃣ Фото 3х4 (6 шт)\n\n🟢 *Этап 1: Диплом или Аттестат*\n❓ Выберите формат:",
         'format_rasm': "🖼️ В виде фото", 'format_fayl': "📎 В виде файла",
         'sorov_allready': "✨ *Вы уже заполнили анкету! Повторная регистрация невозможна.*", 
@@ -111,19 +111,19 @@ LANG_TEXTS = {
         'invalid_phone': "⚠️ *Ошибка:* Неверный формат номера! Пожалуйста, введите номер телефона правильно согласно примеру.\n\n📝 *Пример:* `+998901234567`",
         'success_received': "✨ Успешно принято!", 'all_docs_success': "🎉 Все документы поданы! Скоро мы с вами свяжемся.",
         'select_yonalish_title': "🎓 *ВЫБЕРИТЕ ОДНО ИЗ НАПРАВЛЕНИЙ:*", 'cancel': "❌ Отмена",
-        'ariza_success': "🎉 Ваша заявка успешно зарегистрирована!", 'unknown': "❓ Неизвестная команда.",
+        'ariza_success': "🎉 Ваша заявка успешно зарегистрирована!", 'unknown': "❓ Неизвестная команда. Пожалуйста, используйте кнопки меню.",
         'error_need_file': "⚠️ *Ошибка:* Вы выбрали отправку в виде файла! Пожалуйста, прикрепите документ как файл (Document).",
         'error_need_photo': "⚠️ *Ошибка:* Вы выбрали отправку в виде фото! Пожалуйста, отправьте документ как обычное фото (Photo).",
         'channel_caption': "📋 *Поступил новый документ!*\n\n👤 Пользователь: {user}\n🆔 ID: `{uid}`\n📂 Тип документа: *{doc_name}*",
         'reg_cancelled': "❌ Процесс отменен.", 'reg_success': "🎉 Вы успешно зарегистрировались!",
-        'manzil_text': "📍 *Адрес университета:*\nГород Чирчик, Ташкентская область, Узбекистан.\n\n🗺 *Точная локация на Google Maps:* [Открыть карту](https://maps.google.com/?q=Chirchiq)"
+        'manzil_text': "📍 *Адрес университета:*\nГород Чирчик, Ташкентская область, Узбекистан.\n\n🗺 *Точная локация на Google Maps:* [Открыть карту](http://maps.google.com)"
     },
     'kk': {
         'welcome': "🏛 *М.Әуезов атындағы Оңтүстік Қазақстан университеті* Шыршық филиалының ресми қабылдау ботына қош келдіңіз!\n\n👇 _Жалғастыру үшін төмендегі мәзірді пайдаланыңыз:_ ",
         'menu_about': "🎓 Университет туралы", 'menu_yonalish': "🗃️ Мамандықтар",
         'menu_hujjat': "📝 Құжат тапсыру", 'menu_manzil': "📍 Мекен-жай",
         'menu_sorov': "🗂 Сауалнама", 'menu_tanlash': "📋 Мамандық таңдау",
-        'menu_admin': "👤 Админмен байланыс", 'back': "🔙 Мәзірге қайту",
+        'menu_admin': "👤 Adminмен байланыс", 'back': "🔙 Мәзірге қайту",
         'about_text': "🏛 *М.Әуезов атындағы Оңтүстік Қазақстан университеті Шыршық филиалы*\n\nШыршық қаласында университеттің жаңа заманауи филиалы өз жұмысын бастауда! Мұнда студенттердің халықаралық стандарттарға сай білім алуы үшін барлық жағдай жасалған.\n\n🔗 [Толығырақ Oliygoh.uz сайтында оқыңыз](https://oliygoh.uz/post/chirchiqda-mauezov-nomidagi-janubiy-qozogiston-universiteti-filiali-tashkil-etiladi)",
         'yonalish_text': "👑 *БІЛІМ БЕРУ БАҒДАРЛАМАЛАРЫ*\n\n🔬 Биотехнология\n🌍 Экология\n💻 Ақпараттық жүйелер\n⚙️ Автоматизация\n🚚 Көлік техникасы\n⚡ Электроэнергетика\n🧑‍🏫 Педагогика\n🧠 Жасанды интеллект\n💼 Есеп және аудит\n✈️ Туризм",
         'hujjat_intro': "📋 *ҚАЖЕТТІ ҚҰЖАТТАР ТІЗІМІ*\n\n1️⃣ Диплом/Аттестат\n2️⃣ Төлқұжат көшірмесі\n3️⃣ 0.86 Мед. анықтама\n4️⃣ 3x4 photo (6 дана)\n\n🟢 *1-Кезең: Диплом немесе Аттестат*\n❓ Форматты таңдаңыз:",
@@ -134,16 +134,16 @@ LANG_TEXTS = {
         'enter_age': "✍️ *Жасыңызды енгізіңіз (санмен):*", 
         'invalid_age': "⚠️ *Қате:* Жасыңыз қате енгізілді! Тек сандарды қолданыңыз және жасыңыз 14 пен 60 аралығында болуы керек.",
         'send_phone': "📞 Телефон нөмірін жіберу", 
-        'phone_intro': "📞 *Телефон нөміріңізді енгізіңіз:*\n\nTөмендегі батырманы басу арқылы немесе қолмен жазып қалдыра аласыз.\n\n📝 *Мысал:* `+998901234567` немесе `901234567`",
+        'phone_intro': "📞 *Telephone нөміріңізді енгізіңіз:*\n\nTөмендегі батырманы басу арқылы немесе қолмен жазып qaldıra аласыз.\n\n📝 *Мысал:* `+998901234567` немесе `901234567`",
         'invalid_phone': "⚠️ *Қате:* Телефон нөмірінің форматы қате! Мысалға қарап дұрыс енгізіңіз.\n\n📝 *Мысал:* `+998901234567`",
         'success_received': "✨ Сәтті қабылданды!", 'all_docs_success': "🎉 Барлық құжаттар тапсырылды! Тез арада хабарласамыз.",
         'select_yonalish_title': "🎓 *ТІЗІМДЕГІ МАМАНДЫҚТАРДЫҢ БІРІН ТАҢДАҢЫЗ:*", 'cancel': "❌ Бас тарту",
-        'ariza_success': "🎉 Өтінішіңіз सәтті тіркелді!", 'unknown': "❓ Белгісіз бұйрық.",
+        'ariza_success': "🎉 Өтінішіңіз सәтті тіркелді!", 'unknown': "❓ Белгісіз бұйрық. Мәзір батырмаларын қолданыңыз.",
         'error_need_file': "⚠️ *Қате:* Сіз файл түрінде жіберуді таңдадыңыз! Құжатты файл (Document) ретінде жіберіңіз.",
         'error_need_photo': "⚠️ *Қате:* Сіз сурет түрінде жіберуді таңдадыңыз! Құжатты сурет (Photo) ретінде жіберіңіз.",
         'channel_caption': "📋 *Жаңа құжат түсті!*\n\n👤 Пайдаланушы: {user}\n🆔 ID: `{uid}`\n📂 Құжат түрі: *{doc_name}*",
         'reg_cancelled': "❌ Бас тартылды.", 'reg_success': "🎉 Сіз sәтті тіркелдіңіз!",
-        'manzil_text': "📍 *Университет мекен-жайы:*\nШыршық қаласы, Ташкент облысы, Өзбекстан.\n\n🗺 *Google Maps арқылы нақты локация:* [Картаны ашу](https://maps.google.com/?q=Chirchiq)"
+        'manzil_text': "📍 *Университет мекен-жайы:*\nШыршық қаласы, Ташкент облысы, Өзбекстан.\n\n🗺 *Google Maps арқылы нақты локация:* [Картаны ашу](http://maps.google.com)"
     }
 }
 
@@ -258,7 +258,6 @@ def is_menu_button(text_to_check):
     return False
 
 def validate_phone(phone_str):
-    # Telefon raqam faqat raqamlar va plyusdan iborat bo'lishi va uzunligi 7 tadan 15 tagacha bo'lishi kerak
     clean_phone = re.sub(r'[\s\-()]+', '', phone_str)
     if re.match(r'^\+?[1-9]\d{6,14}$', clean_phone):
         return clean_phone
@@ -457,35 +456,42 @@ async def hujjat_4(update, context): return await hujjat_handler(update, context
 # 📝  SO'ROVNOMA BOSQICHMA-BOSQICH
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def sorov_ism(update, context):
-    if is_menu_button(update.message.text): return await text(update, context)
     lang = get_lang(context, update)
+    if update.message.text and is_menu_button(update.message.text): 
+        return await text(update, context)
+        
     if check_already_registered(update.message.from_user.id, "sorovnama"):
         await update.message.reply_text(LANG_TEXTS[lang]['sorov_allready'], parse_mode="Markdown", reply_markup=main_menu_markup(lang))
         return TANLA
+        
     context.user_data['sorov_ism'] = update.message.text.strip()
     await update.message.reply_text(LANG_TEXTS[lang]['enter_surname'], parse_mode="Markdown", reply_markup=cancel_markup(lang))
     return SOROV_FAMILYA
 
 async def sorov_familya(update, context):
-    if is_menu_button(update.message.text): return await text(update, context)
     lang = get_lang(context, update)
+    if update.message.text and is_menu_button(update.message.text): 
+        return await text(update, context)
+        
     if check_already_registered(update.message.from_user.id, "sorovnama"):
         await update.message.reply_text(LANG_TEXTS[lang]['sorov_allready'], parse_mode="Markdown", reply_markup=main_menu_markup(lang))
         return TANLA
+        
     context.user_data['sorov_familya'] = update.message.text.strip()
     await update.message.reply_text(LANG_TEXTS[lang]['enter_age'], parse_mode="Markdown", reply_markup=cancel_markup(lang))
     return SOROV_YOSH
 
 async def sorov_yosh(update, context):
-    if is_menu_button(update.message.text): return await text(update, context)
     lang = get_lang(context, update)
+    if update.message.text and is_menu_button(update.message.text): 
+        return await text(update, context)
+        
     if check_already_registered(update.message.from_user.id, "sorovnama"):
         await update.message.reply_text(LANG_TEXTS[lang]['sorov_allready'], parse_mode="Markdown", reply_markup=main_menu_markup(lang))
         return TANLA
     
     yosh = update.message.text.strip()
     if not yosh.isdigit() or not (14 <= int(yosh) <= 60):
-        # Aqlli xatolik ko'rsatish
         await update.message.reply_text(LANG_TEXTS[lang]['invalid_age'], parse_mode="Markdown", reply_markup=cancel_markup(lang))
         return SOROV_YOSH
         
@@ -503,18 +509,17 @@ async def sorov_yosh(update, context):
 
 async def sorov_telefon(update, context):
     lang = get_lang(context, update)
-    if update.message.text and is_menu_button(update.message.text): return await text(update, context)
+    if update.message.text and is_menu_button(update.message.text): 
+        return await text(update, context)
+        
     uid = update.message.from_user.id
-    
     if check_already_registered(uid, "sorovnama"):
         await update.message.reply_text(LANG_TEXTS[lang]['sorov_allready'], parse_mode="Markdown", reply_markup=main_menu_markup(lang))
         return TANLA
 
     telefon = None
-    # Agar foydalanuvchi tugmani bosib yuborgan bo'lsa
     if update.message.contact:
         telefon = update.message.contact.phone_number
-    # Agar foydalanuvchi matn ko'rinishida qo'lda yozgan bo'lsa
     elif update.message.text:
         telefon = validate_phone(update.message.text.strip())
         if not telefon:
@@ -542,28 +547,36 @@ async def sorov_telefon(update, context):
 # 🎓  YO'NALISH TANLASH BOSQICHMA-BOSQICH
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def yonalish_ism(update, context):
-    if is_menu_button(update.message.text): return await text(update, context)
     lang = get_lang(context, update)
+    if update.message.text and is_menu_button(update.message.text): 
+        return await text(update, context)
+        
     if check_already_registered(update.message.from_user.id, "yonalish_royxat"):
         await update.message.reply_text(LANG_TEXTS[lang]['yonalish_allready'], parse_mode="Markdown", reply_markup=main_menu_markup(lang))
         return TANLA
+        
     context.user_data['yonalish_ism'] = update.message.text.strip()
     await update.message.reply_text(LANG_TEXTS[lang]['enter_surname'], parse_mode="Markdown", reply_markup=cancel_markup(lang))
     return YONALISH_FAMILYA
 
 async def yonalish_familya(update, context):
-    if is_menu_button(update.message.text): return await text(update, context)
     lang = get_lang(context, update)
+    if update.message.text and is_menu_button(update.message.text): 
+        return await text(update, context)
+        
     if check_already_registered(update.message.from_user.id, "yonalish_royxat"):
         await update.message.reply_text(LANG_TEXTS[lang]['yonalish_allready'], parse_mode="Markdown", reply_markup=main_menu_markup(lang))
         return TANLA
+        
     context.user_data['yonalish_familya'] = update.message.text.strip()
     await update.message.reply_text(LANG_TEXTS[lang]['enter_age'], parse_mode="Markdown", reply_markup=cancel_markup(lang))
     return YONALISH_YOSH
 
 async def yonalish_yosh(update, context):
-    if is_menu_button(update.message.text): return await text(update, context)
     lang = get_lang(context, update)
+    if update.message.text and is_menu_button(update.message.text): 
+        return await text(update, context)
+        
     if check_already_registered(update.message.from_user.id, "yonalish_royxat"):
         await update.message.reply_text(LANG_TEXTS[lang]['yonalish_allready'], parse_mode="Markdown", reply_markup=main_menu_markup(lang))
         return TANLA
@@ -587,9 +600,10 @@ async def yonalish_yosh(update, context):
 
 async def yonalish_telefon(update, context):
     lang = get_lang(context, update)
-    if update.message.text and is_menu_button(update.message.text): return await text(update, context)
+    if update.message.text and is_menu_button(update.message.text): 
+        return await text(update, context)
+        
     uid = update.message.from_user.id
-
     if check_already_registered(uid, "yonalish_royxat"):
         await update.message.reply_text(LANG_TEXTS[lang]['yonalish_allready'], parse_mode="Markdown", reply_markup=main_menu_markup(lang))
         return TANLA
@@ -706,8 +720,6 @@ def main():
 
     init_db()
     app = Application.builder().token(BOT_TOKEN).build()
-    
-    menu_buttons_filter = filters.TEXT & ~filters.COMMAND
 
     app.add_handler(CommandHandler("users", admin_statistika))
 
@@ -719,24 +731,26 @@ def main():
                 MessageHandler(filters.TEXT & ~filters.COMMAND, text),
                 CallbackQueryHandler(callback_data)
             ],
-            HUJJAT_FORMAT_1: [MessageHandler(menu_buttons_filter, text), CallbackQueryHandler(format_callback)],
-            HUJJAT_FORMAT_2: [MessageHandler(menu_buttons_filter, text), CallbackQueryHandler(format_callback)],
-            HUJJAT_FORMAT_3: [MessageHandler(menu_buttons_filter, text), CallbackQueryHandler(format_callback)],
-            HUJJAT_FORMAT_4: [MessageHandler(menu_buttons_filter, text), CallbackQueryHandler(format_callback)],
-            HUJJAT_1: [MessageHandler(menu_buttons_filter, text), MessageHandler(filters.ALL, hujjat_1)],
-            HUJJAT_2: [MessageHandler(menu_buttons_filter, text), MessageHandler(filters.ALL, hujjat_2)],
-            HUJJAT_3: [MessageHandler(menu_buttons_filter, text), MessageHandler(filters.ALL, hujjat_3)],
-            HUJJAT_4: [MessageHandler(menu_buttons_filter, text), MessageHandler(filters.ALL, hujjat_4)],
+            HUJJAT_FORMAT_1: [CallbackQueryHandler(format_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, text)],
+            HUJJAT_FORMAT_2: [CallbackQueryHandler(format_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, text)],
+            HUJJAT_FORMAT_3: [CallbackQueryHandler(format_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, text)],
+            HUJJAT_FORMAT_4: [CallbackQueryHandler(format_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, text)],
             
-            SOROV_ISM:     [MessageHandler(menu_buttons_filter, text), MessageHandler(filters.TEXT & ~filters.COMMAND, sorov_ism)],
-            SOROV_FAMILYA: [MessageHandler(menu_buttons_filter, text), MessageHandler(filters.TEXT & ~filters.COMMAND, sorov_familya)],
-            SOROV_YOSH:    [MessageHandler(menu_buttons_filter, text), MessageHandler(filters.TEXT & ~filters.COMMAND, sorov_yosh)],
-            SOROV_TELEFON: [MessageHandler(menu_buttons_filter, text), MessageHandler(filters.ALL, sorov_telefon)],
+            HUJJAT_1: [MessageHandler(filters.ALL, hujjat_1)],
+            HUJJAT_2: [MessageHandler(filters.ALL, hujjat_2)],
+            HUJJAT_3: [MessageHandler(filters.ALL, hujjat_3)],
+            HUJJAT_4: [MessageHandler(filters.ALL, hujjat_4)],
             
-            YONALISH_ISM:     [MessageHandler(menu_buttons_filter, text), MessageHandler(filters.TEXT & ~filters.COMMAND, yonalish_ism)],
-            YONALISH_FAMILYA: [MessageHandler(menu_buttons_filter, text), MessageHandler(filters.TEXT & ~filters.COMMAND, yonalish_familya)],
-            YONALISH_YOSH:    [MessageHandler(menu_buttons_filter, text), MessageHandler(filters.TEXT & ~filters.COMMAND, yonalish_yosh)],
-            YONALISH_TELEFON: [MessageHandler(menu_buttons_filter, text), MessageHandler(filters.ALL, yonalish_telefon)],
+            # Bu yerda har bir qadam mustaqil ishlaydi va bir-birining matnini "o'g'irlamaydi"
+            SOROV_ISM:     [MessageHandler(filters.TEXT & ~filters.COMMAND, sorov_ism)],
+            SOROV_FAMILYA: [MessageHandler(filters.TEXT & ~filters.COMMAND, sorov_familya)],
+            SOROV_YOSH:    [MessageHandler(filters.TEXT & ~filters.COMMAND, sorov_yosh)],
+            SOROV_TELEFON: [MessageHandler(filters.ALL, sorov_telefon)],
+            
+            YONALISH_ISM:     [MessageHandler(filters.TEXT & ~filters.COMMAND, yonalish_ism)],
+            YONALISH_FAMILYA: [MessageHandler(filters.TEXT & ~filters.COMMAND, yonalish_familya)],
+            YONALISH_YOSH:    [MessageHandler(filters.TEXT & ~filters.COMMAND, yonalish_yosh)],
+            YONALISH_TELEFON: [MessageHandler(filters.ALL, yonalish_telefon)],
         },
         fallbacks=[CommandHandler('start', start)],
         allow_reentry=True
