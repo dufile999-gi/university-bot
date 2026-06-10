@@ -40,14 +40,21 @@ threading.Thread(
 load_dotenv()
 BOT_TOKEN = os.getenv("BOT_TOKEN", "7314275083:AAHe_G3...")
 CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME", "@Auezov_data")
-ADMIN_USERNAME = "@Saman2611"
+ADMIN_ID = 8596949743  # ✅ SIZNING ID'INGIZ
 ADMIN_PHONE = "+998996844483"
 DB_PATH = "universitet.db"
 ABOUT_PHOTO_URL = "https://storage.googleapis.com/createsite-uz-bucket/blog/1722071060_chirchiq-auezov.jpg"
 
-# Qabul muddati (oy, kun)
-QABUL_START = (6, 1)    # 1-iyun
-QABUL_END = (9, 1)      # 1-sentyabr
+# Universitet rasmlari
+UNI_PHOTOS = [
+    "https://storage.googleapis.com/createsite-uz-bucket/blog/1722071060_chirchiq-auezov.jpg",
+    "https://www.auezov.edu.kz/images/slider/1.jpg",
+    "https://www.auezov.edu.kz/images/slider/2.jpg"
+]
+
+# Qabul muddati
+QABUL_START = (6, 1)
+QABUL_END = (9, 1)
 
 logging.basicConfig(format="%(asctime)s | %(levelname)s | %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -55,23 +62,22 @@ logger = logging.getLogger(__name__)
 # Konversiya holatlari
 TIL_TANLASH = "til_tanlash"
 TANLA = "tanla"
-# Bakalavriat
 HUJJAT_FORMAT_1, HUJJAT_FORMAT_2, HUJJAT_FORMAT_3, HUJJAT_FORMAT_4 = "hf1", "hf2", "hf3", "hf4"
 HUJJAT_1, HUJJAT_2, HUJJAT_3, HUJJAT_4 = "h1", "h2", "h3", "h4"
 YONALISH_ISM, YONALISH_FAMILYA, YONALISH_YOSH, YONALISH_TELEFON, YONALISH_TANLASH = "yi", "yf", "yy", "yt", "yonalish_tanlash"
-# Magistratura
 MAG_ISM, MAG_FAMILYA, MAG_YOSH, MAG_TELEFON, MAG_TANLASH = "mi", "mf", "my", "mt", "mag_tanlash"
-# Hujjat tekshiruvi
 ADMIN_REVIEW = "admin_review"
+ADMIN_BROADCAST = "admin_broadcast"
+ADMIN_SETTINGS = "admin_settings"
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🌐  TIL LUG'ATI (UZ, RU, KK)
+# 🌐  TIL LUG'ATI
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 LANG_TEXTS = {
     'uz': {
         'welcome': "🏛 *M.Auezov nomidagi Janubiy Qozog'iston universiteti* Chirchiq filialining rasmiy qabul botiga xush kelibsiz!",
         'lang_selected': "✅ *O'zbek tili* tanlandi!",
-        # Menu (CHIROYLI TARTIB)
+        # Asosiy menu
         'menu_about': "🏛 Universitet haqida",
         'menu_bakalavr': "🎓 Bakalavriat",
         'menu_magistratura': "📚 Magistratura",
@@ -81,17 +87,30 @@ LANG_TEXTS = {
         'menu_magistratura_tanlash': "🎓 Magistratura yo'nalishlari",
         'menu_status': "📊 Hujjat holati",
         'menu_schedule': "📅 Imtihon jadvali",
-        'menu_admin': "👤 Admin",
+        'menu_contact': "📞 Aloqa",
+        'menu_admin': "⚙️ Admin panel",
         'back': "🔙 Orqaga",
         'cancel': "❌ Bekor qilish",
         'change_lang': "🌐 Tilni o'zgartirish",
-        # Matnlar
-        'about_text': "🏛 *M.Auezov nomidagi Janubiy Qozog'iston universiteti Chirchiq filiali*\n\nChirchiq shahrida universitetning yangi zamonaviy filiali o'z ishini boshlamoqda!",
-        'bakalavr_text': "👑 *BAKALAVRIAT YO'NALISHLARI*\n\n🔬 Biotexnologiya\n🌍 Ekologiya\n💻 Axborot tizimlar\n⚙️ Avtomatizatsiya\n🚚 Transport\n⚡ Elektroenergetika\n🧑‍🏫 Pedagogika\n🧠 Sun'iy intellekt\n💼 Hisob va audit\n✈️ Turizm",
-        'magistratura_text': "🎓 *MAGISTRATURA YO'NALISHLARI*\n\n📊 Iqtisodiyot\n⚖️ Yurisprudensiya\n💻 Axborot tizimlari\n🌍 Ekologiya",
+        # Universitet haqida to'liq ma'lumot
+        'about_title': "🏛 *M.AUEZOV NOMIDAGI JANUBIY QOZOG'ISTON UNIVERSITETI*",
+        'about_desc': "📌 *Umumiy ma'lumot:*\n• Tashkil etilgan: 1943 yil\n• Rektor: Qojamjarov Gulmurat Tolibayevich\n• Talabalar soni: 15 000+\n• Fakultetlar: 12 ta\n• Yo'nalishlar: 50+",
+        'about_history': "📜 *Tarixi:*\nUniversitet 1943 yilda Chimkent pedagogika instituti sifatida tashkil etilgan. 1996 yilda M.Auezov nomi berilgan. 2006 yilda Janubiy Qozog'iston universiteti maqomini olgan.",
+        'about_faculties': "🏛 *FAKULTETLAR:*\n\n1. Fizika-matematika fakulteti\n2. Kimyo-biologiya fakulteti\n3. Filologiya fakulteti\n4. Tarix fakulteti\n5. Iqtisodiyot fakulteti\n6. Huquq fakulteti\n7. Pedagogika fakulteti\n8. Axborot texnologiyalari\n9. Muhandislik fakulteti\n10. Sport fakulteti\n11. Xorijiy tillar\n12. San'at fakulteti",
+        'about_international': "🌍 *Xalqaro hamkorlik:*\n• Erasmus+ dasturi\n• Dual diplom dasturlari\n• 50 dan ortiq xorijiy universitetlar bilan hamkorlik\n• Turkiya, Germaniya, Janubiy Koreya, AQSH",
+        'about_achievements': "🏆 *Yutuqlar:*\n• Respublika olimpiadalari sovrindorlari\n• Xalqaro grantlar\n• Ilmiy loyihalar\n• Startap akselerator",
+        'about_contact': "📞 *Bog'lanish:*\n📍 Manzil: Chirchiq shahri, Toshkent viloyati\n📞 Telefon: {phone}\n💬 Telegram: {username}\n🌐 Veb-sayt: www.auezov.edu.kz",
+        # Bakalavriat
+        'bakalavr_text': "👑 *BAKALAVRIAT YO'NALISHLARI (10 ta)*\n\n🔬 Biotexnologiya\n🌍 Ekologiya\n💻 Axborot tizimlar\n⚙️ Avtomatizatsiya\n🚚 Transport\n⚡ Elektroenergetika\n🧑‍🏫 Pedagogika\n🧠 Sun'iy intellekt\n💼 Hisob va audit\n✈️ Turizm",
+        'bakalavr_detail': "📚 *Bakalavriat haqida:*\n• O'qish muddati: 4 yil\n• Kunduzgi va sirtqi bo'lim\n• Grant va kontrakt asosida\n• Xalqaro diplom",
+        # Magistratura
+        'magistratura_text': "🎓 *MAGISTRATURA YO'NALISHLARI (4 ta)*\n\n📊 Iqtisodiyot\n⚖️ Yurisprudensiya\n💻 Axborot tizimlari\n🌍 Ekologiya",
+        'magistratura_detail': "📚 *Magistratura haqida:*\n• O'qish muddati: 2 yil\n• Ilmiy-pedagogik yo'nalish\n• Ilmiy rahbarlar",
+        # Hujjatlar
         'hujjat_intro': "📋 *KERAKLI HUJJATLAR RO'YXATI*\n\n1️⃣ Diplom/Attestat\n2️⃣ Pasport\n3️⃣ 0.86 Med-ma'lumotnoma\n4️⃣ 3x4 rasm (6 dona)\n\n🟢 *1-Bosqich: Diplom yoki Attestat*\n❓ Formatni tanlang:",
         'format_rasm': "🖼️ Rasm",
         'format_fayl': "📎 Fayl",
+        # So'rov
         'enter_name': "✍️ *Ismingizni kiriting:*",
         'enter_surname': "✍️ *Familiyangizni kiriting:*",
         'enter_age': "✍️ *Yoshingizni kiriting:*",
@@ -103,34 +122,25 @@ LANG_TEXTS = {
         'all_docs_success': "🎉 Barcha hujjatlar topshirildi! Tez orada bog'lanamiz.",
         'select_bakalavr_title': "🎓 *BAKALAVRIAT YO'NALISHLARIDAN BIRINI TANLANG:*",
         'select_magistratura_title': "🎓 *MAGISTRATURA YO'NALISHLARIDAN BIRINI TANLANG:*",
+        'reg_success': "🎉 Yo'nalish muvaffaqiyatli tanlandi!",
+        'reg_cancelled': "❌ Jarayon bekor qilindi.",
+        # Xatoliklar
         'unknown': "❓ Tushunarsiz buyruq",
         'error_need_file': "⚠️ Fayl formatida yuboring!",
         'error_need_photo': "⚠️ Rasm formatida yuboring!",
+        'warning_in_progress': "⚠️ Jarayondasiz! Iltimos so'ralgan ma'lumotni kiriting.",
+        # Kanal xabarlari
         'channel_caption': "📋 *Yangi Hujjat!*\n\n👤 Foydalanuvchi: {user}\n🆔 ID: `{uid}`\n📂 Hujjat: *{doc_name}*",
         'yonalish_channel_caption': "🎓 *BAKALAVRIAT TANLANDI!*\n\n👤 Foydalanuvchi: {user}\n🆔 ID: `{uid}`\n📞 Tel: `{phone}`\n📚 Yo'nalish: *{yonalish}*\n👤 Ism: {ism}\n👤 Fam: {familya}\n🎂 Yosh: {yosh}",
         'magistratura_channel_caption': "📚 *MAGISTRATURA TANLANDI!*\n\n👤 Foydalanuvchi: {user}\n🆔 ID: `{uid}`\n📞 Tel: `{phone}`\n🎓 Magistratura: *{yonalish}*\n👤 Ism: {ism}\n👤 Fam: {familya}\n🎂 Yosh: {yosh}",
-        'reg_cancelled': "❌ Jarayon bekor qilindi.",
-        'reg_success': "🎉 Yo'nalish muvaffaqiyatli tanlandi!",
-        'manzil_text': "📍 *Universitet manzili:* Chirchiq shahri, Toshkent viloyati.\n🗺 [Xarita](http://maps.google.com)",
-        'warning_in_progress': "⚠️ Jarayondasiz! Iltimos so'ralgan ma'lumotni kiriting.",
-        # 1. Eslatma xabarlari
-        'reminder_title': "🔔 *ESLATMA!*\n\n",
-        'reminder_7days': "📢 Hujjat topshirish muddatiga *7 kun* qoldi!\n\n📋 Hujjatlaringizni topshirishni unutmang!",
-        'reminder_3days': "⚠️ Hujjat topshirish muddatiga *3 kun* qoldi!\n\n📋 Tezroq hujjatlaringizni topshiring!",
-        'reminder_1day': "🚨 *OXIRGI KUN!*\n\n📋 Hujjat topshirish muddati *bugun* tugaydi!\n\n⏰ Kechiktirmang!",
-        'deadline_passed': "⛔ *QABUL YOPILDI!*\n\nHujjat topshirish muddati tugagan. Keyingi yilda kutamiz!",
-        # 2. Hujjat tekshiruvi
-        'review_title': "📋 *HUJJAT TEKSHIRUVI*\n\n",
-        'review_pending': "⏳ Holat: *Tekshirilmoqda*",
-        'review_approved': "✅ Holat: *Qabul qilindi*",
-        'review_rejected': "❌ Holat: *Qayta topshiring*\n\nSabab: {reason}",
-        'review_buttons': "📋 Tekshirish",
-        'review_approve': "✅ Tasdiqlash",
-        'review_reject': "❌ Rad etish",
-        'review_cancel': "🔙 Bekor qilish",
-        'review_reason': "✍️ Rad etish sababini kiriting:",
-        'review_notification': "📨 *Hujjatingiz tekshirildi!*\n\n{status}",
-        # 3. Hujjat holati
+        # Manzil
+        'manzil_text': "📍 *Universitet manzili:*\nChirchiq shahri, Toshkent viloyati, O'zbekiston\n🗺 [Google Maps](https://maps.google.com)\n\n📞 *Qabul komissiyasi:* +998996844483\n💬 *Telegram:* @Auezov_data",
+        # Imtihon jadvali
+        'schedule_title': "📅 *IMTIHON JADVALI 2024*\n\n",
+        'schedule_bakalavr': "🎓 *Bakalavriat imtihonlari:*\n📆 10-avgust – 20-avgust 2024\n⏰ Soat 9:00 dan 17:00 gacha\n📍 Chirchiq filiali",
+        'schedule_magistratura': "📚 *Magistratura imtihonlari:*\n📆 5-avgust – 15-avgust 2024\n⏰ Soat 10:00 dan 16:00 gacha\n📍 Chirchiq filiali",
+        'schedule_note': "📌 *Eslatma:*\n• Imtihon joyi haqida alohida xabar beriladi\n• Pasport va hujjat bilan kelish shart",
+        # Hujjat holati
         'status_title': "📊 *HUJJAT HOLATINGIZ*\n\n",
         'status_not_found': "❌ Siz hali hujjat topshirmagansiz!",
         'status_docs': "📄 *Hujjatlar holati:*\n",
@@ -144,19 +154,55 @@ LANG_TEXTS = {
         'status_not_submitted': "⭕ Topshirilmagan",
         'status_yonalish': "🎓 *Yo'nalish:* {yonalish}\n",
         'status_phone': "📞 *Telefon:* {phone}\n",
-        # 4. Imtihon jadvali
-        'schedule_title': "📅 *IMTIHON JADVALI 2024*\n\n",
-        'schedule_bakalavr': "🎓 *Bakalavriat imtihonlari:*\n",
-        'schedule_bakalavr_dates': "📆 10-avgust – 20-avgust 2024\n",
-        'schedule_magistratura': "📚 *Magistratura imtihonlari:*\n",
-        'schedule_magistratura_dates': "📆 5-avgust – 15-avgust 2024\n",
-        'schedule_note': "📌 *Eslatma:* Imtihon joyi haqida alohida xabar beriladi.",
-        # Admin
-        'admin_title': "👤 *ADMIN PANEL*\n\n",
+        # Eslatmalar
+        'reminder_title': "🔔 *ESLATMA!*\n\n",
+        'reminder_7days': "📢 Hujjat topshirish muddatiga *7 kun* qoldi!\n\n📋 Hujjatlaringizni topshirishni unutmang!",
+        'reminder_3days': "⚠️ Hujjat topshirish muddatiga *3 kun* qoldi!\n\n📋 Tezroq hujjatlaringizni topshiring!",
+        'reminder_1day': "🚨 *OXIRGI KUN!*\n\n📋 Hujjat topshirish muddati *bugun* tugaydi!\n\n⏰ Kechiktirmang!",
+        'deadline_passed': "⛔ *QABUL YOPILDI!*\n\nHujjat topshirish muddati tugagan. Keyingi yilda kutamiz!",
+        # Admin panel
+        'admin_title': "⚙️ *ADMIN PANEL*\n\n👋 Xush kelibsiz, Administrator!",
         'admin_stats': "📊 Statistika",
         'admin_review': "📋 Hujjat tekshirish",
-        'admin_broadcast': "📨 Xabar yuborish",
-        'admin_back': "🔙 Menyuga qaytish"
+        'admin_broadcast': "📨 Ommaviy xabar",
+        'admin_settings': "⚙️ Sozlamalar",
+        'admin_users': "👥 Foydalanuvchilar",
+        'admin_export': "📁 Eksport",
+        'admin_back': "🔙 Menyuga qaytish",
+        # Statistika
+        'stats_title': "📊 *STATISTIKA MA'LUMOTLARI*\n\n",
+        'stats_bakalavr': "🎓 Bakalavriat: {count} ta",
+        'stats_magistratura': "📚 Magistratura: {count} ta",
+        'stats_total': "👥 Jami foydalanuvchilar: {count} ta",
+        'stats_docs': "📄 Hujjatlar:\n1️⃣ Diplom: {d1}\n2️⃣ Pasport: {d2}\n3️⃣ Med: {d3}\n4️⃣ Rasm: {d4}",
+        'stats_approved': "✅ Tasdiqlangan: {count}",
+        'stats_rejected': "❌ Rad etilgan: {count}",
+        'stats_days': "⏰ Qabul tugashiga: {days} kun",
+        # Hujjat tekshiruvi
+        'review_title': "📋 *HUJJAT TEKSHIRUVI*\n\n",
+        'review_pending': "⏳ Holat: Tekshirilmoqda",
+        'review_approved': "✅ Holat: Qabul qilindi",
+        'review_rejected': "❌ Holat: Qayta topshiring\n\nSabab: {reason}",
+        'review_approve': "✅ Tasdiqlash",
+        'review_reject': "❌ Rad etish",
+        'review_reason': "✍️ Rad etish sababini kiriting:",
+        'review_notification': "📨 *Hujjatingiz tekshirildi!*\n\n{status}",
+        # Broadcast
+        'broadcast_title': "📨 *OMMAVIY XABAR YUBORISH*\n\nXabar matnini kiriting:",
+        'broadcast_sending': "⏳ Xabar yuborilmoqda...",
+        'broadcast_sent': "✅ Xabar yuborildi!\n\n📨 Yuborilgan: {sent}\n❌ Yuborilmagan: {failed}",
+        # Sozlamalar
+        'settings_title': "⚙️ *SOZLAMALAR*\n\n",
+        'settings_deadline': "📅 Qabul muddati",
+        'settings_info': "ℹ️ Bot haqida",
+        'settings_reset': "🔄 Qayta ishga tushirish",
+        'deadline_current': "📅 *Joriy qabul muddati:*\n{start} - {end}",
+        'deadline_set': "🔄 Yangi muddatni kiriting (YYYY-MM-DD):",
+        # Foydalanuvchilar
+        'users_title': "👥 *FOYDALANUVCHILAR RO'YXATI*\n\n",
+        'users_count': "Jami: {count} ta foydalanuvchi",
+        # Aloqa
+        'contact_text': "📞 *BIZ BILAN BOG'LANISH*\n\n📞 Telefon: {phone}\n💬 Telegram: {username}\n🌐 Veb-sayt: www.auezov.edu.kz\n📧 Email: info@auezov.edu.kz"
     },
     'ru': {
         'welcome': "🏛 *Южно-Казахстанский университет им. М.Ауезова* Добро пожаловать!",
@@ -170,13 +216,22 @@ LANG_TEXTS = {
         'menu_magistratura_tanlash': "🎓 Направления магистратуры",
         'menu_status': "📊 Статус документов",
         'menu_schedule': "📅 Расписание экзаменов",
-        'menu_admin': "👤 Админ",
+        'menu_contact': "📞 Контакты",
+        'menu_admin': "⚙️ Админ панель",
         'back': "🔙 Назад",
         'cancel': "❌ Отмена",
         'change_lang': "🌐 Сменить язык",
-        'about_text': "🏛 *Южно-Казахстанский университет им. М.Ауезова Чирчикский филиал*",
+        'about_title': "🏛 *ЮЖНО-КАЗАХСТАНСКИЙ УНИВЕРСИТЕТ ИМ. М.АУЕЗОВА*",
+        'about_desc': "📌 *Общая информация:*\n• Основан: 1943 г.\n• Ректор: Кожамжаров Гульмурат Толибаевич\n• Студентов: 15 000+\n• Факультетов: 12\n• Направлений: 50+",
+        'about_history': "📜 *История:*\nУниверситет основан в 1943 году как Чимкентский педагогический институт. С 1996 года носит имя М.Ауезова. С 2006 года имеет статус университета.",
+        'about_faculties': "🏛 *ФАКУЛЬТЕТЫ:*\n\n1. Физико-математический\n2. Химико-биологический\n3. Филологический\n4. Исторический\n5. Экономический\n6. Юридический\n7. Педагогический\n8. Информационных технологий\n9. Инженерный\n10. Спортивный\n11. Иностранных языков\n12. Искусств",
+        'about_international': "🌍 *Международное сотрудничество:*\n• Программа Erasmus+\n• Программы двойного диплома\n• 50+ зарубежных вузов-партнеров\n• Турция, Германия, Южная Корея, США",
+        'about_achievements': "🏆 *Достижения:*\n• Победители республиканских олимпиад\n• Международные гранты\n• Научные проекты\n• Стартап-акселератор",
+        'about_contact': "📞 *Контакты:*\n📍 Адрес: г.Чирчик, Ташкентская область\n📞 Телефон: {phone}\n💬 Telegram: {username}\n🌐 Сайт: www.auezov.edu.kz",
         'bakalavr_text': "👑 *НАПРАВЛЕНИЯ БАКАЛАВРИАТА*\n\n🔬 Биотехнология\n🌍 Экология\n💻 Информационные системы\n⚙️ Автоматизация\n🚚 Транспорт\n⚡ Электроэнергетика\n🧑‍🏫 Педагогика\n🧠 Искусственный интеллект\n💼 Учет и аудит\n✈️ Туризм",
+        'bakalavr_detail': "📚 *О бакалавриате:*\n• Срок обучения: 4 года\n• Очное и заочное отделение\n• Грант и контракт\n• Международный диплом",
         'magistratura_text': "🎓 *НАПРАВЛЕНИЯ МАГИСТРАТУРЫ*\n\n📊 Экономика\n⚖️ Юриспруденция\n💻 Информационные системы\n🌍 Экология",
+        'magistratura_detail': "📚 *О магистратуре:*\n• Срок обучения: 2 года\n• Научно-педагогическое направление\n• Научные руководители",
         'hujjat_intro': "📋 *СПИСОК ДОКУМЕНТОВ*\n\n1️⃣ Диплом/Аттестат\n2️⃣ Паспорт\n3️⃣ Мед-справка 0.86\n4️⃣ Фото 3x4 (6 шт)\n\n🟢 *1-этап: Диплом или Аттестат*\n❓ Выберите формат:",
         'format_rasm': "🖼️ Изображение",
         'format_fayl': "📎 Файл",
@@ -191,31 +246,20 @@ LANG_TEXTS = {
         'all_docs_success': "🎉 Все документы поданы! Свяжемся с вами.",
         'select_bakalavr_title': "🎓 *ВЫБЕРИТЕ НАПРАВЛЕНИЕ БАКАЛАВРИАТА:*",
         'select_magistratura_title': "🎓 *ВЫБЕРИТЕ НАПРАВЛЕНИЕ МАГИСТРАТУРЫ:*",
+        'reg_success': "🎉 Направление успешно выбрано!",
+        'reg_cancelled': "❌ Процесс отменен.",
         'unknown': "❓ Неизвестная команда",
         'error_need_file': "⚠️ Отправьте файл!",
         'error_need_photo': "⚠️ Отправьте фото!",
+        'warning_in_progress': "⚠️ Вы в процессе! Введите запрашиваемую информацию.",
         'channel_caption': "📋 *Новый документ!*\n\n👤 Пользователь: {user}\n🆔 ID: `{uid}`\n📂 Документ: *{doc_name}*",
         'yonalish_channel_caption': "🎓 *ВЫБРАН БАКАЛАВРИАТ!*\n\n👤 Пользователь: {user}\n🆔 ID: `{uid}`\n📞 Тел: `{phone}`\n📚 Направление: *{yonalish}*\n👤 Имя: {ism}\n👤 Фам: {familya}\n🎂 Возраст: {yosh}",
         'magistratura_channel_caption': "📚 *ВЫБРАНА МАГИСТРАТУРА!*\n\n👤 Пользователь: {user}\n🆔 ID: `{uid}`\n📞 Тел: `{phone}`\n🎓 Магистратура: *{yonalish}*\n👤 Имя: {ism}\n👤 Фам: {familya}\n🎂 Возраст: {yosh}",
-        'reg_cancelled': "❌ Процесс отменен.",
-        'reg_success': "🎉 Направление успешно выбрано!",
-        'manzil_text': "📍 *Адрес:* г.Чирчик, Ташкентская область.\n🗺 [Карта](http://maps.google.com)",
-        'warning_in_progress': "⚠️ Вы в процессе! Введите запрашиваемую информацию.",
-        'reminder_title': "🔔 *НАПОМИНАНИЕ!*\n\n",
-        'reminder_7days': "📢 До окончания приема документов *7 дней*!",
-        'reminder_3days': "⚠️ До окончания приема документов *3 дня*!",
-        'reminder_1day': "🚨 *ПОСЛЕДНИЙ ДЕНЬ!*",
-        'deadline_passed': "⛔ *ПРИЕМ ЗАКРЫТ!*",
-        'review_title': "📋 *ПРОВЕРКА ДОКУМЕНТОВ*\n\n",
-        'review_pending': "⏳ Статус: *На проверке*",
-        'review_approved': "✅ Статус: *Принято*",
-        'review_rejected': "❌ Статус: *Отправьте заново*\n\nПричина: {reason}",
-        'review_buttons': "📋 Проверить",
-        'review_approve': "✅ Одобрить",
-        'review_reject': "❌ Отклонить",
-        'review_cancel': "🔙 Отмена",
-        'review_reason': "✍️ Введите причину отказа:",
-        'review_notification': "📨 *Ваши документы проверены!*\n\n{status}",
+        'manzil_text': "📍 *Адрес:* г.Чирчик, Ташкентская область, Узбекистан\n🗺 [Google Maps](https://maps.google.com)\n\n📞 *Приемная комиссия:* +998996844483\n💬 *Telegram:* @Auezov_data",
+        'schedule_title': "📅 *РАСПИСАНИЕ ЭКЗАМЕНОВ 2024*\n\n",
+        'schedule_bakalavr': "🎓 *Экзамены бакалавриата:*\n📆 10-20 августа 2024\n⏰ С 9:00 до 17:00\n📍 Чирчикский филиал",
+        'schedule_magistratura': "📚 *Экзамены магистратуры:*\n📆 5-15 августа 2024\n⏰ С 10:00 до 16:00\n📍 Чирчикский филиал",
+        'schedule_note': "📌 *Примечание:*\n• О месте экзаменов сообщим дополнительно\n• При себе иметь паспорт и документы",
         'status_title': "📊 *СТАТУС ДОКУМЕНТОВ*\n\n",
         'status_not_found': "❌ Вы еще не подавали документы!",
         'status_docs': "📄 *Статус документов:*\n",
@@ -229,17 +273,47 @@ LANG_TEXTS = {
         'status_not_submitted': "⭕ Не подано",
         'status_yonalish': "🎓 *Направление:* {yonalish}\n",
         'status_phone': "📞 *Телефон:* {phone}\n",
-        'schedule_title': "📅 *РАСПИСАНИЕ ЭКЗАМЕНОВ 2024*\n\n",
-        'schedule_bakalavr': "🎓 *Экзамены бакалавриата:*\n",
-        'schedule_bakalavr_dates': "📆 10-20 августа 2024\n",
-        'schedule_magistratura': "📚 *Экзамены магистратуры:*\n",
-        'schedule_magistratura_dates': "📆 5-15 августа 2024\n",
-        'schedule_note': "📌 *Примечание:* О месте экзаменов сообщим дополнительно.",
-        'admin_title': "👤 *АДМИН ПАНЕЛЬ*\n\n",
+        'reminder_title': "🔔 *НАПОМИНАНИЕ!*\n\n",
+        'reminder_7days': "📢 До окончания приема документов *7 дней*!",
+        'reminder_3days': "⚠️ До окончания приема документов *3 дня*!",
+        'reminder_1day': "🚨 *ПОСЛЕДНИЙ ДЕНЬ!*",
+        'deadline_passed': "⛔ *ПРИЕМ ЗАКРЫТ!*",
+        'admin_title': "⚙️ *АДМИН ПАНЕЛЬ*\n\n👋 Добро пожаловать, Администратор!",
         'admin_stats': "📊 Статистика",
         'admin_review': "📋 Проверить документы",
-        'admin_broadcast': "📨 Отправить сообщение",
-        'admin_back': "🔙 Вернуться"
+        'admin_broadcast': "📨 Рассылка",
+        'admin_settings': "⚙️ Настройки",
+        'admin_users': "👥 Пользователи",
+        'admin_export': "📁 Экспорт",
+        'admin_back': "🔙 Назад",
+        'stats_title': "📊 *СТАТИСТИКА*\n\n",
+        'stats_bakalavr': "🎓 Бакалавриат: {count}",
+        'stats_magistratura': "📚 Магистратура: {count}",
+        'stats_total': "👥 Всего пользователей: {count}",
+        'stats_docs': "📄 Документы:\n1️⃣ Диплом: {d1}\n2️⃣ Паспорт: {d2}\n3️⃣ Мед: {d3}\n4️⃣ Фото: {d4}",
+        'stats_approved': "✅ Одобрено: {count}",
+        'stats_rejected': "❌ Отклонено: {count}",
+        'stats_days': "⏰ До окончания приема: {days} дней",
+        'review_title': "📋 *ПРОВЕРКА ДОКУМЕНТОВ*\n\n",
+        'review_pending': "⏳ Статус: На проверке",
+        'review_approved': "✅ Статус: Принято",
+        'review_rejected': "❌ Статус: Отправьте заново\n\nПричина: {reason}",
+        'review_approve': "✅ Одобрить",
+        'review_reject': "❌ Отклонить",
+        'review_reason': "✍️ Введите причину отказа:",
+        'review_notification': "📨 *Ваши документы проверены!*\n\n{status}",
+        'broadcast_title': "📨 *РАССЫЛКА СООБЩЕНИЙ*\n\nВведите текст сообщения:",
+        'broadcast_sending': "⏳ Отправка сообщений...",
+        'broadcast_sent': "✅ Рассылка завершена!\n\n📨 Отправлено: {sent}\n❌ Не отправлено: {failed}",
+        'settings_title': "⚙️ *НАСТРОЙКИ*\n\n",
+        'settings_deadline': "📅 Срок приема",
+        'settings_info': "ℹ️ О боте",
+        'settings_reset': "🔄 Перезапуск",
+        'deadline_current': "📅 *Текущий срок приема:*\n{start} - {end}",
+        'deadline_set': "🔄 Введите новый срок (ГГГГ-ММ-ДД):",
+        'users_title': "👥 *СПИСОК ПОЛЬЗОВАТЕЛЕЙ*\n\n",
+        'users_count': "Всего: {count} пользователей",
+        'contact_text': "📞 *СВЯЗАТЬСЯ С НАМИ*\n\n📞 Телефон: {phone}\n💬 Telegram: {username}\n🌐 Сайт: www.auezov.edu.kz\n📧 Email: info@auezov.edu.kz"
     },
     'kk': {
         'welcome': "🏛 *М.Әуезов атындағы ОҚУ* Шыршық филиалына қош келдіңіз!",
@@ -253,13 +327,22 @@ LANG_TEXTS = {
         'menu_magistratura_tanlash': "🎓 Магистратура бағыттары",
         'menu_status': "📊 Құжат күйі",
         'menu_schedule': "📅 Емтихан кестесі",
-        'menu_admin': "👤 Әкім",
+        'menu_contact': "📞 Байланыс",
+        'menu_admin': "⚙️ Әкім панелі",
         'back': "🔙 Артқа",
         'cancel': "❌ Болдырмау",
         'change_lang': "🌐 Тілді өзгерту",
-        'about_text': "🏛 *М.Әуезов атындағы ОҚУ Шыршық филиалы*",
+        'about_title': "🏛 *М.ӘУЕЗОВ АТЫНДАҒЫ ОҚУ*",
+        'about_desc': "📌 *Жалпы мәлімет:*\n• Құрылған: 1943 ж\n• Ректор: Қожамжаров Гүлмұрат Толыбайұлы\n• Студенттер: 15 000+\n• Факультеттер: 12\n• Бағыттар: 50+",
+        'about_history': "📜 *Тарихы:*\nУниверситет 1943 жылы Шымкент педагогикалық институты ретінде құрылған. 1996 жылы М.Әуезов аты берілген. 2006 жылы университет мәртебесін алған.",
+        'about_faculties': "🏛 *ФАКУЛЬТЕТТЕР:*\n\n1. Физика-математика\n2. Химия-биология\n3. Филология\n4. Тарих\n5. Экономика\n6. Құқық\n7. Педагогика\n8. Ақпараттық технологиялар\n9. Инженерлік\n10. Спорт\n11. Шет тілдері\n12. Өнер",
+        'about_international': "🌍 *Халықаралық ынтымақтастық:*\n• Erasmus+ бағдарламасы\n• Қос диплом бағдарламалары\n• 50+ шетелдік университеттермен ынтымақтастық\n• Түркия, Германия, Оңтүстік Корея, АҚШ",
+        'about_achievements': "🏆 *Жетістіктер:*\n• Республикалық олимпиада жеңімпаздары\n• Халықаралық гранттар\n• Ғылыми жобалар\n• Стартап-акселератор",
+        'about_contact': "📞 *Байланыс:*\n📍 Мекенжай: Шыршық қ., Ташкент обл.\n📞 Телефон: {phone}\n💬 Telegram: {username}\n🌐 Сайт: www.auezov.edu.kz",
         'bakalavr_text': "👑 *БАКАЛАВРИАТ БАҒЫТТАРЫ*\n\n🔬 Биотехнология\n🌍 Экология\n💻 Ақпараттық жүйелер\n⚙️ Автоматтандыру\n🚚 Көлік\n⚡ Электроэнергетика\n🧑‍🏫 Педагогика\n🧠 Жасанды интеллект\n💼 Есеп және аудит\n✈️ Туризм",
+        'bakalavr_detail': "📚 *Бакалавриат туралы:*\n• Оқу мерзімі: 4 жыл\n• Күндізгі және сырттай бөлім\n• Грант және контракт\n• Халықаралық диплом",
         'magistratura_text': "🎓 *МАГИСТРАТУРА БАҒЫТТАРЫ*\n\n📊 Экономика\n⚖️ Юриспруденция\n💻 Ақпараттық жүйелер\n🌍 Экология",
+        'magistratura_detail': "📚 *Магистратура туралы:*\n• Оқу мерзімі: 2 жыл\n• Ғылыми-педагогикалық бағыт\n• Ғылыми жетекшілер",
         'hujjat_intro': "📋 *ҚҰЖАТТАР ТІЗІМІ*\n\n1️⃣ Диплом/Аттестат\n2️⃣ Паспорт\n3️⃣ 0.86 Мед-анықтама\n4️⃣ 3x4 сурет (6 дана)\n\n🟢 *1-кезең: Диплом/Аттестат*\n❓ Форматты таңдаңыз:",
         'format_rasm': "🖼️ Сурет",
         'format_fayl': "📎 Файл",
@@ -274,31 +357,20 @@ LANG_TEXTS = {
         'all_docs_success': "🎉 Барлық құжаттар тапсырылды!",
         'select_bakalavr_title': "🎓 *БАКАЛАВРИАТ БАҒЫТТАРЫН ТАҢДАҢЫЗ:*",
         'select_magistratura_title': "🎓 *МАГИСТРАТУРА БАҒЫТТАРЫН ТАҢДАҢЫЗ:*",
+        'reg_success': "🎉 Бағыт сәтті таңдалды!",
+        'reg_cancelled': "❌ Процесс болдырылды.",
         'unknown': "❓ Белгісіз команда",
         'error_need_file': "⚠️ Файл жіберіңіз!",
         'error_need_photo': "⚠️ Сурет жіберіңіз!",
+        'warning_in_progress': "⚠️ Процесс жүріп жатыр! Сұралған ақпаратты енгізіңіз.",
         'channel_caption': "📋 *Жаңа Құжат!*\n\n👤 Қолданушы: {user}\n🆔 ID: `{uid}`\n📂 Құжат: *{doc_name}*",
         'yonalish_channel_caption': "🎓 *БАКАЛАВРИАТ ТАҢДАЛДЫ!*\n\n👤 Қолданушы: {user}\n🆔 ID: `{uid}`\n📞 Тел: `{phone}`\n📚 Бағыт: *{yonalish}*\n👤 Аты: {ism}\n👤 Тегі: {familya}\n🎂 Жасы: {yosh}",
         'magistratura_channel_caption': "📚 *МАГИСТРАТУРА ТАҢДАЛДЫ!*\n\n👤 Қолданушы: {user}\n🆔 ID: `{uid}`\n📞 Тел: `{phone}`\n🎓 Магистратура: *{yonalish}*\n👤 Аты: {ism}\n👤 Тегі: {familya}\n🎂 Жасы: {yosh}",
-        'reg_cancelled': "❌ Процесс болдырылды.",
-        'reg_success': "🎉 Бағыт сәтті таңдалды!",
-        'manzil_text': "📍 *Мекенжай:* Шыршық қ., Ташкент обл.\n🗺 [Карта](http://maps.google.com)",
-        'warning_in_progress': "⚠️ Процесс жүріп жатыр! Сұралған ақпаратты енгізіңіз.",
-        'reminder_title': "🔔 *ЕСКЕРТУ!*\n\n",
-        'reminder_7days': "📢 Құжат тапсыруға *7 күн* қалды!",
-        'reminder_3days': "⚠️ Құжат тапсыруға *3 күн* қалды!",
-        'reminder_1day': "🚨 *СОҢҒЫ КҮН!*",
-        'deadline_passed': "⛔ *ҚАБЫЛДАУ БІТТІ!*",
-        'review_title': "📋 *ҚҰЖАТТАРДЫ ТЕКСЕРУ*\n\n",
-        'review_pending': "⏳ Күйі: *Тексерілуде*",
-        'review_approved': "✅ Күйі: *Қабылданды*",
-        'review_rejected': "❌ Күйі: *Қайта тапсырыңыз*\n\nСебебі: {reason}",
-        'review_buttons': "📋 Тексеру",
-        'review_approve': "✅ Мақұлдау",
-        'review_reject': "❌ Қайтару",
-        'review_cancel': "🔙 Болдырмау",
-        'review_reason': "✍️ Қайтару себебін жазыңыз:",
-        'review_notification': "📨 *Құжаттарыңыз тексерілді!*\n\n{status}",
+        'manzil_text': "📍 *Мекенжай:* Шыршық қ., Ташкент обл., Өзбекстан\n🗺 [Google Maps](https://maps.google.com)\n\n📞 *Қабылдау комиссиясы:* +998996844483\n💬 *Telegram:* @Auezov_data",
+        'schedule_title': "📅 *ЕМТИХАН КЕСТЕСІ 2024*\n\n",
+        'schedule_bakalavr': "🎓 *Бакалавриат емтихандары:*\n📆 10-20 тамыз 2024\n⏰ Сағат 9:00-17:00\n📍 Шыршық филиалы",
+        'schedule_magistratura': "📚 *Магистратура емтихандары:*\n📆 5-15 тамыз 2024\n⏰ Сағат 10:00-16:00\n📍 Шыршық филиалы",
+        'schedule_note': "📌 *Ескерту:*\n• Емтихан орны туралы қосымша хабарланады\n• Паспорт және құжатпен келу керек",
         'status_title': "📊 *ҚҰЖАТ КҮЙІҢІЗ*\n\n",
         'status_not_found': "❌ Сіз әлі құжат тапсырған жоқсыз!",
         'status_docs': "📄 *Құжаттар күйі:*\n",
@@ -312,17 +384,47 @@ LANG_TEXTS = {
         'status_not_submitted': "⭕ Тапсырылмаған",
         'status_yonalish': "🎓 *Бағыт:* {yonalish}\n",
         'status_phone': "📞 *Телефон:* {phone}\n",
-        'schedule_title': "📅 *ЕМТИХАН КЕСТЕСІ 2024*\n\n",
-        'schedule_bakalavr': "🎓 *Бакалавриат емтихандары:*\n",
-        'schedule_bakalavr_dates': "📆 10-20 тамыз 2024\n",
-        'schedule_magistratura': "📚 *Магистратура емтихандары:*\n",
-        'schedule_magistratura_dates': "📆 5-15 тамыз 2024\n",
-        'schedule_note': "📌 *Ескерту:* Емтихан орны туралы қосымша хабарланады.",
-        'admin_title': "👤 *ӘКІМ ПАНЕЛІ*\n\n",
+        'reminder_title': "🔔 *ЕСКЕРТУ!*\n\n",
+        'reminder_7days': "📢 Құжат тапсыруға *7 күн* қалды!",
+        'reminder_3days': "⚠️ Құжат тапсыруға *3 күн* қалды!",
+        'reminder_1day': "🚨 *СОҢҒЫ КҮН!*",
+        'deadline_passed': "⛔ *ҚАБЫЛДАУ БІТТІ!*",
+        'admin_title': "⚙️ *ӘКІМ ПАНЕЛІ*\n\n👋 Қош келдіңіз, Әкімші!",
         'admin_stats': "📊 Статистика",
         'admin_review': "📋 Құжаттарды тексеру",
         'admin_broadcast': "📨 Хабарлама жіберу",
-        'admin_back': "🔙 Мәзірге оралу"
+        'admin_settings': "⚙️ Баптаулар",
+        'admin_users': "👥 Пайдаланушылар",
+        'admin_export': "📁 Экспорт",
+        'admin_back': "🔙 Мәзірге оралу",
+        'stats_title': "📊 *СТАТИСТИКА*\n\n",
+        'stats_bakalavr': "🎓 Бакалавриат: {count}",
+        'stats_magistratura': "📚 Магистратура: {count}",
+        'stats_total': "👥 Барлық пайдаланушылар: {count}",
+        'stats_docs': "📄 Құжаттар:\n1️⃣ Диплом: {d1}\n2️⃣ Паспорт: {d2}\n3️⃣ Мед: {d3}\n4️⃣ Сурет: {d4}",
+        'stats_approved': "✅ Мақұлданған: {count}",
+        'stats_rejected': "❌ Қайтарылған: {count}",
+        'stats_days': "⏰ Қабылдау бітуге: {days} күн",
+        'review_title': "📋 *ҚҰЖАТТАРДЫ ТЕКСЕРУ*\n\n",
+        'review_pending': "⏳ Күйі: Тексерілуде",
+        'review_approved': "✅ Күйі: Қабылданды",
+        'review_rejected': "❌ Күйі: Қайта тапсырыңыз\n\nСебебі: {reason}",
+        'review_approve': "✅ Мақұлдау",
+        'review_reject': "❌ Қайтару",
+        'review_reason': "✍️ Қайтару себебін жазыңыз:",
+        'review_notification': "📨 *Құжаттарыңыз тексерілді!*\n\n{status}",
+        'broadcast_title': "📨 *ХАБАРЛАМА ЖІБЕРУ*\n\nХабарлама мәтінін енгізіңіз:",
+        'broadcast_sending': "⏳ Хабарлама жіберілуде...",
+        'broadcast_sent': "✅ Хабарлама жіберілді!\n\n📨 Жіберілген: {sent}\n❌ Жіберілмеген: {failed}",
+        'settings_title': "⚙️ *БАПТАУЛАР*\n\n",
+        'settings_deadline': "📅 Қабылдау мерзімі",
+        'settings_info': "ℹ️ Бот туралы",
+        'settings_reset': "🔄 Қайта іске қосу",
+        'deadline_current': "📅 *Ағымдағы қабылдау мерзімі:*\n{start} - {end}",
+        'deadline_set': "🔄 Жаңа мерзімді енгізіңіз (ЖЖЖЖ-АА-КК):",
+        'users_title': "👥 *ПАЙДАЛАНУШЫЛАР ТІЗІМІ*\n\n",
+        'users_count': "Барлығы: {count} пайдаланушы",
+        'contact_text': "📞 *БІЗГЕ ХАБАРЛАСУ*\n\n📞 Телефон: {phone}\n💬 Telegram: {username}\n🌐 Сайт: www.auezov.edu.kz\n📧 Email: info@auezov.edu.kz"
     }
 }
 
@@ -407,7 +509,14 @@ def init_db():
             doc4_status TEXT DEFAULT 'pending',
             last_update TEXT
         );
+        CREATE TABLE IF NOT EXISTS settings (
+            key TEXT PRIMARY KEY,
+            value TEXT
+        );
     """)
+    # Default settings
+    cur.execute("INSERT OR IGNORE INTO settings (key, value) VALUES ('qabul_start', '2024-06-01')")
+    cur.execute("INSERT OR IGNORE INTO settings (key, value) VALUES ('qabul_end', '2024-09-01')")
     con.commit()
     con.close()
 
@@ -483,20 +592,61 @@ def get_all_users():
     con.close()
     return users
 
+def get_all_users_with_info():
+    con = db_connect()
+    cur = con.cursor()
+    cur.execute("SELECT id, ism, familya, telefon, yonalish FROM bakalavr_royxat")
+    bakalavr = cur.fetchall()
+    cur.execute("SELECT id, ism, familya, telefon, yonalish FROM magistratura_royxat")
+    magistratura = cur.fetchall()
+    con.close()
+    return bakalavr, magistratura
+
+def get_setting(key):
+    con = db_connect()
+    cur = con.cursor()
+    cur.execute("SELECT value FROM settings WHERE key=?", (key,))
+    row = cur.fetchone()
+    con.close()
+    return row[0] if row else None
+
+def set_setting(key, value):
+    con = db_connect()
+    cur = con.cursor()
+    cur.execute("INSERT OR REPLACE INTO settings (key, value) VALUES (?,?)", (key, value))
+    con.commit()
+    con.close()
+
 def is_qabul_open():
-    today = datetime.datetime.now()
-    start = datetime.datetime(today.year, QABUL_START[0], QABUL_START[1])
-    end = datetime.datetime(today.year, QABUL_END[0], QABUL_END[1])
-    return start <= today <= end
+    try:
+        start_str = get_setting('qabul_start')
+        end_str = get_setting('qabul_end')
+        if start_str and end_str:
+            start = datetime.datetime.strptime(start_str, '%Y-%m-%d')
+            end = datetime.datetime.strptime(end_str, '%Y-%m-%d')
+        else:
+            start = datetime.datetime(datetime.datetime.now().year, 6, 1)
+            end = datetime.datetime(datetime.datetime.now().year, 9, 1)
+        today = datetime.datetime.now()
+        return start <= today <= end
+    except:
+        return True
 
 def get_deadline_days():
-    today = datetime.datetime.now()
-    end = datetime.datetime(today.year, QABUL_END[0], QABUL_END[1])
-    diff = (end - today).days
-    return diff
+    try:
+        end_str = get_setting('qabul_end')
+        if end_str:
+            end = datetime.datetime.strptime(end_str, '%Y-%m-%d')
+        else:
+            end = datetime.datetime(datetime.datetime.now().year, 9, 1)
+        today = datetime.datetime.now()
+        diff = (end - today).days
+        return diff
+    except:
+        return 30
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🎛️  KLAVIATURALAR (CHIROYLI TARTIB)
+# 🎛️  KLAVIATURALAR
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 def main_menu_markup(lang):
     t = LANG_TEXTS[lang]
@@ -506,7 +656,8 @@ def main_menu_markup(lang):
         [t['menu_hujjat'], t['menu_manzil']],
         [t['menu_bakalavr_tanlash'], t['menu_magistratura_tanlash']],
         [t['menu_status'], t['menu_schedule']],
-        [t['menu_admin'], t['change_lang']],
+        [t['menu_contact'], t['menu_admin']],
+        [t['change_lang']],
     ], resize_keyboard=True)
 
 def cancel_back_markup(lang):
@@ -550,10 +701,22 @@ def lang_tanlash_keyboard():
 def admin_menu_markup(lang):
     t = LANG_TEXTS[lang]
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton(t['admin_stats'], callback_data="admin_stats")],
-        [InlineKeyboardButton(t['admin_review'], callback_data="admin_review_list")],
-        [InlineKeyboardButton(t['admin_broadcast'], callback_data="admin_broadcast")],
-        [InlineKeyboardButton(t['admin_back'], callback_data="admin_back")]
+        [InlineKeyboardButton("📊 " + t['admin_stats'], callback_data="admin_stats")],
+        [InlineKeyboardButton("📋 " + t['admin_review'], callback_data="admin_review_list")],
+        [InlineKeyboardButton("📨 " + t['admin_broadcast'], callback_data="admin_broadcast")],
+        [InlineKeyboardButton("⚙️ " + t['admin_settings'], callback_data="admin_settings")],
+        [InlineKeyboardButton("👥 " + t['admin_users'], callback_data="admin_users")],
+        [InlineKeyboardButton("📁 " + t['admin_export'], callback_data="admin_export")],
+        [InlineKeyboardButton("🔙 " + t['admin_back'], callback_data="admin_back")]
+    ])
+
+def settings_menu_markup(lang):
+    t = LANG_TEXTS[lang]
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton("📅 " + t['settings_deadline'], callback_data="settings_deadline")],
+        [InlineKeyboardButton("ℹ️ " + t['settings_info'], callback_data="settings_info")],
+        [InlineKeyboardButton("🔄 " + t['settings_reset'], callback_data="settings_reset")],
+        [InlineKeyboardButton("🔙 " + t['admin_back'], callback_data="admin_back")]
     ])
 
 def review_list_keyboard(users, lang, page=0):
@@ -563,33 +726,52 @@ def review_list_keyboard(users, lang, page=0):
     end = min(start + 5, len(users))
     for i in range(start, end):
         user = users[i]
-        name = user.get('ism', 'Noma\'lum')[:20]
-        keyboard.append([InlineKeyboardButton(f"👤 {name}", callback_data=f"review_user_{user['user_id']}")])
+        name = f"{user['ism']} {user['familya']}"[:25]
+        keyboard.append([InlineKeyboardButton(f"👤 {name}", callback_data=f"review_user_{user['user_id']}_{user['doc_num']}")])
     if len(users) > 5:
         nav_row = []
         if page > 0:
-            nav_row.append(InlineKeyboardButton("◀️ Oldingi", callback_data=f"review_page_{page-1}"))
+            nav_row.append(InlineKeyboardButton("◀️ " + t['back'], callback_data=f"review_page_{page-1}"))
         if end < len(users):
-            nav_row.append(InlineKeyboardButton("Keyingi ▶️", callback_data=f"review_page_{page+1}"))
+            nav_row.append(InlineKeyboardButton(t['back'] + " ▶️", callback_data=f"review_page_{page+1}"))
         if nav_row:
             keyboard.append(nav_row)
-    keyboard.append([InlineKeyboardButton(t['back'], callback_data="admin_back")])
+    keyboard.append([InlineKeyboardButton("🔙 " + t['admin_back'], callback_data="admin_back")])
     return InlineKeyboardMarkup(keyboard)
 
 def review_actions_keyboard(lang, user_id, doc_num):
     t = LANG_TEXTS[lang]
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton("✅ Tasdiqlash", callback_data=f"review_approve_{user_id}_{doc_num}")],
-        [InlineKeyboardButton("❌ Rad etish", callback_data=f"review_reject_{user_id}_{doc_num}")],
-        [InlineKeyboardButton("🔙 Orqaga", callback_data="admin_review_list")]
+        [InlineKeyboardButton("✅ " + t['review_approve'], callback_data=f"review_approve_{user_id}_{doc_num}")],
+        [InlineKeyboardButton("❌ " + t['review_reject'], callback_data=f"review_reject_{user_id}_{doc_num}")],
+        [InlineKeyboardButton("🔙 " + t['admin_back'], callback_data="admin_back")]
     ])
+
+def users_list_keyboard(users, lang, page=0, user_type='bakalavr'):
+    keyboard = []
+    start = page * 10
+    end = min(start + 10, len(users))
+    for i in range(start, end):
+        user = users[i]
+        name = f"{user[1]} {user[2]}"[:25] if len(user) > 2 else f"User {user[0]}"
+        keyboard.append([InlineKeyboardButton(f"👤 {name}", callback_data=f"user_detail_{user[0]}_{user_type}")])
+    if len(users) > 10:
+        nav_row = []
+        if page > 0:
+            nav_row.append(InlineKeyboardButton("◀️ Oldingi", callback_data=f"users_page_{user_type}_{page-1}"))
+        if end < len(users):
+            nav_row.append(InlineKeyboardButton("Keyingi ▶️", callback_data=f"users_page_{user_type}_{page+1}"))
+        if nav_row:
+            keyboard.append(nav_row)
+    keyboard.append([InlineKeyboardButton("🔙 Orqaga", callback_data="admin_users")])
+    return InlineKeyboardMarkup(keyboard)
 
 def is_any_menu_button(text, lang):
     if not text: return False
     t = LANG_TEXTS[lang]
     menu = [t['menu_about'], t['menu_bakalavr'], t['menu_magistratura'], t['menu_hujjat'],
             t['menu_manzil'], t['menu_bakalavr_tanlash'], t['menu_magistratura_tanlash'],
-            t['menu_status'], t['menu_schedule'], t['menu_admin'], t['change_lang']]
+            t['menu_status'], t['menu_schedule'], t['menu_contact'], t['menu_admin'], t['change_lang']]
     return text in menu
 
 def is_cancel_or_back(text, lang):
@@ -625,12 +807,6 @@ async def process_step_guard(update, context, current_state):
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def start(update, context):
     user = update.effective_user
-    
-    # Qabul muddatini tekshirish
-    if not is_qabul_open():
-        lang = get_user_lang(user.id)
-        await update.message.reply_text(LANG_TEXTS[lang]['deadline_passed'], parse_mode="Markdown")
-        return
     
     con = db_connect()
     cur = con.cursor()
@@ -669,31 +845,41 @@ async def main_menu_dispatcher(update, context):
     lang = get_user_lang(user_id)
     t = LANG_TEXTS[lang]
 
-    # Qabul muddatini tekshirish
-    if not is_qabul_open() and msg not in [t['menu_about'], t['menu_manzil'], t['change_lang']]:
-        await update.message.reply_text(t['deadline_passed'], parse_mode="Markdown")
-        return TANLA
-
     if msg == t['change_lang']:
         await update.message.reply_text("🌐 Tilni tanlang:", parse_mode="Markdown", reply_markup=lang_tanlash_keyboard())
         return TIL_TANLASH
 
+    # Universitet haqida (to'liq ma'lumot)
     if msg == t['menu_about']:
+        text = f"{t['about_title']}\n\n"
+        text += f"{t['about_desc']}\n\n"
+        text += f"{t['about_history']}\n\n"
+        text += f"{t['about_faculties']}\n\n"
+        text += f"{t['about_international']}\n\n"
+        text += f"{t['about_achievements']}\n\n"
+        text += t['about_contact'].format(phone=ADMIN_PHONE, username=ADMIN_USERNAME)
+        
+        # Rasm bilan yuborish
         try:
-            await update.message.reply_photo(photo=ABOUT_PHOTO_URL, caption=t['about_text'], parse_mode="Markdown")
+            await update.message.reply_photo(photo=UNI_PHOTOS[0], caption=text, parse_mode="Markdown")
         except:
-            await update.message.reply_text(t['about_text'], parse_mode="Markdown")
+            await update.message.reply_text(text, parse_mode="Markdown")
         return TANLA
 
     if msg == t['menu_bakalavr']:
-        await update.message.reply_text(t['bakalavr_text'], parse_mode="Markdown")
+        text = f"{t['bakalavr_text']}\n\n{t['bakalavr_detail']}"
+        await update.message.reply_text(text, parse_mode="Markdown")
         return TANLA
 
     if msg == t['menu_magistratura']:
-        await update.message.reply_text(t['magistratura_text'], parse_mode="Markdown")
+        text = f"{t['magistratura_text']}\n\n{t['magistratura_detail']}"
+        await update.message.reply_text(text, parse_mode="Markdown")
         return TANLA
 
     if msg == t['menu_hujjat']:
+        if not is_qabul_open():
+            await update.message.reply_text(t['deadline_passed'], parse_mode="Markdown")
+            return TANLA
         await update.message.reply_text(t['hujjat_intro'], parse_mode="Markdown", reply_markup=format_tanlash_keyboard(lang, 1))
         return HUJJAT_FORMAT_1
 
@@ -702,6 +888,9 @@ async def main_menu_dispatcher(update, context):
         return TANLA
 
     if msg == t['menu_bakalavr_tanlash']:
+        if not is_qabul_open():
+            await update.message.reply_text(t['deadline_passed'], parse_mode="Markdown")
+            return TANLA
         if check_already_registered(user_id, "bakalavr_royxat"):
             await update.message.reply_text("✨ Siz allaqachon bakalavriat yo'nalishini tanlagansiz!", parse_mode="Markdown")
             return TANLA
@@ -709,13 +898,16 @@ async def main_menu_dispatcher(update, context):
         return YONALISH_ISM
 
     if msg == t['menu_magistratura_tanlash']:
+        if not is_qabul_open():
+            await update.message.reply_text(t['deadline_passed'], parse_mode="Markdown")
+            return TANLA
         if check_already_registered(user_id, "magistratura_royxat"):
             await update.message.reply_text("✨ Siz allaqachon magistratura yo'nalishini tanlagansiz!", parse_mode="Markdown")
             return TANLA
         await update.message.reply_text(t['enter_name'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
         return MAG_ISM
 
-    # 3. Hujjat holati
+    # Hujjat holati
     if msg == t['menu_status']:
         hujjat_data = get_hujjat_status(user_id)
         docs = hujjat_data['docs']
@@ -746,22 +938,24 @@ async def main_menu_dispatcher(update, context):
         await update.message.reply_text(text, parse_mode="Markdown")
         return TANLA
 
-    # 4. Imtihon jadvali
+    # Imtihon jadvali
     if msg == t['menu_schedule']:
         text = t['schedule_title']
-        text += t['schedule_bakalavr']
-        text += t['schedule_bakalavr_dates']
-        text += "\n"
-        text += t['schedule_magistratura']
-        text += t['schedule_magistratura_dates']
-        text += "\n"
+        text += t['schedule_bakalavr'] + "\n\n"
+        text += t['schedule_magistratura'] + "\n\n"
         text += t['schedule_note']
+        await update.message.reply_text(text, parse_mode="Markdown")
+        return TANLA
+
+    # Aloqa
+    if msg == t['menu_contact']:
+        text = t['contact_text'].format(phone=ADMIN_PHONE, username=ADMIN_USERNAME)
         await update.message.reply_text(text, parse_mode="Markdown")
         return TANLA
 
     # Admin panel
     if msg == t['menu_admin']:
-        if update.effective_user.username != "Saman2611":
+        if update.effective_user.id != ADMIN_ID:
             await update.message.reply_text("❌ Bu bo'lim faqat admin uchun!")
             return TANLA
         await update.message.reply_text(t['admin_title'], parse_mode="Markdown", reply_markup=admin_menu_markup(lang))
@@ -1010,22 +1204,19 @@ async def magistratura_callback(update, context):
     return TANLA
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 📊  ADMIN PANEL
+# 📊  ADMIN PANEL FUNKSIYALARI
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-# 1. Eslatma xabarlari (har kuni tekshiradi)
+# Eslatma xabarlari
 async def check_deadline_reminders(context: ContextTypes.DEFAULT_TYPE):
-    """Har kuni ishlaydi va muddatga yaqin foydalanuvchilarga xabar yuboradi"""
     days_left = get_deadline_days()
     
     if days_left == 7:
-        text = LANG_TEXTS['uz']['reminder_title'] + LANG_TEXTS['uz']['reminder_7days']
-        for lang in ['uz', 'ru', 'kk']:
-            text = LANG_TEXTS[lang]['reminder_title'] + LANG_TEXTS[lang]['reminder_7days']
+        reminder_key = 'reminder_7days'
     elif days_left == 3:
-        text = LANG_TEXTS['uz']['reminder_title'] + LANG_TEXTS['uz']['reminder_3days']
+        reminder_key = 'reminder_3days'
     elif days_left == 1:
-        text = LANG_TEXTS['uz']['reminder_title'] + LANG_TEXTS['uz']['reminder_1day']
+        reminder_key = 'reminder_1day'
     else:
         return
     
@@ -1033,18 +1224,17 @@ async def check_deadline_reminders(context: ContextTypes.DEFAULT_TYPE):
     for user_id in users:
         try:
             lang = get_user_lang(user_id)
-            await context.bot.send_message(
-                chat_id=user_id,
-                text=LANG_TEXTS[lang]['reminder_title'] + LANG_TEXTS[lang][f'reminder_{days_left}days'],
-                parse_mode="Markdown"
-            )
+            text = LANG_TEXTS[lang]['reminder_title'] + LANG_TEXTS[lang][reminder_key]
+            await context.bot.send_message(chat_id=user_id, text=text, parse_mode="Markdown")
         except Exception as e:
             logger.error(f"Eslatma yuborishda xato: {e}")
 
-# 2. Admin statistika
+# Statistika
 async def admin_stats(update, context):
     query = update.callback_query
     await query.answer()
+    lang = get_user_lang(query.from_user.id)
+    t = LANG_TEXTS[lang]
     
     con = db_connect()
     cur = con.cursor()
@@ -1052,48 +1242,39 @@ async def admin_stats(update, context):
     bak = cur.fetchone()[0]
     cur.execute("SELECT COUNT(*) FROM magistratura_royxat")
     mag = cur.fetchone()[0]
-    
-    # Hujjat statistikasi
     cur.execute("SELECT COUNT(*) FROM hujjat_status WHERE doc1=1")
-    doc1 = cur.fetchone()[0]
+    d1 = cur.fetchone()[0]
     cur.execute("SELECT COUNT(*) FROM hujjat_status WHERE doc2=1")
-    doc2 = cur.fetchone()[0]
+    d2 = cur.fetchone()[0]
     cur.execute("SELECT COUNT(*) FROM hujjat_status WHERE doc3=1")
-    doc3 = cur.fetchone()[0]
+    d3 = cur.fetchone()[0]
     cur.execute("SELECT COUNT(*) FROM hujjat_status WHERE doc4=1")
-    doc4 = cur.fetchone()[0]
-    
+    d4 = cur.fetchone()[0]
     cur.execute("SELECT COUNT(*) FROM hujjat_status WHERE doc1_status='approved'")
-    approved1 = cur.fetchone()[0]
+    approved = cur.fetchone()[0]
     cur.execute("SELECT COUNT(*) FROM hujjat_status WHERE doc1_status='rejected'")
-    rejected1 = cur.fetchone()[0]
-    
+    rejected = cur.fetchone()[0]
     con.close()
     
     days_left = get_deadline_days()
     
-    text = f"📊 *STATISTIKA*\n\n"
-    text += f"🎓 Bakalavriat: {bak}\n"
-    text += f"📚 Magistratura: {mag}\n"
-    text += f"━━━━━━━━━━━━━━━━\n"
-    text += f"📄 *Hujjatlar:*\n"
-    text += f"1️⃣ Diplom: {doc1} ta\n"
-    text += f"2️⃣ Pasport: {doc2} ta\n"
-    text += f"3️⃣ Med: {doc3} ta\n"
-    text += f"4️⃣ Rasm: {doc4} ta\n"
-    text += f"━━━━━━━━━━━━━━━━\n"
-    text += f"✅ Tasdiqlangan: {approved1}\n"
-    text += f"❌ Rad etilgan: {rejected1}\n"
-    text += f"━━━━━━━━━━━━━━━━\n"
-    text += f"⏰ Qabul tugashiga: {days_left} kun"
+    text = t['stats_title']
+    text += t['stats_bakalavr'].format(count=bak) + "\n"
+    text += t['stats_magistratura'].format(count=mag) + "\n"
+    text += t['stats_total'].format(count=bak+mag) + "\n\n"
+    text += t['stats_docs'].format(d1=d1, d2=d2, d3=d3, d4=d4) + "\n\n"
+    text += t['stats_approved'].format(count=approved) + "\n"
+    text += t['stats_rejected'].format(count=rejected) + "\n\n"
+    text += t['stats_days'].format(days=days_left)
     
-    await query.edit_message_text(text, parse_mode="Markdown", reply_markup=admin_menu_markup(get_user_lang(query.from_user.id)))
+    await query.edit_message_text(text, parse_mode="Markdown", reply_markup=admin_menu_markup(lang))
 
-# 2. Hujjat tekshiruvi - ro'yxat
+# Hujjat tekshiruvi - ro'yxat
 async def admin_review_list(update, context):
     query = update.callback_query
     await query.answer()
     lang = get_user_lang(query.from_user.id)
+    t = LANG_TEXTS[lang]
     
     con = db_connect()
     cur = con.cursor()
@@ -1121,7 +1302,7 @@ async def admin_review_list(update, context):
     
     context.user_data['review_users'] = users
     context.user_data['review_page'] = 0
-    await query.edit_message_text("📋 *Tekshiriladigan hujjatlar:*", parse_mode="Markdown", reply_markup=review_list_keyboard(users, lang, 0))
+    await query.edit_message_text("📋 *Tekshiriladigan hujjatlar:*\n\nTasdiqlanmagan hujjatlar ro'yxati", parse_mode="Markdown", reply_markup=review_list_keyboard(users, lang, 0))
 
 async def review_list_page(update, context):
     query = update.callback_query
@@ -1131,7 +1312,7 @@ async def review_list_page(update, context):
     lang = get_user_lang(query.from_user.id)
     users = context.user_data.get('review_users', [])
     
-    await query.edit_message_text("📋 *Tekshiriladigan hujjatlar:*", parse_mode="Markdown", reply_markup=review_list_keyboard(users, lang, page))
+    await query.edit_message_text("📋 *Tekshiriladigan hujjatlar:*\n\nTasdiqlanmagan hujjatlar ro'yxati", parse_mode="Markdown", reply_markup=review_list_keyboard(users, lang, page))
 
 async def review_user(update, context):
     query = update.callback_query
@@ -1139,25 +1320,26 @@ async def review_user(update, context):
     data = query.data
     parts = data.split("_")
     user_id = int(parts[2])
-    doc_num = int(parts[3]) if len(parts) > 3 else 1
+    doc_num = int(parts[3])
     
     lang = get_user_lang(query.from_user.id)
+    t = LANG_TEXTS[lang]
     user_info = get_user_info(user_id)
     
     if not user_info:
         await query.edit_message_text("❌ Foydalanuvchi topilmadi", reply_markup=admin_menu_markup(lang))
         return
     
-    text = f"📋 *Hujjat tekshiruvi*\n\n"
-    text += f"👤 Foydalanuvchi: {user_info['ism']} {user_info['familya']}\n"
-    text += f"📞 Tel: {user_info['telefon']}\n"
-    text += f"🎓 Yo'nalish: {user_info['yonalish']}\n"
-    text += f"━━━━━━━━━━━━━━━━\n"
-    text += f"📄 Hujjat: {HUJJAT_NOMLAR[lang][doc_num]}"
+    text = f"{t['review_title']}"
+    text += f"👤 *Foydalanuvchi:* {user_info['ism']} {user_info['familya']}\n"
+    text += f"📞 *Telefon:* {user_info['telefon']}\n"
+    text += f"🎓 *Yo'nalish:* {user_info['yonalish']}\n"
+    text += f"📄 *Hujjat:* {HUJJAT_NOMLAR[lang][doc_num]}\n\n"
+    text += t['review_pending']
     
     await query.edit_message_text(text, parse_mode="Markdown", reply_markup=review_actions_keyboard(lang, user_id, doc_num))
 
-# 2. Hujjatni tasdiqlash
+# Hujjatni tasdiqlash
 async def review_approve(update, context):
     query = update.callback_query
     await query.answer()
@@ -1169,7 +1351,6 @@ async def review_approve(update, context):
     
     update_hujjat_review(user_id, doc_num, 'approved')
     
-    # Foydalanuvchiga xabar
     user_lang = get_user_lang(user_id)
     status_text = LANG_TEXTS[user_lang]['review_approved']
     await context.bot.send_message(
@@ -1178,10 +1359,10 @@ async def review_approve(update, context):
         parse_mode="Markdown"
     )
     
-    await query.edit_message_text("✅ Hujjat tasdiqlandi!", reply_markup=admin_menu_markup(lang))
+    await query.edit_message_text("✅ *Hujjat tasdiqlandi!*\n\nFoydalanuvchiga xabar yuborildi.", parse_mode="Markdown", reply_markup=admin_menu_markup(lang))
     await admin_review_list(update, context)
 
-# 2. Hujjatni rad etish (sabab bilan)
+# Hujjatni rad etish
 async def review_reject_request(update, context):
     query = update.callback_query
     await query.answer()
@@ -1190,9 +1371,10 @@ async def review_reject_request(update, context):
     context.user_data['reject_user_id'] = int(parts[2])
     context.user_data['reject_doc_num'] = int(parts[3])
     lang = get_user_lang(query.from_user.id)
+    t = LANG_TEXTS[lang]
     
     await query.edit_message_text(
-        LANG_TEXTS[lang]['review_reason'],
+        f"{t['review_reason']}\n\n✍️ Sabab matnini yozing:",
         parse_mode="Markdown",
         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔙 Bekor qilish", callback_data="admin_review_list")]])
     )
@@ -1203,10 +1385,10 @@ async def review_reject_process(update, context):
     user_id = context.user_data.get('reject_user_id')
     doc_num = context.user_data.get('reject_doc_num')
     lang = get_user_lang(update.effective_user.id)
+    t = LANG_TEXTS[lang]
     
     update_hujjat_review(user_id, doc_num, 'rejected', reason)
     
-    # Foydalanuvchiga xabar
     user_lang = get_user_lang(user_id)
     status_text = LANG_TEXTS[user_lang]['review_rejected'].format(reason=reason)
     await context.bot.send_message(
@@ -1215,20 +1397,19 @@ async def review_reject_process(update, context):
         parse_mode="Markdown"
     )
     
-    await update.message.reply_text("❌ Hujjat rad etildi!", reply_markup=main_menu_markup(lang))
-    
-    # Admin panelga qaytish
-    await update.message.reply_text(LANG_TEXTS[lang]['admin_title'], parse_mode="Markdown", reply_markup=admin_menu_markup(lang))
+    await update.message.reply_text("❌ *Hujjat rad etildi!*\n\nFoydalanuvchiga sabab yuborildi.", parse_mode="Markdown", reply_markup=main_menu_markup(lang))
+    await update.message.reply_text(t['admin_title'], parse_mode="Markdown", reply_markup=admin_menu_markup(lang))
     return TANLA
 
-# 2. Broadcast xabar
+# Broadcast
 async def admin_broadcast(update, context):
     query = update.callback_query
     await query.answer()
     lang = get_user_lang(query.from_user.id)
+    t = LANG_TEXTS[lang]
     
     await query.edit_message_text(
-        "📨 *Xabar yuborish*\n\nXabar matnini yuboring:",
+        t['broadcast_title'],
         parse_mode="Markdown",
         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔙 Bekor qilish", callback_data="admin_back")]])
     )
@@ -1241,39 +1422,208 @@ async def process_broadcast(update, context):
     
     msg_text = update.message.text
     lang = get_user_lang(update.effective_user.id)
+    t = LANG_TEXTS[lang]
     users = get_all_users()
     
     sent = 0
     failed = 0
     
-    status_msg = await update.message.reply_text("⏳ Xabar yuborilmoqda...")
+    status_msg = await update.message.reply_text(t['broadcast_sending'])
     
     for user_id in users:
         try:
             await context.bot.send_message(chat_id=user_id, text=msg_text, parse_mode="Markdown")
             sent += 1
-            await asyncio.sleep(0.05)  # Rate limit uchun
+            await asyncio.sleep(0.05)
         except:
             failed += 1
     
-    await status_msg.edit_text(f"✅ Xabar yuborildi!\n\n📨 Yuborilgan: {sent}\n❌ Yuborilmagan: {failed}")
+    await status_msg.edit_text(t['broadcast_sent'].format(sent=sent, failed=failed))
     
     context.user_data['broadcast_mode'] = False
     await update.message.reply_text(LANG_TEXTS[lang]['admin_title'], parse_mode="Markdown", reply_markup=admin_menu_markup(lang))
     return TANLA
 
+# Sozlamalar
+async def admin_settings(update, context):
+    query = update.callback_query
+    await query.answer()
+    lang = get_user_lang(query.from_user.id)
+    t = LANG_TEXTS[lang]
+    
+    await query.edit_message_text(t['settings_title'], parse_mode="Markdown", reply_markup=settings_menu_markup(lang))
+
+async def settings_deadline(update, context):
+    query = update.callback_query
+    await query.answer()
+    lang = get_user_lang(query.from_user.id)
+    t = LANG_TEXTS[lang]
+    
+    start = get_setting('qabul_start') or '2024-06-01'
+    end = get_setting('qabul_end') or '2024-09-01'
+    
+    await query.edit_message_text(
+        t['deadline_current'].format(start=start, end=end) + "\n\n" + t['deadline_set'],
+        parse_mode="Markdown",
+        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔙 Bekor qilish", callback_data="admin_settings")]])
+    )
+    context.user_data['setting_deadline'] = True
+    return ADMIN_SETTINGS
+
+async def settings_deadline_process(update, context):
+    if not context.user_data.get('setting_deadline'):
+        return TANLA
+    
+    date_str = update.message.text.strip()
+    try:
+        datetime.datetime.strptime(date_str, '%Y-%m-%d')
+        set_setting('qabul_end', date_str)
+        lang = get_user_lang(update.effective_user.id)
+        await update.message.reply_text("✅ *Qabul muddati yangilandi!*", parse_mode="Markdown")
+    except:
+        lang = get_user_lang(update.effective_user.id)
+        await update.message.reply_text("❌ *Noto'g'ri format! YYYY-MM-DD shaklida kiriting.*", parse_mode="Markdown")
+    
+    context.user_data['setting_deadline'] = False
+    await update.message.reply_text(LANG_TEXTS[lang]['settings_title'], parse_mode="Markdown", reply_markup=settings_menu_markup(lang))
+    return TANLA
+
+async def settings_info(update, context):
+    query = update.callback_query
+    await query.answer()
+    lang = get_user_lang(query.from_user.id)
+    t = LANG_TEXTS[lang]
+    
+    info_text = "ℹ️ *BOT HAQIDA*\n\n"
+    info_text += "📌 *Versiya:* 2.0.0\n"
+    info_text += "📅 *Ishlab chiqarilgan:* 2024\n"
+    info_text += "👨‍💻 *Dasturchi:* @Saman2611\n"
+    info_text += "🎯 *Maqsad:* Qabul jarayonini avtomatlashtirish\n\n"
+    info_text += "✨ *Funksiyalar:*\n"
+    info_text += "• Bakalavriat va Magistratura yo'nalishlari\n"
+    info_text += "• Hujjat topshirish (rasm/fayl)\n"
+    info_text += "• Hujjat holatini tekshirish\n"
+    info_text += "• Imtihon jadvali\n"
+    info_text += "• Admin panel (statistika, tekshiruv, xabar)\n"
+    info_text += "• 3 til: O'zbek, Русский, Қазақ"
+    
+    await query.edit_message_text(info_text, parse_mode="Markdown", reply_markup=settings_menu_markup(lang))
+
+async def settings_reset(update, context):
+    query = update.callback_query
+    await query.answer()
+    lang = get_user_lang(query.from_user.id)
+    
+    await query.edit_message_text(
+        "🔄 *Bot qayta ishga tushirilmoqda...*\n\nBu bir necha daqiqa vaqt olishi mumkin.",
+        parse_mode="Markdown"
+    )
+    # Botni qayta ishga tushirish uchun exit
+    os._exit(0)
+
+# Foydalanuvchilar ro'yxati
+async def admin_users(update, context):
+    query = update.callback_query
+    await query.answer()
+    lang = get_user_lang(query.from_user.id)
+    t = LANG_TEXTS[lang]
+    
+    bakalavr, magistratura = get_all_users_with_info()
+    
+    text = t['users_title']
+    text += f"🎓 *Bakalavriat:* {len(bakalavr)} ta\n"
+    text += f"📚 *Magistratura:* {len(magistratura)} ta\n"
+    text += t['users_count'].format(count=len(bakalavr)+len(magistratura))
+    
+    keyboard = InlineKeyboardMarkup([
+        [InlineKeyboardButton("🎓 Bakalavriat", callback_data="users_list_bakalavr_0")],
+        [InlineKeyboardButton("📚 Magistratura", callback_data="users_list_magistratura_0")],
+        [InlineKeyboardButton("🔙 " + t['admin_back'], callback_data="admin_back")]
+    ])
+    
+    await query.edit_message_text(text, parse_mode="Markdown", reply_markup=keyboard)
+
+async def users_list(update, context):
+    query = update.callback_query
+    await query.answer()
+    data = query.data
+    parts = data.split("_")
+    user_type = parts[2]
+    page = int(parts[3])
+    lang = get_user_lang(query.from_user.id)
+    
+    bakalavr, magistratura = get_all_users_with_info()
+    
+    if user_type == 'bakalavr':
+        users = bakalavr
+        title = "🎓 *BAKALAVRIAT FOYDALANUVCHILARI*"
+    else:
+        users = magistratura
+        title = "📚 *MAGISTRATURA FOYDALANUVCHILARI*"
+    
+    if not users:
+        await query.edit_message_text("📋 *Foydalanuvchilar yo'q*", parse_mode="Markdown", reply_markup=admin_menu_markup(lang))
+        return
+    
+    text = f"{title}\n\n"
+    start = page * 10
+    end = min(start + 10, len(users))
+    for i in range(start, end):
+        user = users[i]
+        text += f"*{i+1}.* {user[1]} {user[2]}\n"
+        text += f"   📞 {user[3]}\n"
+        text += f"   🎓 {user[4]}\n\n"
+    
+    await query.edit_message_text(text, parse_mode="Markdown", reply_markup=users_list_keyboard(users, lang, page, user_type))
+
+# Eksport
+async def admin_export_callback(update, context):
+    query = update.callback_query
+    await query.answer()
+    lang = get_user_lang(query.from_user.id)
+    
+    await query.edit_message_text(
+        "📁 *Eksport qilish...*\n\nMa'lumotlar tayyorlanmoqda...",
+        parse_mode="Markdown"
+    )
+    
+    con = db_connect()
+    for table in ['bakalavr_royxat', 'magistratura_royxat', 'hujjat_status']:
+        cur = con.cursor()
+        cur.execute(f"SELECT * FROM {table}")
+        data = cur.fetchall()
+        if data:
+            csv_file = io.StringIO()
+            writer = csv.writer(csv_file)
+            writer.writerow([desc[0] for desc in cur.description])
+            writer.writerows(data)
+            await context.bot.send_document(
+                chat_id=query.from_user.id,
+                document=io.BytesIO(csv_file.getvalue().encode('utf-8-sig')),
+                filename=f"{table}.csv"
+            )
+    con.close()
+    
+    await context.bot.send_message(
+        chat_id=query.from_user.id,
+        text="✅ *Eksport tugallandi!*",
+        parse_mode="Markdown",
+        reply_markup=admin_menu_markup(lang)
+    )
+
 async def admin_back(update, context):
     query = update.callback_query
     await query.answer()
     lang = get_user_lang(query.from_user.id)
-    await query.edit_message_text(LANG_TEXTS[lang]['admin_title'], parse_mode="Markdown", reply_markup=admin_menu_markup(lang))
+    t = LANG_TEXTS[lang]
+    await query.edit_message_text(t['admin_title'], parse_mode="Markdown", reply_markup=admin_menu_markup(lang))
     return TANLA
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 👤  ADMIN COMMANDS
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def admin_statistika(update, context):
-    if update.effective_user.username != "Saman2611":
+    if update.effective_user.id != ADMIN_ID:
         await update.message.reply_text("❌ Faqat admin!")
         return
     con = db_connect()
@@ -1286,7 +1636,7 @@ async def admin_statistika(update, context):
     await update.message.reply_text(f"📊 *STATISTIKA*\n\n🎓 Bakalavriat: {bak}\n📚 Magistratura: {mag}", parse_mode="Markdown")
 
 async def admin_export(update, context):
-    if update.effective_user.username != "Saman2611":
+    if update.effective_user.id != ADMIN_ID:
         await update.message.reply_text("❌ Faqat admin!")
         return
     con = db_connect()
@@ -1303,7 +1653,7 @@ async def admin_export(update, context):
     con.close()
 
 async def admin_search(update, context):
-    if update.effective_user.username != "Saman2611":
+    if update.effective_user.id != ADMIN_ID:
         await update.message.reply_text("❌ Faqat admin!")
         return
     if not context.args:
@@ -1338,7 +1688,7 @@ def main():
     app.add_handler(CommandHandler("export", admin_export))
     app.add_handler(CommandHandler("search", admin_search))
     
-    # Eslatma scheduler (har kuni 9:00 da)
+    # Eslatma scheduler
     job_queue = app.job_queue
     if job_queue:
         job_queue.run_daily(check_deadline_reminders, time=datetime.time(hour=9, minute=0))
@@ -1356,6 +1706,13 @@ def main():
                     CallbackQueryHandler(review_approve, pattern="^review_approve_"),
                     CallbackQueryHandler(review_reject_request, pattern="^review_reject_"),
                     CallbackQueryHandler(admin_broadcast, pattern="^admin_broadcast$"),
+                    CallbackQueryHandler(admin_settings, pattern="^admin_settings$"),
+                    CallbackQueryHandler(settings_deadline, pattern="^settings_deadline$"),
+                    CallbackQueryHandler(settings_info, pattern="^settings_info$"),
+                    CallbackQueryHandler(settings_reset, pattern="^settings_reset$"),
+                    CallbackQueryHandler(admin_users, pattern="^admin_users$"),
+                    CallbackQueryHandler(users_list, pattern="^users_list_"),
+                    CallbackQueryHandler(admin_export_callback, pattern="^admin_export$"),
                     CallbackQueryHandler(admin_back, pattern="^admin_back$"),
                     MessageHandler(filters.TEXT & ~filters.COMMAND, process_broadcast)],
             HUJJAT_FORMAT_1: [CallbackQueryHandler(format_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
@@ -1377,6 +1734,7 @@ def main():
             MAG_TELEFON: [MessageHandler(filters.ALL, magistratura_telefon)],
             MAG_TANLASH: [CallbackQueryHandler(magistratura_callback)],
             ADMIN_REVIEW: [MessageHandler(filters.TEXT & ~filters.COMMAND, review_reject_process)],
+            ADMIN_SETTINGS: [MessageHandler(filters.TEXT & ~filters.COMMAND, settings_deadline_process)],
         },
         fallbacks=[CommandHandler('start', start), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
         allow_reentry=True
@@ -1384,9 +1742,22 @@ def main():
     app.add_handler(conv)
     
     print("✅ QABUL BOTI ISHGA TUSHDI!")
-    print("📊 Admin: /users, /export, /search")
-    print("⏰ Eslatmalar: har kuni 9:00 da tekshiriladi")
+    print(f"👤 ADMIN ID: {ADMIN_ID}")
+    print("📊 Admin buyruqlar: /users, /export, /search")
+    print("⏰ Eslatmalar: har kuni 9:00 da")
     print("📋 Hujjat tekshiruvi: admin panel orqali")
+    print("")
+    print("📱 MENU TARTIBI:")
+    print("━" * 30)
+    print("🏛 Universitet haqida")
+    print("🎓 Bakalavriat     | 📚 Magistratura")
+    print("📝 Hujjat topshirish | 📍 Manzil")
+    print("📋 Bakalavriat yo'nalishlari | 🎓 Magistratura yo'nalishlari")
+    print("📊 Hujjat holati   | 📅 Imtihon jadvali")
+    print("📞 Aloqa          | ⚙️ Admin panel")
+    print("🌐 Tilni o'zgartirish")
+    print("━" * 30)
+    
     app.run_polling(allowed_updates=Update.ALL_TYPES)
 
 if __name__ == '__main__':
