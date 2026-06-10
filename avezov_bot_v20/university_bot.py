@@ -43,7 +43,6 @@ ADMIN_USERNAME = "@Saman2611"
 ADMIN_PHONE = "+998996844483"
 DB_PATH = "universitet.db"
 ABOUT_PHOTO_URL = "https://storage.googleapis.com/createsite-uz-bucket/blog/1722071060_chirchiq-auezov.jpg"
-MAX_NOMZOD = 6  # Bir akkauntdan maksimum 6 nomzod
 
 logging.basicConfig(format="%(asctime)s | %(levelname)s | %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -54,12 +53,11 @@ TANLA = "tanla"
 # Bakalavriat
 HUJJAT_FORMAT_1, HUJJAT_FORMAT_2, HUJJAT_FORMAT_3, HUJJAT_FORMAT_4 = "hf1", "hf2", "hf3", "hf4"
 HUJJAT_1, HUJJAT_2, HUJJAT_3, HUJJAT_4 = "h1", "h2", "h3", "h4"
-SOROV_ISM, SOROV_FAMILYA, SOROV_YOSH, SOROV_TELEFON = "si", "sf", "sy", "st"
 YONALISH_ISM, YONALISH_FAMILYA, YONALISH_YOSH, YONALISH_TELEFON, YONALISH_TANLASH = "yi", "yf", "yy", "yt", "yonalish_tanlash"
-# Magistratura (4 ta yo'nalish)
+# Magistratura
 MAG_ISM, MAG_FAMILYA, MAG_YOSH, MAG_TELEFON, MAG_TANLASH = "mi", "mf", "my", "mt", "mag_tanlash"
-# Nomzod qo'shish
-NOMZOD_ISM, NOMZOD_FAMILYA, NOMZOD_YOSH, NOMZOD_TELEFON, NOMZOD_TANLASH = "ni", "nf", "ny", "nt", "nomzod_tanlash"
+# Ma'lumotlarni o'zgartirish
+EDIT_NAME, EDIT_SURNAME, EDIT_AGE, EDIT_PHONE = "en", "es", "ea", "ep"
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 🌐  TIL LUG'ATI (UZ, RU, KK)
@@ -73,10 +71,10 @@ LANG_TEXTS = {
         'menu_magistratura': "📚 Magistratura",
         'menu_hujjat': "📝 Hujjat topshirish",
         'menu_manzil': "📍 Manzil",
-        'menu_sorov': "🗂 So'rovnoma",
         'menu_bakalavr_tanlash': "📋 Bakalavriat yo'nalishlari",
         'menu_magistratura_tanlash': "🎓 Magistratura yo'nalishlari",
-        'menu_nomzod': "👥 Nomzod qo'shish",
+        'menu_samples': "📄 Hujjat namunalari",
+        'menu_edit': "✏️ Ma'lumotlarni o'zgartirish",
         'menu_admin': "👤 Admin bilan bog'lanish",
         'back': "🔙 Orqaga",
         'cancel': "❌ Bekor qilish",
@@ -87,7 +85,6 @@ LANG_TEXTS = {
         'hujjat_intro': "📋 *KERAKLI HUJJATLAR RO'YXATI*\n\n1️⃣ Diplom/Attestat\n2️⃣ Pasport\n3️⃣ 0.86 Med-ma'lumotnoma\n4️⃣ 3x4 rasm (6 dona)\n\n🟢 *1-Bosqich: Diplom yoki Attestat*\n❓ Formatni tanlang:",
         'format_rasm': "🖼️ Rasm ko'rinishida",
         'format_fayl': "📎 Fayl ko'rinishida",
-        'sorov_allready': "✨ *Siz so'rovnomani to'ldirib bo'lgansiz!*",
         'yonalish_allready': "✨ *Siz bakalavriat yo'nalishini tanlab bo'lgansiz!*",
         'magistratura_allready': "✨ *Siz magistratura yo'nalishini tanlab bo'lgansiz!*",
         'enter_name': "✍️ *Ismingizni kiriting:*",
@@ -107,15 +104,26 @@ LANG_TEXTS = {
         'channel_caption': "📋 *Yangi Hujjat!*\n\n👤 Foydalanuvchi: {user}\n🆔 ID: `{uid}`\n📂 Hujjat: *{doc_name}*",
         'yonalish_channel_caption': "🎓 *BAKALAVRIAT TANLANDI!*\n\n👤 Foydalanuvchi: {user}\n🆔 ID: `{uid}`\n📞 Tel: `{phone}`\n📚 Yo'nalish: *{yonalish}*\n👤 Ism: {ism}\n👤 Fam: {familya}\n🎂 Yosh: {yosh}",
         'magistratura_channel_caption': "📚 *MAGISTRATURA TANLANDI!*\n\n👤 Foydalanuvchi: {user}\n🆔 ID: `{uid}`\n📞 Tel: `{phone}`\n🎓 Magistratura: *{yonalish}*\n👤 Ism: {ism}\n👤 Fam: {familya}\n🎂 Yosh: {yosh}",
-        'nomzod_channel_caption': "👥 *YANGI NOMZOD QO'SHILDI!*\n\n👤 Foydalanuvchi: {user}\n🆔 ID: `{uid}`\n📞 Tel: `{phone}`\n🎓 Yo'nalish: *{yonalish}*\n👤 Ism: {ism}\n👤 Fam: {familya}\n🎂 Yosh: {yosh}\n📊 Jami nomzodlar: {total}/6",
         'reg_cancelled': "❌ Jarayon bekor qilindi.",
         'reg_success': "🎉 Yo'nalish muvaffaqiyatli tanlandi!",
         'manzil_text': "📍 *Universitet manzili:* Chirchiq shahri, Toshkent viloyati.\n🗺 [Xarita](http://maps.google.com)",
         'warning_in_progress': "⚠️ *Siz ro'yxatdan o'tish jarayonidasiz!*\n\nJoriy so'ralgan ma'lumotni yuboring yoki **❌ Bekor qilish** tugmasini bosing.",
-        'nomzod_title': "👥 *NOMZOD QO'SHISH*\n\nSiz maksimum {max} ta nomzod qo'shishingiz mumkin.\n✅ Qo'shilgan nomzodlar: {count}/{max}\n\n👇 Yangi nomzod ma'lumotlarini kiriting:",
-        'nomzod_limit': "⚠️ *Siz maksimum {max} ta nomzod qo'shdingiz!* Boshqa nomzod qo'sha olmaysiz.",
-        'nomzod_success': "✅ *Nomzod muvaffaqiyatli qo'shildi!*\n\n📊 Jami nomzodlar: {count}/{max}",
-        'select_nomzod_title': "🎓 *NOMZOD UCHUN YO'NALISHNI TANLANG:*"
+        'edit_title': "✏️ *MA'LUMOTLARNI O'ZGARTIRISH*\n\nQaysi ma'lumotni o'zgartirmoqchisiz?",
+        'edit_name': "✍️ *Yangi ismingizni kiriting:*",
+        'edit_surname': "✍️ *Yangi familiyangizni kiriting:*",
+        'edit_age': "🎂 *Yangi yoshingizni kiriting:*",
+        'edit_phone': "📞 *Yangi telefon raqamingizni kiriting:*",
+        'edit_success': "✅ *Ma'lumot muvaffaqiyatli o'zgartirildi!*",
+        'samples_title': "📄 *HUJJAT NAMUNALARI*\n\nQuyidagi namunalarni ko'ring:",
+        'sample_diplom': "🎓 Diplom/Attestat namunasi",
+        'sample_passport': "🪪 Pasport namunasi",
+        'sample_medical': "🏥 Tibbiy ma'lumotnoma namunasi",
+        'sample_photo': "📸 Rasmga qo'yiladigan talablar",
+        'sample_diplom_text': "📄 *Diplom/Attestat namunasi*\n\n✅ Rangli yoki oq-qora nusxa\n✅ Aniq ko'rinadigan bo'lishi kerak\n✅ JPEG yoki PDF formatda",
+        'sample_passport_text': "🪪 *Pasport namunasi*\n\n✅ Pasportning 1-2 sahifalari\n✅ Rangli nusxa\n✅ Barcha ma'lumotlar aniq o'qilishi kerak",
+        'sample_medical_text': "🏥 *Tibbiy ma'lumotnoma namunasi*\n\n✅ 0.86 shaklidagi ma'lumotnoma\n✅ Rasmiy shifoxona muhrlangan\n✅ 3 oydan eski bo'lmasligi kerak",
+        'sample_photo_text': "📸 *Rasmga qo'yiladigan talablar*\n\n✅ 3x4 o'lchamda\n✅ Oq fonda\n✅ Formal kiyimda\n✅ 6 dona (4 dona jarayonda, 2 dona shaxsiy ish uchun)",
+        'samples_back': "🔙 Namunalardan chiqish"
     },
     'ru': {
         'welcome': "🏛 *Южно-Казахстанский университет им. М.Ауезова* Добро пожаловать!\n\n👇 _Выберите язык:_",
@@ -125,10 +133,10 @@ LANG_TEXTS = {
         'menu_magistratura': "📚 Магистратура",
         'menu_hujjat': "📝 Подать документы",
         'menu_manzil': "📍 Адрес",
-        'menu_sorov': "🗂 Анкета",
         'menu_bakalavr_tanlash': "📋 Направления бакалавриата",
         'menu_magistratura_tanlash': "🎓 Направления магистратуры",
-        'menu_nomzod': "👥 Добавить кандидата",
+        'menu_samples': "📄 Образцы документов",
+        'menu_edit': "✏️ Редактировать данные",
         'menu_admin': "👤 Связаться с админом",
         'back': "🔙 Назад",
         'cancel': "❌ Отмена",
@@ -139,7 +147,6 @@ LANG_TEXTS = {
         'hujjat_intro': "📋 *СПИСОК ДОКУМЕНТОВ*\n\n1️⃣ Диплом/Аттестат\n2️⃣ Паспорт\n3️⃣ Мед-справка 0.86\n4️⃣ Фото 3x4 (6 шт)\n\n🟢 *1-этап: Диплом или Аттестат*\n❓ Выберите формат:",
         'format_rasm': "🖼️ Изображение",
         'format_fayl': "📎 Файл",
-        'sorov_allready': "✨ *Вы уже заполнили анкету!*",
         'yonalish_allready': "✨ *Вы уже выбрали направление бакалавриата!*",
         'magistratura_allready': "✨ *Вы уже выбрали направление магистратуры!*",
         'enter_name': "✍️ *Введите имя:*",
@@ -159,15 +166,26 @@ LANG_TEXTS = {
         'channel_caption': "📋 *Новый документ!*\n\n👤 Пользователь: {user}\n🆔 ID: `{uid}`\n📂 Документ: *{doc_name}*",
         'yonalish_channel_caption': "🎓 *ВЫБРАН БАКАЛАВРИАТ!*\n\n👤 Пользователь: {user}\n🆔 ID: `{uid}`\n📞 Тел: `{phone}`\n📚 Направление: *{yonalish}*\n👤 Имя: {ism}\n👤 Фам: {familya}\n🎂 Возраст: {yosh}",
         'magistratura_channel_caption': "📚 *ВЫБРАНА МАГИСТРАТУРА!*\n\n👤 Пользователь: {user}\n🆔 ID: `{uid}`\n📞 Тел: `{phone}`\n🎓 Магистратура: *{yonalish}*\n👤 Имя: {ism}\n👤 Фам: {familya}\n🎂 Возраст: {yosh}",
-        'nomzod_channel_caption': "👥 *ДОБАВЛЕН НОВЫЙ КАНДИДАТ!*\n\n👤 Пользователь: {user}\n🆔 ID: `{uid}`\n📞 Тел: `{phone}`\n🎓 Направление: *{yonalish}*\n👤 Имя: {ism}\n👤 Фам: {familya}\n🎂 Возраст: {yosh}\n📊 Всего кандидатов: {total}/6",
         'reg_cancelled': "❌ Процесс отменен.",
         'reg_success': "🎉 Направление успешно выбрано!",
         'manzil_text': "📍 *Адрес:* г.Чирчик, Ташкентская область.\n🗺 [Карта](http://maps.google.com)",
         'warning_in_progress': "⚠️ *Вы в процессе регистрации!*\nОтправьте запрашиваемую информацию.",
-        'nomzod_title': "👥 *ДОБАВЛЕНИЕ КАНДИДАТА*\n\nВы можете добавить максимум {max} кандидатов.\n✅ Добавлено кандидатов: {count}/{max}\n\n👇 Введите данные нового кандидата:",
-        'nomzod_limit': "⚠️ *Вы добавили максимум {max} кандидатов!* Больше нельзя.",
-        'nomzod_success': "✅ *Кандидат успешно добавлен!*\n\n📊 Всего кандидатов: {count}/{max}",
-        'select_nomzod_title': "🎓 *ВЫБЕРИТЕ НАПРАВЛЕНИЕ ДЛЯ КАНДИДАТА:*"
+        'edit_title': "✏️ *РЕДАКТИРОВАНИЕ ДАННЫХ*\n\nЧто хотите изменить?",
+        'edit_name': "✍️ *Введите новое имя:*",
+        'edit_surname': "✍️ *Введите новую фамилию:*",
+        'edit_age': "🎂 *Введите новый возраст:*",
+        'edit_phone': "📞 *Введите новый номер телефона:*",
+        'edit_success': "✅ *Данные успешно изменены!*",
+        'samples_title': "📄 *ОБРАЗЦЫ ДОКУМЕНТОВ*\n\nПосмотрите образцы:",
+        'sample_diplom': "🎓 Образец диплома/аттестата",
+        'sample_passport': "🪪 Образец паспорта",
+        'sample_medical': "🏥 Образец медсправки",
+        'sample_photo': "📸 Требования к фото",
+        'sample_diplom_text': "📄 *Образец диплома/аттестата*\n\n✅ Цветная или черно-белая копия\n✅ Должна быть четко видна\n✅ Формат JPEG или PDF",
+        'sample_passport_text': "🪪 *Образец паспорта*\n\n✅ 1-2 страницы паспорта\n✅ Цветная копия\n✅ Все данные должны быть четко видны",
+        'sample_medical_text': "🏥 *Образец медицинской справки*\n\n✅ Справка формы 0.86\n✅ С печатью официальной больницы\n✅ Не старше 3 месяцев",
+        'sample_photo_text': "📸 *Требования к фото*\n\n✅ Размер 3x4\n✅ На белом фоне\n✅ В формальной одежде\n✅ 6 штук",
+        'samples_back': "🔙 Выйти"
     },
     'kk': {
         'welcome': "🏛 *М.Әуезов атындағы ОҚУ* Шыршық филиалына қош келдіңіз!\n\n👇 _Тілді таңдаңыз:_",
@@ -177,10 +195,10 @@ LANG_TEXTS = {
         'menu_magistratura': "📚 Магистратура",
         'menu_hujjat': "📝 Құжат тапсыру",
         'menu_manzil': "📍 Мекенжай",
-        'menu_sorov': "🗂 Сауалнама",
         'menu_bakalavr_tanlash': "📋 Бакалавриат бағыттары",
         'menu_magistratura_tanlash': "🎓 Магистратура бағыттары",
-        'menu_nomzod': "👥 Кандидат қосу",
+        'menu_samples': "📄 Құжат үлгілері",
+        'menu_edit': "✏️ Деректерді өзгерту",
         'menu_admin': "👤 Әкімге жазу",
         'back': "🔙 Артқа",
         'cancel': "❌ Болдырмау",
@@ -191,7 +209,6 @@ LANG_TEXTS = {
         'hujjat_intro': "📋 *ҚҰЖАТТАР ТІЗІМІ*\n\n1️⃣ Диплом/Аттестат\n2️⃣ Паспорт\n3️⃣ 0.86 Мед-анықтама\n4️⃣ 3x4 сурет (6 дана)\n\n🟢 *1-кезең: Диплом/Аттестат*\n❓ Форматты таңдаңыз:",
         'format_rasm': "🖼️ Сурет түрінде",
         'format_fayl': "📎 Файл түрінде",
-        'sorov_allready': "✨ *Сауалнама толтырылған!*",
         'yonalish_allready': "✨ *Бакалавриат бағыты таңдалған!*",
         'magistratura_allready': "✨ *Магистратура бағыты таңдалған!*",
         'enter_name': "✍️ *Атыңызды жазыңыз:*",
@@ -211,15 +228,26 @@ LANG_TEXTS = {
         'channel_caption': "📋 *Жаңа Құжат!*\n\n👤 Қолданушы: {user}\n🆔 ID: `{uid}`\n📂 Құжат: *{doc_name}*",
         'yonalish_channel_caption': "🎓 *БАКАЛАВРИАТ ТАҢДАЛДЫ!*\n\n👤 Қолданушы: {user}\n🆔 ID: `{uid}`\n📞 Тел: `{phone}`\n📚 Бағыт: *{yonalish}*\n👤 Аты: {ism}\n👤 Тегі: {familya}\n🎂 Жасы: {yosh}",
         'magistratura_channel_caption': "📚 *МАГИСТРАТУРА ТАҢДАЛДЫ!*\n\n👤 Қолданушы: {user}\n🆔 ID: `{uid}`\n📞 Тел: `{phone}`\n🎓 Магистратура: *{yonalish}*\n👤 Аты: {ism}\n👤 Тегі: {familya}\n🎂 Жасы: {yosh}",
-        'nomzod_channel_caption': "👥 *ЖАҢА КАНДИДАТ ҚОСЫЛДЫ!*\n\n👤 Қолданушы: {user}\n🆔 ID: `{uid}`\n📞 Тел: `{phone}`\n🎓 Бағыт: *{yonalish}*\n👤 Аты: {ism}\n👤 Тегі: {familya}\n🎂 Жасы: {yosh}\n📊 Барлық кандидаттар: {total}/6",
         'reg_cancelled': "❌ Процесс болдырылды.",
         'reg_success': "🎉 Бағыт сәтті таңдалды!",
         'manzil_text': "📍 *Мекенжай:* Шыршық қ., Ташкент обл.\n🗺 [Карта](http://maps.google.com)",
         'warning_in_progress': "⚠️ *Сіз тіркелу процесіндесіз!*\nСұралған ақпаратты жіберіңіз.",
-        'nomzod_title': "👥 *КАНДИДАТ ҚОСУ*\n\nСіз максимум {max} кандидат қоса аласыз.\n✅ Қосылған кандидаттар: {count}/{max}\n\n👇 Жаңа кандидат деректерін енгізіңіз:",
-        'nomzod_limit': "⚠️ *Сіз максимум {max} кандидат қостыңыз!* Басқа қоса алмайсыз.",
-        'nomzod_success': "✅ *Кандидат сәтті қосылды!*\n\n📊 Барлық кандидаттар: {count}/{max}",
-        'select_nomzod_title': "🎓 *КАНДИДАТҚА БАҒЫТТЫ ТАҢДАҢЫЗ:*"
+        'edit_title': "✏️ *ДЕРЕКТЕРДІ ӨЗГЕРТУ*\n\nНені өзгерткіңіз келеді?",
+        'edit_name': "✍️ *Жаңа атыңызды енгізіңіз:*",
+        'edit_surname': "✍️ *Жаңа тегіңізді енгізіңіз:*",
+        'edit_age': "🎂 *Жаңа жасыңызды енгізіңіз:*",
+        'edit_phone': "📞 *Жаңа телефон нөміріңізді енгізіңіз:*",
+        'edit_success': "✅ *Деректер сәтті өзгертілді!*",
+        'samples_title': "📄 *ҚҰЖАТ ҮЛГІЛЕРІ*\n\nҮлгілерді қараңыз:",
+        'sample_diplom': "🎓 Диплом/Аттестат үлгісі",
+        'sample_passport': "🪪 Паспорт үлгісі",
+        'sample_medical': "🏥 Мед-анықтама үлгісі",
+        'sample_photo': "📸 Сурет талаптары",
+        'sample_diplom_text': "📄 *Диплом/Аттестат үлгісі*\n\n✅ Түсті немесе ақ-қара көшірме\n✅ Анық көрінуі керек\n✅ JPEG немесе PDF форматы",
+        'sample_passport_text': "🪪 *Паспорт үлгісі*\n\n✅ Паспорттың 1-2 беттері\n✅ Түсті көшірме\n✅ Барлық деректер анық оқылуы керек",
+        'sample_medical_text': "🏥 *Медициналық анықтама үлгісі*\n\n✅ 0.86 нысандағы анықтама\n✅ Ресми аурухана мөрі\n✅ 3 айдан ескі болмауы керек",
+        'sample_photo_text': "📸 *Суретке қойылатын талаптар*\n\n✅ 3x4 өлшемде\n✅ Ақ фонда\n✅ Формалды киімде\n✅ 6 дана",
+        'samples_back': "🔙 Шығу"
     }
 }
 
@@ -290,15 +318,8 @@ def init_db():
     cur = con.cursor()
     cur.executescript("""
         CREATE TABLE IF NOT EXISTS foydalanuvchilar (id INTEGER PRIMARY KEY, first_name TEXT, last_name TEXT, user_name TEXT, lang TEXT, birinchi_vaqt TEXT);
-        CREATE TABLE IF NOT EXISTS sorovnama (id INTEGER PRIMARY KEY, first_name TEXT, last_name TEXT, user_name TEXT, vaqt TEXT, ism TEXT, familya TEXT, yosh INTEGER, telefon TEXT);
         CREATE TABLE IF NOT EXISTS bakalavr_royxat (id INTEGER PRIMARY KEY, first_name TEXT, last_name TEXT, user_name TEXT, vaqt TEXT, ism TEXT, familya TEXT, yosh INTEGER, telefon TEXT, yonalish TEXT);
         CREATE TABLE IF NOT EXISTS magistratura_royxat (id INTEGER PRIMARY KEY, first_name TEXT, last_name TEXT, user_name TEXT, vaqt TEXT, ism TEXT, familya TEXT, yosh INTEGER, telefon TEXT, yonalish TEXT);
-        CREATE TABLE IF NOT EXISTS nomzodlar (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER,
-            ism TEXT, familya TEXT, yosh INTEGER, telefon TEXT, yonalish TEXT,
-            vaqt TEXT
-        );
         CREATE TABLE IF NOT EXISTS hujjat_status (user_id INTEGER PRIMARY KEY, doc1 INTEGER DEFAULT 0, doc2 INTEGER DEFAULT 0, doc3 INTEGER DEFAULT 0, doc4 INTEGER DEFAULT 0, last_update TEXT);
     """)
     con.commit()
@@ -335,38 +356,34 @@ def update_hujjat_status(user_id, doc_num):
     con.commit()
     con.close()
 
-def get_nomzod_count(user_id):
-    con = db_connect()
-    cur = con.cursor()
-    cur.execute("SELECT COUNT(*) FROM nomzodlar WHERE user_id=?", (user_id,))
-    count = cur.fetchone()[0]
-    con.close()
-    return count
-
-def add_nomzod(user_id, ism, familya, yosh, telefon, yonalish):
-    con = db_connect()
-    cur = con.cursor()
-    cur.execute("INSERT INTO nomzodlar (user_id, ism, familya, yosh, telefon, yonalish, vaqt) VALUES (?,?,?,?,?,?,?)",
-                (user_id, ism, familya, yosh, telefon, yonalish, str(datetime.datetime.now())))
-    con.commit()
-    con.close()
-
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 🎛️  KLAVIATURALAR
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 def main_menu_markup(lang):
     t = LANG_TEXTS[lang]
     return ReplyKeyboardMarkup([
-        [t['menu_about'], t['menu_bakalavr'], t['menu_magistratura']],
+        [t['menu_about']],
+        [t['menu_bakalavr'], t['menu_magistratura']],
         [t['menu_hujjat'], t['menu_manzil']],
-        [t['menu_sorov'], t['menu_bakalavr_tanlash'], t['menu_magistratura_tanlash']],
-        [t['menu_nomzod'], t['menu_admin']],
+        [t['menu_bakalavr_tanlash'], t['menu_magistratura_tanlash']],
+        [t['menu_samples'], t['menu_edit']],
+        [t['menu_admin']],
         [t['change_lang']],
     ], resize_keyboard=True)
 
 def cancel_back_markup(lang):
     t = LANG_TEXTS[lang]
     return ReplyKeyboardMarkup([[t['back'], t['cancel']]], resize_keyboard=True)
+
+def edit_menu_markup(lang):
+    t = LANG_TEXTS[lang]
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton("✏️ Ism", callback_data="edit_name"),
+         InlineKeyboardButton("✏️ Familiya", callback_data="edit_surname")],
+        [InlineKeyboardButton("🎂 Yosh", callback_data="edit_age"),
+         InlineKeyboardButton("📞 Telefon", callback_data="edit_phone")],
+        [InlineKeyboardButton(t['back'], callback_data="edit_back")]
+    ])
 
 def format_tanlash_keyboard(lang, step_num):
     t = LANG_TEXTS[lang]
@@ -402,12 +419,22 @@ def lang_tanlash_keyboard():
         [InlineKeyboardButton("🇰🇿 Қазақ тілі", callback_data="lang_kk")],
     ])
 
+def samples_keyboard(lang):
+    t = LANG_TEXTS[lang]
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton(t['sample_diplom'], callback_data="sample_diplom")],
+        [InlineKeyboardButton(t['sample_passport'], callback_data="sample_passport")],
+        [InlineKeyboardButton(t['sample_medical'], callback_data="sample_medical")],
+        [InlineKeyboardButton(t['sample_photo'], callback_data="sample_photo")],
+        [InlineKeyboardButton(t['samples_back'], callback_data="samples_back")]
+    ])
+
 def is_any_menu_button(text, lang):
     if not text: return False
     t = LANG_TEXTS[lang]
     menu = [t['menu_about'], t['menu_bakalavr'], t['menu_magistratura'], t['menu_hujjat'],
-            t['menu_manzil'], t['menu_sorov'], t['menu_bakalavr_tanlash'], t['menu_magistratura_tanlash'],
-            t['menu_nomzod'], t['menu_admin'], t['change_lang']]
+            t['menu_manzil'], t['menu_bakalavr_tanlash'], t['menu_magistratura_tanlash'],
+            t['menu_samples'], t['menu_edit'], t['menu_admin'], t['change_lang']]
     return text in menu
 
 def is_cancel_or_back(text, lang):
@@ -507,13 +534,6 @@ async def main_menu_dispatcher(update, context):
         await update.message.reply_text(t['manzil_text'], parse_mode="Markdown")
         return TANLA
 
-    if msg == t['menu_sorov']:
-        if check_already_registered(user_id, "sorovnama"):
-            await update.message.reply_text(t['sorov_allready'], parse_mode="Markdown")
-            return TANLA
-        await update.message.reply_text(t['enter_name'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
-        return SOROV_ISM
-
     if msg == t['menu_bakalavr_tanlash']:
         if check_already_registered(user_id, "bakalavr_royxat"):
             await update.message.reply_text(t['yonalish_allready'], parse_mode="Markdown")
@@ -528,14 +548,13 @@ async def main_menu_dispatcher(update, context):
         await update.message.reply_text(t['enter_name'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
         return MAG_ISM
 
-    if msg == t['menu_nomzod']:
-        count = get_nomzod_count(user_id)
-        if count >= MAX_NOMZOD:
-            await update.message.reply_text(t['nomzod_limit'].format(max=MAX_NOMZOD), parse_mode="Markdown")
-            return TANLA
-        await update.message.reply_text(t['nomzod_title'].format(max=MAX_NOMZOD, count=count), parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
-        await update.message.reply_text(t['enter_name'], parse_mode="Markdown")
-        return NOMZOD_ISM
+    if msg == t['menu_samples']:
+        await update.message.reply_text(t['samples_title'], parse_mode="Markdown", reply_markup=samples_keyboard(lang))
+        return TANLA
+
+    if msg == t['menu_edit']:
+        await update.message.reply_text(t['edit_title'], parse_mode="Markdown", reply_markup=edit_menu_markup(lang))
+        return TANLA
 
     if msg == t['menu_admin']:
         await update.message.reply_text(f"💬 {ADMIN_USERNAME}\n📞 `{ADMIN_PHONE}`", parse_mode="Markdown")
@@ -595,63 +614,6 @@ async def hujjat_1(update, context): return await hujjat_handler(update, context
 async def hujjat_2(update, context): return await hujjat_handler(update, context, 2)
 async def hujjat_3(update, context): return await hujjat_handler(update, context, 3)
 async def hujjat_4(update, context): return await hujjat_handler(update, context, 4)
-
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 📝  SO'ROVNOMA
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-async def sorov_ism(update, context):
-    lang = get_user_lang(update.effective_user.id)
-    guard = await process_step_guard(update, context, SOROV_ISM)
-    if guard == "FORCE_CAN_MENU": return TANLA
-    if guard == "FORCE_STAY": return SOROV_ISM
-    context.user_data['sorov_ism'] = update.message.text.strip()
-    await update.message.reply_text(LANG_TEXTS[lang]['enter_surname'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
-    return SOROV_FAMILYA
-
-async def sorov_familya(update, context):
-    lang = get_user_lang(update.effective_user.id)
-    guard = await process_step_guard(update, context, SOROV_FAMILYA)
-    if guard == "FORCE_CAN_MENU": return TANLA
-    if guard == "FORCE_STAY": return SOROV_FAMILYA
-    context.user_data['sorov_familya'] = update.message.text.strip()
-    await update.message.reply_text(LANG_TEXTS[lang]['enter_age'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
-    return SOROV_YOSH
-
-async def sorov_yosh(update, context):
-    lang = get_user_lang(update.effective_user.id)
-    guard = await process_step_guard(update, context, SOROV_YOSH)
-    if guard == "FORCE_CAN_MENU": return TANLA
-    if guard == "FORCE_STAY": return SOROV_YOSH
-    yosh = update.message.text.strip()
-    if not yosh.isdigit() or not (14 <= int(yosh) <= 60):
-        await update.message.reply_text(LANG_TEXTS[lang]['invalid_age'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
-        return SOROV_YOSH
-    context.user_data['sorov_yosh'] = yosh
-    btn = [[KeyboardButton(LANG_TEXTS[lang]['send_phone'], request_contact=True)], [KeyboardButton(LANG_TEXTS[lang]['back']), KeyboardButton(LANG_TEXTS[lang]['cancel'])]]
-    await update.message.reply_text(LANG_TEXTS[lang]['phone_intro'], parse_mode="Markdown", reply_markup=ReplyKeyboardMarkup(btn, resize_keyboard=True))
-    return SOROV_TELEFON
-
-async def sorov_telefon(update, context):
-    lang = get_user_lang(update.effective_user.id)
-    guard = await process_step_guard(update, context, SOROV_TELEFON)
-    if guard == "FORCE_CAN_MENU": return TANLA
-    if guard == "FORCE_STAY": return SOROV_TELEFON
-    phone = None
-    if update.message.contact:
-        phone = update.message.contact.phone_number
-    elif update.message.text:
-        phone = validate_phone(update.message.text.strip())
-        if not phone:
-            await update.message.reply_text(LANG_TEXTS[lang]['invalid_phone'], parse_mode="Markdown")
-            return SOROV_TELEFON
-    user = update.message.from_user
-    con = db_connect()
-    cur = con.cursor()
-    cur.execute("INSERT OR REPLACE INTO sorovnama VALUES (?,?,?,?,?,?,?,?,?)", (user.id, user.first_name, user.last_name, user.username, str(datetime.datetime.now()), context.user_data['sorov_ism'], context.user_data['sorov_familya'], context.user_data['sorov_yosh'], phone))
-    con.commit()
-    con.close()
-    await update.message.reply_text(LANG_TEXTS[lang]['reg_success'], parse_mode="Markdown", reply_markup=main_menu_markup(lang))
-    return TANLA
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 🎓  BAKALAVRIAT TANLASH
@@ -733,7 +695,7 @@ async def bakalavr_callback(update, context):
     return TANLA
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 📚  MAGISTRATURA TANLASH (4 TA YONALISH)
+# 📚  MAGISTRATURA TANLASH
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def magistratura_ism(update, context):
     lang = get_user_lang(update.effective_user.id)
@@ -812,45 +774,108 @@ async def magistratura_callback(update, context):
     return TANLA
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 👥  NOMZOD QO'SHISH (MAX 6 TA)
+# 📄  NAMUNALAR
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-async def nomzod_ism(update, context):
-    lang = get_user_lang(update.effective_user.id)
-    guard = await process_step_guard(update, context, NOMZOD_ISM)
-    if guard == "FORCE_CAN_MENU": return TANLA
-    if guard == "FORCE_STAY": return NOMZOD_ISM
-    context.user_data['nomzod_ism'] = update.message.text.strip()
-    await update.message.reply_text(LANG_TEXTS[lang]['enter_surname'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
-    return NOMZOD_FAMILYA
+async def samples_callback(update, context):
+    query = update.callback_query
+    await query.answer()
+    data = query.data
+    lang = get_user_lang(query.from_user.id)
+    
+    samples_data = {
+        'sample_diplom': LANG_TEXTS[lang]['sample_diplom_text'],
+        'sample_passport': LANG_TEXTS[lang]['sample_passport_text'],
+        'sample_medical': LANG_TEXTS[lang]['sample_medical_text'],
+        'sample_photo': LANG_TEXTS[lang]['sample_photo_text'],
+    }
+    
+    if data in samples_data:
+        await query.edit_message_text(samples_data[data], parse_mode="Markdown")
+        await context.bot.send_message(query.from_user.id, "🔙 Menyuga qaytish uchun /start bosing")
+    elif data == "samples_back":
+        t = LANG_TEXTS[lang]
+        await query.edit_message_text(t['samples_title'], parse_mode="Markdown", reply_markup=samples_keyboard(lang))
 
-async def nomzod_familya(update, context):
-    lang = get_user_lang(update.effective_user.id)
-    guard = await process_step_guard(update, context, NOMZOD_FAMILYA)
-    if guard == "FORCE_CAN_MENU": return TANLA
-    if guard == "FORCE_STAY": return NOMZOD_FAMILYA
-    context.user_data['nomzod_familya'] = update.message.text.strip()
-    await update.message.reply_text(LANG_TEXTS[lang]['enter_age'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
-    return NOMZOD_YOSH
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# ✏️  MA'LUMOTLARNI O'ZGARTIRISH
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+async def edit_callback(update, context):
+    query = update.callback_query
+    await query.answer()
+    data = query.data
+    lang = get_user_lang(query.from_user.id)
+    if data == "edit_back":
+        await query.edit_message_text(LANG_TEXTS[lang]['edit_title'], reply_markup=edit_menu_markup(lang))
+        return TANLA
+    elif data == "edit_name":
+        await query.message.reply_text(LANG_TEXTS[lang]['edit_name'], reply_markup=cancel_back_markup(lang))
+        return EDIT_NAME
+    elif data == "edit_surname":
+        await query.message.reply_text(LANG_TEXTS[lang]['edit_surname'], reply_markup=cancel_back_markup(lang))
+        return EDIT_SURNAME
+    elif data == "edit_age":
+        await query.message.reply_text(LANG_TEXTS[lang]['edit_age'], reply_markup=cancel_back_markup(lang))
+        return EDIT_AGE
+    elif data == "edit_phone":
+        await query.message.reply_text(LANG_TEXTS[lang]['edit_phone'], reply_markup=cancel_back_markup(lang))
+        return EDIT_PHONE
+    return TANLA
 
-async def nomzod_yosh(update, context):
-    lang = get_user_lang(update.effective_user.id)
-    guard = await process_step_guard(update, context, NOMZOD_YOSH)
+async def edit_name_handler(update, context):
+    user_id = update.effective_user.id
+    lang = get_user_lang(user_id)
+    guard = await process_step_guard(update, context, EDIT_NAME)
     if guard == "FORCE_CAN_MENU": return TANLA
-    if guard == "FORCE_STAY": return NOMZOD_YOSH
-    yosh = update.message.text.strip()
-    if not yosh.isdigit() or not (14 <= int(yosh) <= 65):
+    if guard == "FORCE_STAY": return EDIT_NAME
+    con = db_connect()
+    cur = con.cursor()
+    cur.execute("UPDATE bakalavr_royxat SET ism=? WHERE id=?", (update.message.text.strip(), user_id))
+    cur.execute("UPDATE magistratura_royxat SET ism=? WHERE id=?", (update.message.text.strip(), user_id))
+    con.commit()
+    con.close()
+    await update.message.reply_text(LANG_TEXTS[lang]['edit_success'], reply_markup=main_menu_markup(lang))
+    return TANLA
+
+async def edit_surname_handler(update, context):
+    user_id = update.effective_user.id
+    lang = get_user_lang(user_id)
+    guard = await process_step_guard(update, context, EDIT_SURNAME)
+    if guard == "FORCE_CAN_MENU": return TANLA
+    if guard == "FORCE_STAY": return EDIT_SURNAME
+    con = db_connect()
+    cur = con.cursor()
+    cur.execute("UPDATE bakalavr_royxat SET familya=? WHERE id=?", (update.message.text.strip(), user_id))
+    cur.execute("UPDATE magistratura_royxat SET familya=? WHERE id=?", (update.message.text.strip(), user_id))
+    con.commit()
+    con.close()
+    await update.message.reply_text(LANG_TEXTS[lang]['edit_success'], reply_markup=main_menu_markup(lang))
+    return TANLA
+
+async def edit_age_handler(update, context):
+    user_id = update.effective_user.id
+    lang = get_user_lang(user_id)
+    guard = await process_step_guard(update, context, EDIT_AGE)
+    if guard == "FORCE_CAN_MENU": return TANLA
+    if guard == "FORCE_STAY": return EDIT_AGE
+    age = update.message.text.strip()
+    if not age.isdigit() or not (14 <= int(age) <= 65):
         await update.message.reply_text(LANG_TEXTS[lang]['invalid_age'], parse_mode="Markdown")
-        return NOMZOD_YOSH
-    context.user_data['nomzod_yosh'] = yosh
-    btn = [[KeyboardButton(LANG_TEXTS[lang]['send_phone'], request_contact=True)], [KeyboardButton(LANG_TEXTS[lang]['back']), KeyboardButton(LANG_TEXTS[lang]['cancel'])]]
-    await update.message.reply_text(LANG_TEXTS[lang]['phone_intro'], parse_mode="Markdown", reply_markup=ReplyKeyboardMarkup(btn, resize_keyboard=True))
-    return NOMZOD_TELEFON
+        return EDIT_AGE
+    con = db_connect()
+    cur = con.cursor()
+    cur.execute("UPDATE bakalavr_royxat SET yosh=? WHERE id=?", (int(age), user_id))
+    cur.execute("UPDATE magistratura_royxat SET yosh=? WHERE id=?", (int(age), user_id))
+    con.commit()
+    con.close()
+    await update.message.reply_text(LANG_TEXTS[lang]['edit_success'], reply_markup=main_menu_markup(lang))
+    return TANLA
 
-async def nomzod_telefon(update, context):
-    lang = get_user_lang(update.effective_user.id)
-    guard = await process_step_guard(update, context, NOMZOD_TELEFON)
+async def edit_phone_handler(update, context):
+    user_id = update.effective_user.id
+    lang = get_user_lang(user_id)
+    guard = await process_step_guard(update, context, EDIT_PHONE)
     if guard == "FORCE_CAN_MENU": return TANLA
-    if guard == "FORCE_STAY": return NOMZOD_TELEFON
+    if guard == "FORCE_STAY": return EDIT_PHONE
     phone = None
     if update.message.contact:
         phone = update.message.contact.phone_number
@@ -858,49 +883,14 @@ async def nomzod_telefon(update, context):
         phone = validate_phone(update.message.text.strip())
         if not phone:
             await update.message.reply_text(LANG_TEXTS[lang]['invalid_phone'], parse_mode="Markdown")
-            return NOMZOD_TELEFON
-    context.user_data['nomzod_telefon'] = phone
-    await update.message.reply_text(LANG_TEXTS[lang]['select_nomzod_title'], parse_mode="Markdown", reply_markup=bakalavr_keyboard(lang))
-    return NOMZOD_TANLASH
-
-async def nomzod_callback(update, context):
-    query = update.callback_query
-    await query.answer()
-    data = query.data
-    if not data.startswith("bak_"):
-        return TANLA
-    key = data.replace("bak_", "")
-    user_id = query.from_user.id
-    lang = get_user_lang(user_id)
-    
-    # Limitni tekshirish
-    count = get_nomzod_count(user_id)
-    if count >= MAX_NOMZOD:
-        await query.edit_message_text(LANG_TEXTS[lang]['nomzod_limit'].format(max=MAX_NOMZOD), parse_mode="Markdown")
-        return TANLA
-    
-    if key not in BAKALAVR_YONALISHLAR[lang]:
-        return TANLA
-    yonalish = BAKALAVR_YONALISHLAR[lang][key]
-    
-    # Nomzodni saqlash
-    add_nomzod(user_id, context.user_data.get('nomzod_ism'), context.user_data.get('nomzod_familya'),
-               context.user_data.get('nomzod_yosh'), context.user_data.get('nomzod_telefon'), yonalish)
-    
-    new_count = count + 1
-    username = f"@{query.from_user.username}" if query.from_user.username else f"[{query.from_user.first_name}](tg://user?id={user_id})"
-    caption = LANG_TEXTS[lang]['nomzod_channel_caption'].format(
-        user=username, uid=user_id, phone=context.user_data.get('nomzod_telefon'),
-        yonalish=yonalish, ism=context.user_data.get('nomzod_ism'),
-        familya=context.user_data.get('nomzod_familya'), yosh=context.user_data.get('nomzod_yosh'),
-        total=new_count, max=MAX_NOMZOD)
-    try:
-        await context.bot.send_message(CHANNEL_USERNAME, caption, parse_mode="Markdown")
-    except Exception as e:
-        logger.error(f"Kanalga yuborish xato: {e}")
-    
-    await query.edit_message_text(LANG_TEXTS[lang]['nomzod_success'].format(count=new_count, max=MAX_NOMZOD), parse_mode="Markdown")
-    await context.bot.send_message(user_id, "🏠 Bosh menyu", reply_markup=main_menu_markup(lang))
+            return EDIT_PHONE
+    con = db_connect()
+    cur = con.cursor()
+    cur.execute("UPDATE bakalavr_royxat SET telefon=? WHERE id=?", (phone, user_id))
+    cur.execute("UPDATE magistratura_royxat SET telefon=? WHERE id=?", (phone, user_id))
+    con.commit()
+    con.close()
+    await update.message.reply_text(LANG_TEXTS[lang]['edit_success'], reply_markup=main_menu_markup(lang))
     return TANLA
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -912,23 +902,19 @@ async def admin_statistika(update, context):
         return
     con = db_connect()
     cur = con.cursor()
-    cur.execute("SELECT COUNT(*) FROM sorovnama")
-    sorov = cur.fetchone()[0]
     cur.execute("SELECT COUNT(*) FROM bakalavr_royxat")
     bak = cur.fetchone()[0]
     cur.execute("SELECT COUNT(*) FROM magistratura_royxat")
     mag = cur.fetchone()[0]
-    cur.execute("SELECT COUNT(*) FROM nomzodlar")
-    nomzod = cur.fetchone()[0]
     con.close()
-    await update.message.reply_text(f"📊 *STATISTIKA*\n\n📝 So'rovnoma: {sorov}\n🎓 Bakalavriat: {bak}\n📚 Magistratura: {mag}\n👥 Nomzodlar: {nomzod}", parse_mode="Markdown")
+    await update.message.reply_text(f"📊 *STATISTIKA*\n\n🎓 Bakalavriat: {bak}\n📚 Magistratura: {mag}", parse_mode="Markdown")
 
 async def admin_export(update, context):
     if update.effective_user.username != "Saman2611":
         await update.message.reply_text("❌ Faqat admin!")
         return
     con = db_connect()
-    for table in ['sorovnama', 'bakalavr_royxat', 'magistratura_royxat', 'nomzodlar']:
+    for table in ['bakalavr_royxat', 'magistratura_royxat']:
         cur = con.cursor()
         cur.execute(f"SELECT * FROM {table}")
         data = cur.fetchall()
@@ -951,19 +937,13 @@ async def admin_search(update, context):
     con = db_connect()
     cur = con.cursor()
     text = f"🔍 '{term}' bo'yicha natijalar:\n\n"
-    for table in ['sorovnama', 'bakalavr_royxat', 'magistratura_royxat', 'nomzodlar']:
-        if table == 'nomzodlar':
-            cur.execute(f"SELECT ism, familya, telefon, yonalish FROM {table} WHERE ism LIKE ? OR familya LIKE ? OR telefon LIKE ?", (f'%{term}%', f'%{term}%', f'%{term}%'))
-        else:
-            cur.execute(f"SELECT ism, familya, telefon FROM {table} WHERE ism LIKE ? OR familya LIKE ? OR telefon LIKE ?", (f'%{term}%', f'%{term}%', f'%{term}%'))
+    for table in ['bakalavr_royxat', 'magistratura_royxat']:
+        cur.execute(f"SELECT ism, familya, telefon, yonalish FROM {table} WHERE ism LIKE ? OR familya LIKE ? OR telefon LIKE ?", (f'%{term}%', f'%{term}%', f'%{term}%'))
         rows = cur.fetchall()
         if rows:
             text += f"📋 {table}:\n"
             for row in rows:
-                if len(row) == 4:
-                    text += f"• {row[0]} {row[1]} | {row[2]} | {row[3]}\n"
-                else:
-                    text += f"• {row[0]} {row[1]} | {row[2]}\n"
+                text += f"• {row[0]} {row[1]} | {row[2]} | {row[3]}\n"
             text += "\n"
     con.close()
     await update.message.reply_text(text, parse_mode="Markdown")
@@ -985,17 +965,15 @@ def main():
         states={
             TIL_TANLASH: [CallbackQueryHandler(lang_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
             TANLA: [MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher), 
-                    CallbackQueryHandler(bakalavr_callback), CallbackQueryHandler(magistratura_callback), CallbackQueryHandler(nomzod_callback)],
+                    CallbackQueryHandler(bakalavr_callback), CallbackQueryHandler(magistratura_callback), 
+                    CallbackQueryHandler(samples_callback, pattern="^sample_|^samples_back$"),
+                    CallbackQueryHandler(edit_callback, pattern="^edit_")],
             HUJJAT_FORMAT_1: [CallbackQueryHandler(format_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
             HUJJAT_FORMAT_2: [CallbackQueryHandler(format_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
             HUJJAT_FORMAT_3: [CallbackQueryHandler(format_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
             HUJJAT_FORMAT_4: [CallbackQueryHandler(format_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
             HUJJAT_1: [MessageHandler(filters.ALL, hujjat_1)], HUJJAT_2: [MessageHandler(filters.ALL, hujjat_2)],
             HUJJAT_3: [MessageHandler(filters.ALL, hujjat_3)], HUJJAT_4: [MessageHandler(filters.ALL, hujjat_4)],
-            SOROV_ISM: [MessageHandler(filters.TEXT & ~filters.COMMAND, sorov_ism)], 
-            SOROV_FAMILYA: [MessageHandler(filters.TEXT & ~filters.COMMAND, sorov_familya)],
-            SOROV_YOSH: [MessageHandler(filters.TEXT & ~filters.COMMAND, sorov_yosh)], 
-            SOROV_TELEFON: [MessageHandler(filters.ALL, sorov_telefon)],
             YONALISH_ISM: [MessageHandler(filters.TEXT & ~filters.COMMAND, yonalish_ism)], 
             YONALISH_FAMILYA: [MessageHandler(filters.TEXT & ~filters.COMMAND, yonalish_familya)],
             YONALISH_YOSH: [MessageHandler(filters.TEXT & ~filters.COMMAND, yonalish_yosh)], 
@@ -1006,11 +984,10 @@ def main():
             MAG_YOSH: [MessageHandler(filters.TEXT & ~filters.COMMAND, magistratura_yosh)], 
             MAG_TELEFON: [MessageHandler(filters.ALL, magistratura_telefon)],
             MAG_TANLASH: [CallbackQueryHandler(magistratura_callback)],
-            NOMZOD_ISM: [MessageHandler(filters.TEXT & ~filters.COMMAND, nomzod_ism)],
-            NOMZOD_FAMILYA: [MessageHandler(filters.TEXT & ~filters.COMMAND, nomzod_familya)],
-            NOMZOD_YOSH: [MessageHandler(filters.TEXT & ~filters.COMMAND, nomzod_yosh)],
-            NOMZOD_TELEFON: [MessageHandler(filters.ALL, nomzod_telefon)],
-            NOMZOD_TANLASH: [CallbackQueryHandler(nomzod_callback)],
+            EDIT_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, edit_name_handler)],
+            EDIT_SURNAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, edit_surname_handler)],
+            EDIT_AGE: [MessageHandler(filters.TEXT & ~filters.COMMAND, edit_age_handler)],
+            EDIT_PHONE: [MessageHandler(filters.ALL, edit_phone_handler)],
         },
         fallbacks=[CommandHandler('start', start), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
         allow_reentry=True
@@ -1018,7 +995,6 @@ def main():
     app.add_handler(conv)
     print("✅ BOT ISHGA TUSHDI!")
     print("📊 Admin: /users, /export, /search")
-    print("👥 Har bir foydalanuvchi maksimum 6 ta nomzod qo'sha oladi")
     app.run_polling(allowed_updates=Update.ALL_TYPES)
 
 if __name__ == '__main__':
