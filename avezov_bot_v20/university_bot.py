@@ -40,7 +40,7 @@ CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME", "@Auezov_data")
 ADMIN_USERNAME = "@Saman2611"
 ADMIN_PHONE = "+998996844483"
 DB_PATH = "universitet.db"
-ABOUT_PHOTO_URL = "https://storage.googleapis.com/createsite-uz-bucket/blog/1722071060_chirchiq-auezov.jpg"
+UNI_PHOTO_URL = "https://storage.googleapis.com/createsite-uz-bucket/blog/1722071060_chirchiq-auezov.jpg"
 
 logging.basicConfig(format="%(asctime)s | %(levelname)s | %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -54,12 +54,13 @@ YONALISH_ISM, YONALISH_FAMILYA, YONALISH_YOSH, YONALISH_TELEFON, YONALISH_TANLAS
 MAG_ISM, MAG_FAMILYA, MAG_YOSH, MAG_TELEFON, MAG_TANLASH = "mi", "mf", "my", "mt", "mag_tanlash"
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🌐  TIL LUG'ATI
+# 🌐  TIL LUG'ATI (UZ, RU, KK)
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 LANG_TEXTS = {
     'uz': {
         'welcome': "🏛 *M.Auezov nomidagi Janubiy Qozog'iston universiteti* Chirchiq filialining rasmiy qabul botiga xush kelibsiz!",
         'lang_selected': "✅ *O'zbek tili* tanlandi!",
+        # Menyu
         'menu_about': "🏛 Universitet haqida",
         'menu_bakalavr': "🎓 Bakalavriat",
         'menu_magistratura': "📚 Magistratura",
@@ -67,45 +68,46 @@ LANG_TEXTS = {
         'menu_manzil': "📍 Manzil",
         'menu_bakalavr_tanlash': "📋 Bakalavriat yo'nalishlari",
         'menu_magistratura_tanlash': "🎓 Magistratura yo'nalishlari",
-        'menu_schedule': "📅 Imtihon jadvali",
         'menu_contact': "📞 Aloqa",
         'back': "🔙 Orqaga",
         'cancel': "❌ Bekor qilish",
         'change_lang': "🌐 Tilni o'zgartirish",
-        'about_text': "🏛 *M.Auezov nomidagi Janubiy Qozog'iston universiteti Chirchiq filiali*\n\nChirchiq shahrida universitetning yangi zamonaviy filiali o'z ishini boshlamoqda!",
-        'about_detail': "📌 *Umumiy ma'lumot:*\n• Tashkil etilgan: 1943 yil\n• Talabalar soni: 15 000+\n• Fakultetlar: 12 ta\n• Yo'nalishlar: 50+",
-        'about_contact': "\n\n📞 *Bog'lanish:*\n📞 Telefon: {phone}\n💬 Telegram: {username}",
-        'bakalavr_text': "👑 *BAKALAVRIAT YO'NALISHLARI (10 ta)*\n\n🔬 Biotexnologiya\n🌍 Ekologiya\n💻 Axborot tizimlar\n⚙️ Avtomatizatsiya\n🚚 Transport\n⚡ Elektroenergetika\n🧑‍🏫 Pedagogika\n🧠 Sun'iy intellekt\n💼 Hisob va audit\n✈️ Turizm",
-        'magistratura_text': "🎓 *MAGISTRATURA YO'NALISHLARI (4 ta)*\n\n📊 Iqtisodiyot\n⚖️ Yurisprudensiya\n💻 Axborot tizimlari\n🌍 Ekologiya",
-        'hujjat_intro': "📋 *KERAKLI HUJJATLAR RO'YXATI*\n\n1️⃣ Diplom/Attestat\n2️⃣ Pasport\n3️⃣ 0.86 Med-ma'lumotnoma\n4️⃣ 3x4 rasm (6 dona)\n\n🟢 *1-Bosqich: Diplom yoki Attestat*\n❓ Formatni tanlang:",
+        # Universitet haqida
+        'about_title': "🏛 *M.AUEZOV NOMIDAGI JANUBIY QOZOG'ISTON UNIVERSITETI*",
+        'about_text': "📌 *1943 yilda tashkil etilgan*\n\n🇰🇿 Qozog'istonning eng yirik universitetlaridan biri\n\n📚 50+ ta yo'nalish\n👨‍🎓 15 000+ talaba\n🏛 12 ta fakultet\n🌍 Xalqaro hamkorlik: Erasmus+, dual diplom\n\n🔗 *Batafsil ma'lumot:*\n[🌐 Oliygoh.uz](https://oliygoh.uz/post/chirchiqda-mauezov-nomidagi-janubiy-qozogiston-universiteti-filiali-tashkil-etiali)\n[🌐 Auezov.edu.kz](https://www.auezov.edu.kz)",
+        # Bakalavriat yo'nalishlari (11 ta)
+        'bakalavr_text': "👑 *BAKALAVRIAT YO'NALISHLARI* (11 ta)\n\n🔬 Biotexnologiya\n🌍 Ekologiya\n💻 Axborot tizimlar\n⚙️ Avtomatizatsiya\n🚚 Transport\n⚡ Elektroenergetika\n🧑‍🏫 Pedagogika\n🧠 Sun'iy intellekt\n💼 Hisob va audit\n✈️ Turizm\n⚖️ Yurisprudensiya\n\n📚 *O'qish muddati:* 4 yil",
+        # Magistratura yo'nalishlari (5 ta)
+        'magistratura_text': "🎓 *MAGISTRATURA YO'NALISHLARI* (5 ta)\n\n📊 Iqtisodiyot\n⚖️ Yurisprudensiya\n💻 Axborot tizimlari\n🌍 Ekologiya\n📈 Menejment\n\n📚 *O'qish muddati:* 2 yil",
+        # Hujjat topshirish
+        'hujjat_intro': "📋 *KERAKLI HUJJATLAR RO'YXATI*\n\n1️⃣ Diplom/Attestat\n2️⃣ Pasport nusxasi\n3️⃣ 0.86 Med-ma'lumotnoma\n4️⃣ 3x4 rasm (6 dona)\n\n▸ *1-Bosqich: Diplom yoki Attestat*\n❓ Formatni tanlang:",
         'format_rasm': "🖼️ Rasm",
         'format_fayl': "📎 Fayl",
         'enter_name': "✍️ *Ismingizni kiriting:*",
         'enter_surname': "✍️ *Familiyangizni kiriting:*",
         'enter_age': "✍️ *Yoshingizni kiriting:*",
         'invalid_age': "⚠️ Xato! Bakalavriat: 14-60, Magistratura: 21-65",
-        'send_phone': "📞 Telefon raqamni yuborish",
+        'send_phone': "📞 Telefon raqam",
         'phone_intro': "📞 *Telefon raqamingizni kiriting:*\n📝 *Namuna:* `+998901234567`",
         'invalid_phone': "⚠️ Xato! +998901234567 formatida yozing",
         'success_received': "✅ Qabul qilindi!",
-        'all_docs_success': "🎉 Barcha hujjatlar topshirildi! Tez orada bog'lanamiz.",
+        'all_docs_success': "🎉 *BARCHA HUJJATLAR TOPSHIRILDI!*\n\n👨‍💼 Admin tez orada siz bilan bog'lanadi.\n\n⭐ Botimizdan foydalanganingiz uchun rahmat!",
         'select_bakalavr_title': "🎓 *BAKALAVRIAT YO'NALISHLARIDAN BIRINI TANLANG:*",
         'select_magistratura_title': "🎓 *MAGISTRATURA YO'NALISHLARIDAN BIRINI TANLANG:*",
-        'reg_success': "🎉 Yo'nalish muvaffaqiyatli tanlandi!",
+        'reg_success': "🎉 *Yo'nalish muvaffaqiyatli tanlandi!*\n\n✅ Ma'lumotlaringiz qabul qilindi.\n📝 Endi hujjat topshirishingiz mumkin.",
         'reg_cancelled': "❌ Jarayon bekor qilindi.",
         'unknown': "❓ Tushunarsiz buyruq",
-        'error_need_file': "⚠️ Fayl formatida yuboring!",
-        'error_need_photo': "⚠️ Rasm formatida yuboring!",
-        'warning_in_progress': "⚠️ Jarayondasiz! Iltimos so'ralgan ma'lumotni kiriting.",
-        'channel_caption': "📋 *Yangi Hujjat!*\n\n👤 Foydalanuvchi: {user}\n🆔 ID: `{uid}`\n📂 Hujjat: *{doc_name}*",
-        'yonalish_channel_caption': "🎓 *BAKALAVRIAT TANLANDI!*\n\n👤 Foydalanuvchi: {user}\n🆔 ID: `{uid}`\n📞 Tel: `{phone}`\n📚 Yo'nalish: *{yonalish}*\n👤 Ism: {ism}\n👤 Fam: {familya}\n🎂 Yosh: {yosh}",
-        'magistratura_channel_caption': "📚 *MAGISTRATURA TANLANDI!*\n\n👤 Foydalanuvchi: {user}\n🆔 ID: `{uid}`\n📞 Tel: `{phone}`\n🎓 Magistratura: *{yonalish}*\n👤 Ism: {ism}\n👤 Fam: {familya}\n🎂 Yosh: {yosh}",
-        'manzil_text': "📍 *Universitet manzili:*\nChirchiq shahri, Toshkent viloyati\n🗺 [Google Maps](https://maps.google.com)",
-        'schedule_title': "📅 *IMTIHON JADVALI 2024*\n\n",
-        'schedule_bakalavr': "🎓 *Bakalavriat imtihonlari:*\n📆 10-avgust – 20-avgust 2024",
-        'schedule_magistratura': "📚 *Magistratura imtihonlari:*\n📆 5-avgust – 15-avgust 2024",
-        'schedule_note': "📌 *Eslatma:* Imtihon joyi haqida alohida xabar beriladi.",
-        'contact_text': "📞 *BIZ BILAN BOG'LANISH*\n\n📞 Telefon: {phone}\n💬 Telegram: {username}"
+        'error_need_file': "⚠️ Fayl formatida yuboring! (PDF, DOC, TXT)",
+        'error_need_photo': "⚠️ Rasm formatida yuboring! (JPEG, PNG)",
+        'warning_in_progress': "⚠️ Jarayondasiz! Iltimos so'ralgan ma'lumotni kiriting.\n\n❌ Bekor qilish tugmasini bosing.",
+        # Kanal xabarlari
+        'channel_caption': "📋 *YANGI HUJJAT!*\n\n👤 Foydalanuvchi: {user}\n🆔 ID: `{uid}`\n📂 Hujjat: *{doc_name}*",
+        'yonalish_channel_caption': "🎓 *BAKALAVRIAT TANLANDI!*\n\n👤 Foydalanuvchi: {user}\n🆔 ID: `{uid}`\n📞 Tel: `{phone}`\n📚 Yo'nalish: *{yonalish}*\n👤 Ism: {ism}\n👤 Familiya: {familya}\n🎂 Yosh: {yosh}",
+        'magistratura_channel_caption': "📚 *MAGISTRATURA TANLANDI!*\n\n👤 Foydalanuvchi: {user}\n🆔 ID: `{uid}`\n📞 Tel: `{phone}`\n🎓 Magistratura: *{yonalish}*\n👤 Ism: {ism}\n👤 Familiya: {familya}\n🎂 Yosh: {yosh}",
+        # Manzil
+        'manzil_text': "📍 *UNIVERSITET MANZILI*\n\n🏛 Chirchiq filiali\n🇺🇿 Toshkent viloyati, Chirchiq shahri\n\n🗺 [Google Maps da ko'rish](https://maps.google.com)\n\n📞 Qabul komissiyasi: +998996844483",
+        # Aloqa
+        'contact_text': "📞 *BIZ BILAN BOG'LANISH*\n\n📞 Telefon: {phone}\n💬 Telegram: {username}\n🌐 Veb-sayt: www.auezov.edu.kz\n\n📧 Email: info@auezov.edu.kz"
     },
     'ru': {
         'welcome': "🏛 *Южно-Казахстанский университет им. М.Ауезова* Добро пожаловать!",
@@ -117,45 +119,39 @@ LANG_TEXTS = {
         'menu_manzil': "📍 Адрес",
         'menu_bakalavr_tanlash': "📋 Направления бакалавриата",
         'menu_magistratura_tanlash': "🎓 Направления магистратуры",
-        'menu_schedule': "📅 Расписание экзаменов",
         'menu_contact': "📞 Контакты",
         'back': "🔙 Назад",
         'cancel': "❌ Отмена",
         'change_lang': "🌐 Сменить язык",
-        'about_text': "🏛 *Южно-Казахстанский университет им. М.Ауезова Чирчикский филиал*\n\nВ городе Чирчик открывается новый современный филиал!",
-        'about_detail': "📌 *Общая информация:*\n• Основан: 1943 г.\n• Студентов: 15 000+\n• Факультетов: 12\n• Направлений: 50+",
-        'about_contact': "\n\n📞 *Контакты:*\n📞 Телефон: {phone}\n💬 Telegram: {username}",
-        'bakalavr_text': "👑 *НАПРАВЛЕНИЯ БАКАЛАВРИАТА*\n\n🔬 Биотехнология\n🌍 Экология\n💻 Информационные системы\n⚙️ Автоматизация\n🚚 Транспорт\n⚡ Электроэнергетика\n🧑‍🏫 Педагогика\n🧠 Искусственный интеллект\n💼 Учет и аудит\n✈️ Туризм",
-        'magistratura_text': "🎓 *НАПРАВЛЕНИЯ МАГИСТРАТУРЫ*\n\n📊 Экономика\n⚖️ Юриспруденция\n💻 Информационные системы\n🌍 Экология",
-        'hujjat_intro': "📋 *СПИСОК ДОКУМЕНТОВ*\n\n1️⃣ Диплом/Аттестат\n2️⃣ Паспорт\n3️⃣ Мед-справка 0.86\n4️⃣ Фото 3x4 (6 шт)\n\n🟢 *1-этап: Диплом или Аттестат*\n❓ Выберите формат:",
+        'about_title': "🏛 *ЮЖНО-КАЗАХСТАНСКИЙ УНИВЕРСИТЕТ ИМ. М.АУЕЗОВА*",
+        'about_text': "📌 *Основан в 1943 году*\n\n🇰🇿 Один из крупнейших вузов Казахстана\n\n📚 50+ направлений\n👨‍🎓 15 000+ студентов\n🏛 12 факультетов\n🌍 Международное сотрудничество: Erasmus+, двойные дипломы\n\n🔗 *Подробнее:*\n[🌐 Oliygoh.uz](https://oliygoh.uz/post/chirchiqda-mauezov-nomidagi-janubiy-qozogiston-universiteti-filiali-tashkil-etiali)\n[🌐 Auezov.edu.kz](https://www.auezov.edu.kz)",
+        'bakalavr_text': "👑 *НАПРАВЛЕНИЯ БАКАЛАВРИАТА* (11)\n\n🔬 Биотехнология\n🌍 Экология\n💻 Информационные системы\n⚙️ Автоматизация\n🚚 Транспорт\n⚡ Электроэнергетика\n🧑‍🏫 Педагогика\n🧠 Искусственный интеллект\n💼 Учет и аудит\n✈️ Туризм\n⚖️ Юриспруденция\n\n📚 *Срок обучения:* 4 года",
+        'magistratura_text': "🎓 *НАПРАВЛЕНИЯ МАГИСТРАТУРЫ* (5)\n\n📊 Экономика\n⚖️ Юриспруденция\n💻 Информационные системы\n🌍 Экология\n📈 Менеджмент\n\n📚 *Срок обучения:* 2 года",
+        'hujjat_intro': "📋 *СПИСОК ДОКУМЕНТОВ*\n\n1️⃣ Диплом/Аттестат\n2️⃣ Копия паспорта\n3️⃣ Мед-справка 0.86\n4️⃣ Фото 3x4 (6 шт)\n\n▸ *1-этап: Диплом или Аттестат*\n❓ Выберите формат:",
         'format_rasm': "🖼️ Изображение",
         'format_fayl': "📎 Файл",
         'enter_name': "✍️ *Введите имя:*",
         'enter_surname': "✍️ *Введите фамилию:*",
         'enter_age': "✍️ *Введите возраст:*",
         'invalid_age': "⚠️ Ошибка! Бакалавриат: 14-60, Магистратура: 21-65",
-        'send_phone': "📞 Отправить номер",
+        'send_phone': "📞 Номер телефона",
         'phone_intro': "📞 *Введите номер телефона:*\n📝 *Пример:* `+998901234567`",
         'invalid_phone': "⚠️ Ошибка! Формат: +998901234567",
         'success_received': "✅ Принято!",
-        'all_docs_success': "🎉 Все документы поданы!",
+        'all_docs_success': "🎉 *ВСЕ ДОКУМЕНТЫ ПОДАНЫ!*\n\n👨‍💼 Администратор свяжется с вами.\n\n⭐ Спасибо за использование бота!",
         'select_bakalavr_title': "🎓 *ВЫБЕРИТЕ НАПРАВЛЕНИЕ БАКАЛАВРИАТА:*",
         'select_magistratura_title': "🎓 *ВЫБЕРИТЕ НАПРАВЛЕНИЕ МАГИСТРАТУРЫ:*",
-        'reg_success': "🎉 Направление успешно выбрано!",
+        'reg_success': "🎉 *Направление успешно выбрано!*\n\n✅ Ваши данные приняты.\n📝 Теперь можете подать документы.",
         'reg_cancelled': "❌ Процесс отменен.",
         'unknown': "❓ Неизвестная команда",
-        'error_need_file': "⚠️ Отправьте файл!",
-        'error_need_photo': "⚠️ Отправьте фото!",
-        'warning_in_progress': "⚠️ Вы в процессе!",
-        'channel_caption': "📋 *Новый документ!*\n\n👤 Пользователь: {user}\n🆔 ID: `{uid}`\n📂 Документ: *{doc_name}*",
-        'yonalish_channel_caption': "🎓 *ВЫБРАН БАКАЛАВРИАТ!*\n\n👤 Пользователь: {user}\n🆔 ID: `{uid}`\n📞 Тел: `{phone}`\n📚 Направление: *{yonalish}*\n👤 Имя: {ism}\n👤 Фам: {familya}\n🎂 Возраст: {yosh}",
-        'magistratura_channel_caption': "📚 *ВЫБРАНА МАГИСТРАТУРА!*\n\n👤 Пользователь: {user}\n🆔 ID: `{uid}`\n📞 Тел: `{phone}`\n🎓 Магистратура: *{yonalish}*\n👤 Имя: {ism}\n👤 Фам: {familya}\n🎂 Возраст: {yosh}",
-        'manzil_text': "📍 *Адрес:* г.Чирчик, Ташкентская область\n🗺 [Google Maps](https://maps.google.com)",
-        'schedule_title': "📅 *РАСПИСАНИЕ ЭКЗАМЕНОВ 2024*\n\n",
-        'schedule_bakalavr': "🎓 *Бакалавриат:*\n📆 10-20 августа 2024",
-        'schedule_magistratura': "📚 *Магистратура:*\n📆 5-15 августа 2024",
-        'schedule_note': "📌 *Примечание:* О месте сообщим дополнительно.",
-        'contact_text': "📞 *КОНТАКТЫ*\n\n📞 Телефон: {phone}\n💬 Telegram: {username}"
+        'error_need_file': "⚠️ Отправьте файл! (PDF, DOC, TXT)",
+        'error_need_photo': "⚠️ Отправьте фото! (JPEG, PNG)",
+        'warning_in_progress': "⚠️ Вы в процессе! Введите запрашиваемую информацию.\n\n❌ Нажмите Отмена для выхода.",
+        'channel_caption': "📋 *НОВЫЙ ДОКУМЕНТ!*\n\n👤 Пользователь: {user}\n🆔 ID: `{uid}`\n📂 Документ: *{doc_name}*",
+        'yonalish_channel_caption': "🎓 *ВЫБРАН БАКАЛАВРИАТ!*\n\n👤 Пользователь: {user}\n🆔 ID: `{uid}`\n📞 Тел: `{phone}`\n📚 Направление: *{yonalish}*\n👤 Имя: {ism}\n👤 Фамилия: {familya}\n🎂 Возраст: {yosh}",
+        'magistratura_channel_caption': "📚 *ВЫБРАНА МАГИСТРАТУРА!*\n\n👤 Пользователь: {user}\n🆔 ID: `{uid}`\n📞 Тел: `{phone}`\n🎓 Магистратура: *{yonalish}*\n👤 Имя: {ism}\n👤 Фамилия: {familya}\n🎂 Возраст: {yosh}",
+        'manzil_text': "📍 *АДРЕС УНИВЕРСИТЕТА*\n\n🏛 Чирчикский филиал\n🇺🇿 Ташкентская область, г.Чирчик\n\n🗺 [Google Maps](https://maps.google.com)\n\n📞 Приемная комиссия: +998996844483",
+        'contact_text': "📞 *СВЯЗАТЬСЯ С НАМИ*\n\n📞 Телефон: {phone}\n💬 Telegram: {username}\n🌐 Сайт: www.auezov.edu.kz\n\n📧 Email: info@auezov.edu.kz"
     },
     'kk': {
         'welcome': "🏛 *М.Әуезов атындағы ОҚУ* Шыршық филиалына қош келдіңіз!",
@@ -167,45 +163,39 @@ LANG_TEXTS = {
         'menu_manzil': "📍 Мекенжай",
         'menu_bakalavr_tanlash': "📋 Бакалавриат бағыттары",
         'menu_magistratura_tanlash': "🎓 Магистратура бағыттары",
-        'menu_schedule': "📅 Емтихан кестесі",
         'menu_contact': "📞 Байланыс",
         'back': "🔙 Артқа",
         'cancel': "❌ Болдырмау",
         'change_lang': "🌐 Тілді өзгерту",
-        'about_text': "🏛 *М.Әуезов атындағы ОҚУ Шыршық филиалы*\n\nШыршық қаласында заманауи филиал ашылды!",
-        'about_detail': "📌 *Жалпы мәлімет:*\n• Құрылған: 1943 ж\n• Студенттер: 15 000+\n• Факультеттер: 12\n• Бағыттар: 50+",
-        'about_contact': "\n\n📞 *Байланыс:*\n📞 Телефон: {phone}\n💬 Telegram: {username}",
-        'bakalavr_text': "👑 *БАКАЛАВРИАТ БАҒЫТТАРЫ*\n\n🔬 Биотехнология\n🌍 Экология\n💻 Ақпараттық жүйелер\n⚙️ Автоматтандыру\n🚚 Көлік\n⚡ Электроэнергетика\n🧑‍🏫 Педагогика\n🧠 Жасанды интеллект\n💼 Есеп және аудит\n✈️ Туризм",
-        'magistratura_text': "🎓 *МАГИСТРАТУРА БАҒЫТТАРЫ*\n\n📊 Экономика\n⚖️ Юриспруденция\n💻 Ақпараттық жүйелер\n🌍 Экология",
-        'hujjat_intro': "📋 *ҚҰЖАТТАР ТІЗІМІ*\n\n1️⃣ Диплом/Аттестат\n2️⃣ Паспорт\n3️⃣ 0.86 Мед-анықтама\n4️⃣ 3x4 сурет (6 дана)\n\n🟢 *1-кезең: Диплом/Аттестат*\n❓ Форматты таңдаңыз:",
+        'about_title': "🏛 *М.ӘУЕЗОВ АТЫНДАҒЫ ОҚУ*",
+        'about_text': "📌 *1943 жылы құрылған*\n\n🇰🇿 Қазақстанның ірі университеттерінің бірі\n\n📚 50+ бағыт\n👨‍🎓 15 000+ студент\n🏛 12 факультет\n🌍 Халықаралық ынтымақтастық: Erasmus+, қос диплом\n\n🔗 *Толығырақ:*\n[🌐 Oliygoh.uz](https://oliygoh.uz/post/chirchiqda-mauezov-nomidagi-janubiy-qozogiston-universiteti-filiali-tashkil-etiali)\n[🌐 Auezov.edu.kz](https://www.auezov.edu.kz)",
+        'bakalavr_text': "👑 *БАКАЛАВРИАТ БАҒЫТТАРЫ* (11)\n\n🔬 Биотехнология\n🌍 Экология\n💻 Ақпараттық жүйелер\n⚙️ Автоматтандыру\n🚚 Көлік\n⚡ Электроэнергетика\n🧑‍🏫 Педагогика\n🧠 Жасанды интеллект\n💼 Есеп және аудит\n✈️ Туризм\n⚖️ Юриспруденция\n\n📚 *Оқу мерзімі:* 4 жыл",
+        'magistratura_text': "🎓 *МАГИСТРАТУРА БАҒЫТТАРЫ* (5)\n\n📊 Экономика\n⚖️ Юриспруденция\n💻 Ақпараттық жүйелер\n🌍 Экология\n📈 Менеджмент\n\n📚 *Оқу мерзімі:* 2 жыл",
+        'hujjat_intro': "📋 *ҚҰЖАТТАР ТІЗІМІ*\n\n1️⃣ Диплом/Аттестат\n2️⃣ Паспорт көшірмесі\n3️⃣ 0.86 Мед-анықтама\n4️⃣ 3x4 сурет (6 дана)\n\n▸ *1-кезең: Диплом/Аттестат*\n❓ Форматты таңдаңыз:",
         'format_rasm': "🖼️ Сурет",
         'format_fayl': "📎 Файл",
         'enter_name': "✍️ *Атыңызды жазыңыз:*",
         'enter_surname': "✍️ *Тегіңізді жазыңыз:*",
         'enter_age': "✍️ *Жасыңызды жазыңыз:*",
         'invalid_age': "⚠️ Қате! Бакалавриат: 14-60, Магистратура: 21-65",
-        'send_phone': "📞 Телефон жіберу",
+        'send_phone': "📞 Телефон нөмірі",
         'phone_intro': "📞 *Телефон нөміріңізді жазыңыз:*\n📝 *Мысалы:* `+998901234567`",
         'invalid_phone': "⚠️ Қате! +998901234567 форматында жазыңыз",
         'success_received': "✅ Қабылданды!",
-        'all_docs_success': "🎉 Барлық құжаттар тапсырылды!",
+        'all_docs_success': "🎉 *БАРЛЫҚ ҚҰЖАТТАР ТАПСЫРЫЛДЫ!*\n\n👨‍💼 Әкімші жақын арада хабарласады.\n\n⭐ Ботты қолданғаныңызға рахмет!",
         'select_bakalavr_title': "🎓 *БАКАЛАВРИАТ БАҒЫТТАРЫН ТАҢДАҢЫЗ:*",
         'select_magistratura_title': "🎓 *МАГИСТРАТУРА БАҒЫТТАРЫН ТАҢДАҢЫЗ:*",
-        'reg_success': "🎉 Бағыт сәтті таңдалды!",
+        'reg_success': "🎉 *Бағыт сәтті таңдалды!*\n\n✅ Деректеріңіз қабылданды.\n📝 Енді құжат тапсыра аласыз.",
         'reg_cancelled': "❌ Процесс болдырылды.",
         'unknown': "❓ Белгісіз команда",
-        'error_need_file': "⚠️ Файл жіберіңіз!",
-        'error_need_photo': "⚠️ Сурет жіберіңіз!",
-        'warning_in_progress': "⚠️ Процесс жүріп жатыр!",
-        'channel_caption': "📋 *Жаңа Құжат!*\n\n👤 Қолданушы: {user}\n🆔 ID: `{uid}`\n📂 Құжат: *{doc_name}*",
+        'error_need_file': "⚠️ Файл жіберіңіз! (PDF, DOC, TXT)",
+        'error_need_photo': "⚠️ Сурет жіберіңіз! (JPEG, PNG)",
+        'warning_in_progress': "⚠️ Процесс жүріп жатыр! Сұралған ақпаратты енгізіңіз.\n\n❌ Болдырмау батырмасын басыңыз.",
+        'channel_caption': "📋 *ЖАҢА ҚҰЖАТ!*\n\n👤 Қолданушы: {user}\n🆔 ID: `{uid}`\n📂 Құжат: *{doc_name}*",
         'yonalish_channel_caption': "🎓 *БАКАЛАВРИАТ ТАҢДАЛДЫ!*\n\n👤 Қолданушы: {user}\n🆔 ID: `{uid}`\n📞 Тел: `{phone}`\n📚 Бағыт: *{yonalish}*\n👤 Аты: {ism}\n👤 Тегі: {familya}\n🎂 Жасы: {yosh}",
         'magistratura_channel_caption': "📚 *МАГИСТРАТУРА ТАҢДАЛДЫ!*\n\n👤 Қолданушы: {user}\n🆔 ID: `{uid}`\n📞 Тел: `{phone}`\n🎓 Магистратура: *{yonalish}*\n👤 Аты: {ism}\n👤 Тегі: {familya}\n🎂 Жасы: {yosh}",
-        'manzil_text': "📍 *Мекенжай:* Шыршық қ., Ташкент обл.\n🗺 [Google Maps](https://maps.google.com)",
-        'schedule_title': "📅 *ЕМТИХАН КЕСТЕСІ 2024*\n\n",
-        'schedule_bakalavr': "🎓 *Бакалавриат:*\n📆 10-20 тамыз 2024",
-        'schedule_magistratura': "📚 *Магистратура:*\n📆 5-15 тамыз 2024",
-        'schedule_note': "📌 *Ескерту:* Орны туралы қосымша хабарланады.",
-        'contact_text': "📞 *БАЙЛАНЫС*\n\n📞 Телефон: {phone}\n💬 Telegram: {username}"
+        'manzil_text': "📍 *УНИВЕРСИТЕТ МЕКЕНЖАЙЫ*\n\n🏛 Шыршық филиалы\n🇺🇿 Ташкент облысы, Шыршық қаласы\n\n🗺 [Google Maps](https://maps.google.com)\n\n📞 Қабылдау комиссиясы: +998996844483",
+        'contact_text': "📞 *БАЙЛАНЫС*\n\n📞 Телефон: {phone}\n💬 Telegram: {username}\n🌐 Сайт: www.auezov.edu.kz\n\n📧 Email: info@auezov.edu.kz"
     }
 }
 
@@ -218,48 +208,56 @@ HUJJAT_NOMLAR = {
 HUJJAT_STATES = {1: HUJJAT_1, 2: HUJJAT_2, 3: HUJJAT_3, 4: HUJJAT_4}
 HUJJAT_FORMAT_STATES = {1: HUJJAT_FORMAT_1, 2: HUJJAT_FORMAT_2, 3: HUJJAT_FORMAT_3, 4: HUJJAT_FORMAT_4}
 
+# Bakalavriat yo'nalishlari (11 ta - Yurisprudensiya qo'shildi)
 BAKALAVR_YONALISHLAR = {
     'uz': {
         "Biotexnologiya": "🔬 Biotexnologiya", "Ekologiya": "🌍 Ekologiya",
         "Axborot_tizimlar": "💻 Axborot tizimlar", "Avtomatizatsiya": "⚙️ Avtomatizatsiya",
         "Transport": "🚚 Transport", "Elektroenergetika": "⚡ Elektroenergetika",
         "Pedagogika": "🧑‍🏫 Pedagogika", "Suniy_intellekt": "🧠 Sun'iy intellekt",
-        "Hisob_audit": "💼 Hisob va audit", "Turizm": "✈️ Turizm"
+        "Hisob_audit": "💼 Hisob va audit", "Turizm": "✈️ Turizm",
+        "Yurisprudensiya": "⚖️ Yurisprudensiya"
     },
     'ru': {
         "Biotexnologiya": "🔬 Биотехнология", "Ekologiya": "🌍 Экология",
         "Axborot_tizimlar": "💻 Информационные системы", "Avtomatizatsiya": "⚙️ Автоматизация",
         "Transport": "🚚 Транспорт", "Elektroenergetika": "⚡ Электроэнергетика",
         "Pedagogika": "🧑‍🏫 Педагогика", "Suniy_intellekt": "🧠 Искусственный интеллект",
-        "Hisob_audit": "💼 Учет и аудит", "Turizm": "✈️ Туризм"
+        "Hisob_audit": "💼 Учет и аудит", "Turizm": "✈️ Туризм",
+        "Yurisprudensiya": "⚖️ Юриспруденция"
     },
     'kk': {
         "Biotexnologiya": "🔬 Биотехнология", "Ekologiya": "🌍 Экология",
         "Axborot_tizimlar": "💻 Ақпараттық жүйелер", "Avtomatizatsiya": "⚙️ Автоматтандыру",
         "Transport": "🚚 Көлік", "Elektroenergetika": "⚡ Электроэнергетика",
         "Pedagogika": "🧑‍🏫 Педагогика", "Suniy_intellekt": "🧠 Жасанды интеллект",
-        "Hisob_audit": "💼 Есеп және аудит", "Turizm": "✈️ Туризм"
+        "Hisob_audit": "💼 Есеп және аудит", "Turizm": "✈️ Туризм",
+        "Yurisprudensiya": "⚖️ Юриспруденция"
     }
 }
 
+# Magistratura yo'nalishlari (5 ta - Menejment qo'shildi)
 MAGISTRATURA_YONALISHLAR = {
     'uz': {
         "Iqtisodiyot": "📊 Iqtisodiyot",
         "Yurisprudensiya": "⚖️ Yurisprudensiya",
         "Axborot_tizimlari": "💻 Axborot tizimlari",
-        "Ekologiya": "🌍 Ekologiya"
+        "Ekologiya": "🌍 Ekologiya",
+        "Menejment": "📈 Menejment"
     },
     'ru': {
         "Iqtisodiyot": "📊 Экономика",
         "Yurisprudensiya": "⚖️ Юриспруденция",
         "Axborot_tizimlari": "💻 Информационные системы",
-        "Ekologiya": "🌍 Экология"
+        "Ekologiya": "🌍 Экология",
+        "Menejment": "📈 Менеджмент"
     },
     'kk': {
         "Iqtisodiyot": "📊 Экономика",
         "Yurisprudensiya": "⚖️ Юриспруденция",
         "Axborot_tizimlari": "💻 Ақпараттық жүйелер",
-        "Ekologiya": "🌍 Экология"
+        "Ekologiya": "🌍 Экология",
+        "Menejment": "📈 Менеджмент"
     }
 }
 
@@ -336,7 +334,7 @@ def main_menu_markup(lang):
         [t['menu_bakalavr'], t['menu_magistratura']],
         [t['menu_hujjat'], t['menu_manzil']],
         [t['menu_bakalavr_tanlash'], t['menu_magistratura_tanlash']],
-        [t['menu_schedule'], t['menu_contact']],
+        [t['menu_contact']],
         [t['change_lang']],
     ], resize_keyboard=True)
 
@@ -383,7 +381,7 @@ def is_any_menu_button(text, lang):
     t = LANG_TEXTS[lang]
     menu = [t['menu_about'], t['menu_bakalavr'], t['menu_magistratura'], t['menu_hujjat'],
             t['menu_manzil'], t['menu_bakalavr_tanlash'], t['menu_magistratura_tanlash'],
-            t['menu_schedule'], t['menu_contact'], t['change_lang']]
+            t['menu_contact'], t['change_lang']]
     return text in menu
 
 def is_cancel_or_back(text, lang):
@@ -462,11 +460,10 @@ async def main_menu_dispatcher(update, context):
         return TIL_TANLASH
 
     if msg == t['menu_about']:
-        text = t['about_text'] + t['about_detail'] + t['about_contact'].format(phone=ADMIN_PHONE, username=ADMIN_USERNAME)
         try:
-            await update.message.reply_photo(photo=ABOUT_PHOTO_URL, caption=text, parse_mode="Markdown")
+            await update.message.reply_photo(photo=UNI_PHOTO_URL, caption=t['about_text'], parse_mode="Markdown")
         except:
-            await update.message.reply_text(text, parse_mode="Markdown")
+            await update.message.reply_text(t['about_text'], parse_mode="Markdown")
         return TANLA
 
     if msg == t['menu_bakalavr']:
@@ -498,11 +495,6 @@ async def main_menu_dispatcher(update, context):
             return TANLA
         await update.message.reply_text(t['enter_name'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
         return MAG_ISM
-
-    if msg == t['menu_schedule']:
-        text = t['schedule_title'] + t['schedule_bakalavr'] + "\n\n" + t['schedule_magistratura'] + "\n\n" + t['schedule_note']
-        await update.message.reply_text(text, parse_mode="Markdown")
-        return TANLA
 
     if msg == t['menu_contact']:
         text = t['contact_text'].format(phone=ADMIN_PHONE, username=ADMIN_USERNAME)
@@ -792,17 +784,26 @@ def main():
     )
     app.add_handler(conv)
     
+    print("=" * 50)
     print("✅ QABUL BOTI ISHGA TUSHDI!")
+    print("=" * 50)
     print("")
     print("📱 MENU TARTIBI:")
-    print("━" * 30)
+    print("━" * 35)
     print("🏛 Universitet haqida")
     print("🎓 Bakalavriat     | 📚 Magistratura")
     print("📝 Hujjat topshirish | 📍 Manzil")
     print("📋 Bakalavriat yo'nalishlari | 🎓 Magistratura yo'nalishlari")
-    print("📅 Imtihon jadvali | 📞 Aloqa")
+    print("📞 Aloqa")
     print("🌐 Tilni o'zgartirish")
-    print("━" * 30)
+    print("━" * 35)
+    print("")
+    print("📊 YO'NALISHLAR SONI:")
+    print(f"   🎓 Bakalavriat: 11 ta (Yurisprudensiya qo'shildi)")
+    print(f"   📚 Magistratura: 5 ta (Menejment qo'shildi)")
+    print("")
+    print("📨 KANALGA XABAR KETADI")
+    print("=" * 50)
     
     app.run_polling(allowed_updates=Update.ALL_TYPES)
 
