@@ -38,7 +38,6 @@ ADMIN_USERNAME = "@Saman2611"
 ADMIN_PHONE = "+998996844483"
 DB_PATH = "universitet.db"
 
-# ⭐ YANGI: Bir foydalanuvchi maksimal necha marta ro'yxatdan o'ta olishi
 MAX_REGISTRATIONS = 5
 
 logging.basicConfig(
@@ -89,7 +88,6 @@ LANG_TEXTS = {
         'error_need_file': "⚠️ Siz fayl ko'rinishida yuborishni tanladingiz! Iltimos, hujjatni fayl (document) sifatida yuboring.",
         'error_need_photo': "⚠️ Siz rasm ko'rinishida yuborishni tanladingiz! Iltimos, hujjatni rasm (photo) sifatida yuboring.",
         'channel_caption': "📋 *Yangi Hujjat Keldi!*\n\n👤 Foydalanuvchi: {user}\n🆔 ID: `{uid}`\n📂 Hujjat turi: *{doc_name}*",
-        # ⭐ YANGI: Limit xabarlari
         'cancelled': "❌ *Bekor qilindi.* Asosiy menyuga qaytdingiz.",
         'limit_sorov': f"⛔ *Siz allaqachon {MAX_REGISTRATIONS} marta so'rovnoma to'ldirdingiz!*\nMaksimal chegara ({MAX_REGISTRATIONS} ta) ga yetgansiz.",
         'limit_yonalish': f"⛔ *Siz allaqachon {MAX_REGISTRATIONS} marta yo'nalish tanladingiz!*\nMaksimal chegara ({MAX_REGISTRATIONS} ta) ga yetgansiz.",
@@ -217,7 +215,6 @@ def get_lang(context, update=None):
             return res[0]
     return 'uz'
 
-# ⭐ YANGI: Necha marta ro'yxatdan o'tganini tekshirish
 def get_registration_count(table, user_id):
     con = db_connect()
     cur = con.cursor()
@@ -245,7 +242,6 @@ def format_tanlash_keyboard(lang, step_num):
         ]
     ])
 
-# ⭐ YANGI: Bekor qilish tugmasi bilan klaviatura
 def cancel_keyboard(lang):
     t = LANG_TEXTS[lang]
     return ReplyKeyboardMarkup(
@@ -308,7 +304,7 @@ async def select_lang_callback(update, context):
     return TANLA
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 📋  ASOSIY MENYU INTERFEYSI
+# 📋  ASOSIY MENYU
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def text(update, context):
     msg = update.message.text
@@ -340,12 +336,10 @@ async def text(update, context):
 
     elif msg == t['menu_sorov']:
         uid = update.message.from_user.id
-        # ⭐ YANGI: Limit tekshiruvi
         count = get_registration_count('sorovnama', uid)
         if count >= MAX_REGISTRATIONS:
             await update.message.reply_text(t['limit_sorov'], parse_mode="Markdown")
             return TANLA
-        # ⭐ YANGI: Bekor qilish tugmasi bilan boshlash
         await update.message.reply_text(
             t['enter_name'],
             parse_mode="Markdown",
@@ -355,12 +349,10 @@ async def text(update, context):
 
     elif msg == t['menu_tanlash']:
         uid = update.message.from_user.id
-        # ⭐ YANGI: Limit tekshiruvi
         count = get_registration_count('yonalish_royxat', uid)
         if count >= MAX_REGISTRATIONS:
             await update.message.reply_text(t['limit_yonalish'], parse_mode="Markdown")
             return TANLA
-        # ⭐ YANGI: Bekor qilish tugmasi bilan boshlash
         await update.message.reply_text(
             t['enter_name'],
             parse_mode="Markdown",
@@ -379,7 +371,7 @@ async def text(update, context):
         return TANLA
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# ⭐ YANGI: BEKOR QILISH HANDLER
+# ❌  BEKOR QILISH
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def cancel_handler(update, context):
     lang = get_lang(context, update)
@@ -391,14 +383,8 @@ async def cancel_handler(update, context):
     )
     return TANLA
 
-def cancel_filter(lang_texts):
-    """Barcha tillardagi 'Bekor qilish' tugmalarini filtirlaydi."""
-    cancel_texts = [lang_texts[l]['cancel'] for l in lang_texts]
-    pattern = "^(" + "|".join(map(lambda x: x.replace("❌ ", "❌ "), cancel_texts)) + ")$"
-    return filters.Regex(pattern)
-
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 📤  HUJJATLAR VALIDATSIYASI & KANALGA YUBORISH
+# 📤  HUJJATLAR
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def format_callback(update, context):
     query = update.callback_query
@@ -460,7 +446,7 @@ async def hujjat_3(update, context): return await hujjat_handler(update, context
 async def hujjat_4(update, context): return await hujjat_handler(update, context, 4)
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 📝  SO'ROVNOMA HANDLING
+# 📝  SO'ROVNOMA
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def sorov_ism(update, context):
     lang = get_lang(context, update)
@@ -468,7 +454,7 @@ async def sorov_ism(update, context):
     await update.message.reply_text(
         LANG_TEXTS[lang]['enter_surname'],
         parse_mode="Markdown",
-        reply_markup=cancel_keyboard(lang)  # ⭐ bekor tugmasi
+        reply_markup=cancel_keyboard(lang)
     )
     return SOROV_FAMILYA
 
@@ -478,7 +464,7 @@ async def sorov_familya(update, context):
     await update.message.reply_text(
         LANG_TEXTS[lang]['enter_age'],
         parse_mode="Markdown",
-        reply_markup=cancel_keyboard(lang)  # ⭐ bekor tugmasi
+        reply_markup=cancel_keyboard(lang)
     )
     return SOROV_YOSH
 
@@ -495,7 +481,7 @@ async def sorov_yosh(update, context):
     context.user_data['sorov_yosh'] = yosh
     k = [
         [KeyboardButton(LANG_TEXTS[lang]['send_phone'], request_contact=True)],
-        [KeyboardButton(LANG_TEXTS[lang]['cancel'])],  # ⭐ bekor tugmasi
+        [KeyboardButton(LANG_TEXTS[lang]['cancel'])],
     ]
     await update.message.reply_text(
         LANG_TEXTS[lang]['phone_intro'],
@@ -511,7 +497,6 @@ async def sorov_telefon(update, context):
 
     con = db_connect()
     cur = con.cursor()
-    # ⭐ YANGI: INSERT OR REPLACE emas, oddiy INSERT — har safar yangi qator
     cur.execute(
         "INSERT INTO sorovnama VALUES (?,?,?,?,?,?,?,?,?)",
         (user.id, user.first_name, user.last_name, user.username, str(datetime.datetime.now()),
@@ -525,7 +510,7 @@ async def sorov_telefon(update, context):
     return TANLA
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🎓  YO'NALISH TANLASH HANDLING
+# 🎓  YO'NALISH TANLASH
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def yonalish_ism(update, context):
     lang = get_lang(context, update)
@@ -533,7 +518,7 @@ async def yonalish_ism(update, context):
     await update.message.reply_text(
         LANG_TEXTS[lang]['enter_surname'],
         parse_mode="Markdown",
-        reply_markup=cancel_keyboard(lang)  # ⭐ bekor tugmasi
+        reply_markup=cancel_keyboard(lang)
     )
     return YONALISH_FAMILYA
 
@@ -543,7 +528,7 @@ async def yonalish_familya(update, context):
     await update.message.reply_text(
         LANG_TEXTS[lang]['enter_age'],
         parse_mode="Markdown",
-        reply_markup=cancel_keyboard(lang)  # ⭐ bekor tugmasi
+        reply_markup=cancel_keyboard(lang)
     )
     return YONALISH_YOSH
 
@@ -560,7 +545,7 @@ async def yonalish_yosh(update, context):
     context.user_data['yonalish_yosh'] = yosh
     k = [
         [KeyboardButton(LANG_TEXTS[lang]['send_phone'], request_contact=True)],
-        [KeyboardButton(LANG_TEXTS[lang]['cancel'])],  # ⭐ bekor tugmasi
+        [KeyboardButton(LANG_TEXTS[lang]['cancel'])],
     ]
     await update.message.reply_text(
         LANG_TEXTS[lang]['phone_intro'],
@@ -572,6 +557,9 @@ async def yonalish_yosh(update, context):
 async def yonalish_telefon(update, context):
     lang = get_lang(context, update)
     context.user_data['yonalish_telefon'] = update.message.contact.phone_number
+    user = update.message.from_user
+    if 'user_name' not in context.user_data:
+        context.user_data['user_name'] = user.username or ""
 
     yonalishlar = [
         ("🔬 Biotexnologiya", "Biotexnologiya"),
@@ -628,9 +616,9 @@ async def callback_data(update, context):
     context.user_data['yonalish'] = yonalish
 
     user_id = query.message.chat_id
+
     con = db_connect()
     cur = con.cursor()
-    # ⭐ YANGI: INSERT OR REPLACE emas, oddiy INSERT — har safar yangi qator
     cur.execute(
         "INSERT INTO yonalish_royxat VALUES (?,?,?,?,?,?,?,?,?,?)",
         (user_id, "", "", "", str(datetime.datetime.now()), context.user_data.get('yonalish_ism'),
@@ -639,6 +627,31 @@ async def callback_data(update, context):
     )
     con.commit()
     con.close()
+
+    # Kanalga foydalanuvchi ma'lumotlarini yuborish
+    username_raw = context.user_data.get('user_name', '')
+    username = f"@{username_raw}" if username_raw else f"ID: {user_id}"
+    kanal_xabar = (
+        f"📋 *Yangi Yo'nalish Arizasi!*\n"
+        f"{'━' * 22}\n"
+        f"👤 *Telegram:* {username}\n"
+        f"🆔 *ID:* `{user_id}`\n"
+        f"{'━' * 22}\n"
+        f"📝 *Ism:* {context.user_data.get('yonalish_ism', '—')}\n"
+        f"📝 *Familya:* {context.user_data.get('yonalish_familya', '—')}\n"
+        f"🎂 *Yosh:* {context.user_data.get('yonalish_yosh', '—')}\n"
+        f"📞 *Telefon:* `{context.user_data.get('yonalish_telefon', '—')}`\n"
+        f"{'━' * 22}\n"
+        f"🎓 *Tanlagan yo'nalish:* {yonalish}"
+    )
+    try:
+        await context.bot.send_message(
+            chat_id=CHANNEL_USERNAME,
+            text=kanal_xabar,
+            parse_mode="Markdown"
+        )
+    except Exception as e:
+        logger.error(f"Kanalga yo'nalish yuborishda xatolik: {e}")
 
     await query.edit_message_text(LANG_TEXTS[lang]['ariza_success'], parse_mode="Markdown")
     await context.bot.send_message(chat_id=user_id, text="🏠", reply_markup=main_menu_markup(lang))
@@ -660,7 +673,6 @@ def main():
     app = Application.builder().token(BOT_TOKEN).build()
 
     back_filter = filters.Regex("^🔙 Menyuga qaytish$|^🔙 Назад в меню$|^🔙 Мәзірге қайту$")
-    # ⭐ YANGI: Barcha tillardagi "Bekor qilish" tugmasi filtri
     bekor_filter = filters.Regex("^❌ Bekor qilish$|^❌ Отмена$|^❌ Бас тарту$")
     media_filter = filters.PHOTO | filters.Document.ALL | filters.TEXT
 
@@ -680,8 +692,7 @@ def main():
             HUJJAT_2: [MessageHandler(back_filter, menyuga_qaytish), MessageHandler(media_filter, hujjat_2)],
             HUJJAT_3: [MessageHandler(back_filter, menyuga_qaytish), MessageHandler(media_filter, hujjat_3)],
             HUJJAT_4: [MessageHandler(back_filter, menyuga_qaytish), MessageHandler(media_filter, hujjat_4)],
-            # ⭐ YANGI: Har bir so'rovnoma bosqichida bekor qilish handler qo'shildi
-            SOROV_ISM:     [
+            SOROV_ISM: [
                 MessageHandler(bekor_filter, cancel_handler),
                 MessageHandler(back_filter, menyuga_qaytish),
                 MessageHandler(filters.TEXT & ~filters.COMMAND, sorov_ism)
@@ -691,7 +702,7 @@ def main():
                 MessageHandler(back_filter, menyuga_qaytish),
                 MessageHandler(filters.TEXT & ~filters.COMMAND, sorov_familya)
             ],
-            SOROV_YOSH:    [
+            SOROV_YOSH: [
                 MessageHandler(bekor_filter, cancel_handler),
                 MessageHandler(back_filter, menyuga_qaytish),
                 MessageHandler(filters.TEXT & ~filters.COMMAND, sorov_yosh)
@@ -701,8 +712,7 @@ def main():
                 MessageHandler(back_filter, menyuga_qaytish),
                 MessageHandler(filters.CONTACT, sorov_telefon)
             ],
-            # ⭐ YANGI: Har bir yo'nalish bosqichida bekor qilish handler qo'shildi
-            YONALISH_ISM:     [
+            YONALISH_ISM: [
                 MessageHandler(bekor_filter, cancel_handler),
                 MessageHandler(back_filter, menyuga_qaytish),
                 MessageHandler(filters.TEXT & ~filters.COMMAND, yonalish_ism)
@@ -712,7 +722,7 @@ def main():
                 MessageHandler(back_filter, menyuga_qaytish),
                 MessageHandler(filters.TEXT & ~filters.COMMAND, yonalish_familya)
             ],
-            YONALISH_YOSH:    [
+            YONALISH_YOSH: [
                 MessageHandler(bekor_filter, cancel_handler),
                 MessageHandler(back_filter, menyuga_qaytish),
                 MessageHandler(filters.TEXT & ~filters.COMMAND, yonalish_yosh)
