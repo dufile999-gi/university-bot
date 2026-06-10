@@ -50,7 +50,7 @@ TIL_TANLASH, TANLA = "til_tanlash", "tanla"
 HUJJAT_FORMAT_1, HUJJAT_FORMAT_2, HUJJAT_FORMAT_3, HUJJAT_FORMAT_4 = "hf1", "hf2", "hf3", "hf4"
 HUJJAT_1, HUJJAT_2, HUJJAT_3, HUJJAT_4 = "h1", "h2", "h3", "h4"
 SOROV_ISM, SOROV_FAMILYA, SOROV_YOSH, SOROV_TELEFON = "si", "sf", "sy", "st"
-YONALISH_ISM, YONALISH_FAMILYA, YONALISH_YOSH, YONALISH_TELEFON = "yi", "yf", "yy", "yt"
+YONALISH_ISM, YONALISH_FAMILYA, YONALISH_YOSH, YONALISH_TELEFON, YONALISH_TANLASH = "yi", "yf", "yy", "yt", "yonalish_tanlash"
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 🌐  TIL LUG'ATI
@@ -86,7 +86,6 @@ LANG_TEXTS = {
     }
 }
 
-# Boshqa tillar avtomatik uz'ga havola qilinadi yoki qo'shish mumkin
 LANG_TEXTS['ru'] = LANG_TEXTS['uz']
 LANG_TEXTS['kk'] = LANG_TEXTS['uz']
 
@@ -124,6 +123,14 @@ def check_already_registered(user_id, table_name):
     return bool(res)
 
 def get_lang(context, update=None):
+    if update and update.effective_user:
+        con = db_connect()
+        cur = con.cursor()
+        cur.execute("SELECT lang FROM foydalanuvchilar WHERE id=?", (update.effective_user.id,))
+        row = cur.fetchone()
+        con.close()
+        if row and row[0]:
+            return row[0]
     return 'uz'
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -151,6 +158,23 @@ def format_tanlash_keyboard(lang, step_num):
         ]
     ])
 
+def yonalish_tanlash_keyboard():
+    yonalishlar = [
+        ("🔬 Biotexnologiya", "Biotexnologiya"), ("🌍 Ekologiya", "Ekologiya"),
+        ("💻 Axborot tizimlar", "Axborot_tizimlar"), ("⚙️ Avtomatizatsiya", "Avtomatizatsiya"),
+        ("🚚 Transport", "Transport"), ("⚡ Elektroenergetika", "Elektroenergetika"),
+        ("🧑‍🏫 Pedagogika", "Pedagogika"), ("🧠 Sun'iy intellekt", "Suniy_intellekt"),
+        ("💼 Hisob va audit", "Hisob_audit"), ("✈️ Turizm", "Turizm"),
+    ]
+    
+    keyboard = []
+    for i in range(0, len(yonalishlar), 2):
+        row = [InlineKeyboardButton(yonalishlar[i][0], callback_data=yonalishlar[i][1])]
+        if i + 1 < len(yonalishlar):
+            row.append(InlineKeyboardButton(yonalishlar[i+1][0], callback_data=yonalishlar[i+1][1]))
+        keyboard.append(row)
+    return InlineKeyboardMarkup(keyboard)
+
 def is_any_menu_button(text_to_check):
     if not text_to_check: return False
     for lang in LANG_TEXTS:
@@ -171,12 +195,12 @@ def validate_phone(phone_str):
     return None
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🛡️  PIPELINE GUARD (ADASHIB BOSILGAN MENULARNI TEKSHIRISH)
+# 🛡️  PIPELINE GUARD (JARAYONNI NAZORAT QILISH)
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-async def process_step_guard(update, context):
+async def process_step_guard(update, context, current_state):
     lang = get_lang(context, update)
     t = LANG_TEXTS[lang]
-    msg_text = update.message.text if update.message else None
+    msg_text = update.message.text if (update.message and update.message.text) else None
     
     if msg_text:
         if is_cancel_or_back(msg_text):
@@ -190,7 +214,7 @@ async def process_step_guard(update, context):
     return "PROCEED"
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🚀  START BUYRUG'I
+# 🚀  START COMMAND
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def start(update, context):
     lang = 'uz'
@@ -202,6 +226,8 @@ async def start(update, context):
     cur.execute("SELECT id FROM foydalanuvchilar WHERE id=?", (user.id,))
     if not cur.fetchone():
         cur.execute("INSERT INTO foydalanuvchilar VALUES (?,?,?,?,?,?)", (user.id, user.first_name, user.last_name, user.username, lang, str(datetime.datetime.now())))
+    else:
+        cur.execute("UPDATE foydalanuvchilar SET lang=? WHERE id=?", (lang, user.id))
     con.commit()
     con.close()
 
@@ -209,7 +235,7 @@ async def start(update, context):
     return TANLA
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 📋  BOSH MENYU DISPATCHER (FAQAT TANLA HOLATIDA ISHLAYDI)
+# 📋  BOSH MENYU DISPATCHER
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def main_menu_dispatcher(update, context):
     msg = update.message.text if update.message else None
@@ -242,14 +268,14 @@ async def main_menu_dispatcher(update, context):
 
     elif msg == t['menu_sorov']:
         if check_already_registered(uid, "sorovnama"):
-            await update.message.reply_text(t['sorov_allready'])
+            await update.message.reply_text(t['sorov_allready'], parse_mode="Markdown")
             return TANLA
         await update.message.reply_text(t['enter_name'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
         return SOROV_ISM
 
     elif msg == t['menu_tanlash']:
         if check_already_registered(uid, "yonalish_royxat"):
-            await update.message.reply_text(t['yonalish_allready'])
+            await update.message.reply_text(t['yonalish_allready'], parse_mode="Markdown")
             return TANLA
         await update.message.reply_text(t['enter_name'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
         return YONALISH_ISM
@@ -259,12 +285,11 @@ async def main_menu_dispatcher(update, context):
         return TANLA
         
     else:
-        # Erkin istalgan xabar yozilganda yo'nalish berish
         await update.message.reply_text(t['unknown'], reply_markup=main_menu_markup(lang))
         return TANLA
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 📤  HUJJAT TOPSHIRISH BOSQICHLARI
+# 📤  HUJJAT TOPSHIRISH OQIMI
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def format_callback(update, context):
     query = update.callback_query
@@ -285,7 +310,7 @@ async def hujjat_handler(update, context, step):
     lang = get_lang(context, update)
     t = LANG_TEXTS[lang]
     
-    guard = await process_step_guard(update, context)
+    guard = await process_step_guard(update, context, HUJJAT_STATES[step])
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return HUJJAT_STATES[step]
 
@@ -324,11 +349,11 @@ async def hujjat_3(update, context): return await hujjat_handler(update, context
 async def hujjat_4(update, context): return await hujjat_handler(update, context, 4)
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 📝  SO'ROVNOMA BOSQICHLARI (MUKAMMAL VA TO'G'RI VARIANT)
+# 📝  SO'ROVNOMA OQIMI 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def sorov_ism(update, context):
     lang = get_lang(context, update)
-    guard = await process_step_guard(update, context)
+    guard = await process_step_guard(update, context, SOROV_ISM)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return SOROV_ISM
     
@@ -342,7 +367,7 @@ async def sorov_ism(update, context):
 
 async def sorov_familya(update, context):
     lang = get_lang(context, update)
-    guard = await process_step_guard(update, context)
+    guard = await process_step_guard(update, context, SOROV_FAMILYA)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return SOROV_FAMILYA
     
@@ -356,7 +381,7 @@ async def sorov_familya(update, context):
 
 async def sorov_yosh(update, context):
     lang = get_lang(context, update)
-    guard = await process_step_guard(update, context)
+    guard = await process_step_guard(update, context, SOROV_YOSH)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return SOROV_YOSH
     
@@ -372,7 +397,7 @@ async def sorov_yosh(update, context):
 
 async def sorov_telefon(update, context):
     lang = get_lang(context, update)
-    guard = await process_step_guard(update, context)
+    guard = await process_step_guard(update, context, SOROV_TELEFON)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return SOROV_TELEFON
 
@@ -391,19 +416,22 @@ async def sorov_telefon(update, context):
     user = update.message.from_user
     con = db_connect()
     cur = con.cursor()
-    cur.execute("INSERT OR REPLACE INTO sorovnama VALUES (?,?,?,?,?,?,?,?,?)", (user.id, user.first_name, user.last_name, user.username, str(datetime.datetime.now()), context.user_data.get('sorov_ism'), context.user_data.get('sorov_familya'), context.user_data.get('sorov_yosh'), telefon))
+    cur.execute("INSERT OR REPLACE INTO sorovnama (id, first_name, last_name, user_name, vaqt, ism, familya, yosh, telefon) VALUES (?,?,?,?,?,?,?,?,?)", 
+                (user.id, user.first_name, user.last_name, user.username, str(datetime.datetime.now()), 
+                 context.user_data.get('sorov_ism'), context.user_data.get('sorov_familya'), 
+                 context.user_data.get('sorov_yosh'), telefon))
     con.commit()
     con.close()
 
-    await update.message.reply_text(LANG_TEXTS[lang]['reg_success'], reply_markup=main_menu_markup(lang))
+    await update.message.reply_text(LANG_TEXTS[lang]['reg_success'], parse_mode="Markdown", reply_markup=main_menu_markup(lang))
     return TANLA
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🎓  YO'NALISH TANLASH BOSQICHLARI
+# 🎓  YO'NALISH TANLASH OQIMI 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def yonalish_ism(update, context):
     lang = get_lang(context, update)
-    guard = await process_step_guard(update, context)
+    guard = await process_step_guard(update, context, YONALISH_ISM)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return YONALISH_ISM
     
@@ -417,7 +445,7 @@ async def yonalish_ism(update, context):
 
 async def yonalish_familya(update, context):
     lang = get_lang(context, update)
-    guard = await process_step_guard(update, context)
+    guard = await process_step_guard(update, context, YONALISH_FAMILYA)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return YONALISH_FAMILYA
     
@@ -431,7 +459,7 @@ async def yonalish_familya(update, context):
 
 async def yonalish_yosh(update, context):
     lang = get_lang(context, update)
-    guard = await process_step_guard(update, context)
+    guard = await process_step_guard(update, context, YONALISH_YOSH)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return YONALISH_YOSH
     
@@ -447,12 +475,13 @@ async def yonalish_yosh(update, context):
 
 async def yonalish_telefon(update, context):
     lang = get_lang(context, update)
-    guard = await process_step_guard(update, context)
+    guard = await process_step_guard(update, context, YONALISH_TELEFON)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return YONALISH_TELEFON
 
     telefon = None
-    if update.message.contact: telefon = update.message.contact.phone_number
+    if update.message.contact: 
+        telefon = update.message.contact.phone_number
     elif update.message.text:
         telefon = validate_phone(update.message.text.strip())
         if not telefon:
@@ -464,53 +493,52 @@ async def yonalish_telefon(update, context):
 
     context.user_data['yonalish_telefon'] = telefon
     
-    yonalishlar = [
-        ("🔬 Biotexnologiya", "Biotexnologiya"), ("🌍 Ekologiya", "Ekologiya"),
-        ("💻 Axborot tizimlar", "Axborot_tizimlar"), ("⚙️ Avtomatizatsiya", "Avtomatizatsiya"),
-        ("🚚 Transport", "Transport"), ("⚡ Elektroenergetika", "Elektroenergetika"),
-        ("🧑‍🏫 Pedagogika", "Pedagogika"), ("🧠 Sun'iy intellekt", "Suniy_intellekt"),
-        ("💼 Hisob va audit", "Hisob_audit"), ("✈️ Turizm", "Turizm"),
-    ]
-    
-    keyboard = []
-    for i in range(0, len(yonalishlar), 2):
-        row = [InlineKeyboardButton(yonalishlar[i][0], callback_data=yonalishlar[i][1])]
-        if i + 1 < len(yonalishlar): row.append(InlineKeyboardButton(yonalishlar[i+1][0], callback_data=yonalishlar[i+1][1]))
-        keyboard.append(row)
-        
-    await update.message.reply_text(LANG_TEXTS[lang]['select_yonalish_title'], parse_mode="Markdown", reply_markup=InlineKeyboardMarkup(keyboard))
-    return TANLA
+    await update.message.reply_text(
+        LANG_TEXTS[lang]['select_yonalish_title'], 
+        parse_mode="Markdown", 
+        reply_markup=yonalish_tanlash_keyboard()
+    )
+    return YONALISH_TANLASH
 
-YONALISH_MAP = {
-    "Biotexnologiya": "🔬 Biotexnologiya", "Ekologiya": "🌍 Ekologiya", "Axborot_tizimlar": "💻 Axborot tizimlar",
-    "Avtomatizatsiya": "⚙️ Avtomatizatsiya", "Transport": "🚚 Transport", "Elektroenergetika": "⚡ Elektroenergetika",
-    "Pedagogika": "🧑‍🏫 Pedagogika", "Suniy_intellekt": "🧠 Sun'iy intellekt", "Hisob_audit": "💼 Hisob va audit", "Turizm": "✈️ Turizm",
-}
-
-async def callback_data(update, context):
+async def yonalish_tanlash_callback(update, context):
+    """Yo'nalish tanlash callback handler"""
     query = update.callback_query
     await query.answer()
     data = query.data
     lang = get_lang(context)
-    user_id = query.message.chat_id
+    user_id = query.from_user.id
 
-    if data.startswith("format_") or data.startswith("set_lang_") or data == "bekor": return 
-
-    if check_already_registered(user_id, "yonalish_royxat"):
-        await query.edit_message_text(LANG_TEXTS[lang]['yonalish_allready'], parse_mode="Markdown")
+    # Faqat yo'nalish callback'larini ishlaymiz
+    YONALISH_MAP = {
+        "Biotexnologiya": "🔬 Biotexnologiya", "Ekologiya": "🌍 Ekologiya", 
+        "Axborot_tizimlar": "💻 Axborot tizimlar", "Avtomatizatsiya": "⚙️ Avtomatizatsiya",
+        "Transport": "🚚 Transport", "Elektroenergetika": "⚡ Elektroenergetika",
+        "Pedagogika": "🧑‍🏫 Pedagogika", "Suniy_intellekt": "🧠 Sun'iy intellekt", 
+        "Hisob_audit": "💼 Hisob va audit", "Turizm": "✈️ Turizm",
+    }
+    
+    if data not in YONALISH_MAP:
         return TANLA
-
-    yonalish = YONALISH_MAP.get(data)
-    context.user_data['yonalish'] = yonalish
+        
+    yonalish = YONALISH_MAP[data]
 
     con = db_connect()
     cur = con.cursor()
-    cur.execute("INSERT OR REPLACE INTO yonalish_royxat VALUES (?,?,?,?,?,?,?,?,?,?)", (user_id, "", "", "", str(datetime.datetime.now()), context.user_data.get('yonalish_ism'), context.user_data.get('yonalish_familya'), context.user_data.get('yonalish_yosh'), context.user_data.get('yonalish_telefon'), yonalish))
+    cur.execute("""INSERT OR REPLACE INTO yonalish_royxat 
+                  (id, first_name, last_name, user_name, vaqt, ism, familya, yosh, telefon, yonalish) 
+                  VALUES (?,?,?,?,?,?,?,?,?,?)""", 
+                (user_id, "", "", "", str(datetime.datetime.now()), 
+                 context.user_data.get('yonalish_ism'), context.user_data.get('yonalish_familya'), 
+                 context.user_data.get('yonalish_yosh'), context.user_data.get('yonalish_telefon'), yonalish))
     con.commit()
     con.close()
 
     await query.edit_message_text(LANG_TEXTS[lang]['reg_success'], parse_mode="Markdown")
-    await context.bot.send_message(chat_id=user_id, text="🏠 Bosh menyuga qaytdingiz.", reply_markup=main_menu_markup(lang))
+    await context.bot.send_message(
+        chat_id=user_id, 
+        text="🏠 Bosh menyuga qaytdingiz.", 
+        reply_markup=main_menu_markup(lang)
+    )
     return TANLA
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -530,39 +558,37 @@ async def admin_statistika(update, context):
 
     matn = "📊 *STATISTIKA MA'LUMOTLARI*\n\n"
     matn += f"📝 *So'rovnoma to'ldirganlar ({len(sorov_rows)} ta):*\n"
-    for i, row in enumerate(sorov_rows, 1): matn += f"{i}. {row[0]} {row[1]} -> `{row[2]}`\n"
+    for i, row in enumerate(sorov_rows, 1): 
+        matn += f"{i}. {row[0]} {row[1]} -> `{row[2]}`\n"
     matn += "\n" + "━" * 15 + "\n\n"
     matn += f"🎓 *Yo'nalish tanlaganlar ({len(yonalish_rows)} ta):*\n"
-    for i, row in enumerate(yonalish_rows, 1): matn += f"{i}. {row[0]} {row[1]} | *{row[3]}* -> `{row[2]}`\n"
+    for i, row in enumerate(yonalish_rows, 1): 
+        matn += f"{i}. {row[0]} {row[1]} | *{row[3]}* -> `{row[2]}`\n"
     await update.message.reply_text(matn, parse_mode="Markdown")
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🤖  MAIN RUNNER (MANTIQIY FILTERLAR TO'LIQ TUZATILDI)
+# 🤖  MAIN RUNNER (MUKAMMAL STRUKTURA)
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 def main():
-    if not BOT_TOKEN: raise ValueError("❌ BOT_TOKEN xatoligi!")
+    if not BOT_TOKEN or BOT_TOKEN == "7314275083:AAHe_G3...":
+        raise ValueError("❌ BOT_TOKEN xatoligi! Iltimos, .env faylda tokeningizni to'g'ri kiriting!")
     init_db()
     app = Application.builder().token(BOT_TOKEN).build()
     app.add_handler(CommandHandler("users", admin_statistika))
 
     conv = ConversationHandler(
-        entry_points=[
-            CommandHandler('start', start), 
-            MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)
-        ],
+        entry_points=[CommandHandler('start', start)],
         states={
             TANLA: [
                 MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher), 
-                CallbackQueryHandler(callback_data)
+                CallbackQueryHandler(yonalish_tanlash_callback)  # Faqat yo'nalish callback'lari
             ],
             
-            # Formani tanlash bosqichlari inline tugmalar uchun ochiq qoldirildi
             HUJJAT_FORMAT_1: [CallbackQueryHandler(format_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
             HUJJAT_FORMAT_2: [CallbackQueryHandler(format_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
             HUJJAT_FORMAT_3: [CallbackQueryHandler(format_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
             HUJJAT_FORMAT_4: [CallbackQueryHandler(format_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
             
-            # Har bir xabar faqat o'zining shaxsiy funksiyasiga uzatiladi (Chalkashlik bartaraf etildi)
             HUJJAT_1: [MessageHandler(filters.ALL, hujjat_1)],
             HUJJAT_2: [MessageHandler(filters.ALL, hujjat_2)],
             HUJJAT_3: [MessageHandler(filters.ALL, hujjat_3)],
@@ -577,16 +603,21 @@ def main():
             YONALISH_FAMILYA: [MessageHandler(filters.TEXT & ~filters.COMMAND, yonalish_familya)],
             YONALISH_YOSH:    [MessageHandler(filters.TEXT & ~filters.COMMAND, yonalish_yosh)],
             YONALISH_TELEFON: [MessageHandler(filters.ALL, yonalish_telefon)],
+            YONALISH_TANLASH: [CallbackQueryHandler(yonalish_tanlash_callback)],  # Yo'nalish tanlash state
         },
         fallbacks=[
-            CommandHandler('start', start), 
+            CommandHandler('start', start),
             MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)
         ],
         allow_reentry=True
     )
 
     app.add_handler(conv)
-    app.run_polling()
+    
+    # Webhook emas, polling ishlatamiz
+    print("✅ Bot ishga tushdi! Polling orqali ishlayapti...")
+    app.run_polling(allowed_updates=Update.ALL_TYPES)
 
 if __name__ == '__main__':
+    from telegram import Update
     main()
