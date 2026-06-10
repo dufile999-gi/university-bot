@@ -115,7 +115,7 @@ LANG_TEXTS = {
         'menu_about': "🎓 Университет туралы", 'menu_yonalish': "🗃️ Мамандықтар",
         'menu_hujjat': "📝 Құжат тапсыру", 'menu_manzil': "📍 Мекен-жай",
         'menu_sorov': "🗂 Сауалнама", 'menu_tanlash': "📋 Мамандық таңдау",
-        'menu_admin': "👤 Adminмен байланыс", 'back': "🔙 Мәзірге қайту", 'cancel': "❌ Бас тарту",
+        'menu_admin': "👤 Adminмен байланыс", 'back': "🔙 Mәзірге қайту", 'cancel': "❌ Бас тарту",
         'about_text': "🏛 *М.Әуезов атындағы Оңтүстік Қазақстан университеті Шыршық филиалы*",
         'yonalish_text': "👑 *БІЛІМ БЕРУ БАҒДАРЛАМАЛАРЫ*\n\n🔬 Биотехнология\n💻 Ақпараттық жүйелер",
         'hujjat_intro': "📋 *ҚАЖЕТТІ ҚҰЖАТТАР*\n\n🟢 *1-Кезең:* Форматты таңдаңыз:",
@@ -131,7 +131,7 @@ LANG_TEXTS = {
         'error_need_file': "⚠️ *Қате:* Құжатты файл (Document) ретінде жіберіңіз.",
         'error_need_photo': "⚠️ *Қате:* Құжатты сурет (Photo) ретінде жіберіңіз.",
         'channel_caption': "📋 *Жаңа құжат:* {doc_name}",
-        'reg_cancelled': "❌ Бас тартылды. Бас мәзір.", 'reg_success': "🎉 Сіз сәтті тіркелдіңіз!",
+        'reg_cancelled': "❌ Бас тартылды. Бас мәзір.", 'reg_success': "🎉 Сіз sәтті тіркелдіңіз!",
         'manzil_text': "📍 *Мекен-жай:* Шыршық қаласы.",
         'warning_in_progress': "⚠️ *Сіз қазір тіркелу үстіндесіз!*\n\nСұралған мәліметті енгізіңіз немесе тоқтату үшін **❌ Бас тарту** немесе **🔙 Мәзірге қайту** батырмасын басыңыз."
     }
@@ -147,7 +147,7 @@ HUJJAT_STATES = {1: HUJJAT_1, 2: HUJJAT_2, 3: HUJJAT_3, 4: HUJJAT_4}
 HUJJAT_FORMAT_STATES = {1: HUJJAT_FORMAT_1, 2: HUJJAT_FORMAT_2, 3: HUJJAT_FORMAT_3, 4: HUJJAT_FORMAT_4}
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🗄️  MA'LUMOTLAR BAZASI BILAN ISHLAH
+# 🗄️  MA'LUMOTLAR BAZASI BILAN ISHLASH
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 def db_connect(): return sqlite3.connect(DB_PATH)
 
@@ -229,26 +229,18 @@ def validate_phone(phone_str):
     return None
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🛡️  BOSQICHMA-BOSQICH FILTRLASH (MIDDLEWARE CAPABILITY)
+# 🛡️  BOSQICHMA-BOSQICH FILTRLASH (GUARD PIPELINE)
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-async def process_step_guard(update, context, current_state_name):
-    """
-    Ushbu funksiya foydalanuvchidan kiritilgan har qanday xabarni 
-    eng birinchi bo'lib tekshiradi (Pipeline qadami)
-    """
+async def process_step_guard(update, context):
     lang = get_lang(context, update)
     t = LANG_TEXTS[lang]
-    
-    # 1. Kelgan xabar matnini tekshirish
     msg_text = update.message.text if update.message else None
     
     if msg_text:
-        # Agar foydalanuvchi orqaga yoki bekor qilishni bossa jarayonni darhol to'xtatamiz
         if is_cancel_or_back(msg_text):
             await update.message.reply_text(t['reg_cancelled'], reply_markup=main_menu_markup(lang))
             return "FORCE_CAN_MENU"
             
-        # Agar jarayon ichida turganda adashib boshqa asosiy menyu tugmasini bossa, ogohlantiramiz
         if is_any_menu_button(msg_text):
             await update.message.reply_text(t['warning_in_progress'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
             return "FORCE_STAY"
@@ -256,7 +248,7 @@ async def process_step_guard(update, context, current_state_name):
     return "PROCEED"
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🚀  BOSHLACH/START
+# 🚀  BOSHLACH / START
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def start(update, context):
     keyboard = InlineKeyboardMarkup([
@@ -291,7 +283,7 @@ async def select_lang_callback(update, context):
     return TANLA
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 📋  ASOSIY MENYU INTERFEYSI VA ISTALGAN XABARGA JAVOB
+# 📋  ASOSIY MENYU DISPATCHER
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def main_menu_dispatcher(update, context):
     msg = update.message.text if update.message else None
@@ -301,10 +293,6 @@ async def main_menu_dispatcher(update, context):
 
     if not msg:
         await update.message.reply_text(t['unknown'], reply_markup=main_menu_markup(lang))
-        return TANLA
-
-    if msg in [t['cancel'], t['back']]:
-        await update.message.reply_text(t['welcome'], reply_markup=main_menu_markup(lang))
         return TANLA
 
     if msg == t['menu_about']:
@@ -345,12 +333,11 @@ async def main_menu_dispatcher(update, context):
         return TANLA
         
     else:
-        # Arxitektura talabi: tushunarsiz har qanday xabarga (stiker, audio yoki boshqa matn) javob berish
         await update.message.reply_text(t['unknown'], reply_markup=main_menu_markup(lang))
         return TANLA
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 📤  HUJJAT TOPSHIRISH OQIMI (VALIDATSIYA BILAN)
+# 📤  HUJJAT TOPSHIRISH (TUG'RI TIZIMDA)
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def format_callback(update, context):
     query = update.callback_query
@@ -360,23 +347,23 @@ async def format_callback(update, context):
     parts = data.split("_")
     format_turi, step = parts[1], int(parts[2])
     context.user_data[f'hujjat_format_{step}'] = format_turi
-    await query.edit_message_text(f"📥 {HUJJAT_NOMLAR[lang][step]} ({format_turi.upper()})\n\n👇 Iltimos, fayl/rasmni biriktirib yuboring yoki quyidagi tugmalardan foydalaning:", reply_markup=cancel_back_markup(lang))
+    await query.edit_message_text(f"📥 {HUJJAT_NOMLAR[lang][step]} ({format_turi.upper()})\n\n👇 Iltimos, fayl yoki rasmni yuboring:", reply_markup=cancel_back_markup(lang))
     return HUJJAT_STATES[step]
 
 async def hujjat_handler(update, context, step):
     lang = get_lang(context, update)
     t = LANG_TEXTS[lang]
     
-    guard = await process_step_guard(update, context, HUJJAT_STATES[step])
+    guard = await process_step_guard(update, context)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return HUJJAT_STATES[step]
 
     tanlangan_format = context.user_data.get(f'hujjat_format_{step}', 'rasm')
     if tanlangan_format == 'fayl' and not update.message.document:
-        await update.message.reply_text(t['error_need_file'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
+        await update.message.reply_text(t['error_need_file'], parse_mode="Markdown")
         return HUJJAT_STATES[step]
     if tanlangan_format == 'rasm' and not update.message.photo:
-        await update.message.reply_text(t['error_need_photo'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
+        await update.message.reply_text(t['error_need_photo'], parse_mode="Markdown")
         return HUJJAT_STATES[step]
 
     user = update.message.from_user
@@ -384,12 +371,12 @@ async def hujjat_handler(update, context, step):
     caption_txt = t['channel_caption'].format(user=username, uid=user.id, doc_name=HUJJAT_NOMLAR[lang][step])
 
     try:
-        if update.message.document:
-            await context.bot.send_document(chat_id=CHANNEL_USERNAME, document=update.message.document.file_id, caption=caption_txt, parse_mode="Markdown")
-        elif update.message.photo:
-            await context.bot.send_photo(chat_id=CHANNEL_USERNAME, photo=update.message.photo[-1].file_id, caption=caption_txt, parse_mode="Markdown")
+         if update.message.document:
+              await context.bot.send_document(chat_id=CHANNEL_USERNAME, document=update.message.document.file_id, caption=caption_txt, parse_mode="Markdown")
+         elif update.message.photo:
+              await context.bot.send_photo(chat_id=CHANNEL_USERNAME, photo=update.message.photo[-1].file_id, caption=caption_txt, parse_mode="Markdown")
     except Exception as e:
-        logger.error(f"Kanalga yuborishda xato: {e}")
+         logger.error(f"Kanalga yuborishda xato: {e}")
 
     if step < 4:
         next_step = step + 1
@@ -409,10 +396,11 @@ async def hujjat_4(update, context): return await hujjat_handler(update, context
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def sorov_ism(update, context):
     lang = get_lang(context, update)
-    guard = await process_step_guard(update, context, SOROV_ISM)
+    guard = await process_step_guard(update, context)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return SOROV_ISM
-    if not update.message.text: 
+    
+    if not update.message.text:
         await update.message.reply_text(LANG_TEXTS[lang]['enter_name'])
         return SOROV_ISM
 
@@ -422,10 +410,11 @@ async def sorov_ism(update, context):
 
 async def sorov_familya(update, context):
     lang = get_lang(context, update)
-    guard = await process_step_guard(update, context, SOROV_FAMILYA)
+    guard = await process_step_guard(update, context)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return SOROV_FAMILYA
-    if not update.message.text: 
+    
+    if not update.message.text:
         await update.message.reply_text(LANG_TEXTS[lang]['enter_surname'])
         return SOROV_FAMILYA
 
@@ -435,7 +424,7 @@ async def sorov_familya(update, context):
 
 async def sorov_yosh(update, context):
     lang = get_lang(context, update)
-    guard = await process_step_guard(update, context, SOROV_YOSH)
+    guard = await process_step_guard(update, context)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return SOROV_YOSH
     
@@ -451,7 +440,7 @@ async def sorov_yosh(update, context):
 
 async def sorov_telefon(update, context):
     lang = get_lang(context, update)
-    guard = await process_step_guard(update, context, SOROV_TELEFON)
+    guard = await process_step_guard(update, context)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return SOROV_TELEFON
 
@@ -481,9 +470,10 @@ async def sorov_telefon(update, context):
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def yonalish_ism(update, context):
     lang = get_lang(context, update)
-    guard = await process_step_guard(update, context, YONALISH_ISM)
+    guard = await process_step_guard(update, context)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return YONALISH_ISM
+    
     if not update.message.text:
         await update.message.reply_text(LANG_TEXTS[lang]['enter_name'])
         return YONALISH_ISM
@@ -494,9 +484,10 @@ async def yonalish_ism(update, context):
 
 async def yonalish_familya(update, context):
     lang = get_lang(context, update)
-    guard = await process_step_guard(update, context, YONALISH_FAMILYA)
+    guard = await process_step_guard(update, context)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return YONALISH_FAMILYA
+    
     if not update.message.text:
         await update.message.reply_text(LANG_TEXTS[lang]['enter_surname'])
         return YONALISH_FAMILYA
@@ -507,7 +498,7 @@ async def yonalish_familya(update, context):
 
 async def yonalish_yosh(update, context):
     lang = get_lang(context, update)
-    guard = await process_step_guard(update, context, YONALISH_YOSH)
+    guard = await process_step_guard(update, context)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return YONALISH_YOSH
     
@@ -523,7 +514,7 @@ async def yonalish_yosh(update, context):
 
 async def yonalish_telefon(update, context):
     lang = get_lang(context, update)
-    guard = await process_step_guard(update, context, YONALISH_TELEFON)
+    guard = await process_step_guard(update, context)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return YONALISH_TELEFON
 
@@ -622,15 +613,21 @@ def main():
     app.add_handler(CommandHandler("users", admin_statistika))
 
     conv = ConversationHandler(
-        entry_points=[CommandHandler('start', start), MessageHandler(filters.ALL, main_menu_dispatcher)],
+        entry_points=[
+            CommandHandler('start', start), 
+            MessageHandler(filters.ALL, main_menu_dispatcher)
+        ],
         states={
             TIL_TANLASH: [CallbackQueryHandler(select_lang_callback, pattern="^set_lang_")],
-            TANLA: [MessageHandler(filters.ALL, main_menu_dispatcher), CallbackQueryHandler(callback_data)],
+            TANLA: [
+                MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher), 
+                CallbackQueryHandler(callback_data)
+            ],
             
-            HUJJAT_FORMAT_1: [CallbackQueryHandler(format_callback), MessageHandler(filters.ALL, main_menu_dispatcher)],
-            HUJJAT_FORMAT_2: [CallbackQueryHandler(format_callback), MessageHandler(filters.ALL, main_menu_dispatcher)],
-            HUJJAT_FORMAT_3: [CallbackQueryHandler(format_callback), MessageHandler(filters.ALL, main_menu_dispatcher)],
-            HUJJAT_FORMAT_4: [CallbackQueryHandler(format_callback), MessageHandler(filters.ALL, main_menu_dispatcher)],
+            HUJJAT_FORMAT_1: [CallbackQueryHandler(format_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
+            HUJJAT_FORMAT_2: [CallbackQueryHandler(format_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
+            HUJJAT_FORMAT_3: [CallbackQueryHandler(format_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
+            HUJJAT_FORMAT_4: [CallbackQueryHandler(format_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
             
             HUJJAT_1: [MessageHandler(filters.ALL, hujjat_1)],
             HUJJAT_2: [MessageHandler(filters.ALL, hujjat_2)],
