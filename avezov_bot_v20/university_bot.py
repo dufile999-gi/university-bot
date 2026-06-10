@@ -37,8 +37,8 @@ threading.Thread(
 load_dotenv()
 BOT_TOKEN = os.getenv("BOT_TOKEN", "")
 CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME", "@Auezov_data")
-ADMIN_USERNAME = "@Saman2611"
-ADMIN_PHONE = "+998996844483"
+ADMIN_USERNAME = "@Su1tonov0"
+ADMIN_PHONE = "+998996454671"
 DB_PATH = "universitet.db"
 UNI_PHOTO_URL = "https://storage.googleapis.com/createsite-uz-bucket/blog/1722071060_chirchiq-auezov.jpg"
 
@@ -67,7 +67,7 @@ LANG_TEXTS = {
         'menu_hujjat': "📝 Hujjat topshirish",
         'menu_manzil': "📍 Manzil",
         'menu_bakalavr_tanlash': "📋 Bakalavriat yo'nalishlari",
-        'menu_magistratura_tanlash': "🎓 Magistratura yo'nalishlari",
+        'menu_magistratura_tanlash': "   🎓 Magistratura yo'nalishlari",
         'menu_contact': "📞 Aloqa",
         'back': "🔙 Orqaga",
         'cancel': "❌ Bekor qilish",
@@ -162,7 +162,7 @@ LANG_TEXTS = {
         'menu_hujjat': "📝 Құжат тапсыру",
         'menu_manzil': "📍 Мекенжай",
         'menu_bakalavr_tanlash': "📋 Бакалавриат бағыттары",
-        'menu_magistratura_tanlash': "🎓 Магистратура бағыттары",
+        'menu_magistratura_tanlash': "  🎓 Магистратура бағыттары",
         'menu_contact': "📞 Байланыс",
         'back': "🔙 Артқа",
         'cancel': "❌ Болдырмау",
