@@ -21,7 +21,7 @@ import logging
 from dotenv import load_dotenv
 from telegram import (
     InlineKeyboardButton, InlineKeyboardMarkup, BotCommand,
-    ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
+    ReplyKeyboardMarkup, KeyboardButton
 )
 from telegram.ext import (
     Application, CommandHandler, CallbackQueryHandler,
@@ -71,9 +71,10 @@ LANG_TEXTS = {
         'yonalish_text': "👑 *TA'LIM YO'NALISHLARI*\n\n🔬 Biotexnologiya\n🌍 Ekologiya\n💻 Axborot tizimlar\n⚙️ Avtomatizatsiya\n🚚 Transport\n⚡ Elektroenergetika\n🧑‍🏫 Pedagogika\n🧠 Sun'iy intellekt\n💼 Hisob va audit\n✈️ Turizm",
         'hujjat_intro': "📋 *KERAKLI HUJJATLAR RO'YXATI*\n\n1️⃣ Diplom/Attestat\n2️⃣ Pasport\n3️⃣ 0.86 Med-ma'lumotnoma\n4️⃣ 3x4 rasm (6 dona)\n\n🟢 *1-Bosqich: Diplom yoki Attestat*\n❓ Formatni tanlang:",
         'format_rasm': "🖼️ Rasm ko'rinishida", 'format_fayl': "📎 Fayl ko'rinishida",
-        'sorov_allready': "✨ *Siz so'rovnomani to'ldirib bo'lgansiz!*", 'yonalish_allready': "✨ *Siz yo'nalishni tanlab bo'lgansiz!*",
+        'sorov_allready': "✨ *Siz so'rovnomani to'ldirib bo'lgansiz! Qayta ro'yxatdan o'tish mumkin emas.*", 
+        'yonalish_allready': "✨ *Siz yo'nalishni tanlab bo'lgansiz! Qayta ro'yxatdan o'tish mumkin emas.*",
         'enter_name': "✍️ *To'liq ismingizni kiriting:*", 'enter_surname': "✍️ *Familiyangizni kiriting:*",
-        'enter_age': "✍️ *Yoshingizni kiriting (raqamlarda):*", 'invalid_age': "⚠️ Noto'g'ri yosh kiritildi (14-60 tahriri)!",
+        'enter_age': "✍️ *Yoshingizni kiriting (raqamlarda):*", 'invalid_age': "⚠️ Noto'g'ri yosh kiritildi (14-60)!",
         'send_phone': "📞 Telefon raqamni yuborish", 'phone_intro': "📞 Pastdagi tugma orqali telefon raqamingizni jo'nating:",
         'success_received': "✨ Muvaffaqiyatli qabul qilindi!", 'all_docs_success': "🎉 Barcha hujjatlar topshirildi! Tez orada bog'lanamiz.",
         'select_yonalish_title': "🎓 *RO'YXATDAGI YO'NALISHLARDAN BIRINI TANLANG:*", 'cancel': "❌ Bekor qilish",
@@ -81,7 +82,7 @@ LANG_TEXTS = {
         'error_need_file': "⚠️ Siz fayl ko'rinishida yuborishni tanladingiz! Iltimos, hujjatni fayl sifatida yuboring.",
         'error_need_photo': "⚠️ Siz rasm ko'rinishida yuborishni tanladingiz! Iltimos, hujjatni rasm sifatida yuboring.",
         'channel_caption': "📋 *Yangi Hujjat Keldi!*\n\n👤 Foydalanuvchi: {user}\n🆔 ID: `{uid}`\n📂 Hujjat turi: *{doc_name}*",
-        'reg_cancelled': "❌ Ro'yxatdan o'tish bekor qilindi.", 'reg_success': "🎉 Ro'yxatdan muvaffaqiyatli o'tdingiz!"
+        'reg_cancelled': "❌ Jarayon bekor qilindi.", 'reg_success': "🎉 Ro'yxatdan muvaffaqiyatli o'tdingiz!"
     },
     'ru': {
         'welcome': "🏛 Добро пожаловать в официальный бот приема Чирчикского филиала *Южно-Казахстанского университета имени М. Ауэзова*!\n\n👇 _Используйте меню ниже для продолжения:_ ",
@@ -93,7 +94,8 @@ LANG_TEXTS = {
         'yonalish_text': "👑 *НАПРАВЛЕНИЯ ОБУЧЕНИЯ*\n\n🔬 Биотехнология\n🌍 Экология\n💻 Информационные системы\n⚙️ Автоматизация\n🚚 Транспорт\n⚡ Электроэнергетика\n🧑‍🏫 Педагогика\n🧠 Искусственный интеллект\n💼 Учет и аудит\n✈️ Туризм",
         'hujjat_intro': "📋 *СПИСОК НЕОБХОДИМЫХ ДОКУМЕНТОВ*\n\n1️⃣ Диплом/Аттестат\n2️⃣ Копия паспорта\n3️⃣ Мед. справка 0.86\n4️⃣ Фото 3х4 (6 шт)\n\n🟢 *Этап 1: Диплом или Аттестат*\n❓ Выберите формат:",
         'format_rasm': "🖼️ В виде фото", 'format_fayl': "📎 В виде файла",
-        'sorov_allready': "✨ *Вы уже заполнили анкету!*", 'yonalish_allready': "✨ *Вы уже выбрали направление!*",
+        'sorov_allready': "✨ *Вы уже заполнили анкету! Повторная регистрация невозможна.*", 
+        'yonalish_allready': "✨ *Вы уже выбрали направление! Повторный выбор невозможен.*",
         'enter_name': "✍️ *Введите ваше имя:*", 'enter_surname': "✍️ *Введите вашу фамилию:*",
         'enter_age': "✍️ *Введите ваш возраст (цифрами):*", 'invalid_age': "⚠️ Некорректный возраст (14-60)!",
         'send_phone': "📞 Отправить номер телефона", 'phone_intro': "📞 Отправьте свой номер телефона с помощью кнопки ниже:",
@@ -103,7 +105,7 @@ LANG_TEXTS = {
         'error_need_file': "⚠️ Вы выбрали отправку в виде файла! Пожалуйста, отправьте документ как файл.",
         'error_need_photo': "⚠️ Вы выбрали отправку в виде фото! Пожалуйста, отправьте документ как фото.",
         'channel_caption': "📋 *Поступил новый документ!*\n\n👤 Пользователь: {user}\n🆔 ID: `{uid}`\n📂 Тип документа: *{doc_name}*",
-        'reg_cancelled': "❌ Регистрация отменена.", 'reg_success': "🎉 Вы успешно зарегистрировались!"
+        'reg_cancelled': "❌ Процесс отменен.", 'reg_success': "🎉 Вы успешно зарегистрировались!"
     },
     'kk': {
         'welcome': "🏛 *М.Әуезов атындағы Оңтүстік Қазақстан университеті* Шыршық филиалының ресми қабылдау ботына қош келдіңіз!\n\n👇 _Жалғастыру үшін төмендегі мәзірді пайдаланыңыз:_ ",
@@ -115,17 +117,18 @@ LANG_TEXTS = {
         'yonalish_text': "👑 *БІЛІМ БЕРУ БАҒДАРЛАМАЛАРЫ*\n\n🔬 Биотехнология\n🌍 Экология\n💻 Ақпараттық жүйелер\n⚙️ Автоматизация\n🚚 Көлік техникасы\n⚡ Электроэнергетика\n🧑‍🏫 Педагогика\n🧠 Жасанды интеллект\n💼 Есеп және аудит\n✈️ Туризм",
         'hujjat_intro': "📋 *ҚАЖЕТТІ ҚҰЖАТТАР ТІЗІМІ*\n\n1️⃣ Диплом/Аттестат\n2️⃣ Төлқұжат көшірмесі\n3️⃣ 0.86 Мед. анықтама\n4️⃣ 3x4 photo (6 дана)\n\n🟢 *1-Кезең: Диплом немесе Аттестат*\n❓ Форматты таңдаңыз:",
         'format_rasm': "🖼️ Сурет түрінде", 'format_fayl': "📎 Файл түрінде",
-        'sorov_allready': "✨ *Сіз сауалнаманы толтырып қойғансыз!*", 'yonalish_allready': "✨ *Сіз мамандықты таңдап қойғансыз!*",
+        'sorov_allready': "✨ *Сіз сауалнаманы толтырып қойғансыз! Қайта тіркелу мүмкін емес.*", 
+        'yonalish_allready': "✨ *Сіз мамандықты таңдап қойғансыз! Қайта таңдау мүмкін емес.*",
         'enter_name': "✍️ *Толық атыңызды енгізіңіз:*", 'enter_surname': "✍️ *Тегіңізді енгізіңіз:*",
         'enter_age': "✍️ *Жасыңызды енгізіңіз (санмен):*", 'invalid_age': "⚠️ Жас қате енгізілді (14-60)!",
         'send_phone': "📞 Телефон нөмірін жіберу", 'phone_intro': "📞 Төмендегі арнайы батырма арқылы телефон нөміріңізді жіберіңіз:",
         'success_received': "✨ Сәтті қабылданды!", 'all_docs_success': "🎉 Барлық құжаттар тапсырылды! Тез арада хабарласамыз.",
         'select_yonalish_title': "🎓 *ТІЗІМДЕГІ МАМАНДЫҚТАРДЫҢ БІРІН ТАҢДАҢЫЗ:*", 'cancel': "❌ Бас тарту",
-        'ariza_success': "🎉 Өтінішіңіз сәтті тіркелді!", 'unknown': "❓ Белгісіз бұйрық.",
+        'ariza_success': "🎉 Өтінішіңіз सәтті тіркелді!", 'unknown': "❓ Белгісіз бұйрық.",
         'error_need_file': "⚠️ Сіз файл түрінде жіберуді таңдадыңыз! Құжатты файл ретінде жіберіңіз.",
         'error_need_photo': "⚠️ Сіз сурет түрінде жіберуді таңдадыңыз! Құжатты сурет ретінде жіберіңіз.",
         'channel_caption': "📋 *Жаңа құжат түсті!*\n\n👤 Пайдаланушы: {user}\n🆔 ID: `{uid}`\n📂 Құжат түрі: *{doc_name}*",
-        'reg_cancelled': "❌ Тіркелу бас тартылды.", 'reg_success': "🎉 Сіз сәтті тіркелдіңіз!"
+        'reg_cancelled': "❌ Бас тартылды.", 'reg_success': "🎉 Сіз сәтті тіркелдіңіз!"
     }
 }
 
@@ -139,7 +142,7 @@ HUJJAT_STATES = {1: HUJJAT_1, 2: HUJJAT_2, 3: HUJJAT_3, 4: HUJJAT_4}
 HUJJAT_FORMAT_STATES = {1: HUJJAT_FORMAT_1, 2: HUJJAT_FORMAT_2, 3: HUJJAT_FORMAT_3, 4: HUJJAT_FORMAT_4}
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🗄️  MA'LUMOTLAR BAZASI
+# 🗄️  MA'LUMOTLAR BAZASI AUX FUNKSIYALARI
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 def db_connect():
     return sqlite3.connect(DB_PATH)
@@ -182,6 +185,14 @@ def init_db():
     """)
     con.commit()
     con.close()
+
+def check_already_registered(user_id, table_name):
+    con = db_connect()
+    cur = con.cursor()
+    cur.execute(f"SELECT id FROM {table_name} WHERE id=?", (user_id,))
+    res = cur.fetchone()
+    con.close()
+    return True if res else False
 
 def get_lang(context, update=None):
     if context and 'lang' in context.user_data:
@@ -286,12 +297,13 @@ async def select_lang_callback(update, context):
     return TANLA
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 📋  ASOSIY MENYU INTERFEYSI
+# 📋  ASOSIY MENYU INTERFEYSI (VA INTERCEPTOR)
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def text(update, context):
     msg = update.message.text
     lang = get_lang(context, update)
     t = LANG_TEXTS[lang]
+    uid = update.message.from_user.id
 
     if msg == t['cancel']:
         await update.message.reply_text(t['reg_cancelled'], reply_markup=main_menu_markup(lang))
@@ -321,24 +333,14 @@ async def text(update, context):
         return TANLA
 
     elif msg == t['menu_sorov']:
-        con = db_connect()
-        cur = con.cursor()
-        cur.execute("SELECT id FROM sorovnama WHERE id=?", (update.message.from_user.id,))
-        mavjud = cur.fetchone()
-        con.close()
-        if mavjud:
+        if check_already_registered(uid, "sorovnama"):
             await update.message.reply_text(t['sorov_allready'], parse_mode="Markdown")
             return TANLA
         await update.message.reply_text(t['enter_name'], parse_mode="Markdown", reply_markup=cancel_markup(lang))
         return SOROV_ISM
 
     elif msg == t['menu_tanlash']:
-        con = db_connect()
-        cur = con.cursor()
-        cur.execute("SELECT id FROM yonalish_royxat WHERE id=?", (update.message.from_user.id,))
-        mavjud = cur.fetchone()
-        con.close()
-        if mavjud:
+        if check_already_registered(uid, "yonalish_royxat"):
             await update.message.reply_text(t['yonalish_allready'], parse_mode="Markdown")
             return TANLA
         await update.message.reply_text(t['enter_name'], parse_mode="Markdown", reply_markup=cancel_markup(lang))
@@ -355,7 +357,7 @@ async def text(update, context):
         return TANLA
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 📤  HUJJATLAR VALIDATSIYASI
+# 📤  HUJJATLAR VALIDATSIYASI & JO'NATISH
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def format_callback(update, context):
     query = update.callback_query
@@ -421,11 +423,14 @@ async def hujjat_3(update, context): return await hujjat_handler(update, context
 async def hujjat_4(update, context): return await hujjat_handler(update, context, 4)
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 📝  SO'ROVNOMA HANDLING
+# 📝  SO'ROVNOMA BOSQICHMA-BOSQICH (QAYTA RO'YXATDAN TO'SIQLAR BILAN)
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def sorov_ism(update, context):
     if is_menu_button(update.message.text): return await text(update, context)
     lang = get_lang(context, update)
+    if check_already_registered(update.message.from_user.id, "sorovnama"):
+        await update.message.reply_text(LANG_TEXTS[lang]['sorov_allready'], parse_mode="Markdown", reply_markup=main_menu_markup(lang))
+        return TANLA
     context.user_data['sorov_ism'] = update.message.text.strip()
     await update.message.reply_text(LANG_TEXTS[lang]['enter_surname'], parse_mode="Markdown", reply_markup=cancel_markup(lang))
     return SOROV_FAMILYA
@@ -433,6 +438,9 @@ async def sorov_ism(update, context):
 async def sorov_familya(update, context):
     if is_menu_button(update.message.text): return await text(update, context)
     lang = get_lang(context, update)
+    if check_already_registered(update.message.from_user.id, "sorovnama"):
+        await update.message.reply_text(LANG_TEXTS[lang]['sorov_allready'], parse_mode="Markdown", reply_markup=main_menu_markup(lang))
+        return TANLA
     context.user_data['sorov_familya'] = update.message.text.strip()
     await update.message.reply_text(LANG_TEXTS[lang]['enter_age'], parse_mode="Markdown", reply_markup=cancel_markup(lang))
     return SOROV_YOSH
@@ -440,6 +448,9 @@ async def sorov_familya(update, context):
 async def sorov_yosh(update, context):
     if is_menu_button(update.message.text): return await text(update, context)
     lang = get_lang(context, update)
+    if check_already_registered(update.message.from_user.id, "sorovnama"):
+        await update.message.reply_text(LANG_TEXTS[lang]['sorov_allready'], parse_mode="Markdown", reply_markup=main_menu_markup(lang))
+        return TANLA
     yosh = update.message.text.strip()
     if not yosh.isdigit() or not (14 <= int(yosh) <= 60):
         await update.message.reply_text(LANG_TEXTS[lang]['invalid_age'], parse_mode="Markdown", reply_markup=cancel_markup(lang))
@@ -459,9 +470,14 @@ async def sorov_yosh(update, context):
 async def sorov_telefon(update, context):
     lang = get_lang(context, update)
     if update.message.text and is_menu_button(update.message.text): return await text(update, context)
+    uid = update.message.from_user.id
     
+    if check_already_registered(uid, "sorovnama"):
+        await update.message.reply_text(LANG_TEXTS[lang]['sorov_allready'], parse_mode="Markdown", reply_markup=main_menu_markup(lang))
+        return TANLA
+
     if not update.message.contact:
-        await update.message.reply_text("❌ Iltimos, kontakt yuborish tugmasini bosing yoki menyudan birini tanlang.", reply_markup=cancel_markup(lang))
+        await update.message.reply_text("❌ Iltimos, faqat pastdagi 'Telefon raqamni yuborish' tugmasini bosing.", reply_markup=cancel_markup(lang))
         return SOROV_TELEFON
         
     telefon = update.message.contact.phone_number
@@ -481,11 +497,14 @@ async def sorov_telefon(update, context):
     return TANLA
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🎓  YO'NALISH TANLASH HANDLING
+# 🎓  YO'NALISH TANLASH BOSQICHMA-BOSQICH
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def yonalish_ism(update, context):
     if is_menu_button(update.message.text): return await text(update, context)
     lang = get_lang(context, update)
+    if check_already_registered(update.message.from_user.id, "yonalish_royxat"):
+        await update.message.reply_text(LANG_TEXTS[lang]['yonalish_allready'], parse_mode="Markdown", reply_markup=main_menu_markup(lang))
+        return TANLA
     context.user_data['yonalish_ism'] = update.message.text.strip()
     await update.message.reply_text(LANG_TEXTS[lang]['enter_surname'], parse_mode="Markdown", reply_markup=cancel_markup(lang))
     return YONALISH_FAMILYA
@@ -493,6 +512,9 @@ async def yonalish_ism(update, context):
 async def yonalish_familya(update, context):
     if is_menu_button(update.message.text): return await text(update, context)
     lang = get_lang(context, update)
+    if check_already_registered(update.message.from_user.id, "yonalish_royxat"):
+        await update.message.reply_text(LANG_TEXTS[lang]['yonalish_allready'], parse_mode="Markdown", reply_markup=main_menu_markup(lang))
+        return TANLA
     context.user_data['yonalish_familya'] = update.message.text.strip()
     await update.message.reply_text(LANG_TEXTS[lang]['enter_age'], parse_mode="Markdown", reply_markup=cancel_markup(lang))
     return YONALISH_YOSH
@@ -500,6 +522,9 @@ async def yonalish_familya(update, context):
 async def yonalish_yosh(update, context):
     if is_menu_button(update.message.text): return await text(update, context)
     lang = get_lang(context, update)
+    if check_already_registered(update.message.from_user.id, "yonalish_royxat"):
+        await update.message.reply_text(LANG_TEXTS[lang]['yonalish_allready'], parse_mode="Markdown", reply_markup=main_menu_markup(lang))
+        return TANLA
     yosh = update.message.text.strip()
     if not yosh.isdigit() or not (14 <= int(yosh) <= 60):
         await update.message.reply_text(LANG_TEXTS[lang]['invalid_age'], parse_mode="Markdown", reply_markup=cancel_markup(lang))
@@ -519,9 +544,14 @@ async def yonalish_yosh(update, context):
 async def yonalish_telefon(update, context):
     lang = get_lang(context, update)
     if update.message.text and is_menu_button(update.message.text): return await text(update, context)
+    uid = update.message.from_user.id
+
+    if check_already_registered(uid, "yonalish_royxat"):
+        await update.message.reply_text(LANG_TEXTS[lang]['yonalish_allready'], parse_mode="Markdown", reply_markup=main_menu_markup(lang))
+        return TANLA
     
     if not update.message.contact:
-        await update.message.reply_text("❌ Iltimos, kontakt yuborish tugmasini bosing.", reply_markup=cancel_markup(lang))
+        await update.message.reply_text("❌ Iltimos, faqat pastdagi 'Telefon raqamni yuborish' tugmasini bosing.", reply_markup=cancel_markup(lang))
         return YONALISH_TELEFON
 
     context.user_data['yonalish_telefon'] = update.message.contact.phone_number
@@ -561,14 +591,18 @@ async def callback_data(update, context):
     await query.answer()
     data = query.data
     lang = get_lang(context)
+    user_id = query.message.chat_id
 
     if data.startswith("format_") or data.startswith("set_lang_") or data == "bekor":
         return 
 
+    if check_already_registered(user_id, "yonalish_royxat"):
+        await query.edit_message_text(LANG_TEXTS[lang]['yonalish_allready'], parse_mode="Markdown")
+        return TANLA
+
     yonalish = YONALISH_MAP.get(data)
     context.user_data['yonalish'] = yonalish
 
-    user_id = query.message.chat_id
     con = db_connect()
     cur = con.cursor()
     cur.execute(
@@ -580,7 +614,7 @@ async def callback_data(update, context):
     con.close()
 
     await query.edit_message_text(LANG_TEXTS[lang]['reg_success'], parse_mode="Markdown")
-    await context.bot.send_message(chat_id=user_id, text="🏠 Menyuga qaytdingiz.", reply_markup=main_menu_markup(lang))
+    await context.bot.send_message(chat_id=user_id, text="🏠 Bosh menyuga qaytdingiz.", reply_markup=main_menu_markup(lang))
     return TANLA
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -642,14 +676,14 @@ def main():
             HUJJAT_3: [MessageHandler(menu_buttons_filter, text), MessageHandler(filters.ALL, hujjat_3)],
             HUJJAT_4: [MessageHandler(menu_buttons_filter, text), MessageHandler(filters.ALL, hujjat_4)],
             
-            SOROV_ISM:     [MessageHandler(menu_buttons_filter, text)],
-            SOROV_FAMILYA: [MessageHandler(menu_buttons_filter, text)],
-            SOROV_YOSH:    [MessageHandler(menu_buttons_filter, text)],
+            SOROV_ISM:     [MessageHandler(menu_buttons_filter, text), MessageHandler(filters.TEXT & ~filters.COMMAND, sorov_ism)],
+            SOROV_FAMILYA: [MessageHandler(menu_buttons_filter, text), MessageHandler(filters.TEXT & ~filters.COMMAND, sorov_familya)],
+            SOROV_YOSH:    [MessageHandler(menu_buttons_filter, text), MessageHandler(filters.TEXT & ~filters.COMMAND, sorov_yosh)],
             SOROV_TELEFON: [MessageHandler(menu_buttons_filter, text), MessageHandler(filters.ALL, sorov_telefon)],
             
-            YONALISH_ISM:     [MessageHandler(menu_buttons_filter, text)],
-            YONALISH_FAMILYA: [MessageHandler(menu_buttons_filter, text)],
-            YONALISH_YOSH:    [MessageHandler(menu_buttons_filter, text)],
+            YONALISH_ISM:     [MessageHandler(menu_buttons_filter, text), MessageHandler(filters.TEXT & ~filters.COMMAND, yonalish_ism)],
+            YONALISH_FAMILYA: [MessageHandler(menu_buttons_filter, text), MessageHandler(filters.TEXT & ~filters.COMMAND, yonalish_familya)],
+            YONALISH_YOSH:    [MessageHandler(menu_buttons_filter, text), MessageHandler(filters.TEXT & ~filters.COMMAND, yonalish_yosh)],
             YONALISH_TELEFON: [MessageHandler(menu_buttons_filter, text), MessageHandler(filters.ALL, yonalish_telefon)],
         },
         fallbacks=[CommandHandler('start', start)],
