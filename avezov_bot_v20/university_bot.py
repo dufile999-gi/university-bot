@@ -67,14 +67,14 @@ LANG_TEXTS = {
         'menu_hujjat': "📝 Hujjat topshirish",
         'menu_manzil': "📍 Manzil",
         'menu_bakalavr_tanlash': "📋 Bakalavriat yo'nalishlari",
-        'menu_magistratura_tanlash': "   🎓 Magistratura yo'nalishlari",
+        'menu_magistratura_tanlash': "🎓 Magistratura yo'nalishlari",
         'menu_contact': "📞 Aloqa",
         'back': "🔙 Orqaga",
         'cancel': "❌ Bekor qilish",
         'change_lang': "🌐 Tilni o'zgartirish",
         # Universitet haqida
         'about_title': "🏛 *M.AUEZOV NOMIDAGI JANUBIY QOZOG'ISTON UNIVERSITETI*",
-        'about_text': "📌 *1943 yilda tashkil etilgan*\n\n🇰🇿 Qozog'istonning eng yirik universitetlaridan biri\n\n📚 50+ ta yo'nalish\n👨‍🎓 15 000+ talaba\n🏛 12 ta fakultet\n🌍 Xalqaro hamkorlik: Erasmus+, dual diplom\n\n🔗 *Batafsil ma'lumot:*\n[🌐 Oliygoh.uz](https://oliygoh.uz/post/chirchiqda-mauezov-nomidagi-janubiy-qozogiston-universiteti-filiali-tashkil-etiali)\n[🌐 Auezov.edu.kz](https://www.auezov.edu.kz)",
+        'about_text': "📌 *1943 yilda tashkil etilgan*\n\n🇰🇿 Qozog'istonning eng yirik universitetlaridan biri\n\n📚 50+ ta yo'nalish\n👨‍🎓 15 000+ talaba\n🏛 12 ta fakultet\n🌍 Xalqaro hamkorlik: Erasmus+, dual diplom\n\n🔗 *Batafsil ma'lumot:*\n[🌐 Oliygoh.uz](https://oliygoh.uz/post/chirchiqda-mauezov-nomidagi-janubiy-qozogiston-universiteti-filiali-tashkil-etiali)",
         # Bakalavriat yo'nalishlari (11 ta)
         'bakalavr_text': "👑 *BAKALAVRIAT YO'NALISHLARI* (11 ta)\n\n🔬 Biotexnologiya\n🌍 Ekologiya\n💻 Axborot tizimlar\n⚙️ Avtomatizatsiya\n🚚 Transport\n⚡ Elektroenergetika\n🧑‍🏫 Pedagogika\n🧠 Sun'iy intellekt\n💼 Hisob va audit\n✈️ Turizm\n⚖️ Yurisprudensiya\n\n📚 *O'qish muddati:* 4 yil",
         # Magistratura yo'nalishlari (5 ta)
@@ -104,10 +104,10 @@ LANG_TEXTS = {
         'channel_caption': "📋 *YANGI HUJJAT!*\n\n👤 Foydalanuvchi: {user}\n🆔 ID: `{uid}`\n📂 Hujjat: *{doc_name}*",
         'yonalish_channel_caption': "🎓 *BAKALAVRIAT TANLANDI!*\n\n👤 Foydalanuvchi: {user}\n🆔 ID: `{uid}`\n📞 Tel: `{phone}`\n📚 Yo'nalish: *{yonalish}*\n👤 Ism: {ism}\n👤 Familiya: {familya}\n🎂 Yosh: {yosh}",
         'magistratura_channel_caption': "📚 *MAGISTRATURA TANLANDI!*\n\n👤 Foydalanuvchi: {user}\n🆔 ID: `{uid}`\n📞 Tel: `{phone}`\n🎓 Magistratura: *{yonalish}*\n👤 Ism: {ism}\n👤 Familiya: {familya}\n🎂 Yosh: {yosh}",
-        # Manzil
-        'manzil_text': "📍 *UNIVERSITET MANZILI*\n\n🏛 Chirchiq filiali\n🇺🇿 Toshkent viloyati, Chirchiq shahri\n\n🗺 [Google Maps da ko'rish](https://maps.google.com)\n\n📞 Qabul komissiyasi: +998996844483",
-        # Aloqa
-        'contact_text': "📞 *BIZ BILAN BOG'LANISH*\n\n📞 Telefon: {phone}\n💬 Telegram: {username}\n🌐 Veb-sayt: www.auezov.edu.kz\n\n📧 Email: info@auezov.edu.kz"
+        # Manzil (telefon raqam olib tashlandi)
+        'manzil_text': "📍 *UNIVERSITET MANZILI*\n\n🏛 M.Auezov nomidagi Janubiy Qozog'iston universiteti\n🇺🇿 Chirchiq filiali\n🏙 Toshkent viloyati, Chirchiq shahri\n\n🗺 [Google Maps da ko'rish](https://maps.google.com)",
+        # Aloqa (yangi telefon va telegram)
+        'contact_text': "📞 *BIZ BILAN BOG'LANISH*\n\n📞 Telefon: {phone}\n💬 Telegram: {username}"
     },
     'ru': {
         'welcome': "🏛 *Южно-Казахстанский университет им. М.Ауезова* Добро пожаловать!",
@@ -124,7 +124,7 @@ LANG_TEXTS = {
         'cancel': "❌ Отмена",
         'change_lang': "🌐 Сменить язык",
         'about_title': "🏛 *ЮЖНО-КАЗАХСТАНСКИЙ УНИВЕРСИТЕТ ИМ. М.АУЕЗОВА*",
-        'about_text': "📌 *Основан в 1943 году*\n\n🇰🇿 Один из крупнейших вузов Казахстана\n\n📚 50+ направлений\n👨‍🎓 15 000+ студентов\n🏛 12 факультетов\n🌍 Международное сотрудничество: Erasmus+, двойные дипломы\n\n🔗 *Подробнее:*\n[🌐 Oliygoh.uz](https://oliygoh.uz/post/chirchiqda-mauezov-nomidagi-janubiy-qozogiston-universiteti-filiali-tashkil-etiali)\n[🌐 Auezov.edu.kz](https://www.auezov.edu.kz)",
+        'about_text': "📌 *Основан в 1943 году*\n\n🇰🇿 Один из крупнейших вузов Казахстана\n\n📚 50+ направлений\n👨‍🎓 15 000+ студентов\n🏛 12 факультетов\n🌍 Международное сотрудничество: Erasmus+, двойные дипломы\n\n🔗 *Подробнее:*\n[🌐 Oliygoh.uz](https://oliygoh.uz/post/chirchiqda-mauezov-nomidagi-janubiy-qozogiston-universiteti-filiali-tashkil-etiali)",
         'bakalavr_text': "👑 *НАПРАВЛЕНИЯ БАКАЛАВРИАТА* (11)\n\n🔬 Биотехнология\n🌍 Экология\n💻 Информационные системы\n⚙️ Автоматизация\n🚚 Транспорт\n⚡ Электроэнергетика\n🧑‍🏫 Педагогика\n🧠 Искусственный интеллект\n💼 Учет и аудит\n✈️ Туризм\n⚖️ Юриспруденция\n\n📚 *Срок обучения:* 4 года",
         'magistratura_text': "🎓 *НАПРАВЛЕНИЯ МАГИСТРАТУРЫ* (5)\n\n📊 Экономика\n⚖️ Юриспруденция\n💻 Информационные системы\n🌍 Экология\n📈 Менеджмент\n\n📚 *Срок обучения:* 2 года",
         'hujjat_intro': "📋 *СПИСОК ДОКУМЕНТОВ*\n\n1️⃣ Диплом/Аттестат\n2️⃣ Копия паспорта\n3️⃣ Мед-справка 0.86\n4️⃣ Фото 3x4 (6 шт)\n\n▸ *1-этап: Диплом или Аттестат*\n❓ Выберите формат:",
@@ -150,8 +150,8 @@ LANG_TEXTS = {
         'channel_caption': "📋 *НОВЫЙ ДОКУМЕНТ!*\n\n👤 Пользователь: {user}\n🆔 ID: `{uid}`\n📂 Документ: *{doc_name}*",
         'yonalish_channel_caption': "🎓 *ВЫБРАН БАКАЛАВРИАТ!*\n\n👤 Пользователь: {user}\n🆔 ID: `{uid}`\n📞 Тел: `{phone}`\n📚 Направление: *{yonalish}*\n👤 Имя: {ism}\n👤 Фамилия: {familya}\n🎂 Возраст: {yosh}",
         'magistratura_channel_caption': "📚 *ВЫБРАНА МАГИСТРАТУРА!*\n\n👤 Пользователь: {user}\n🆔 ID: `{uid}`\n📞 Тел: `{phone}`\n🎓 Магистратура: *{yonalish}*\n👤 Имя: {ism}\n👤 Фамилия: {familya}\n🎂 Возраст: {yosh}",
-        'manzil_text': "📍 *АДРЕС УНИВЕРСИТЕТА*\n\n🏛 Чирчикский филиал\n🇺🇿 Ташкентская область, г.Чирчик\n\n🗺 [Google Maps](https://maps.google.com)\n\n📞 Приемная комиссия: +998996844483",
-        'contact_text': "📞 *СВЯЗАТЬСЯ С НАМИ*\n\n📞 Телефон: {phone}\n💬 Telegram: {username}\n🌐 Сайт: www.auezov.edu.kz\n\n📧 Email: info@auezov.edu.kz"
+        'manzil_text': "📍 *АДРЕС УНИВЕРСИТЕТА*\n\n🏛 Южно-Казахстанский университет им. М.Ауезова\n🇺🇿 Чирчикский филиал\n🏙 Ташкентская область, г.Чирчик\n\n🗺 [Google Maps](https://maps.google.com)",
+        'contact_text': "📞 *КОНТАКТЫ*\n\n📞 Телефон: {phone}\n💬 Telegram: {username}"
     },
     'kk': {
         'welcome': "🏛 *М.Әуезов атындағы ОҚУ* Шыршық филиалына қош келдіңіз!",
@@ -162,13 +162,13 @@ LANG_TEXTS = {
         'menu_hujjat': "📝 Құжат тапсыру",
         'menu_manzil': "📍 Мекенжай",
         'menu_bakalavr_tanlash': "📋 Бакалавриат бағыттары",
-        'menu_magistratura_tanlash': "  🎓 Магистратура бағыттары",
+        'menu_magistratura_tanlash': "🎓 Магистратура бағыттары",
         'menu_contact': "📞 Байланыс",
         'back': "🔙 Артқа",
         'cancel': "❌ Болдырмау",
         'change_lang': "🌐 Тілді өзгерту",
         'about_title': "🏛 *М.ӘУЕЗОВ АТЫНДАҒЫ ОҚУ*",
-        'about_text': "📌 *1943 жылы құрылған*\n\n🇰🇿 Қазақстанның ірі университеттерінің бірі\n\n📚 50+ бағыт\n👨‍🎓 15 000+ студент\n🏛 12 факультет\n🌍 Халықаралық ынтымақтастық: Erasmus+, қос диплом\n\n🔗 *Толығырақ:*\n[🌐 Oliygoh.uz](https://oliygoh.uz/post/chirchiqda-mauezov-nomidagi-janubiy-qozogiston-universiteti-filiali-tashkil-etiali)\n[🌐 Auezov.edu.kz](https://www.auezov.edu.kz)",
+        'about_text': "📌 *1943 жылы құрылған*\n\n🇰🇿 Қазақстанның ірі университеттерінің бірі\n\n📚 50+ бағыт\n👨‍🎓 15 000+ студент\n🏛 12 факультет\n🌍 Халықаралық ынтымақтастық: Erasmus+, қос диплом\n\n🔗 *Толығырақ:*\n[🌐 Oliygoh.uz](https://oliygoh.uz/post/chirchiqda-mauezov-nomidagi-janubiy-qozogiston-universiteti-filiali-tashkil-etiali)",
         'bakalavr_text': "👑 *БАКАЛАВРИАТ БАҒЫТТАРЫ* (11)\n\n🔬 Биотехнология\n🌍 Экология\n💻 Ақпараттық жүйелер\n⚙️ Автоматтандыру\n🚚 Көлік\n⚡ Электроэнергетика\n🧑‍🏫 Педагогика\n🧠 Жасанды интеллект\n💼 Есеп және аудит\n✈️ Туризм\n⚖️ Юриспруденция\n\n📚 *Оқу мерзімі:* 4 жыл",
         'magistratura_text': "🎓 *МАГИСТРАТУРА БАҒЫТТАРЫ* (5)\n\n📊 Экономика\n⚖️ Юриспруденция\n💻 Ақпараттық жүйелер\n🌍 Экология\n📈 Менеджмент\n\n📚 *Оқу мерзімі:* 2 жыл",
         'hujjat_intro': "📋 *ҚҰЖАТТАР ТІЗІМІ*\n\n1️⃣ Диплом/Аттестат\n2️⃣ Паспорт көшірмесі\n3️⃣ 0.86 Мед-анықтама\n4️⃣ 3x4 сурет (6 дана)\n\n▸ *1-кезең: Диплом/Аттестат*\n❓ Форматты таңдаңыз:",
@@ -194,8 +194,8 @@ LANG_TEXTS = {
         'channel_caption': "📋 *ЖАҢА ҚҰЖАТ!*\n\n👤 Қолданушы: {user}\n🆔 ID: `{uid}`\n📂 Құжат: *{doc_name}*",
         'yonalish_channel_caption': "🎓 *БАКАЛАВРИАТ ТАҢДАЛДЫ!*\n\n👤 Қолданушы: {user}\n🆔 ID: `{uid}`\n📞 Тел: `{phone}`\n📚 Бағыт: *{yonalish}*\n👤 Аты: {ism}\n👤 Тегі: {familya}\n🎂 Жасы: {yosh}",
         'magistratura_channel_caption': "📚 *МАГИСТРАТУРА ТАҢДАЛДЫ!*\n\n👤 Қолданушы: {user}\n🆔 ID: `{uid}`\n📞 Тел: `{phone}`\n🎓 Магистратура: *{yonalish}*\n👤 Аты: {ism}\n👤 Тегі: {familya}\n🎂 Жасы: {yosh}",
-        'manzil_text': "📍 *УНИВЕРСИТЕТ МЕКЕНЖАЙЫ*\n\n🏛 Шыршық филиалы\n🇺🇿 Ташкент облысы, Шыршық қаласы\n\n🗺 [Google Maps](https://maps.google.com)\n\n📞 Қабылдау комиссиясы: +998996844483",
-        'contact_text': "📞 *БАЙЛАНЫС*\n\n📞 Телефон: {phone}\n💬 Telegram: {username}\n🌐 Сайт: www.auezov.edu.kz\n\n📧 Email: info@auezov.edu.kz"
+        'manzil_text': "📍 *УНИВЕРСИТЕТ МЕКЕНЖАЙЫ*\n\n🏛 М.Әуезов атындағы ОҚУ\n🇺🇿 Шыршық филиалы\n🏙 Ташкент облысы, Шыршық қаласы\n\n🗺 [Google Maps](https://maps.google.com)",
+        'contact_text': "📞 *БАЙЛАНЫС*\n\n📞 Телефон: {phone}\n💬 Telegram: {username}"
     }
 }
 
@@ -208,7 +208,7 @@ HUJJAT_NOMLAR = {
 HUJJAT_STATES = {1: HUJJAT_1, 2: HUJJAT_2, 3: HUJJAT_3, 4: HUJJAT_4}
 HUJJAT_FORMAT_STATES = {1: HUJJAT_FORMAT_1, 2: HUJJAT_FORMAT_2, 3: HUJJAT_FORMAT_3, 4: HUJJAT_FORMAT_4}
 
-# Bakalavriat yo'nalishlari (11 ta - Yurisprudensiya qo'shildi)
+# Bakalavriat yo'nalishlari (11 ta)
 BAKALAVR_YONALISHLAR = {
     'uz': {
         "Biotexnologiya": "🔬 Biotexnologiya", "Ekologiya": "🌍 Ekologiya",
@@ -236,7 +236,7 @@ BAKALAVR_YONALISHLAR = {
     }
 }
 
-# Magistratura yo'nalishlari (5 ta - Menejment qo'shildi)
+# Magistratura yo'nalishlari (5 ta)
 MAGISTRATURA_YONALISHLAR = {
     'uz': {
         "Iqtisodiyot": "📊 Iqtisodiyot",
@@ -799,8 +799,12 @@ def main():
     print("━" * 35)
     print("")
     print("📊 YO'NALISHLAR SONI:")
-    print(f"   🎓 Bakalavriat: 11 ta (Yurisprudensiya qo'shildi)")
-    print(f"   📚 Magistratura: 5 ta (Menejment qo'shildi)")
+    print(f"   🎓 Bakalavriat: 11 ta")
+    print(f"   📚 Magistratura: 5 ta")
+    print("")
+    print("📞 KONTAKT MA'LUMOTLARI:")
+    print(f"   📞 Telefon: {ADMIN_PHONE}")
+    print(f"   💬 Telegram: {ADMIN_USERNAME}")
     print("")
     print("📨 KANALGA XABAR KETADI")
     print("=" * 50)
