@@ -56,8 +56,6 @@ HUJJAT_1, HUJJAT_2, HUJJAT_3, HUJJAT_4 = "h1", "h2", "h3", "h4"
 YONALISH_ISM, YONALISH_FAMILYA, YONALISH_YOSH, YONALISH_TELEFON, YONALISH_TANLASH = "yi", "yf", "yy", "yt", "yonalish_tanlash"
 # Magistratura
 MAG_ISM, MAG_FAMILYA, MAG_YOSH, MAG_TELEFON, MAG_TANLASH = "mi", "mf", "my", "mt", "mag_tanlash"
-# Ma'lumotlarni o'zgartirish
-EDIT_NAME, EDIT_SURNAME, EDIT_AGE, EDIT_PHONE = "en", "es", "ea", "ep"
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 🌐  TIL LUG'ATI (UZ, RU, KK)
@@ -73,8 +71,6 @@ LANG_TEXTS = {
         'menu_manzil': "📍 Manzil",
         'menu_bakalavr_tanlash': "📋 Bakalavriat yo'nalishlari",
         'menu_magistratura_tanlash': "🎓 Magistratura yo'nalishlari",
-        'menu_samples': "📄 Hujjat namunalari",
-        'menu_edit': "✏️ Ma'lumotlarni o'zgartirish",
         'menu_admin': "👤 Admin bilan bog'lanish",
         'back': "🔙 Orqaga",
         'cancel': "❌ Bekor qilish",
@@ -98,7 +94,7 @@ LANG_TEXTS = {
         'all_docs_success': "🎉 Barcha hujjatlar topshirildi! Tez orada bog'lanamiz.",
         'select_bakalavr_title': "🎓 *BAKALAVRIAT YO'NALISHLARIDAN BIRINI TANLANG:*",
         'select_magistratura_title': "🎓 *MAGISTRATURA YO'NALISHLARIDAN BIRINI TANLANG:*",
-        'unknown': "❓ Noma'lum xabar. Iltimos, menyu tugmalaridan foydalaning.",
+        'unknown': "❓ Noma'lum xabar.",
         'error_need_file': "⚠️ *Xatolik:* Fayl formatida yuboring!",
         'error_need_photo': "⚠️ *Xatolik:* Rasm formatida yuboring!",
         'channel_caption': "📋 *Yangi Hujjat!*\n\n👤 Foydalanuvchi: {user}\n🆔 ID: `{uid}`\n📂 Hujjat: *{doc_name}*",
@@ -107,23 +103,17 @@ LANG_TEXTS = {
         'reg_cancelled': "❌ Jarayon bekor qilindi.",
         'reg_success': "🎉 Yo'nalish muvaffaqiyatli tanlandi!",
         'manzil_text': "📍 *Universitet manzili:* Chirchiq shahri, Toshkent viloyati.\n🗺 [Xarita](http://maps.google.com)",
-        'warning_in_progress': "⚠️ *Siz ro'yxatdan o'tish jarayonidasiz!*\n\nJoriy so'ralgan ma'lumotni yuboring yoki **❌ Bekor qilish** tugmasini bosing.",
-        'edit_title': "✏️ *MA'LUMOTLARNI O'ZGARTIRISH*\n\nQaysi ma'lumotni o'zgartirmoqchisiz?",
-        'edit_name': "✍️ *Yangi ismingizni kiriting:*",
-        'edit_surname': "✍️ *Yangi familiyangizni kiriting:*",
-        'edit_age': "🎂 *Yangi yoshingizni kiriting:*",
-        'edit_phone': "📞 *Yangi telefon raqamingizni kiriting:*",
-        'edit_success': "✅ *Ma'lumot muvaffaqiyatli o'zgartirildi!*",
-        'samples_title': "📄 *HUJJAT NAMUNALARI*\n\nQuyidagi namunalarni ko'ring:",
-        'sample_diplom': "🎓 Diplom/Attestat namunasi",
-        'sample_passport': "🪪 Pasport namunasi",
-        'sample_medical': "🏥 Tibbiy ma'lumotnoma namunasi",
-        'sample_photo': "📸 Rasmga qo'yiladigan talablar",
-        'sample_diplom_text': "📄 *Diplom/Attestat namunasi*\n\n✅ Rangli yoki oq-qora nusxa\n✅ Aniq ko'rinadigan bo'lishi kerak\n✅ JPEG yoki PDF formatda",
-        'sample_passport_text': "🪪 *Pasport namunasi*\n\n✅ Pasportning 1-2 sahifalari\n✅ Rangli nusxa\n✅ Barcha ma'lumotlar aniq o'qilishi kerak",
-        'sample_medical_text': "🏥 *Tibbiy ma'lumotnoma namunasi*\n\n✅ 0.86 shaklidagi ma'lumotnoma\n✅ Rasmiy shifoxona muhrlangan\n✅ 3 oydan eski bo'lmasligi kerak",
-        'sample_photo_text': "📸 *Rasmga qo'yiladigan talablar*\n\n✅ 3x4 o'lchamda\n✅ Oq fonda\n✅ Formal kiyimda\n✅ 6 dona (4 dona jarayonda, 2 dona shaxsiy ish uchun)",
-        'samples_back': "🔙 Namunalardan chiqish"
+        # Xatolik va yo'l ko'rsatish xabarlari
+        'warning_in_progress': "⚠️ *Siz hozir ro'yxatdan o'tish jarayonidasiz!*\n\n📝 Sizdan so'ralgan ma'lumotni kiriting:\n{current_step}\n\n❌ Jarayonni to'xtatish uchun **Bekor qilish** tugmasini bosing.\n🔙 Menyuga qaytish uchun **Orqaga** tugmasini bosing.",
+        'step_name': "✍️ Ismingiz",
+        'step_surname': "✍️ Familiyangiz",
+        'step_age': "🎂 Yoshingiz",
+        'step_phone': "📞 Telefon raqamingiz",
+        'step_format': "📎 Hujjat formati",
+        'step_document': "📄 Hujjat fayli/rasmi",
+        'wrong_input': "❌ *Xato ma'lumot kiritdingiz!*\n\n📝 Sizdan {expected} so'ralgan edi.\n\n✅ Iltimos, to'g'ri ma'lumot kiriting yoki ❌ Bekor qilish tugmasini bosing.",
+        'menu_pressed': "ℹ️ *Siz ro'yxatdan o'tish jarayonidasiz!*\n\n{current_step} kiritishingiz kerak.\n\n🚫 Iltimos, menyu tugmalarini ishlatmang!",
+        'help_text': "🤝 *Yordam*\n\nBotdan foydalanish tartibi:\n\n1. 📋 Bakalavriat yoki Magistratura yo'nalishini tanlang\n2. 📝 So'ralgan ma'lumotlarni to'g'ri kiriting\n3. 📎 Hujjatlarni rasm yoki fayl sifatida yuklang\n4. ✅ Jarayon tugagach, admin siz bilan bog'lanadi\n\n❌ Xato kiritgan bo'lsangiz, jarayonni bekor qilib qaytadan boshlang."
     },
     'ru': {
         'welcome': "🏛 *Южно-Казахстанский университет им. М.Ауезова* Добро пожаловать!\n\n👇 _Выберите язык:_",
@@ -135,8 +125,6 @@ LANG_TEXTS = {
         'menu_manzil': "📍 Адрес",
         'menu_bakalavr_tanlash': "📋 Направления бакалавриата",
         'menu_magistratura_tanlash': "🎓 Направления магистратуры",
-        'menu_samples': "📄 Образцы документов",
-        'menu_edit': "✏️ Редактировать данные",
         'menu_admin': "👤 Связаться с админом",
         'back': "🔙 Назад",
         'cancel': "❌ Отмена",
@@ -169,23 +157,16 @@ LANG_TEXTS = {
         'reg_cancelled': "❌ Процесс отменен.",
         'reg_success': "🎉 Направление успешно выбрано!",
         'manzil_text': "📍 *Адрес:* г.Чирчик, Ташкентская область.\n🗺 [Карта](http://maps.google.com)",
-        'warning_in_progress': "⚠️ *Вы в процессе регистрации!*\nОтправьте запрашиваемую информацию.",
-        'edit_title': "✏️ *РЕДАКТИРОВАНИЕ ДАННЫХ*\n\nЧто хотите изменить?",
-        'edit_name': "✍️ *Введите новое имя:*",
-        'edit_surname': "✍️ *Введите новую фамилию:*",
-        'edit_age': "🎂 *Введите новый возраст:*",
-        'edit_phone': "📞 *Введите новый номер телефона:*",
-        'edit_success': "✅ *Данные успешно изменены!*",
-        'samples_title': "📄 *ОБРАЗЦЫ ДОКУМЕНТОВ*\n\nПосмотрите образцы:",
-        'sample_diplom': "🎓 Образец диплома/аттестата",
-        'sample_passport': "🪪 Образец паспорта",
-        'sample_medical': "🏥 Образец медсправки",
-        'sample_photo': "📸 Требования к фото",
-        'sample_diplom_text': "📄 *Образец диплома/аттестата*\n\n✅ Цветная или черно-белая копия\n✅ Должна быть четко видна\n✅ Формат JPEG или PDF",
-        'sample_passport_text': "🪪 *Образец паспорта*\n\n✅ 1-2 страницы паспорта\n✅ Цветная копия\n✅ Все данные должны быть четко видны",
-        'sample_medical_text': "🏥 *Образец медицинской справки*\n\n✅ Справка формы 0.86\n✅ С печатью официальной больницы\n✅ Не старше 3 месяцев",
-        'sample_photo_text': "📸 *Требования к фото*\n\n✅ Размер 3x4\n✅ На белом фоне\n✅ В формальной одежде\n✅ 6 штук",
-        'samples_back': "🔙 Выйти"
+        'warning_in_progress': "⚠️ *Вы находитесь в процессе регистрации!*\n\n📝 Введите запрашиваемую информацию:\n{current_step}\n\n❌ Чтобы остановить процесс, нажмите **Отмена**\n🔙 Чтобы вернуться в меню, нажмите **Назад**",
+        'step_name': "✍️ Ваше имя",
+        'step_surname': "✍️ Ваша фамилия",
+        'step_age': "🎂 Ваш возраст",
+        'step_phone': "📞 Ваш номер телефона",
+        'step_format': "📎 Формат документа",
+        'step_document': "📄 Файл/Фото документа",
+        'wrong_input': "❌ *Неверный ввод!*\n\n📝 Ожидалось: {expected}\n\n✅ Пожалуйста, введите правильные данные или нажмите ❌ Отмена.",
+        'menu_pressed': "ℹ️ *Вы в процессе регистрации!*\n\nНеобходимо ввести: {current_step}\n\n🚫 Пожалуйста, не используйте кнопки меню!",
+        'help_text': "🤝 *Помощь*\n\nКак пользоваться ботом:\n\n1. 📋 Выберите направление бакалавриата или магистратуры\n2. 📝 Введите запрашиваемые данные правильно\n3. 📎 Загрузите документы в виде фото или файла\n4. ✅ После завершения администратор свяжется с вами\n\n❌ Если ошиблись, отмените процесс и начните заново."
     },
     'kk': {
         'welcome': "🏛 *М.Әуезов атындағы ОҚУ* Шыршық филиалына қош келдіңіз!\n\n👇 _Тілді таңдаңыз:_",
@@ -197,8 +178,6 @@ LANG_TEXTS = {
         'menu_manzil': "📍 Мекенжай",
         'menu_bakalavr_tanlash': "📋 Бакалавриат бағыттары",
         'menu_magistratura_tanlash': "🎓 Магистратура бағыттары",
-        'menu_samples': "📄 Құжат үлгілері",
-        'menu_edit': "✏️ Деректерді өзгерту",
         'menu_admin': "👤 Әкімге жазу",
         'back': "🔙 Артқа",
         'cancel': "❌ Болдырмау",
@@ -231,23 +210,16 @@ LANG_TEXTS = {
         'reg_cancelled': "❌ Процесс болдырылды.",
         'reg_success': "🎉 Бағыт сәтті таңдалды!",
         'manzil_text': "📍 *Мекенжай:* Шыршық қ., Ташкент обл.\n🗺 [Карта](http://maps.google.com)",
-        'warning_in_progress': "⚠️ *Сіз тіркелу процесіндесіз!*\nСұралған ақпаратты жіберіңіз.",
-        'edit_title': "✏️ *ДЕРЕКТЕРДІ ӨЗГЕРТУ*\n\nНені өзгерткіңіз келеді?",
-        'edit_name': "✍️ *Жаңа атыңызды енгізіңіз:*",
-        'edit_surname': "✍️ *Жаңа тегіңізді енгізіңіз:*",
-        'edit_age': "🎂 *Жаңа жасыңызды енгізіңіз:*",
-        'edit_phone': "📞 *Жаңа телефон нөміріңізді енгізіңіз:*",
-        'edit_success': "✅ *Деректер сәтті өзгертілді!*",
-        'samples_title': "📄 *ҚҰЖАТ ҮЛГІЛЕРІ*\n\nҮлгілерді қараңыз:",
-        'sample_diplom': "🎓 Диплом/Аттестат үлгісі",
-        'sample_passport': "🪪 Паспорт үлгісі",
-        'sample_medical': "🏥 Мед-анықтама үлгісі",
-        'sample_photo': "📸 Сурет талаптары",
-        'sample_diplom_text': "📄 *Диплом/Аттестат үлгісі*\n\n✅ Түсті немесе ақ-қара көшірме\n✅ Анық көрінуі керек\n✅ JPEG немесе PDF форматы",
-        'sample_passport_text': "🪪 *Паспорт үлгісі*\n\n✅ Паспорттың 1-2 беттері\n✅ Түсті көшірме\n✅ Барлық деректер анық оқылуы керек",
-        'sample_medical_text': "🏥 *Медициналық анықтама үлгісі*\n\n✅ 0.86 нысандағы анықтама\n✅ Ресми аурухана мөрі\n✅ 3 айдан ескі болмауы керек",
-        'sample_photo_text': "📸 *Суретке қойылатын талаптар*\n\n✅ 3x4 өлшемде\n✅ Ақ фонда\n✅ Формалды киімде\n✅ 6 дана",
-        'samples_back': "🔙 Шығу"
+        'warning_in_progress': "⚠️ *Сіз тіркелу процесіндесіз!*\n\n📝 Сұралған ақпаратты енгізіңіз:\n{current_step}\n\n❌ Процесті тоқтату үшін **Болдырмау** басыңыз\n🔙 Мәзірге оралу үшін **Артқа** басыңыз",
+        'step_name': "✍️ Атыңыз",
+        'step_surname': "✍️ Тегіңіз",
+        'step_age': "🎂 Жасыңыз",
+        'step_phone': "📞 Телефон нөміріңіз",
+        'step_format': "📎 Құжат форматы",
+        'step_document': "📄 Құжат файлы/суреті",
+        'wrong_input': "❌ *Қате енгізу!*\n\n📝 Күтілген: {expected}\n\n✅ Дұрыс деректерді енгізіңіз немесе ❌ Болдырмау басыңыз.",
+        'menu_pressed': "ℹ️ *Сіз тіркелу процесіндесіз!*\n\nЕнгізу қажет: {current_step}\n\n🚫 Мәзір түймелерін пайдаланбаңыз!",
+        'help_text': "🤝 *Көмек*\n\nБотты пайдалану тәртібі:\n\n1. 📋 Бакалавриат немесе Магистратура бағытын таңдаңыз\n2. 📝 Сұралған деректерді дұрыс енгізіңіз\n3. 📎 Құжаттарды сурет немесе файл ретінде жүктеңіз\n4. ✅ Процесс аяқталған соң, әкімші сізге хабарласады\n\n❌ Қате енгізсеңіз, процесті болдырмап, қайта бастаңыз."
     }
 }
 
@@ -308,6 +280,26 @@ MAGISTRATURA_YONALISHLAR = {
     }
 }
 
+# Step nomlari (yo'l ko'rsatish uchun)
+STEP_NAMES = {
+    YONALISH_ISM: "step_name",
+    YONALISH_FAMILYA: "step_surname",
+    YONALISH_YOSH: "step_age",
+    YONALISH_TELEFON: "step_phone",
+    MAG_ISM: "step_name",
+    MAG_FAMILYA: "step_surname",
+    MAG_YOSH: "step_age",
+    MAG_TELEFON: "step_phone",
+    HUJJAT_FORMAT_1: "step_format",
+    HUJJAT_FORMAT_2: "step_format",
+    HUJJAT_FORMAT_3: "step_format",
+    HUJJAT_FORMAT_4: "step_format",
+    HUJJAT_1: "step_document",
+    HUJJAT_2: "step_document",
+    HUJJAT_3: "step_document",
+    HUJJAT_4: "step_document",
+}
+
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 🗄️  MA'LUMOTLAR BAZASI
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -366,7 +358,6 @@ def main_menu_markup(lang):
         [t['menu_bakalavr'], t['menu_magistratura']],
         [t['menu_hujjat'], t['menu_manzil']],
         [t['menu_bakalavr_tanlash'], t['menu_magistratura_tanlash']],
-        [t['menu_samples'], t['menu_edit']],
         [t['menu_admin']],
         [t['change_lang']],
     ], resize_keyboard=True)
@@ -374,16 +365,6 @@ def main_menu_markup(lang):
 def cancel_back_markup(lang):
     t = LANG_TEXTS[lang]
     return ReplyKeyboardMarkup([[t['back'], t['cancel']]], resize_keyboard=True)
-
-def edit_menu_markup(lang):
-    t = LANG_TEXTS[lang]
-    return InlineKeyboardMarkup([
-        [InlineKeyboardButton("✏️ Ism", callback_data="edit_name"),
-         InlineKeyboardButton("✏️ Familiya", callback_data="edit_surname")],
-        [InlineKeyboardButton("🎂 Yosh", callback_data="edit_age"),
-         InlineKeyboardButton("📞 Telefon", callback_data="edit_phone")],
-        [InlineKeyboardButton(t['back'], callback_data="edit_back")]
-    ])
 
 def format_tanlash_keyboard(lang, step_num):
     t = LANG_TEXTS[lang]
@@ -419,22 +400,12 @@ def lang_tanlash_keyboard():
         [InlineKeyboardButton("🇰🇿 Қазақ тілі", callback_data="lang_kk")],
     ])
 
-def samples_keyboard(lang):
-    t = LANG_TEXTS[lang]
-    return InlineKeyboardMarkup([
-        [InlineKeyboardButton(t['sample_diplom'], callback_data="sample_diplom")],
-        [InlineKeyboardButton(t['sample_passport'], callback_data="sample_passport")],
-        [InlineKeyboardButton(t['sample_medical'], callback_data="sample_medical")],
-        [InlineKeyboardButton(t['sample_photo'], callback_data="sample_photo")],
-        [InlineKeyboardButton(t['samples_back'], callback_data="samples_back")]
-    ])
-
 def is_any_menu_button(text, lang):
     if not text: return False
     t = LANG_TEXTS[lang]
     menu = [t['menu_about'], t['menu_bakalavr'], t['menu_magistratura'], t['menu_hujjat'],
             t['menu_manzil'], t['menu_bakalavr_tanlash'], t['menu_magistratura_tanlash'],
-            t['menu_samples'], t['menu_edit'], t['menu_admin'], t['change_lang']]
+            t['menu_admin'], t['change_lang']]
     return text in menu
 
 def is_cancel_or_back(text, lang):
@@ -448,7 +419,7 @@ def validate_phone(phone):
     return None
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🛡️  GUARD
+# 🛡️  PIPELINE GUARD (TAKOMILLASHTIRILGAN)
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def process_step_guard(update, context, current_state):
     user_id = update.effective_user.id
@@ -456,13 +427,23 @@ async def process_step_guard(update, context, current_state):
     t = LANG_TEXTS[lang]
     msg = update.message.text if update.message else None
     
-    if msg:
-        if is_cancel_or_back(msg, lang):
-            await update.message.reply_text(t['reg_cancelled'], reply_markup=main_menu_markup(lang))
-            return "FORCE_CAN_MENU"
-        if is_any_menu_button(msg, lang):
-            await update.message.reply_text(t['warning_in_progress'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
-            return "FORCE_STAY"
+    # Cancel yoki Back tekshirish
+    if msg and is_cancel_or_back(msg, lang):
+        await update.message.reply_text(t['reg_cancelled'], reply_markup=main_menu_markup(lang))
+        return "FORCE_CAN_MENU"
+    
+    # Menyu tugmasi bosilganmi?
+    if msg and is_any_menu_button(msg, lang):
+        # Qaysi stepda ekanligini aniqlab, to'g'ri yo'lni ko'rsatish
+        step_key = STEP_NAMES.get(current_state, "step_name")
+        step_text = t.get(step_key, "ma'lumot")
+        await update.message.reply_text(
+            t['menu_pressed'].format(current_step=step_text), 
+            parse_mode="Markdown",
+            reply_markup=cancel_back_markup(lang)
+        )
+        return "FORCE_STAY"
+    
     return "PROCEED"
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -494,12 +475,16 @@ async def lang_callback(update, context):
         set_user_lang(query.from_user.id, lang)
         context.user_data['lang'] = lang
         await query.edit_message_text(LANG_TEXTS[lang]['lang_selected'], parse_mode="Markdown")
-        await query.message.reply_text(LANG_TEXTS[lang]['welcome'].replace("tilni tanlang", "quyidagi menyudan foydalaning"), parse_mode="Markdown", reply_markup=main_menu_markup(lang))
+        await query.message.reply_text(
+            LANG_TEXTS[lang]['welcome'].replace("tilni tanlang", "quyidagi menyudan foydalaning"), 
+            parse_mode="Markdown", 
+            reply_markup=main_menu_markup(lang)
+        )
         return TANLA
     return TIL_TANLASH
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 📋  MENYU DISPATCHER
+# 📋  BOSH MENYU DISPATCHER
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def main_menu_dispatcher(update, context):
     msg = update.message.text
@@ -548,14 +533,6 @@ async def main_menu_dispatcher(update, context):
         await update.message.reply_text(t['enter_name'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
         return MAG_ISM
 
-    if msg == t['menu_samples']:
-        await update.message.reply_text(t['samples_title'], parse_mode="Markdown", reply_markup=samples_keyboard(lang))
-        return TANLA
-
-    if msg == t['menu_edit']:
-        await update.message.reply_text(t['edit_title'], parse_mode="Markdown", reply_markup=edit_menu_markup(lang))
-        return TANLA
-
     if msg == t['menu_admin']:
         await update.message.reply_text(f"💬 {ADMIN_USERNAME}\n📞 `{ADMIN_PHONE}`", parse_mode="Markdown")
         return TANLA
@@ -574,23 +551,32 @@ async def format_callback(update, context):
     parts = data.split("_")
     format_turi, step = parts[1], int(parts[2])
     context.user_data[f'hujjat_format_{step}'] = format_turi
-    await query.message.reply_text(f"📥 {HUJJAT_NOMLAR[lang][step]} ({format_turi.upper()} ko'rinishida)\n\n👇 Yuklang:", reply_markup=cancel_back_markup(lang))
+    await query.message.reply_text(
+        f"📥 {HUJJAT_NOMLAR[lang][step]} ({format_turi.upper()} ko'rinishida)\n\n👇 Yuklang:", 
+        reply_markup=cancel_back_markup(lang)
+    )
     return HUJJAT_STATES[step]
 
 async def hujjat_handler(update, context, step):
     user_id = update.effective_user.id
     lang = get_user_lang(user_id)
     t = LANG_TEXTS[lang]
+    
+    # Guard - agar xato bo'lsa to'g'ri yo'lni ko'rsatadi
     guard = await process_step_guard(update, context, HUJJAT_STATES[step])
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return HUJJAT_STATES[step]
+    
     fmt = context.user_data.get(f'hujjat_format_{step}', 'rasm')
+    
+    # Xato format tekshiruvi
     if fmt == 'fayl' and not update.message.document:
         await update.message.reply_text(t['error_need_file'], parse_mode="Markdown")
         return HUJJAT_STATES[step]
     if fmt == 'rasm' and not update.message.photo:
         await update.message.reply_text(t['error_need_photo'], parse_mode="Markdown")
         return HUJJAT_STATES[step]
+    
     user = update.message.from_user
     username = f"@{user.username}" if user.username else f"[{user.first_name}](tg://user?id={user.id})"
     caption = t['channel_caption'].format(user=username, uid=user.id, doc_name=HUJJAT_NOMLAR[lang][step])
@@ -602,9 +588,14 @@ async def hujjat_handler(update, context, step):
     except Exception as e:
         logger.error(f"Kanalga yuborish xato: {e}")
     update_hujjat_status(user_id, step)
+    
     if step < 4:
         ns = step + 1
-        await update.message.reply_text(f"{t['success_received']}\n\n🟢 *{ns}-Bosqich: {HUJJAT_NOMLAR[lang][ns]}*\n❓ Format:", parse_mode="Markdown", reply_markup=format_tanlash_keyboard(lang, ns))
+        await update.message.reply_text(
+            f"{t['success_received']}\n\n🟢 *{ns}-Bosqich: {HUJJAT_NOMLAR[lang][ns]}*\n❓ Format:", 
+            parse_mode="Markdown", 
+            reply_markup=format_tanlash_keyboard(lang, ns)
+        )
         return HUJJAT_FORMAT_STATES[ns]
     else:
         await update.message.reply_text(t['all_docs_success'], parse_mode="Markdown", reply_markup=main_menu_markup(lang))
@@ -619,52 +610,93 @@ async def hujjat_4(update, context): return await hujjat_handler(update, context
 # 🎓  BAKALAVRIAT TANLASH
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def yonalish_ism(update, context):
-    lang = get_user_lang(update.effective_user.id)
+    user_id = update.effective_user.id
+    lang = get_user_lang(user_id)
+    t = LANG_TEXTS[lang]
+    
     guard = await process_step_guard(update, context, YONALISH_ISM)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return YONALISH_ISM
+    
+    if not update.message or not update.message.text:
+        await update.message.reply_text(t['enter_name'], reply_markup=cancel_back_markup(lang))
+        return YONALISH_ISM
+    
     context.user_data['yonalish_ism'] = update.message.text.strip()
-    await update.message.reply_text(LANG_TEXTS[lang]['enter_surname'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
+    await update.message.reply_text(t['enter_surname'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
     return YONALISH_FAMILYA
 
 async def yonalish_familya(update, context):
-    lang = get_user_lang(update.effective_user.id)
+    user_id = update.effective_user.id
+    lang = get_user_lang(user_id)
+    t = LANG_TEXTS[lang]
+    
     guard = await process_step_guard(update, context, YONALISH_FAMILYA)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return YONALISH_FAMILYA
+    
+    if not update.message or not update.message.text:
+        await update.message.reply_text(t['enter_surname'], reply_markup=cancel_back_markup(lang))
+        return YONALISH_FAMILYA
+    
     context.user_data['yonalish_familya'] = update.message.text.strip()
-    await update.message.reply_text(LANG_TEXTS[lang]['enter_age'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
+    await update.message.reply_text(t['enter_age'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
     return YONALISH_YOSH
 
 async def yonalish_yosh(update, context):
-    lang = get_user_lang(update.effective_user.id)
+    user_id = update.effective_user.id
+    lang = get_user_lang(user_id)
+    t = LANG_TEXTS[lang]
+    
     guard = await process_step_guard(update, context, YONALISH_YOSH)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return YONALISH_YOSH
-    yosh = update.message.text.strip()
+    
+    yosh = update.message.text.strip() if (update.message and update.message.text) else ""
     if not yosh.isdigit() or not (14 <= int(yosh) <= 60):
-        await update.message.reply_text(LANG_TEXTS[lang]['invalid_age'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
+        await update.message.reply_text(
+            t['wrong_input'].format(expected=t['step_age']), 
+            parse_mode="Markdown",
+            reply_markup=cancel_back_markup(lang)
+        )
         return YONALISH_YOSH
+    
     context.user_data['yonalish_yosh'] = yosh
-    btn = [[KeyboardButton(LANG_TEXTS[lang]['send_phone'], request_contact=True)], [KeyboardButton(LANG_TEXTS[lang]['back']), KeyboardButton(LANG_TEXTS[lang]['cancel'])]]
-    await update.message.reply_text(LANG_TEXTS[lang]['phone_intro'], parse_mode="Markdown", reply_markup=ReplyKeyboardMarkup(btn, resize_keyboard=True))
+    btn = [[KeyboardButton(t['send_phone'], request_contact=True)], [KeyboardButton(t['back']), KeyboardButton(t['cancel'])]]
+    await update.message.reply_text(t['phone_intro'], parse_mode="Markdown", reply_markup=ReplyKeyboardMarkup(btn, resize_keyboard=True))
     return YONALISH_TELEFON
 
 async def yonalish_telefon(update, context):
-    lang = get_user_lang(update.effective_user.id)
+    user_id = update.effective_user.id
+    lang = get_user_lang(user_id)
+    t = LANG_TEXTS[lang]
+    
     guard = await process_step_guard(update, context, YONALISH_TELEFON)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return YONALISH_TELEFON
+    
     phone = None
     if update.message.contact:
         phone = update.message.contact.phone_number
     elif update.message.text:
         phone = validate_phone(update.message.text.strip())
         if not phone:
-            await update.message.reply_text(LANG_TEXTS[lang]['invalid_phone'], parse_mode="Markdown")
+            await update.message.reply_text(
+                t['wrong_input'].format(expected=t['step_phone']), 
+                parse_mode="Markdown",
+                reply_markup=cancel_back_markup(lang)
+            )
             return YONALISH_TELEFON
+    else:
+        await update.message.reply_text(
+            t['wrong_input'].format(expected=t['step_phone']), 
+            parse_mode="Markdown",
+            reply_markup=cancel_back_markup(lang)
+        )
+        return YONALISH_TELEFON
+    
     context.user_data['yonalish_telefon'] = phone
-    await update.message.reply_text(LANG_TEXTS[lang]['select_bakalavr_title'], parse_mode="Markdown", reply_markup=bakalavr_keyboard(lang))
+    await update.message.reply_text(t['select_bakalavr_title'], parse_mode="Markdown", reply_markup=bakalavr_keyboard(lang))
     return YONALISH_TANLASH
 
 async def bakalavr_callback(update, context):
@@ -676,21 +708,34 @@ async def bakalavr_callback(update, context):
     key = data.replace("bak_", "")
     user_id = query.from_user.id
     lang = get_user_lang(user_id)
+    t = LANG_TEXTS[lang]
+    
     if key not in BAKALAVR_YONALISHLAR[lang]:
         return TANLA
     yonalish = BAKALAVR_YONALISHLAR[lang][key]
+    
     con = db_connect()
     cur = con.cursor()
-    cur.execute("INSERT OR REPLACE INTO bakalavr_royxat VALUES (?,?,?,?,?,?,?,?,?,?)", (user_id, query.from_user.first_name, query.from_user.last_name, query.from_user.username, str(datetime.datetime.now()), context.user_data.get('yonalish_ism'), context.user_data.get('yonalish_familya'), context.user_data.get('yonalish_yosh'), context.user_data.get('yonalish_telefon'), yonalish))
+    cur.execute("INSERT OR REPLACE INTO bakalavr_royxat VALUES (?,?,?,?,?,?,?,?,?,?)", 
+                (user_id, query.from_user.first_name, query.from_user.last_name, query.from_user.username, 
+                 str(datetime.datetime.now()), context.user_data.get('yonalish_ism'), 
+                 context.user_data.get('yonalish_familya'), context.user_data.get('yonalish_yosh'), 
+                 context.user_data.get('yonalish_telefon'), yonalish))
     con.commit()
     con.close()
+    
     username = f"@{query.from_user.username}" if query.from_user.username else f"[{query.from_user.first_name}](tg://user?id={user_id})"
-    caption = LANG_TEXTS[lang]['yonalish_channel_caption'].format(user=username, uid=user_id, phone=context.user_data.get('yonalish_telefon'), yonalish=yonalish, ism=context.user_data.get('yonalish_ism'), familya=context.user_data.get('yonalish_familya'), yosh=context.user_data.get('yonalish_yosh'))
+    caption = t['yonalish_channel_caption'].format(
+        user=username, uid=user_id, phone=context.user_data.get('yonalish_telefon'),
+        yonalish=yonalish, ism=context.user_data.get('yonalish_ism'),
+        familya=context.user_data.get('yonalish_familya'), yosh=context.user_data.get('yonalish_yosh')
+    )
     try:
         await context.bot.send_message(CHANNEL_USERNAME, caption, parse_mode="Markdown")
     except Exception as e:
         logger.error(f"Kanalga yuborish xato: {e}")
-    await query.edit_message_text(LANG_TEXTS[lang]['reg_success'], parse_mode="Markdown")
+    
+    await query.edit_message_text(t['reg_success'], parse_mode="Markdown")
     await context.bot.send_message(user_id, "🏠 Bosh menyu", reply_markup=main_menu_markup(lang))
     return TANLA
 
@@ -698,52 +743,93 @@ async def bakalavr_callback(update, context):
 # 📚  MAGISTRATURA TANLASH
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def magistratura_ism(update, context):
-    lang = get_user_lang(update.effective_user.id)
+    user_id = update.effective_user.id
+    lang = get_user_lang(user_id)
+    t = LANG_TEXTS[lang]
+    
     guard = await process_step_guard(update, context, MAG_ISM)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return MAG_ISM
+    
+    if not update.message or not update.message.text:
+        await update.message.reply_text(t['enter_name'], reply_markup=cancel_back_markup(lang))
+        return MAG_ISM
+    
     context.user_data['mag_ism'] = update.message.text.strip()
-    await update.message.reply_text(LANG_TEXTS[lang]['enter_surname'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
+    await update.message.reply_text(t['enter_surname'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
     return MAG_FAMILYA
 
 async def magistratura_familya(update, context):
-    lang = get_user_lang(update.effective_user.id)
+    user_id = update.effective_user.id
+    lang = get_user_lang(user_id)
+    t = LANG_TEXTS[lang]
+    
     guard = await process_step_guard(update, context, MAG_FAMILYA)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return MAG_FAMILYA
+    
+    if not update.message or not update.message.text:
+        await update.message.reply_text(t['enter_surname'], reply_markup=cancel_back_markup(lang))
+        return MAG_FAMILYA
+    
     context.user_data['mag_familya'] = update.message.text.strip()
-    await update.message.reply_text(LANG_TEXTS[lang]['enter_age'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
+    await update.message.reply_text(t['enter_age'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
     return MAG_YOSH
 
 async def magistratura_yosh(update, context):
-    lang = get_user_lang(update.effective_user.id)
+    user_id = update.effective_user.id
+    lang = get_user_lang(user_id)
+    t = LANG_TEXTS[lang]
+    
     guard = await process_step_guard(update, context, MAG_YOSH)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return MAG_YOSH
-    yosh = update.message.text.strip()
+    
+    yosh = update.message.text.strip() if (update.message and update.message.text) else ""
     if not yosh.isdigit() or not (21 <= int(yosh) <= 65):
-        await update.message.reply_text(LANG_TEXTS[lang]['invalid_age'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
+        await update.message.reply_text(
+            t['wrong_input'].format(expected=t['step_age']), 
+            parse_mode="Markdown",
+            reply_markup=cancel_back_markup(lang)
+        )
         return MAG_YOSH
+    
     context.user_data['mag_yosh'] = yosh
-    btn = [[KeyboardButton(LANG_TEXTS[lang]['send_phone'], request_contact=True)], [KeyboardButton(LANG_TEXTS[lang]['back']), KeyboardButton(LANG_TEXTS[lang]['cancel'])]]
-    await update.message.reply_text(LANG_TEXTS[lang]['phone_intro'], parse_mode="Markdown", reply_markup=ReplyKeyboardMarkup(btn, resize_keyboard=True))
+    btn = [[KeyboardButton(t['send_phone'], request_contact=True)], [KeyboardButton(t['back']), KeyboardButton(t['cancel'])]]
+    await update.message.reply_text(t['phone_intro'], parse_mode="Markdown", reply_markup=ReplyKeyboardMarkup(btn, resize_keyboard=True))
     return MAG_TELEFON
 
 async def magistratura_telefon(update, context):
-    lang = get_user_lang(update.effective_user.id)
+    user_id = update.effective_user.id
+    lang = get_user_lang(user_id)
+    t = LANG_TEXTS[lang]
+    
     guard = await process_step_guard(update, context, MAG_TELEFON)
     if guard == "FORCE_CAN_MENU": return TANLA
     if guard == "FORCE_STAY": return MAG_TELEFON
+    
     phone = None
     if update.message.contact:
         phone = update.message.contact.phone_number
     elif update.message.text:
         phone = validate_phone(update.message.text.strip())
         if not phone:
-            await update.message.reply_text(LANG_TEXTS[lang]['invalid_phone'], parse_mode="Markdown")
+            await update.message.reply_text(
+                t['wrong_input'].format(expected=t['step_phone']), 
+                parse_mode="Markdown",
+                reply_markup=cancel_back_markup(lang)
+            )
             return MAG_TELEFON
+    else:
+        await update.message.reply_text(
+            t['wrong_input'].format(expected=t['step_phone']), 
+            parse_mode="Markdown",
+            reply_markup=cancel_back_markup(lang)
+        )
+        return MAG_TELEFON
+    
     context.user_data['mag_telefon'] = phone
-    await update.message.reply_text(LANG_TEXTS[lang]['select_magistratura_title'], parse_mode="Markdown", reply_markup=magistratura_keyboard(lang))
+    await update.message.reply_text(t['select_magistratura_title'], parse_mode="Markdown", reply_markup=magistratura_keyboard(lang))
     return MAG_TANLASH
 
 async def magistratura_callback(update, context):
@@ -755,142 +841,35 @@ async def magistratura_callback(update, context):
     key = data.replace("mag_", "")
     user_id = query.from_user.id
     lang = get_user_lang(user_id)
+    t = LANG_TEXTS[lang]
+    
     if key not in MAGISTRATURA_YONALISHLAR[lang]:
         return TANLA
     yonalish = MAGISTRATURA_YONALISHLAR[lang][key]
+    
     con = db_connect()
     cur = con.cursor()
-    cur.execute("INSERT OR REPLACE INTO magistratura_royxat VALUES (?,?,?,?,?,?,?,?,?,?)", (user_id, query.from_user.first_name, query.from_user.last_name, query.from_user.username, str(datetime.datetime.now()), context.user_data.get('mag_ism'), context.user_data.get('mag_familya'), context.user_data.get('mag_yosh'), context.user_data.get('mag_telefon'), yonalish))
+    cur.execute("INSERT OR REPLACE INTO magistratura_royxat VALUES (?,?,?,?,?,?,?,?,?,?)", 
+                (user_id, query.from_user.first_name, query.from_user.last_name, query.from_user.username, 
+                 str(datetime.datetime.now()), context.user_data.get('mag_ism'), 
+                 context.user_data.get('mag_familya'), context.user_data.get('mag_yosh'), 
+                 context.user_data.get('mag_telefon'), yonalish))
     con.commit()
     con.close()
+    
     username = f"@{query.from_user.username}" if query.from_user.username else f"[{query.from_user.first_name}](tg://user?id={user_id})"
-    caption = LANG_TEXTS[lang]['magistratura_channel_caption'].format(user=username, uid=user_id, phone=context.user_data.get('mag_telefon'), yonalish=yonalish, ism=context.user_data.get('mag_ism'), familya=context.user_data.get('mag_familya'), yosh=context.user_data.get('mag_yosh'))
+    caption = t['magistratura_channel_caption'].format(
+        user=username, uid=user_id, phone=context.user_data.get('mag_telefon'),
+        yonalish=yonalish, ism=context.user_data.get('mag_ism'),
+        familya=context.user_data.get('mag_familya'), yosh=context.user_data.get('mag_yosh')
+    )
     try:
         await context.bot.send_message(CHANNEL_USERNAME, caption, parse_mode="Markdown")
     except Exception as e:
         logger.error(f"Kanalga yuborish xato: {e}")
-    await query.edit_message_text(LANG_TEXTS[lang]['reg_success'], parse_mode="Markdown")
+    
+    await query.edit_message_text(t['reg_success'], parse_mode="Markdown")
     await context.bot.send_message(user_id, "🏠 Bosh menyu", reply_markup=main_menu_markup(lang))
-    return TANLA
-
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 📄  NAMUNALAR
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-async def samples_callback(update, context):
-    query = update.callback_query
-    await query.answer()
-    data = query.data
-    lang = get_user_lang(query.from_user.id)
-    
-    samples_data = {
-        'sample_diplom': LANG_TEXTS[lang]['sample_diplom_text'],
-        'sample_passport': LANG_TEXTS[lang]['sample_passport_text'],
-        'sample_medical': LANG_TEXTS[lang]['sample_medical_text'],
-        'sample_photo': LANG_TEXTS[lang]['sample_photo_text'],
-    }
-    
-    if data in samples_data:
-        await query.edit_message_text(samples_data[data], parse_mode="Markdown")
-        await context.bot.send_message(query.from_user.id, "🔙 Menyuga qaytish uchun /start bosing")
-    elif data == "samples_back":
-        t = LANG_TEXTS[lang]
-        await query.edit_message_text(t['samples_title'], parse_mode="Markdown", reply_markup=samples_keyboard(lang))
-
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# ✏️  MA'LUMOTLARNI O'ZGARTIRISH
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-async def edit_callback(update, context):
-    query = update.callback_query
-    await query.answer()
-    data = query.data
-    lang = get_user_lang(query.from_user.id)
-    if data == "edit_back":
-        await query.edit_message_text(LANG_TEXTS[lang]['edit_title'], reply_markup=edit_menu_markup(lang))
-        return TANLA
-    elif data == "edit_name":
-        await query.message.reply_text(LANG_TEXTS[lang]['edit_name'], reply_markup=cancel_back_markup(lang))
-        return EDIT_NAME
-    elif data == "edit_surname":
-        await query.message.reply_text(LANG_TEXTS[lang]['edit_surname'], reply_markup=cancel_back_markup(lang))
-        return EDIT_SURNAME
-    elif data == "edit_age":
-        await query.message.reply_text(LANG_TEXTS[lang]['edit_age'], reply_markup=cancel_back_markup(lang))
-        return EDIT_AGE
-    elif data == "edit_phone":
-        await query.message.reply_text(LANG_TEXTS[lang]['edit_phone'], reply_markup=cancel_back_markup(lang))
-        return EDIT_PHONE
-    return TANLA
-
-async def edit_name_handler(update, context):
-    user_id = update.effective_user.id
-    lang = get_user_lang(user_id)
-    guard = await process_step_guard(update, context, EDIT_NAME)
-    if guard == "FORCE_CAN_MENU": return TANLA
-    if guard == "FORCE_STAY": return EDIT_NAME
-    con = db_connect()
-    cur = con.cursor()
-    cur.execute("UPDATE bakalavr_royxat SET ism=? WHERE id=?", (update.message.text.strip(), user_id))
-    cur.execute("UPDATE magistratura_royxat SET ism=? WHERE id=?", (update.message.text.strip(), user_id))
-    con.commit()
-    con.close()
-    await update.message.reply_text(LANG_TEXTS[lang]['edit_success'], reply_markup=main_menu_markup(lang))
-    return TANLA
-
-async def edit_surname_handler(update, context):
-    user_id = update.effective_user.id
-    lang = get_user_lang(user_id)
-    guard = await process_step_guard(update, context, EDIT_SURNAME)
-    if guard == "FORCE_CAN_MENU": return TANLA
-    if guard == "FORCE_STAY": return EDIT_SURNAME
-    con = db_connect()
-    cur = con.cursor()
-    cur.execute("UPDATE bakalavr_royxat SET familya=? WHERE id=?", (update.message.text.strip(), user_id))
-    cur.execute("UPDATE magistratura_royxat SET familya=? WHERE id=?", (update.message.text.strip(), user_id))
-    con.commit()
-    con.close()
-    await update.message.reply_text(LANG_TEXTS[lang]['edit_success'], reply_markup=main_menu_markup(lang))
-    return TANLA
-
-async def edit_age_handler(update, context):
-    user_id = update.effective_user.id
-    lang = get_user_lang(user_id)
-    guard = await process_step_guard(update, context, EDIT_AGE)
-    if guard == "FORCE_CAN_MENU": return TANLA
-    if guard == "FORCE_STAY": return EDIT_AGE
-    age = update.message.text.strip()
-    if not age.isdigit() or not (14 <= int(age) <= 65):
-        await update.message.reply_text(LANG_TEXTS[lang]['invalid_age'], parse_mode="Markdown")
-        return EDIT_AGE
-    con = db_connect()
-    cur = con.cursor()
-    cur.execute("UPDATE bakalavr_royxat SET yosh=? WHERE id=?", (int(age), user_id))
-    cur.execute("UPDATE magistratura_royxat SET yosh=? WHERE id=?", (int(age), user_id))
-    con.commit()
-    con.close()
-    await update.message.reply_text(LANG_TEXTS[lang]['edit_success'], reply_markup=main_menu_markup(lang))
-    return TANLA
-
-async def edit_phone_handler(update, context):
-    user_id = update.effective_user.id
-    lang = get_user_lang(user_id)
-    guard = await process_step_guard(update, context, EDIT_PHONE)
-    if guard == "FORCE_CAN_MENU": return TANLA
-    if guard == "FORCE_STAY": return EDIT_PHONE
-    phone = None
-    if update.message.contact:
-        phone = update.message.contact.phone_number
-    elif update.message.text:
-        phone = validate_phone(update.message.text.strip())
-        if not phone:
-            await update.message.reply_text(LANG_TEXTS[lang]['invalid_phone'], parse_mode="Markdown")
-            return EDIT_PHONE
-    con = db_connect()
-    cur = con.cursor()
-    cur.execute("UPDATE bakalavr_royxat SET telefon=? WHERE id=?", (phone, user_id))
-    cur.execute("UPDATE magistratura_royxat SET telefon=? WHERE id=?", (phone, user_id))
-    con.commit()
-    con.close()
-    await update.message.reply_text(LANG_TEXTS[lang]['edit_success'], reply_markup=main_menu_markup(lang))
     return TANLA
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -965,15 +944,15 @@ def main():
         states={
             TIL_TANLASH: [CallbackQueryHandler(lang_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
             TANLA: [MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher), 
-                    CallbackQueryHandler(bakalavr_callback), CallbackQueryHandler(magistratura_callback), 
-                    CallbackQueryHandler(samples_callback, pattern="^sample_|^samples_back$"),
-                    CallbackQueryHandler(edit_callback, pattern="^edit_")],
+                    CallbackQueryHandler(bakalavr_callback), CallbackQueryHandler(magistratura_callback)],
             HUJJAT_FORMAT_1: [CallbackQueryHandler(format_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
             HUJJAT_FORMAT_2: [CallbackQueryHandler(format_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
             HUJJAT_FORMAT_3: [CallbackQueryHandler(format_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
             HUJJAT_FORMAT_4: [CallbackQueryHandler(format_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
-            HUJJAT_1: [MessageHandler(filters.ALL, hujjat_1)], HUJJAT_2: [MessageHandler(filters.ALL, hujjat_2)],
-            HUJJAT_3: [MessageHandler(filters.ALL, hujjat_3)], HUJJAT_4: [MessageHandler(filters.ALL, hujjat_4)],
+            HUJJAT_1: [MessageHandler(filters.ALL, hujjat_1)], 
+            HUJJAT_2: [MessageHandler(filters.ALL, hujjat_2)],
+            HUJJAT_3: [MessageHandler(filters.ALL, hujjat_3)], 
+            HUJJAT_4: [MessageHandler(filters.ALL, hujjat_4)],
             YONALISH_ISM: [MessageHandler(filters.TEXT & ~filters.COMMAND, yonalish_ism)], 
             YONALISH_FAMILYA: [MessageHandler(filters.TEXT & ~filters.COMMAND, yonalish_familya)],
             YONALISH_YOSH: [MessageHandler(filters.TEXT & ~filters.COMMAND, yonalish_yosh)], 
@@ -984,10 +963,6 @@ def main():
             MAG_YOSH: [MessageHandler(filters.TEXT & ~filters.COMMAND, magistratura_yosh)], 
             MAG_TELEFON: [MessageHandler(filters.ALL, magistratura_telefon)],
             MAG_TANLASH: [CallbackQueryHandler(magistratura_callback)],
-            EDIT_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, edit_name_handler)],
-            EDIT_SURNAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, edit_surname_handler)],
-            EDIT_AGE: [MessageHandler(filters.TEXT & ~filters.COMMAND, edit_age_handler)],
-            EDIT_PHONE: [MessageHandler(filters.ALL, edit_phone_handler)],
         },
         fallbacks=[CommandHandler('start', start), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
         allow_reentry=True
