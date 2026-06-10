@@ -25,20 +25,25 @@ class Handler(BaseHTTPRequestHandler):
 threading.Thread(target=lambda: HTTPServer(('0.0.0.0', 8080), Handler).serve_forever(), daemon=True).start()
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# ⚙️  SOZLAMALAR & DIZAYN
+# ⚙️  SOZLAMALAR & DIZAYN (YANGILANDI)
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 load_dotenv()
-BOT_TOKEN = os.getenv("BOT_TOKEN", "7963384260:AAFl1m6g8w_p93K8S5L8B-xT_Y7Dq6R2bI4") # Tokeningizni shu yerga yozing
+BOT_TOKEN = os.getenv("BOT_TOKEN", "7963384260:AAFl1m6g8w_p93K8S5L8B-xT_Y7Dq6R2bI4")
 CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME", "@Auezov_data")
 ADMIN_USERNAME = "@Saman2611"
 ADMIN_PHONE = "+998996844483"
 DB_PATH = "universitet.db"
 MAX_REGISTRATIONS = 5
 
+# Vizual Dizayn uchun Dizayn Elementlari (Rasmlar va Havolalar)
+ABOUT_PHOTO_URL = "https://raw.githubusercontent.com/aiogram/aiogram/dev/assets/logo.png" # Shu yerga universitet binosi rasmi linkini qo'ying
+MAP_LATITUDE = 41.468307   # M.Auezov Chirchiq filiali aniq geo koordinatalari (Misol tariqasida)
+MAP_LONGITUDE = 69.582845
+
 logging.basicConfig(format="%(asctime)s | %(levelname)s | %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-SEP = "━" * 22
+SEP = "━━━━━━━━━━━━━━━━━━━━"
 
 # Conversation (Suhbat) holatlari
 TIL_TANLASH, TANLA = "til_tanlash", "tanla"
@@ -48,23 +53,50 @@ SOROV_ISM, SOROV_FAMILYA, SOROV_YOSH, SOROV_TELEFON = "si", "sf", "sy", "st"
 YONALISH_ISM, YONALISH_FAMILYA, YONALISH_YOSH, YONALISH_TELEFON = "yi", "yf", "yy", "yt"
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🌐  TIL LUG'ATI (UZ, RU, KK)
+# 🌐  TIL LUG'ATI (DIZAYN VA MATNLAR KUCHAYTIRILDI)
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 LANG_TEXTS = {
     'uz': {
-        'welcome': "🏛 *M.Auezov nomidagi JQU* Chirchiq filialining rasmiy qabul botiga xush kelibsiz!\n\n👇 _Davom etish uchun menyudan foydalaning:_",
+        'welcome': "🏛 *M.Auezov nomidagi Janubiy Qozog'iston Universiteti* Chirchiq filialining rasmiy qabul botiga xush kelibsiz!\n\n👇 _Davom etish uchun menyudan foydalaning:_",
         'menu_about': "🎓 Universitet haqida", 'menu_yonalish': "🗃️ Yo'nalishlar",
         'menu_hujjat': "📝 Hujjat topshirish", 'menu_manzil': "📍 Manzil",
         'menu_sorov': "🗂 So'rovnoma", 'menu_tanlash': "📋 Yo'nalish tanlash",
         'menu_admin': "👤 Admin bilan bog'lanish", 'back': "🔙 Menyuga qaytish",
-        'about_text': "Chirchiq shahrida universitetning yangi zamonaviy filiali o'z ishini boshlamoqda!",
+        
+        'about_text': (
+            f"🏛 *M.Auezov nomidagi Janubiy Qozog'iston Universiteti*\n"
+            f"_{SEP}_\n\n"
+            f"Chirchiq shahrida universitetning yangi, zamonaviy va xalqaro andozalarga mos keluvchi filiali o'z ishini boshlamoqda! "
+            f"Biz talabalarga eng yuqori darajadagi ta'lim, malakali professor-o'qituvchilar hamda zamonaviy laboratoriyalarni kafolatlaymiz.\n\n"
+            f"🌐 *Rasmiy veb-sayt:* [auezov.edu.kz](https://auezov.edu.kz)\n"
+            f"📢 *Telegram kanal:* {CHANNEL_USERNAME}\n\n"
+            f"👇 _Batafsil ma'lumot olish uchun tugmalardan foydalaning:_"
+        ),
+        'btn_site': "🌐 Veb-saytga o'tish", 'btn_channel': "📢 Telegram Kanal",
+        
+        'manzil_text': (
+            f"📍 *UNIVERSITET MANZILI*\n"
+            f"_{SEP}_\n\n"
+            f"🏢 *Manzil:* Toshkent viloyati, Chirchiq shahri, Navoiy ko'chasi, 4-bino.\n"
+            f"📌 *Mo'ljal:* Chirchiq shahar xalq ta'limi bo'limi yaqinida.\n\n"
+            f"🗺 _Quyida sizga qulay bo'lishi uchun universitetning aniq geo-lokatsiyasini ham yubordik!_"
+        ),
+        
         'yonalish_text': f"👑 *TA'LIM YO'NALISHLARI*\n*{SEP}*\n\n⚖️ Yurisprudensiya\n🔬 Biotexnologiya\n🌍 Ekologiya\n💻 Axborot tizimlar\n⚙️ Avtomatizatsiya\n🚚 Transport\n⚡ Elektroenergetika\n🧑‍🏫 Pedagogika\n🧠 Sun'iy intellekt\n💼 Hisob va audit\n✈️ Turizm",
         'hujjat_intro': f"📋 *KERAKLI HUJJATLAR RO'YXATI*\n*{SEP}*\n1️⃣ Diplom/Attestat\n2️⃣ Pasport\n3️⃣ 0.86 Ma'lumotnoma\n4️⃣ 3x4 rasm\n\n🟢 *1-Bosqich: Diplom yoki Attestat*\n❓ Formatni tanlang:",
         'format_rasm': "🖼️ Rasm ko'rinishida", 'format_fayl': "📎 Fayl ko'rinishida",
         'enter_name': "✍️ *Ismingizni kiriting:*", 'enter_surname': "✍️ *Familiyangizni kiriting:*",
         'enter_age': "✍️ *Yoshingizni kiriting (raqamlarda):*", 'invalid_age': "⚠️ Noto'g'ri yosh kiritildi (14-60)!",
         'send_phone': "📞 Telefon raqamni yuborish", 'phone_intro': "📞 Pastdagi tugma orqali telefon raqamingizni yuboring:",
-        'success_received': "✨ Muvaffaqiyatli qabul qilindi!", 'all_docs_success': "🎉 Barcha hujjatlar topshirildi! Tez orada bog'lanamiz.",
+        'success_received': "✨ Muvaffaqiyatli qabul qilindi!",
+        
+        'all_docs_success': (
+            f"🎉 *TABRIKLAYMIZ!*\n"
+            f"Barcha kerakli hujjatlaringiz muvaffaqiyatli topshirildi. Qabul komissiyasi tez orada siz bilan bog'lanadi!\n\n"
+            f"🏢 *Universitetimiz manzili:* Chirchiq shahri, Navoiy ko'chasi, 4-bino.\n"
+            f"🗺 Oflayn kelmoqchi bo'lsangiz, lokatsiya pastda biriktirilgan."
+        ),
+        
         'select_yonalish_title': "🎓 *RO'YXATDAGI YO'NALISHLARDAN BIRINI TANLANG:*", 'cancel': "❌ Bekor qilish",
         'ariza_success': "🎉 Arizangiz muvaffaqiyatli ro'yxatga olindi!", 
         'unknown': "❓ Noma'lum buyruq. Iltimos, menyudagi tugmalardan foydalaning.",
@@ -81,14 +113,41 @@ LANG_TEXTS = {
         'menu_hujjat': "📝 Подача документов", 'menu_manzil': "📍 Адрес",
         'menu_sorov': "🗂 Анкета", 'menu_tanlash': "📋 Выбор направления",
         'menu_admin': "👤 Связь с админом", 'back': "🔙 Назад в меню",
-        'about_text': "В городе Чирчик начинает работу новый современный филиал университета!",
-        'yonalish_text': f"👑 *НАПРАВЛЕНИЯ ОБУЧЕНИЯ*\n*{SEP}*\n\n⚖️ Юриспруденция\n🔬 Биотехнология\n🌍 Экология\n💻 Информационные системы\n⚙️ Автоматизация\n🚚 Транспорт\n⚡ Электроэнергетика\n🧑‍🏫 Педагогика\n🧠 Искусственный интеллект\n💼 Учет и аудит\n✈️ Туризм",
+        
+        'about_text': (
+            f"🏛 *Южно-Казахстанский Университет имени М. Ауэзова*\n"
+            f"_{SEP}_\n\n"
+            f"Новый современный филиал университета начинает свою деятельность в городе Чирчик! "
+            f"Мы гарантируем высокий уровень образования, квалифицированный преподавательский состав и передовые лаборатории.\n\n"
+            f"🌐 *Официальный сайт:* [auezov.edu.kz](https://auezov.edu.kz)\n"
+            f"📢 *Telegram канал:* {CHANNEL_USERNAME}\n\n"
+            f"👇 _Используйте кнопки ниже для подробностей:_"
+        ),
+        'btn_site': "🌐 Перейти на сайт", 'btn_channel': "📢 Telegram Канал",
+        
+        'manzil_text': (
+            f"📍 *АДРЕС УНИВЕРСИТЕТА*\n"
+            f"_{SEP}_\n\n"
+            f"🏢 *Адрес:* Ташкентская область, город Чирчик, улица Навои, здание 4.\n"
+            f"📌 *Ориентир:* Рядом с городским отделом народного образования.\n\n"
+            f"🗺 _Ниже мы также отправили точную гео-локацию университета для вашего удобства!_"
+        ),
+        
+        'yonalish_text': f"👑 *НАПРАВЛЕНИЯ ОБУЧЕНИЯ*\n*{SEP}*\n\n⚖️ Юриспруденция\n🔬 Биотехнология\n🌍 Экология\n💻 Информационные системы\n⚙️ Автоматизация\n🚚 Транспорт\n⚡ Электроэнергетика\n🧑‍🏫 Педагогика\n🧠 Искусственный интеллект\n💼 Учет и充дит\n✈️ Туризм",
         'hujjat_intro': f"📋 *СПИСОК ДОКУМЕНТОВ*\n*{SEP}*\n1️⃣ Диплом/Аттестат\n2️⃣ Паспорт\n3️⃣ Мед. справка 0.86\n4️⃣ Фото 3х4\n\n🟢 *Этап 1: Диплом или Аттестат*\n❓ Выберите формат:",
         'format_rasm': "🖼️ В виде фото", 'format_fayl': "📎 В виде файла",
         'enter_name': "✍️ *Введите ваше имя:*", 'enter_surname': "✍️ *Введите вашу фамилию:*",
         'enter_age': "✍️ *Введите ваш возраст (цифрами):*", 'invalid_age': "⚠️ Некорректный возраст (14-60)!",
         'send_phone': "📞 Отправить номер", 'phone_intro': "📞 Отправьте свой номер телефона с помощью кнопки ниже:",
-        'success_received': "✨ Успешно принято!", 'all_docs_success': "🎉 Все документы поданы! Скоро мы свяжемся.",
+        'success_received': "✨ Успешно принято!",
+        
+        'all_docs_success': (
+            f"🎉 *ПОЗДРАВЛЯЕМ!*\n"
+            f"Все необходимые документы успешно поданы. Приемная комиссия свяжется с вами в ближайшее время!\n\n"
+            f"🏢 *Адрес университета:* город Чирчик, улица Навои, здание 4.\n"
+            f"🗺 Точная локация прикреплена ниже."
+        ),
+        
         'select_yonalish_title': "🎓 *ВЫБЕРИТЕ ОДНО ИЗ НАПРАВЛЕНИЙ:*", 'cancel': "❌ Отмена",
         'ariza_success': "🎉 Ваша заявка успешно зарегистрирована!", 
         'unknown': "❓ Неизвестная команда. Пожалуйста, используйте кнопки меню.",
@@ -100,21 +159,48 @@ LANG_TEXTS = {
         'state_error': "⚠️ Вы находитесь на этапе ввода данных! Продолжайте или нажмите кнопку отмены."
     },
     'kk': {
-        'welcome': "🏛 *М.Әуезов атындағы ОҚУ* Шыршық филиалының ресми қабылдау ботына қош келдіңіз!\n\n👇 _Жалғастыру үшін мәзірді пайдаланыңыз:_ ",
+        'welcome': "🏛 *М.Әуезов атындағы Оңтүстік Қазақстан Университеті* Шыршық филиалының ресми қабылдау ботына қош келдіңіз!\n\n👇 _Жалғастыру үшін мәзірді пайдаланыңыз:_ ",
         'menu_about': "🎓 Университет туралы", 'menu_yonalish': "🗃️ Мамандықтар",
         'menu_hujjat': "📝 Құжат тапсыру", 'menu_manzil': "📍 Мекен-жай",
         'menu_sorov': "🗂 Сауалнама", 'menu_tanlash': "📋 Мамандық таңдау",
         'menu_admin': "👤 Админмен байланыс", 'back': "🔙 Мәзірге қайту",
-        'about_text': "Шыршық қаласында университеттің жаңа заманауи филиалы өз жұмысын бастауда!",
+        
+        'about_text': (
+            f"🏛 *М.Әуезов атындағы Оңтүстік Қазақстан Университеті*\n"
+            f"_{SEP}_\n\n"
+            f"Шыршық қаласында университеттің жаңа, заманауи және халықаралық талаптарға сай филиалы өз жұмысын бастауда! "
+            f"Біз студенттерге жоғары деңгейлі білім, білікті профессор-оқытушылар құрамы мен заманауи зертханаларға кепілдік береміз.\n\n"
+            f"🌐 *Ресми веб-сайт:* [auezov.edu.kz](https://auezov.edu.kz)\n"
+            f"📢 *Telegram канал:* {CHANNEL_USERNAME}\n\n"
+            f"👇 _Толық ақпарат алу үшін батырмаларды қолданыңыз:_"
+        ),
+        'btn_site': "🌐 Веб-сайтқа өту", 'btn_channel': "📢 Telegram Канал",
+        
+        'manzil_text': (
+            f"📍 *УНИВЕРСИТЕТ МЕКЕН-ЖАЙЫ*\n"
+            f"_{SEP}_\n\n"
+            f"🏢 *Мекен-жай:* Ташкент облысы, Шыршық қаласы, Науаи көшесі, 4-үй.\n"
+            f"📌 *Бағдар:* Шыршық қалалық халыққа білім беру бөлімінің жанында.\n\n"
+            f"🗺 _Төменде сізге ыңғайлы болуы үшін университеттің нақты гео-локациясын жібердік!_"
+        ),
+        
         'yonalish_text': f"👑 *БІЛІМ БЕРУ БАҒДАРЛАМАЛАРЫ*\n*{SEP}*\n\n⚖️ Юриспруденция\n🔬 Биотехнология\n🌍 Экология\n💻 Ақпараттық жүйелер\n⚙️ Автоматизация\n🚚 Көлік техникасы\n⚡ Электроэнергетика\n🧑‍🏫 Педагогика\n🧠 Жасанды интеллект\n💼 Есеп және аудит\n✈️ Туризм",
-        'hujjat_intro': f"📋 *ҚАЖЕТТІ ҚҰЖАТТАР*\n*{SEP}*\n1️⃣ Диплом/Аттестат\n2️⃣ Төлқұжат\n3️⃣ 0.86 Анықтама\n4️⃣ 3x4 фото\n\n🟢 *1-Кезең: Диплом немесе Аттестат*\n❓ Форматты таңдаңыз:",
+        'hujjat_intro': f"📋 *ҚАЖЕТТІ ҚҰЖАТТАР*\n*{SEP}*\n1️⃣ Диплом/Аттестат\n2️⃣ Төлқұжат\n3️⃣ 0.86 Анықтама\n4️⃣ 3x4 photo\n\n🟢 *1-Кезең: Диплом немесе Аттестат*\n❓ Форматты таңдаңыз:",
         'format_rasm': "🖼️ Сурет түрінде", 'format_fayl': "📎 Файл түрінде",
         'enter_name': "✍️ *Атыңызды енгізіңіз:*", 'enter_surname': "✍️ *Тегіңізді енгізіңіз:*",
         'enter_age': "✍️ *Жасыңызды енгізіңіз (санмен):*", 'invalid_age': "⚠️ Жас қате енгізілді (14-60)!",
-        'send_phone': "📞 Телефон жіберу", 'phone_intro': "📞 Төмендегі арнайы батырма арқылы телефон нөміріңізді жіберіңіз:",
-        'success_received': "✨ Сәтті қабылданды!", 'all_docs_success': "🎉 Барлық құжаттар тапсырылды! Тез арада хабарласамыз.",
+        'send_phone': "📞 Телефон жіберу", 'phone_intro': "📞 Төмендегі арнайы батырма арқылы telephone нөміріңізді жіберіңіз:",
+        'success_received': "✨ Сәтті қабылданды!",
+        
+        'all_docs_success': (
+            f"🎉 *ҚҰТТЫҚТАЙМЫЗ!*\n"
+            f"Барлық қажетті құжаттарыңыз сәтті тапсырылды. Қабылдау комиссиясы жақын арада сізбен байланысады!\n\n"
+            f"🏢 *Университет мекен-жайы:* Шыршық қаласы, Науаи көшесі, 4-үй.\n"
+            f"🗺 Нақты локация төменде бекітілген."
+        ),
+        
         'select_yonalish_title': "🎓 *ТІЗІМДЕГІ МАМАНДЫҚТАРДЫҢ БІРІН ТАҢДАҢЫЗ:*", 'cancel': "❌ Бас тарту",
-        'ariza_success': "🎉 Өтінішіңіз сәтті тіркелді!", 
+        'ariza_success': "🎉 Өтінішіңіз sәтті тіркелді!", 
         'unknown': "❓ Белгісіз бұйрық. Мәзір батырмаларын қолданыңыз.",
         'error_need_file': "⚠️ Құжатты файл (document) ретінде жіберіңіз.",
         'error_need_photo': "⚠️ Құжатты сурет (photo) ретінде жіберіңіз.",
@@ -180,14 +266,14 @@ def format_tanlash_keyboard(lang, step_num):
     return InlineKeyboardMarkup([
         [InlineKeyboardButton(t['format_rasm'], callback_data=f"format_rasm_{step_num}"),
          InlineKeyboardButton(t['format_fayl'], callback_data=f"format_fayl_{step_num}")],
-        [InlineKeyboardButton(t['back'], callback_data="hujjat_orqaga")] # Nazad inline tugmasi
+        [InlineKeyboardButton(t['back'], callback_data="hujjat_orqaga")]
     ])
 
 def cancel_keyboard(lang):
     return ReplyKeyboardMarkup([[KeyboardButton(LANG_TEXTS[lang]['cancel'])]], resize_keyboard=True)
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 🚀  START VA ASOSIY MATNLAR BOSHQRUVI
+# 🚀  START VA ASOSIY MATNLAR BOSHQRUVI (RASM VA SAYTLAR QO'SHILDI)
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def start(update, context):
     context.user_data.clear()
@@ -222,15 +308,30 @@ async def text_handler(update, context):
     lang = get_lang(context, update)
     t = LANG_TEXTS[lang]
 
+    # 🎓 UNIVERSITET HAQIDA (YANGI DIZAYN - RASM + TUGMALAR)
     if msg == t['menu_about']:
-        await update.message.reply_text(t['about_text'], parse_mode="Markdown")
+        inline_links = InlineKeyboardMarkup([
+            [InlineKeyboardButton(t['btn_site'], url="https://auezov.edu.kz"),
+             InlineKeyboardButton(t['btn_channel'], url=f"https://t.me/{CHANNEL_USERNAME.replace('@','')}" )]
+        ])
+        # Rasm bilan chiroyli xabar chiqarish
+        try:
+            await update.message.reply_photo(photo=ABOUT_PHOTO_URL, caption=t['about_text'], parse_mode="Markdown", reply_markup=inline_links)
+        except Exception:
+            # Agar rasm yuklanishida xatolik bo'lsa, faqat matnning o'zini yuboradi
+            await update.message.reply_text(t['about_text'], parse_mode="Markdown", reply_markup=inline_links)
         return TANLA
+        
     elif msg == t['menu_yonalish']:
         await update.message.reply_text(t['yonalish_text'], parse_mode="Markdown")
         return TANLA
+        
+    # 📍 MANZIL BO'LIMI (TO'G'RILANDI VA GEO LOKATSIYA QO'SHILDI)
     elif msg == t['menu_manzil']:
-        await update.message.reply_text("📍 *Manzil:* Chirchiq shahri, r-n... [Google Maps](http://maps.google.com)", parse_mode="Markdown")
+        await update.message.reply_text(t['manzil_text'], parse_mode="Markdown")
+        await update.message.reply_location(latitude=MAP_LATITUDE, longitude=MAP_LONGITUDE)
         return TANLA
+        
     elif msg == t['menu_admin']:
         await update.message.reply_text(f"💬 *Admin:* {ADMIN_USERNAME}\n📞 *Tel:* `{ADMIN_PHONE}`", parse_mode="Markdown")
         return TANLA
@@ -242,7 +343,6 @@ async def text_handler(update, context):
         await update.message.reply_text(t['enter_name'], parse_mode="Markdown", reply_markup=cancel_keyboard(lang))
         return SOROV_ISM if msg == t['menu_sorov'] else YONALISH_ISM
     
-    # ⚠️ Kutilmagan har qanday begona matn kelsa (Catch-all)
     await update.message.reply_text(t['unknown'], reply_markup=main_menu_markup(lang))
     return TANLA
 
@@ -264,13 +364,12 @@ async def inline_back_handler(update, context):
     return TANLA
 
 async def state_error_handler(update, context):
-    # Foydalanuvchi ma'lumot kiritish rejimida adashib boshqa narsa yozsa yoki boshqa menyuni bossa ishlaydi
     lang = get_lang(context, update)
     await update.message.reply_text(LANG_TEXTS[lang]['state_error'], reply_markup=cancel_keyboard(lang))
     return None
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 📤  HUJJAT YUKLASH BOSQICHLARI
+# 📤  HUJJAT YUKLASH (YAKUNIDA MANZIL CHIQADIGAN QILINDI)
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async def format_callback(update, context):
     query = update.callback_query
@@ -315,11 +414,13 @@ async def hujjat_save(update, context, step):
 
     if step < 4:
         next_s = step + 1
-        await update.message.reply_text(f"{SUCCESS} {t['success_received']}\n\n🟢 *{next_s}-Bosqich:* {HUJJAT_NOMLAR[lang][next_s]}", 
+        await update.message.reply_text(f"✨ {t['success_received']}\n\n🟢 *{next_s}-Bosqich:* {HUJJAT_NOMLAR[lang][next_s]}", 
                                        parse_mode="Markdown", reply_markup=format_tanlash_keyboard(lang, next_s))
         return HUJJAT_FORMAT_STATES[next_s]
     
+    # 🔥 HUJJATLAR TUGAGANIDAN KEYIN MANZIL VA LOKATSIYA CHIQARISH
     await update.message.reply_text(t['all_docs_success'], parse_mode="Markdown", reply_markup=main_menu_markup(lang))
+    await update.message.reply_location(latitude=MAP_LATITUDE, longitude=MAP_LONGITUDE)
     return TANLA
 
 async def h1(update, context): return await hujjat_save(update, context, 1)
@@ -367,7 +468,6 @@ async def input_telefon(update, context):
     rejim = context.user_data.get('rejim')
 
     if rejim == 'sorov':
-        # So'rovnomani bazaga saqlash va tugatish
         user = update.message.from_user
         con = db_connect()
         cur = con.cursor()
@@ -379,7 +479,6 @@ async def input_telefon(update, context):
         await update.message.reply_text(LANG_TEXTS[lang]['ariza_success'], reply_markup=main_menu_markup(lang))
         return TANLA
     else:
-        # Yo'nalish tanlash inline tugmalarini ko'rsatish
         yonalishlar = [
             ("⚖️ Yurisprudensiya", "Yur"), ("🔬 Biotexnologiya", "Bio"),
             ("🌍 Ekologiya", "Eko"), ("💻 Axborot tizimlar", "IT"),
@@ -427,14 +526,13 @@ async def yonalish_callback(update, context):
     con.commit()
     con.close()
 
-    # Kanalga chiroyli xabar yuborish
     uname = f"@{user.username}" if user.username else f"ID: {user_id}"
     report = f"📋 *Yangi Yo'nalish Arizasi!*\n{SEP}\n👤 *User:* {uname}\n📝 *F.I.O:* {context.user_data.get('p_fam')} {context.user_data.get('p_ism')}\n📞 *Tel:* `{context.user_data.get('p_tel')}`\n🎓 *Yo'nalish:* {yon_nomi}"
     try: await context.bot.send_message(chat_id=CHANNEL_USERNAME, text=report, parse_mode="Markdown")
     except Exception as e: logger.error(f"Kanal xatosi: {e}")
 
     await query.edit_message_text(LANG_TEXTS[lang]['ariza_success'])
-    await context.bot.send_message(chat_id=user_id, text="🏠 Asosiy sahifa", reply_markup=main_menu_markup(lang))
+    await context.bot.send_message(chat_id=user_id, text="Asosiy sahifa", reply_markup=main_menu_markup(lang))
     return TANLA
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -475,9 +573,9 @@ def main():
     )
 
     app.add_handler(conv)
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, text_handler)) # Global Catch-All Filter
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, text_handler))
 
-    logger.info("🤖 Bot 100% tayyor va ishga tushdi...")
+    logger.info("🤖 Bot 100% yangi dizayn bilan ishlamoqda...")
     app.run_polling()
 
 if __name__ == '__main__':
