@@ -72,39 +72,18 @@ LANG_TEXTS = {
         'back': "🔙 Orqaga",
         'cancel': "❌ Bekor qilish",
         'change_lang': "🌐 Tilni o'zgartirish",
-        # Universitet haqida (YANGI - to'liq ma'lumot, saytsiz)
-        'about_title': "🏛 *M.AUEZOV NOMIDAGI JANUBIY QOZOG'ISTON UNIVERSITETI*",
-        'about_filial': "\n📌 *CHIRCHIQ FILIALI HAQIDA*\n\n"
-                       "🏛 *Filial nomi:* M.Auezov nomidagi Janubiy Qozog'iston universiteti Chirchiq filiali\n\n"
-                       "📍 *Manzili:* Chirchiq shahri, Toshkent viloyati, O'zbekiston\n\n"
-                       "📅 *Tashkil etilgan vaqti:* 2024-yil\n\n"
-                       "📆 *Ochilgan sana:* 2024-yil 1-sentyabr\n\n"
-                       "🎯 *Maqsad:* O'zbekiston va Qozog'iston o'rtasidagi ta'lim sohasidagi hamkorlikni rivojlantirish\n\n"
-                       "🎓 *Ta'lim turlari:* Bakalavriat (4 yil) va Magistratura (2 yil)\n\n"
-                       "📚 *Yo'nalishlar soni:* 16 ta (11 bakalavriat, 5 magistratura)\n\n"
-                       "👨‍🏫 *Professor-o'qituvchilar:* 50+ nafar\n\n"
-                       "🏛 *Binolar:* Zamonaviy o'quv binolari va jihozlangan laboratoriyalar\n\n"
-                       "🛌 *Yotoqxona:* Mavjud (chet ellik va viloyat talabalari uchun)\n\n"
-                       "📜 *Diplom:* O'zbekiston va Qozog'iston davlatlarida amal qiladi\n\n"
-                       "🌐 *Xalqaro hamkorlik:* Erasmus+, dual diplom dasturlari\n\n"
-                       "✅ *Qabul jarayoni:* 2024-yil 1-iyundan 1-sentyabrgacha davom etadi",
-        'about_main': "\n🏛 *ASOSIY UNIVERSITET HAQIDA*\n\n"
-                      "🏛 *Universitet nomi:* M.Auezov nomidagi Janubiy Qozog'iston universiteti\n\n"
-                      "📅 *Tashkil etilgan:* 1943-yil (Chimkent pedagogika instituti sifatida)\n\n"
-                      "📍 *Asosiy manzil:* Chimkent shahri, Qozog'iston\n\n"
-                      "👨‍🎓 *Talabalar soni:* 15 000+ nafar\n\n"
-                      "🏛 *Fakultetlar:* 12 ta\n\n"
-                      "📚 *Yo'nalishlar:* 50+ ta bakalavriat va magistratura yo'nalishlari\n\n"
-                      "🏆 *Yutuqlar:* Respublika olimpiadalari sovrindorlari, xalqaro grantlar, ilmiy loyihalar\n\n"
-                      "🤝 *Hamkor universitetlar:* 50 dan ortiq xorijiy oliygohlar\n\n"
-                      "🇹🇷 *Hamkor davlatlar:* Turkiya, Germaniya, Janubiy Koreya, AQSH, Rossiya va boshqalar\n\n"
-                      "📖 *Ta'lim tili:* Qozoq, Rus, Ingliz tillarida\n\n"
-                      "🎓 *Bitiruvchilar:* 100 000+ nafar malakali mutaxassislar",
-        'about_source': "\n📝 *Ma'lumot manbasi:*\n"
-                        "[🌐 Oliygoh.uz sayti](https://oliygoh.uz/post/chirchiqda-mauezov-nomidagi-janubiy-qozogiston-universiteti-filiali-tashkil-etiali)\n\n"
-                        "🔍 Batafsil ma'lumot uchun yuqoridagi saytga tashrif buyuring!",
+        # Universitet haqida (SODDA VA QISQA)
+        'about_text': "🏛 *M.AUEZOV NOMIDAGI JANUBIY QOZOG'ISTON UNIVERSITETI*\n\n"
+                      "🇺🇿 *Chirchiq filiali* 2024-yil 1-sentyabrda ochilgan.\n\n"
+                      "🎓 *Bakalavriat* (4 yil) va *Magistratura* (2 yil) yo'nalishlari mavjud.\n\n"
+                      "📚 *16 ta* yo'nalish (11 bakalavriat, 5 magistratura).\n\n"
+                      "🏛 Asosiy universitet 1943-yilda tashkil etilgan.\n\n"
+                      "👨‍🎓 15 000 dan ortiq talaba tahsil oladi.\n\n"
+                      "🌐 Xalqaro hamkorlik: Erasmus+, dual diplom.\n\n"
+                      "📜 Diplom O'zbekiston va Qozog'istonda amal qiladi.\n\n"
+                      "🔗 *Batafsil:* [Oliygoh.uz](https://oliygoh.uz/post/chirchiqda-mauezov-nomidagi-janubiy-qozogiston-universiteti-filiali-tashkil-etiali)",
         # Xatolik xabarlari
-        'wrong_input': "❌ *Xato ma'lumot!*\n\n📝 Iltimos, to'g'ri ma'lumot kiriting.",
+        'wrong_input': "❌ *Xato ma'lumot!*",
         'already_registered': "✨ *Siz allaqachon yo'nalish tanlagansiz!*",
         'no_yonalish': "⚠️ *Avval yo'nalish tanlang!*",
         'step_name': "Ismingiz",
@@ -119,8 +98,8 @@ LANG_TEXTS = {
         'magistratura_text': "🎓 *MAGISTRATURA YO'NALISHLARI* (5 ta)\n\n📊 Iqtisodiyot\n⚖️ Yurisprudensiya\n💻 Axborot tizimlari\n🌍 Ekologiya\n📈 Menejment\n\n📚 *O'qish muddati:* 2 yil",
         # Hujjat topshirish
         'hujjat_intro': "📋 *KERAKLI HUJJATLAR RO'YXATI*\n\n1️⃣ Diplom/Attestat\n2️⃣ Pasport nusxasi\n3️⃣ 0.86 Med-ma'lumotnoma\n4️⃣ 3x4 rasm (6 dona)\n\n▸ *1-Bosqich: Diplom yoki Attestat*\n❓ Formatni tanlang:",
-        'format_rasm': "🖼️ Rasm (JPEG, PNG)",
-        'format_fayl': "📎 Fayl (PDF, DOC)",
+        'format_rasm': "🖼️ Rasm",
+        'format_fayl': "📎 Fayl",
         'enter_name': "✍️ *Ismingizni kiriting:*",
         'enter_surname': "✍️ *Familiyangizni kiriting:*",
         'enter_age': "🎂 *Yoshingizni kiriting:*\n\n📌 Bakalavriat: 14-60 yosh\n📌 Magistratura: 21-65 yosh",
@@ -135,8 +114,8 @@ LANG_TEXTS = {
         'reg_success': "🎉 *Yo'nalish muvaffaqiyatli tanlandi!*\n\n✅ Ma'lumotlaringiz qabul qilindi.\n📝 Endi hujjat topshirishingiz mumkin.",
         'reg_cancelled': "❌ Jarayon bekor qilindi.",
         'unknown': "❓ *Tushunarsiz buyruq!*\n\n📋 Iltimos, menyu tugmalaridan foydalaning.",
-        'error_need_file': "⚠️ *Fayl formatida yuboring!*\n\n✅ Formatlar: PDF, DOC, TXT",
-        'error_need_photo': "⚠️ *Rasm formatida yuboring!*\n\n✅ Formatlar: JPEG, PNG, WEBP",
+        'error_need_file': "⚠️ *Fayl formatida yuboring!*",
+        'error_need_photo': "⚠️ *Rasm formatida yuboring!*",
         'warning_in_progress': "⚠️ *Siz ro'yxatdan o'tish jarayonidasiz!*\n\n📝 Kutilmoqda: *{current_step}*\n\n❌ Bekor qilish uchun tugmani bosing.",
         # Kanal xabarlari
         'channel_caption': "📋 *YANGI HUJJAT!*\n\n👤 Foydalanuvchi: {user}\n🆔 ID: `{uid}`\n📂 Hujjat: *{doc_name}*",
@@ -161,37 +140,16 @@ LANG_TEXTS = {
         'back': "🔙 Назад",
         'cancel': "❌ Отмена",
         'change_lang': "🌐 Сменить язык",
-        'about_title': "🏛 *ЮЖНО-КАЗАХСТАНСКИЙ УНИВЕРСИТЕТ ИМ. М.АУЕЗОВА*",
-        'about_filial': "\n📌 *О ЧИРЧИКСКОМ ФИЛИАЛЕ*\n\n"
-                       "🏛 *Название филиала:* Чирчикский филиал Южно-Казахстанского университета им. М.Ауезова\n\n"
-                       "📍 *Адрес:* г.Чирчик, Ташкентская область, Узбекистан\n\n"
-                       "📅 *Дата основания:* 2024 год\n\n"
-                       "📆 *Дата открытия:* 1 сентября 2024 года\n\n"
-                       "🎯 *Цель:* Развитие сотрудничества в сфере образования между Узбекистаном и Казахстаном\n\n"
-                       "🎓 *Типы обучения:* Бакалавриат (4 года) и Магистратура (2 года)\n\n"
-                       "📚 *Количество направлений:* 16 (11 бакалавриат, 5 магистратура)\n\n"
-                       "👨‍🏫 *Преподавателей:* 50+\n\n"
-                       "🏛 *Здания:* Современные учебные корпуса и оборудованные лаборатории\n\n"
-                       "🛌 *Общежитие:* Есть (для иногородних и иностранных студентов)\n\n"
-                       "📜 *Диплом:* Действителен в Узбекистане и Казахстане\n\n"
-                       "🌐 *Международное сотрудничество:* Erasmus+, программы двойных дипломов\n\n"
-                       "✅ *Прием документов:* с 1 июня по 1 сентября 2024 года",
-        'about_main': "\n🏛 *ОБ ОСНОВНОМ УНИВЕРСИТЕТЕ*\n\n"
-                      "🏛 *Название:* Южно-Казахстанский университет им. М.Ауезова\n\n"
-                      "📅 *Основан:* 1943 год (как Чимкентский педагогический институт)\n\n"
-                      "📍 *Главный адрес:* г.Шымкент, Казахстан\n\n"
-                      "👨‍🎓 *Студентов:* 15 000+\n\n"
-                      "🏛 *Факультетов:* 12\n\n"
-                      "📚 *Направлений:* 50+ направлений бакалавриата и магистратуры\n\n"
-                      "🏆 *Достижения:* Победители республиканских олимпиад, международные гранты, научные проекты\n\n"
-                      "🤝 *Университеты-партнеры:* Более 50 зарубежных вузов\n\n"
-                      "🇹🇷 *Страны-партнеры:* Турция, Германия, Южная Корея, США, Россия и др.\n\n"
-                      "📖 *Языки обучения:* Казахский, Русский, Английский\n\n"
-                      "🎓 *Выпускники:* Более 100 000 квалифицированных специалистов",
-        'about_source': "\n📝 *Источник информации:*\n"
-                        "[🌐 Сайт Oliygoh.uz](https://oliygoh.uz/post/chirchiqda-mauezov-nomidagi-janubiy-qozogiston-universiteti-filiali-tashkil-etiali)\n\n"
-                        "🔍 Подробнее на сайте выше!",
-        'wrong_input': "❌ *Неверный ввод!*\n\n📝 Введите правильные данные.",
+        'about_text': "🏛 *ЮЖНО-КАЗАХСТАНСКИЙ УНИВЕРСИТЕТ ИМ. М.АУЕЗОВА*\n\n"
+                      "🇺🇿 *Чирчикский филиал* открыт 1 сентября 2024 года.\n\n"
+                      "🎓 *Бакалавриат* (4 года) и *Магистратура* (2 года).\n\n"
+                      "📚 *16 направлений* (11 бакалавриат, 5 магистратура).\n\n"
+                      "🏛 Основной университет основан в 1943 году.\n\n"
+                      "👨‍🎓 Более 15 000 студентов.\n\n"
+                      "🌐 Международное сотрудничество: Erasmus+, двойные дипломы.\n\n"
+                      "📜 Диплом действует в Узбекистане и Казахстане.\n\n"
+                      "🔗 *Подробнее:* [Oliygoh.uz](https://oliygoh.uz/post/chirchiqda-mauezov-nomidagi-janubiy-qozogiston-universiteti-filiali-tashkil-etiali)",
+        'wrong_input': "❌ *Неверный ввод!*",
         'already_registered': "✨ *Вы уже выбрали направление!*",
         'no_yonalish': "⚠️ *Сначала выберите направление!*",
         'step_name': "Ваше имя",
@@ -203,8 +161,8 @@ LANG_TEXTS = {
         'bakalavr_text': "👑 *НАПРАВЛЕНИЯ БАКАЛАВРИАТА* (11)\n\n🔬 Биотехнология\n🌍 Экология\n💻 Информационные системы\n⚙️ Автоматизация\n🚚 Транспорт\n⚡ Электроэнергетика\n🧑‍🏫 Педагогика\n🧠 Искусственный интеллект\n💼 Учет и аудит\n✈️ Туризм\n⚖️ Юриспруденция\n\n📚 *Срок обучения:* 4 года",
         'magistratura_text': "🎓 *НАПРАВЛЕНИЯ МАГИСТРАТУРЫ* (5)\n\n📊 Экономика\n⚖️ Юриспруденция\n💻 Информационные системы\n🌍 Экология\n📈 Менеджмент\n\n📚 *Срок обучения:* 2 года",
         'hujjat_intro': "📋 *СПИСОК ДОКУМЕНТОВ*\n\n1️⃣ Диплом/Аттестат\n2️⃣ Копия паспорта\n3️⃣ Мед-справка 0.86\n4️⃣ Фото 3x4 (6 шт)\n\n▸ *1-этап: Диплом или Аттестат*\n❓ Выберите формат:",
-        'format_rasm': "🖼️ Изображение (JPEG, PNG)",
-        'format_fayl': "📎 Файл (PDF, DOC)",
+        'format_rasm': "🖼️ Изображение",
+        'format_fayl': "📎 Файл",
         'enter_name': "✍️ *Введите имя:*",
         'enter_surname': "✍️ *Введите фамилию:*",
         'enter_age': "🎂 *Введите возраст:*\n\n📌 Бакалавриат: 14-60 лет\n📌 Магистратура: 21-65 лет",
@@ -219,8 +177,8 @@ LANG_TEXTS = {
         'reg_success': "🎉 *Направление успешно выбрано!*\n\n✅ Ваши данные приняты.\n📝 Теперь можете подать документы.",
         'reg_cancelled': "❌ Процесс отменен.",
         'unknown': "❓ *Неизвестная команда!*\n\n📋 Используйте кнопки меню.",
-        'error_need_file': "⚠️ *Отправьте файл!*\n\n✅ Форматы: PDF, DOC, TXT",
-        'error_need_photo': "⚠️ *Отправьте фото!*\n\n✅ Форматы: JPEG, PNG, WEBP",
+        'error_need_file': "⚠️ *Отправьте файл!*",
+        'error_need_photo': "⚠️ *Отправьте фото!*",
         'warning_in_progress': "⚠️ *Вы в процессе регистрации!*\n\n📝 Ожидается: *{current_step}*",
         'channel_caption': "📋 *НОВЫЙ ДОКУМЕНТ!*\n\n👤 Пользователь: {user}\n🆔 ID: `{uid}`\n📂 Документ: *{doc_name}*",
         'yonalish_channel_caption': "🎓 *ВЫБРАН БАКАЛАВРИАТ!*\n\n👤 Пользователь: {user}\n🆔 ID: `{uid}`\n📞 Тел: `{phone}`\n📚 Направление: *{yonalish}*\n👤 Имя: {ism}\n👤 Фамилия: {familya}\n🎂 Возраст: {yosh}",
@@ -242,37 +200,16 @@ LANG_TEXTS = {
         'back': "🔙 Артқа",
         'cancel': "❌ Болдырмау",
         'change_lang': "🌐 Тілді өзгерту",
-        'about_title': "🏛 *М.ӘУЕЗОВ АТЫНДАҒЫ ОҚУ*",
-        'about_filial': "\n📌 *ШЫРШЫҚ ФИЛИАЛЫ ТУРАЛЫ*\n\n"
-                       "🏛 *Филиал атауы:* М.Әуезов атындағы ОҚУ Шыршық филиалы\n\n"
-                       "📍 *Мекенжайы:* Шыршық қаласы, Ташкент облысы, Өзбекстан\n\n"
-                       "📅 *Құрылған жылы:* 2024 жыл\n\n"
-                       "📆 *Ашылған күні:* 2024 жылғы 1 қыркүйек\n\n"
-                       "🎯 *Мақсаты:* Өзбекстан мен Қазақстан арасындағы білім саласындағы ынтымақтастықты дамыту\n\n"
-                       "🎓 *Оқу түрлері:* Бакалавриат (4 жыл) және Магистратура (2 жыл)\n\n"
-                       "📚 *Бағыттар саны:* 16 (11 бакалавриат, 5 магистратура)\n\n"
-                       "👨‍🏫 *Оқытушылар саны:* 50-ден астам\n\n"
-                       "🏛 *Ғимараттар:* Заманауи оқу корпустары мен жабдықталған зертханалар\n\n"
-                       "🛌 *Жатақхана:* Бар (облыстан және шет елден келген студенттер үшін)\n\n"
-                       "📜 *Диплом:* Өзбекстан мен Қазақстанда жарамды\n\n"
-                       "🌐 *Халықаралық ынтымақтастық:* Erasmus+, қос диплом бағдарламалары\n\n"
-                       "✅ *Қабылдау мерзімі:* 2024 жылғы 1 маусымнан 1 қыркүйекке дейін",
-        'about_main': "\n🏛 *БАС УНИВЕРСИТЕТ ТУРАЛЫ*\n\n"
-                      "🏛 *Университет атауы:* М.Әуезов атындағы ОҚУ\n\n"
-                      "📅 *Құрылған:* 1943 жыл (Шымкент педагогикалық институты ретінде)\n\n"
-                      "📍 *Бас мекенжайы:* Шымкент қаласы, Қазақстан\n\n"
-                      "👨‍🎓 *Студенттер саны:* 15 000-нан астам\n\n"
-                      "🏛 *Факультеттер:* 12\n\n"
-                      "📚 *Бағыттар:* 50-ден астам бакалавриат және магистратура бағыттары\n\n"
-                      "🏆 *Жетістіктер:* Республикалық олимпиада жеңімпаздары, халықаралық гранттар, ғылыми жобалар\n\n"
-                      "🤝 *Серіктес университеттер:* 50-ден астам шетелдік ЖОО\n\n"
-                      "🇹🇷 *Серіктес елдер:* Түркия, Германия, Оңтүстік Корея, АҚШ, Ресей және т.б.\n\n"
-                      "📖 *Оқу тілі:* Қазақ, Орыс, Ағылшын тілдерінде\n\n"
-                      "🎓 *Түлектер:* 100 000-нан астам білікті мамандар",
-        'about_source': "\n📝 *Ақпарат көзі:*\n"
-                        "[🌐 Oliygoh.uz сайты](https://oliygoh.uz/post/chirchiqda-mauezov-nomidagi-janubiy-qozogiston-universiteti-filiali-tashkil-etiali)\n\n"
-                        "🔍 Толығырақ жоғарыдағы сайтта!",
-        'wrong_input': "❌ *Қате енгізу!*\n\n📝 Дұрыс деректерді енгізіңіз.",
+        'about_text': "🏛 *М.ӘУЕЗОВ АТЫНДАҒЫ ОҚУ*\n\n"
+                      "🇺🇿 *Шыршық филиалы* 2024 жылғы 1 қыркүйекте ашылды.\n\n"
+                      "🎓 *Бакалавриат* (4 жыл) және *Магистратура* (2 жыл).\n\n"
+                      "📚 *16 бағыт* (11 бакалавриат, 5 магистратура).\n\n"
+                      "🏛 Бас университет 1943 жылы құрылған.\n\n"
+                      "👨‍🎓 15 000-нан астам студент.\n\n"
+                      "🌐 Халықаралық ынтымақтастық: Erasmus+, қос диплом.\n\n"
+                      "📜 Диплом Өзбекстан мен Қазақстанда жарамды.\n\n"
+                      "🔗 *Толығырақ:* [Oliygoh.uz](https://oliygoh.uz/post/chirchiqda-mauezov-nomidagi-janubiy-qozogiston-universiteti-filiali-tashkil-etiali)",
+        'wrong_input': "❌ *Қате енгізу!*",
         'already_registered': "✨ *Сіз бағытты таңдадыңыз!*",
         'no_yonalish': "⚠️ *Алдымен бағыт таңдаңыз!*",
         'step_name': "Атыңыз",
@@ -284,8 +221,8 @@ LANG_TEXTS = {
         'bakalavr_text': "👑 *БАКАЛАВРИАТ БАҒЫТТАРЫ* (11)\n\n🔬 Биотехнология\n🌍 Экология\n💻 Ақпараттық жүйелер\n⚙️ Автоматтандыру\n🚚 Көлік\n⚡ Электроэнергетика\n🧑‍🏫 Педагогика\n🧠 Жасанды интеллект\n💼 Есеп және аудит\n✈️ Туризм\n⚖️ Юриспруденция\n\n📚 *Оқу мерзімі:* 4 жыл",
         'magistratura_text': "🎓 *МАГИСТРАТУРА БАҒЫТТАРЫ* (5)\n\n📊 Экономика\n⚖️ Юриспруденция\n💻 Ақпараттық жүйелер\n🌍 Экология\n📈 Менеджмент\n\n📚 *Оқу мерзімі:* 2 жыл",
         'hujjat_intro': "📋 *ҚҰЖАТТАР ТІЗІМІ*\n\n1️⃣ Диплом/Аттестат\n2️⃣ Паспорт көшірмесі\n3️⃣ 0.86 Мед-анықтама\n4️⃣ 3x4 сурет (6 дана)\n\n▸ *1-кезең: Диплом/Аттестат*\n❓ Форматты таңдаңыз:",
-        'format_rasm': "🖼️ Сурет (JPEG, PNG)",
-        'format_fayl': "📎 Файл (PDF, DOC)",
+        'format_rasm': "🖼️ Сурет",
+        'format_fayl': "📎 Файл",
         'enter_name': "✍️ *Атыңызды жазыңыз:*",
         'enter_surname': "✍️ *Тегіңізді жазыңыз:*",
         'enter_age': "🎂 *Жасыңызды жазыңыз:*\n\n📌 Бакалавриат: 14-60 жас\n📌 Магистратура: 21-65 жас",
@@ -300,8 +237,8 @@ LANG_TEXTS = {
         'reg_success': "🎉 *Бағыт сәтті таңдалды!*\n\n✅ Деректеріңіз қабылданды.\n📝 Енді құжат тапсыра аласыз.",
         'reg_cancelled': "❌ Процесс болдырылды.",
         'unknown': "❓ *Белгісіз команда!*\n\n📋 Мәзір түймелерін пайдаланыңыз.",
-        'error_need_file': "⚠️ *Файл жіберіңіз!*\n\n✅ Форматтар: PDF, DOC, TXT",
-        'error_need_photo': "⚠️ *Сурет жіберіңіз!*\n\n✅ Форматтар: JPEG, PNG, WEBP",
+        'error_need_file': "⚠️ *Файл жіберіңіз!*",
+        'error_need_photo': "⚠️ *Сурет жіберіңіз!*",
         'warning_in_progress': "⚠️ *Сіз тіркелу процесіндесіз!*\n\n📝 Күтілуде: *{current_step}*",
         'channel_caption': "📋 *ЖАҢА ҚҰЖАТ!*\n\n👤 Қолданушы: {user}\n🆔 ID: `{uid}`\n📂 Құжат: *{doc_name}*",
         'yonalish_channel_caption': "🎓 *БАКАЛАВРИАТ ТАҢДАЛДЫ!*\n\n👤 Қолданушы: {user}\n🆔 ID: `{uid}`\n📞 Тел: `{phone}`\n📚 Бағыт: *{yonalish}*\n👤 Аты: {ism}\n👤 Тегі: {familya}\n🎂 Жасы: {yosh}",
@@ -586,17 +523,12 @@ async def main_menu_dispatcher(update, context):
         await update.message.reply_text("🌐 Tilni tanlang:", parse_mode="Markdown", reply_markup=lang_tanlash_keyboard())
         return TIL_TANLASH
 
-    # YANGILANGAN UNIVERSITET HAQIDA BO'LIMI
+    # SODDA VA QISQA UNIVERSITET HAQIDA
     if msg == t['menu_about']:
-        text = t['about_title']
-        text += t['about_filial']
-        text += t['about_main']
-        text += t['about_source']
-        
         try:
-            await update.message.reply_photo(photo=UNI_PHOTO_URL, caption=text, parse_mode="Markdown", disable_web_page_preview=False)
+            await update.message.reply_photo(photo=UNI_PHOTO_URL, caption=t['about_text'], parse_mode="Markdown", disable_web_page_preview=False)
         except:
-            await update.message.reply_text(text, parse_mode="Markdown", disable_web_page_preview=False)
+            await update.message.reply_text(t['about_text'], parse_mode="Markdown", disable_web_page_preview=False)
         return TANLA
 
     if msg == t['menu_bakalavr']:
@@ -931,14 +863,10 @@ def main():
     print("🌐 Tilni o'zgartirish")
     print("━" * 35)
     print("")
-    print("📊 YO'NALISHLAR SONI:")
-    print(f"   🎓 Bakalavriat: 11 ta")
-    print(f"   📚 Magistratura: 5 ta")
-    print("")
-    print("🏛 UNIVERSITET HAQIDA BO'LIMI:")
-    print("   • Chirchiq filiali ochilgan sana: 2024-yil 1-sentyabr")
-    print("   • To'liq ma'lumot berilgan")
-    print("   • Ma'lumot manbasi: Oliygoh.uz sayti")
+    print("🏛 UNIVERSITET HAQIDA (SODDA):")
+    print("   • 2024-yil 1-sentyabrda ochilgan")
+    print("   • 16 ta yo'nalish")
+    print("   • Batafsil: Oliygoh.uz saytida")
     print("")
     print("📨 KANALGA XABAR KETADI")
     print("=" * 50)
