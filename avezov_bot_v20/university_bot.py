@@ -58,7 +58,15 @@ MAG_ISM, MAG_FAMILYA, MAG_YOSH, MAG_TELEFON, MAG_TANLASH = "mi", "mf", "my", "mt
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 LANG_TEXTS = {
     'uz': {
-        'welcome': "🏛 *M.Auezov nomidagi Janubiy Qozog'iston universiteti* Chirchiq filialining rasmiy qabul botiga xush kelibsiz!",
+        'welcome': (
+            "🎓 *RASMIY QABUL BOTI*\n"
+            "━━━━━━━━━━━━━━━━━━━━━━\n"
+            "🏛 *M.Auezov nomidagi*\n"
+            "*Janubiy Qozog'iston universiteti*\n"
+            "🇺🇿 *Chirchiq filiali*\n"
+            "━━━━━━━━━━━━━━━━━━━━━━\n\n"
+            "Xush kelibsiz! Quyidagi tilni tanlang:"
+        ),
         'lang_selected': "✅ *O'zbek tili* tanlandi!",
         # Menyu
         'menu_about': "🏛 Universitet haqida",
@@ -73,15 +81,45 @@ LANG_TEXTS = {
         'cancel': "❌ Bekor qilish",
         'change_lang': "🌐 Tilni o'zgartirish",
         # Universitet haqida (SODDA VA QISQA)
-        'about_text': "🏛 *M.AUEZOV NOMIDAGI JANUBIY QOZOG'ISTON UNIVERSITETI*\n\n"
-                      "🇺🇿 *Chirchiq filiali* 2024-yil 1-sentyabrda ochilgan.\n\n"
-                      "🎓 *Bakalavriat* (4 yil) va *Magistratura* (2 yil) yo'nalishlari mavjud.\n\n"
-                      "📚 *16 ta* yo'nalish (11 bakalavriat, 5 magistratura).\n\n"
-                      "🏛 Asosiy universitet 1943-yilda tashkil etilgan.\n\n"
-                      "👨‍🎓 15 000 dan ortiq talaba tahsil oladi.\n\n"
-                      "🌐 Xalqaro hamkorlik: Erasmus+, dual diplom.\n\n"
-                      "📜 Diplom O'zbekiston va Qozog'istonda amal qiladi.\n\n"
-                      "🔗 *Batafsil:* [Oliygoh.uz](https://oliygoh.uz/post/chirchiqda-mauezov-nomidagi-janubiy-qozogiston-universiteti-filiali-tashkil-etiali)",
+        'about_text': (
+            "╔══════════════════════════════╗\n"
+            "🏛  *M.AUEZOV NOMIDAGI JQU*\n"
+            "       *CHIRCHIQ FILIALI*\n"
+            "╚══════════════════════════════╝\n\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "📌 *FILIAL HAQIDA*\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "📅  Ochilgan: *2024-yil, 1-sentabr*\n"
+            "📍  Manzil: Chirchiq sh., Toshkent viloyati\n"
+            "🏢  O'quv binosi: zamonaviy jihozlangan\n"
+            "🛌  Yotoqxona: *mavjud*\n\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "🎓 *TA'LIM DASTURLARI*\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "🟦  Bakalavriat — *4 yil* (11 yo'nalish)\n"
+            "🟩  Magistratura — *2 yil* (4 yo'nalish)\n"
+            "📜  Diplom: O'zbekiston *va* Qozog'istonda amal qiladi\n\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "🌍 *XALQARO IMKONIYATLAR*\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "🇪🇺  Erasmus+ — Evropada o'qish\n"
+            "📋  Dual diplom — 2 ta diplom birdan\n"
+            "🤝  50+ xorijiy hamkor universitet\n\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "🏛 *ASOSIY UNIVERSITET (SHYMKENT)*\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "📅  Tashkil etilgan: *1943-yil*\n"
+            "👨‍🎓  Talabalar: *15 000+*\n"
+            "🏫  Fakultetlar: *12 ta*, Yo'nalishlar: *50+*\n"
+            "🎓  Bitiruvchilar: *100 000+*\n\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "📞 *BOG'LANISH*\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "📞  +998 99 645 46 71\n"
+            "💬  @Su1tonov0\n\n"
+            "🔗 [🌐 Oliygoh.uz — batafsil ma'lumot](https://oliygoh.uz/post/chirchiqda-mauezov-nomidagi-janubiy-qozogiston-universiteti-filiali-tashkil-etiali)\n"
+            "🔗 [🏛 Rasmiy sayt — auezov.edu.kz](https://auezov.edu.kz)"
+        ),
         # Xatolik xabarlari
         'wrong_input': "❌ *Xato ma'lumot!*",
         'already_registered': "✨ *Siz allaqachon yo'nalish tanlagansiz!*",
@@ -95,9 +133,19 @@ LANG_TEXTS = {
         # Bakalavriat
         'bakalavr_text': "👑 *BAKALAVRIAT YO'NALISHLARI* (11 ta)\n\n🔬 Biotexnologiya\n🌍 Ekologiya\n💻 Axborot tizimlar\n⚙️ Avtomatizatsiya\n🚚 Transport\n⚡ Elektroenergetika\n🧑‍🏫 Pedagogika\n🧠 Sun'iy intellekt\n💼 Hisob va audit\n✈️ Turizm\n⚖️ Yurisprudensiya\n\n📚 *O'qish muddati:* 4 yil",
         # Magistratura
-        'magistratura_text': "🎓 *MAGISTRATURA YO'NALISHLARI* (5 ta)\n\n📊 Iqtisodiyot\n⚖️ Yurisprudensiya\n💻 Axborot tizimlari\n🌍 Ekologiya\n📈 Menejment\n\n📚 *O'qish muddati:* 2 yil",
+        'magistratura_text': "🎓 *MAGISTRATURA YO\'NALISHLARI* (4 ta)\n\n📊 Iqtisodiyot\n⚖️ Yurisprudensiya\n💻 Axborot tizimlari\n🌍 Ekologiya\n\n📚 *O\'qish muddati:* 2 yil",
         # Hujjat topshirish
-        'hujjat_intro': "📋 *KERAKLI HUJJATLAR RO'YXATI*\n\n1️⃣ Diplom/Attestat\n2️⃣ Pasport nusxasi\n3️⃣ 0.86 Med-ma'lumotnoma\n4️⃣ 3x4 rasm (6 dona)\n\n▸ *1-Bosqich: Diplom yoki Attestat*\n❓ Formatni tanlang:",
+        'hujjat_intro': (
+            "📋 *HUJJATLAR RO\'YXATI*\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "1️⃣  📗 Diplom yoki Attestat\n"
+            "2️⃣  🪪 Pasport nusxasi\n"
+            "3️⃣  🏥 0.86 Med-ma'lumotnoma\n"
+            "4️⃣  📸 3×4 rasm — 6 dona\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+            "▶️ *1-qadam: Diplom / Attestat*\n"
+            "❓ Qanday formatda yuborasiz?"
+        ),
         'format_rasm': "🖼️ Rasm",
         'format_fayl': "📎 Fayl",
         'enter_name': "✍️ *Ismingizni kiriting:*",
@@ -108,10 +156,26 @@ LANG_TEXTS = {
         'phone_intro': "📞 *Telefon raqamingizni kiriting:*\n\n📝 *Namuna:* `+998901234567`",
         'invalid_phone': "⚠️ *Noto'g'ri telefon raqam!*\n\n📝 Format: `+998901234567`",
         'success_received': "✅ *Qabul qilindi!*",
-        'all_docs_success': "🎉 *BARCHA HUJJATLAR TOPSHIRILDI!*\n\n👨‍💼 Admin tez orada siz bilan bog'lanadi.\n\n⭐ Botimizdan foydalanganingiz uchun rahmat!",
+        'all_docs_success': (
+            "🎊 *BARCHA HUJJATLAR QABUL QILINDI!*\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "✅ 4 ta hujjat muvaffaqiyatli yuborildi\n"
+            "👨‍💼 Admin *tez orada* siz bilan bog'lanadi\n\n"
+            "📞 Shoshilinch: +998 99 645 46 71\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "⭐ Botimizdan foydalanganingiz uchun rahmat!"
+        ),
         'select_bakalavr_title': "🎓 *BAKALAVRIAT YO'NALISHLARIDAN BIRINI TANLANG:*",
         'select_magistratura_title': "🎓 *MAGISTRATURA YO'NALISHLARIDAN BIRINI TANLANG:*",
-        'reg_success': "🎉 *Yo'nalish muvaffaqiyatli tanlandi!*\n\n✅ Ma'lumotlaringiz qabul qilindi.\n📝 Endi hujjat topshirishingiz mumkin.",
+        'reg_success': (
+            "🎉 *YO\'NALISH TANLANDI!*\n"
+            "━━━━━━━━━━━━━━━━━━━━━━\n"
+            "✅ Ma'lumotlaringiz qabul qilindi\n"
+            "📋 Endi hujjat topshirishingiz mumkin\n"
+            "👨‍💼 Admin tez orada bog'lanadi\n"
+            "━━━━━━━━━━━━━━━━━━━━━━\n"
+            "⬇️ Asosiy menyuga qayting"
+        ),
         'reg_cancelled': "❌ Jarayon bekor qilindi.",
         'unknown': "❓ *Tushunarsiz buyruq!*\n\n📋 Iltimos, menyu tugmalaridan foydalaning.",
         'error_need_file': "⚠️ *Fayl formatida yuboring!*",
@@ -127,7 +191,15 @@ LANG_TEXTS = {
         'contact_text': "📞 *BIZ BILAN BOG'LANISH*\n\n📞 Telefon: {phone}\n💬 Telegram: {username}"
     },
     'ru': {
-        'welcome': "🏛 *Южно-Казахстанский университет им. М.Ауезова* Добро пожаловать!",
+        'welcome': (
+            "🎓 *ОФИЦИАЛЬНЫЙ БОТ ПРИЁМНОЙ КОМИССИИ*\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "🏛 *Южно-Казахстанский университет*\n"
+            "*им. М.Ауезова*\n"
+            "🇺🇿 *Чирчикский филиал*\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+            "Добро пожаловать! Выберите язык:"
+        ),
         'lang_selected': "✅ *Русский язык выбран*!",
         'menu_about': "🏛 Об университете",
         'menu_bakalavr': "🎓 Бакалавриат",
@@ -140,15 +212,45 @@ LANG_TEXTS = {
         'back': "🔙 Назад",
         'cancel': "❌ Отмена",
         'change_lang': "🌐 Сменить язык",
-        'about_text': "🏛 *ЮЖНО-КАЗАХСТАНСКИЙ УНИВЕРСИТЕТ ИМ. М.АУЕЗОВА*\n\n"
-                      "🇺🇿 *Чирчикский филиал* открыт 1 сентября 2024 года.\n\n"
-                      "🎓 *Бакалавриат* (4 года) и *Магистратура* (2 года).\n\n"
-                      "📚 *16 направлений* (11 бакалавриат, 5 магистратура).\n\n"
-                      "🏛 Основной университет основан в 1943 году.\n\n"
-                      "👨‍🎓 Более 15 000 студентов.\n\n"
-                      "🌐 Международное сотрудничество: Erasmus+, двойные дипломы.\n\n"
-                      "📜 Диплом действует в Узбекистане и Казахстане.\n\n"
-                      "🔗 *Подробнее:* [Oliygoh.uz](https://oliygoh.uz/post/chirchiqda-mauezov-nomidagi-janubiy-qozogiston-universiteti-filiali-tashkil-etiali)",
+        'about_text': (
+            "╔══════════════════════════════╗\n"
+            "🏛  *ЮКУ ИМ. М.АУЕЗОВА*\n"
+            "       *ЧИРЧИКСКИЙ ФИЛИАЛ*\n"
+            "╚══════════════════════════════╝\n\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "📌 *О ФИЛИАЛЕ*\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "📅  Открыт: *1 сентября 2024 года*\n"
+            "📍  Адрес: г. Чирчик, Ташкентская обл.\n"
+            "🏢  Корпус: современное оборудование\n"
+            "🛌  Общежитие: *есть*\n\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "🎓 *ПРОГРАММЫ ОБУЧЕНИЯ*\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "🟦  Бакалавриат — *4 года* (11 направлений)\n"
+            "🟩  Магистратура — *2 года* (4 направления)\n"
+            "📜  Диплом: действует в Узбекистане *и* Казахстане\n\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "🌍 *МЕЖДУНАРОДНЫЕ ВОЗМОЖНОСТИ*\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "🇪🇺  Erasmus+ — учёба в Европе\n"
+            "📋  Двойной диплом — 2 диплома сразу\n"
+            "🤝  50+ зарубежных партнёров\n\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "🏛 *ОСНОВНОЙ УНИВЕРСИТЕТ (ШЫМКЕНТ)*\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "📅  Основан: *1943 год*\n"
+            "👨‍🎓  Студентов: *15 000+*\n"
+            "🏫  Факультетов: *12*, Направлений: *50+*\n"
+            "🎓  Выпускников: *100 000+*\n\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "📞 *КОНТАКТЫ*\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "📞  +998 99 645 46 71\n"
+            "💬  @Su1tonov0\n\n"
+            "🔗 [🌐 Oliygoh.uz — подробнее](https://oliygoh.uz/post/chirchiqda-mauezov-nomidagi-janubiy-qozogiston-universiteti-filiali-tashkil-etiali)\n"
+            "🔗 [🏛 Официальный сайт — auezov.edu.kz](https://auezov.edu.kz)"
+        ),
         'wrong_input': "❌ *Неверный ввод!*",
         'already_registered': "✨ *Вы уже выбрали направление!*",
         'no_yonalish': "⚠️ *Сначала выберите направление!*",
@@ -159,7 +261,7 @@ LANG_TEXTS = {
         'step_format': "Формат документа",
         'step_document': "Файл/Фото документа",
         'bakalavr_text': "👑 *НАПРАВЛЕНИЯ БАКАЛАВРИАТА* (11)\n\n🔬 Биотехнология\n🌍 Экология\n💻 Информационные системы\n⚙️ Автоматизация\n🚚 Транспорт\n⚡ Электроэнергетика\n🧑‍🏫 Педагогика\n🧠 Искусственный интеллект\n💼 Учет и аудит\n✈️ Туризм\n⚖️ Юриспруденция\n\n📚 *Срок обучения:* 4 года",
-        'magistratura_text': "🎓 *НАПРАВЛЕНИЯ МАГИСТРАТУРЫ* (5)\n\n📊 Экономика\n⚖️ Юриспруденция\n💻 Информационные системы\n🌍 Экология\n📈 Менеджмент\n\n📚 *Срок обучения:* 2 года",
+        'magistratura_text': "🎓 *НАПРАВЛЕНИЯ МАГИСТРАТУРЫ* (4)\n\n📊 Экономика\n⚖️ Юриспруденция\n💻 Информационные системы\n🌍 Экология\n\n📚 *Срок обучения:* 2 года",
         'hujjat_intro': "📋 *СПИСОК ДОКУМЕНТОВ*\n\n1️⃣ Диплом/Аттестат\n2️⃣ Копия паспорта\n3️⃣ Мед-справка 0.86\n4️⃣ Фото 3x4 (6 шт)\n\n▸ *1-этап: Диплом или Аттестат*\n❓ Выберите формат:",
         'format_rasm': "🖼️ Изображение",
         'format_fayl': "📎 Файл",
@@ -187,7 +289,15 @@ LANG_TEXTS = {
         'contact_text': "📞 *КОНТАКТЫ*\n\n📞 Телефон: {phone}\n💬 Telegram: {username}"
     },
     'kk': {
-        'welcome': "🏛 *М.Әуезов атындағы ОҚУ* Шыршық филиалына қош келдіңіз!",
+        'welcome': (
+            "🎓 *РЕСМИ ҚАБЫЛДАУ БОТЫ*\n"
+            "━━━━━━━━━━━━━━━━━━━━━━\n"
+            "🏛 *М.Әуезов атындағы*\n"
+            "*Оңтүстік Қазақстан университеті*\n"
+            "🇺🇿 *Шыршық филиалы*\n"
+            "━━━━━━━━━━━━━━━━━━━━━━\n\n"
+            "Қош келдіңіз! Тілді таңдаңыз:"
+        ),
         'lang_selected': "✅ *Қазақ тілі таңдалды*!",
         'menu_about': "🏛 Университет туралы",
         'menu_bakalavr': "🎓 Бакалавриат",
@@ -200,15 +310,45 @@ LANG_TEXTS = {
         'back': "🔙 Артқа",
         'cancel': "❌ Болдырмау",
         'change_lang': "🌐 Тілді өзгерту",
-        'about_text': "🏛 *М.ӘУЕЗОВ АТЫНДАҒЫ ОҚУ*\n\n"
-                      "🇺🇿 *Шыршық филиалы* 2024 жылғы 1 қыркүйекте ашылды.\n\n"
-                      "🎓 *Бакалавриат* (4 жыл) және *Магистратура* (2 жыл).\n\n"
-                      "📚 *16 бағыт* (11 бакалавриат, 5 магистратура).\n\n"
-                      "🏛 Бас университет 1943 жылы құрылған.\n\n"
-                      "👨‍🎓 15 000-нан астам студент.\n\n"
-                      "🌐 Халықаралық ынтымақтастық: Erasmus+, қос диплом.\n\n"
-                      "📜 Диплом Өзбекстан мен Қазақстанда жарамды.\n\n"
-                      "🔗 *Толығырақ:* [Oliygoh.uz](https://oliygoh.uz/post/chirchiqda-mauezov-nomidagi-janubiy-qozogiston-universiteti-filiali-tashkil-etiali)",
+        'about_text': (
+            "╔══════════════════════════════╗\n"
+            "🏛  *М.ӘУЕЗОВ АТЫНДАҒЫ ОҚУ*\n"
+            "       *ШЫРШЫҚ ФИЛИАЛЫ*\n"
+            "╚══════════════════════════════╝\n\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "📌 *ФИЛИАЛ ТУРАЛЫ*\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "📅  Ашылды: *2024 жылғы 1 қыркүйек*\n"
+            "📍  Мекенжай: Шыршық қ., Ташкент облысы\n"
+            "🏢  Оқу ғимараты: заманауи жабдықталған\n"
+            "🛌  Жатақхана: *бар*\n\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "🎓 *ОҚУ БАҒДАРЛАМАЛАРЫ*\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "🟦  Бакалавриат — *4 жыл* (11 бағыт)\n"
+            "🟩  Магистратура — *2 жыл* (4 бағыт)\n"
+            "📜  Диплом: Өзбекстан *және* Қазақстанда жарамды\n\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "🌍 *ХАЛЫҚАРАЛЫҚ МҮМКІНДІКТЕР*\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "🇪🇺  Erasmus+ — Еуропада оқу\n"
+            "📋  Қос диплом — бір уақытта 2 диплом\n"
+            "🤝  50+ шетелдік серіктес\n\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "🏛 *БАС УНИВЕРСИТЕТ (ШЫМКЕНТ)*\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "📅  Құрылған: *1943 жыл*\n"
+            "👨‍🎓  Студенттер: *15 000+*\n"
+            "🏫  Факультеттер: *12*, Бағыттар: *50+*\n"
+            "🎓  Түлектер: *100 000+*\n\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "📞 *БАЙЛАНЫС*\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "📞  +998 99 645 46 71\n"
+            "💬  @Su1tonov0\n\n"
+            "🔗 [🌐 Oliygoh.uz — толығырақ](https://oliygoh.uz/post/chirchiqda-mauezov-nomidagi-janubiy-qozogiston-universiteti-filiali-tashkil-etiali)\n"
+            "🔗 [🏛 Ресми сайт — auezov.edu.kz](https://auezov.edu.kz)"
+        ),
         'wrong_input': "❌ *Қате енгізу!*",
         'already_registered': "✨ *Сіз бағытты таңдадыңыз!*",
         'no_yonalish': "⚠️ *Алдымен бағыт таңдаңыз!*",
@@ -219,7 +359,7 @@ LANG_TEXTS = {
         'step_format': "Құжат форматы",
         'step_document': "Құжат файлы/суреті",
         'bakalavr_text': "👑 *БАКАЛАВРИАТ БАҒЫТТАРЫ* (11)\n\n🔬 Биотехнология\n🌍 Экология\n💻 Ақпараттық жүйелер\n⚙️ Автоматтандыру\n🚚 Көлік\n⚡ Электроэнергетика\n🧑‍🏫 Педагогика\n🧠 Жасанды интеллект\n💼 Есеп және аудит\n✈️ Туризм\n⚖️ Юриспруденция\n\n📚 *Оқу мерзімі:* 4 жыл",
-        'magistratura_text': "🎓 *МАГИСТРАТУРА БАҒЫТТАРЫ* (5)\n\n📊 Экономика\n⚖️ Юриспруденция\n💻 Ақпараттық жүйелер\n🌍 Экология\n📈 Менеджмент\n\n📚 *Оқу мерзімі:* 2 жыл",
+        'magistratura_text': "🎓 *МАГИСТРАТУРА БАҒЫТТАРЫ* (4)\n\n📊 Экономика\n⚖️ Юриспруденция\n💻 Ақпараттық жүйелер\n🌍 Экология\n\n📚 *Оқу мерзімі:* 2 жыл",
         'hujjat_intro': "📋 *ҚҰЖАТТАР ТІЗІМІ*\n\n1️⃣ Диплом/Аттестат\n2️⃣ Паспорт көшірмесі\n3️⃣ 0.86 Мед-анықтама\n4️⃣ 3x4 сурет (6 дана)\n\n▸ *1-кезең: Диплом/Аттестат*\n❓ Форматты таңдаңыз:",
         'format_rasm': "🖼️ Сурет",
         'format_fayl': "📎 Файл",
@@ -288,32 +428,29 @@ BAKALAVR_YONALISHLAR = {
 # Magistratura yo'nalishlari
 MAGISTRATURA_YONALISHLAR = {
     'uz': {
-        "Iqtisodiyot": "📊 Iqtisodiyot",
-        "Yurisprudensiya": "⚖️ Yurisprudensiya",
+        "Iqtisodiyot":       "📊 Iqtisodiyot",
+        "Yurisprudensiya":   "⚖️ Yurisprudensiya",
         "Axborot_tizimlari": "💻 Axborot tizimlari",
-        "Ekologiya": "🌍 Ekologiya",
-        "Menejment": "📈 Menejment"
+        "Ekologiya":         "🌍 Ekologiya",
     },
     'ru': {
-        "Iqtisodiyot": "📊 Экономика",
-        "Yurisprudensiya": "⚖️ Юриспруденция",
+        "Iqtisodiyot":       "📊 Экономика",
+        "Yurisprudensiya":   "⚖️ Юриспруденция",
         "Axborot_tizimlari": "💻 Информационные системы",
-        "Ekologiya": "🌍 Экология",
-        "Menejment": "📈 Менеджмент"
+        "Ekologiya":         "🌍 Экология",
     },
     'kk': {
-        "Iqtisodiyot": "📊 Экономика",
-        "Yurisprudensiya": "⚖️ Юриспруденция",
+        "Iqtisodiyot":       "📊 Экономика",
+        "Yurisprudensiya":   "⚖️ Юриспруденция",
         "Axborot_tizimlari": "💻 Ақпараттық жүйелер",
-        "Ekologiya": "🌍 Экология",
-        "Menejment": "📈 Менеджмент"
+        "Ekologiya":         "🌍 Экология",
     }
 }
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 🗄️  MA'LUMOTLAR BAZASI
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-def db_connect(): return sqlite3.connect(DB_PATH)
+def db_connect(): return sqlite3.connect(DB_PATH, check_same_thread=False)
 
 def init_db():
     con = db_connect()
@@ -493,6 +630,7 @@ async def start(update, context):
         lang = row[1] if row[1] else 'uz'
     con.commit()
     con.close()
+    context.user_data.clear()
     context.user_data['lang'] = lang
     await update.message.reply_text(LANG_TEXTS[lang]['welcome'], parse_mode="Markdown", reply_markup=lang_tanlash_keyboard())
     return TIL_TANLASH
@@ -822,13 +960,14 @@ def main():
     conv = ConversationHandler(
         entry_points=[CommandHandler('start', start)],
         states={
-            TIL_TANLASH: [CallbackQueryHandler(lang_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
-            TANLA: [MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher), 
-                    CallbackQueryHandler(bakalavr_callback), CallbackQueryHandler(magistratura_callback)],
-            HUJJAT_FORMAT_1: [CallbackQueryHandler(format_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
-            HUJJAT_FORMAT_2: [CallbackQueryHandler(format_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
-            HUJJAT_FORMAT_3: [CallbackQueryHandler(format_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
-            HUJJAT_FORMAT_4: [CallbackQueryHandler(format_callback), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
+            TIL_TANLASH: [CallbackQueryHandler(lang_callback, pattern='^lang_'), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
+            TANLA: [MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher),
+                    CallbackQueryHandler(bakalavr_callback, pattern='^bak_'),
+                    CallbackQueryHandler(magistratura_callback, pattern='^mag_')],
+            HUJJAT_FORMAT_1: [CallbackQueryHandler(format_callback, pattern='^format_'), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
+            HUJJAT_FORMAT_2: [CallbackQueryHandler(format_callback, pattern='^format_'), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
+            HUJJAT_FORMAT_3: [CallbackQueryHandler(format_callback, pattern='^format_'), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
+            HUJJAT_FORMAT_4: [CallbackQueryHandler(format_callback, pattern='^format_'), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
             HUJJAT_1: [MessageHandler(filters.ALL, hujjat_1)], 
             HUJJAT_2: [MessageHandler(filters.ALL, hujjat_2)],
             HUJJAT_3: [MessageHandler(filters.ALL, hujjat_3)], 
@@ -837,12 +976,12 @@ def main():
             YONALISH_FAMILYA: [MessageHandler(filters.TEXT & ~filters.COMMAND, yonalish_familya)],
             YONALISH_YOSH: [MessageHandler(filters.TEXT & ~filters.COMMAND, yonalish_yosh)], 
             YONALISH_TELEFON: [MessageHandler(filters.ALL, yonalish_telefon)],
-            YONALISH_TANLASH: [CallbackQueryHandler(bakalavr_callback)],
+            YONALISH_TANLASH: [CallbackQueryHandler(bakalavr_callback, pattern='^bak_')],
             MAG_ISM: [MessageHandler(filters.TEXT & ~filters.COMMAND, magistratura_ism)], 
             MAG_FAMILYA: [MessageHandler(filters.TEXT & ~filters.COMMAND, magistratura_familya)],
             MAG_YOSH: [MessageHandler(filters.TEXT & ~filters.COMMAND, magistratura_yosh)], 
             MAG_TELEFON: [MessageHandler(filters.ALL, magistratura_telefon)],
-            MAG_TANLASH: [CallbackQueryHandler(magistratura_callback)],
+            MAG_TANLASH: [CallbackQueryHandler(magistratura_callback, pattern='^mag_')],
         },
         fallbacks=[CommandHandler('start', start), MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_dispatcher)],
         allow_reentry=True
