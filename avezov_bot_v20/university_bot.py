@@ -39,9 +39,6 @@ UNI_PHOTO_URL = "https://storage.googleapis.com/createsite-uz-bucket/blog/172207
 logging.basicConfig(format="%(asctime)s | %(levelname)s | %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Maksimal hujjat topshirish soni
-MAX_HUJJAT_TOPSHIRISH = 7
-
 TIL_TANLASH = "til_tanlash"
 TANLA = "tanla"
 HUJJAT_FORMAT_1, HUJJAT_FORMAT_2, HUJJAT_FORMAT_3, HUJJAT_FORMAT_4 = "hf1", "hf2", "hf3", "hf4"
@@ -65,14 +62,13 @@ LANG_TEXTS = {
         'cancel': "❌ Bekor qilish",
         'change_lang': "🌐 Tilni o'zgartirish",
 
-        # ━━ UNIVERSITET HAQIDA ━━
         'about_text': (
             "🏛 *M.AUEZOV NOMIDAGI JANUBIY QO'ZOG'ISTON UNIVERSITETI*\n"
             "📍 *Chirchiq filiali*\n\n"
             "📅 Filial ochilgan: *2024-yil, 1-sentabr*\n"
             "🏙 Manzil: Chirchiq shahri, Toshkent viloyati\n"
             "🎓 Ta'lim: Bakalavriat (4 yil) + Magistratura (2 yil)\n"
-            "📚 Yo'nalishlar: *15 ta* (11 bak. + 4 mag.)\n"
+            "📚 Yo'nalishlar: *16 ta* (11 bak. + 5 mag.)\n"
             "📜 Diplom: O'zbekiston *va* Qozog'istonda amal qiladi\n\n"
             "🏛 *Asosiy universitet (Shymkent):*\n"
             "• Tashkil etilgan: 1943-yil\n"
@@ -85,13 +81,11 @@ LANG_TEXTS = {
         ),
 
         'bakalavr_text': "👑 *BAKALAVRIAT YO'NALISHLARI* (11 ta)\n\n🔬 Biotexnologiya\n🌍 Ekologiya\n💻 Axborot tizimlar\n⚙️ Avtomatizatsiya\n🚚 Transport\n⚡ Elektroenergetika\n🧑‍🏫 Pedagogika\n🧠 Sun'iy intellekt\n💼 Hisob va audit\n✈️ Turizm\n⚖️ Yurisprudensiya\n\n📚 *O'qish muddati:* 4 yil",
-        'magistratura_text': "🎓 *MAGISTRATURA YO'NALISHLARI* (4 ta)\n\n📊 Iqtisodiyot\n⚖️ Yurisprudensiya\n💻 Axborot tizimlari\n🌍 Ekologiya\n\n📚 *O'qish muddati:* 2 yil",
+        'magistratura_text': "🎓 *MAGISTRATURA YO'NALISHLARI* (5 ta)\n\n📊 Iqtisodiyot\n⚖️ Yurisprudensiya\n💻 Axborot tizimlari\n🌍 Ekologiya\n📈 Menejment\n\n📚 *O'qish muddati:* 2 yil",
         'hujjat_intro': "📋 *KERAKLI HUJJATLAR RO'YXATI*\n\n1️⃣ Diplom/Attestat\n2️⃣ Pasport nusxasi\n3️⃣ 0.86 Med-ma'lumotnoma\n4️⃣ 3x4 rasm (6 dona)\n\n📌 *Siz bakalavriat yo'nalishini tanlagansiz*\n▸ *1-Bosqich: Diplom yoki Attestat*\n❓ Formatni tanlang:",
         'mag_hujjat_intro': "📋 *KERAKLI HUJJATLAR RO'YXATI*\n\n1️⃣ Diplom/Attestat\n2️⃣ Pasport nusxasi\n3️⃣ 0.86 Med-ma'lumotnoma\n4️⃣ 3x4 rasm (6 dona)\n\n📌 *Siz magistratura yo'nalishini tanlagansiz*\n▸ *1-Bosqich: Diplom yoki Attestat*\n❓ Formatni tanlang:",
         'need_select_yonalish': "⚠️ *Avval yo'nalish tanlashingiz kerak!*\n\n📋 Iltimos, avval quyidagi tugmalardan birini bosing:\n• 📋 Bakalavriat yo'nalishlari\n• 🎓 Magistratura yo'nalishlari\n\nKeyin hujjat topshirishingiz mumkin.",
-        'already_selected_yonalish': "⚠️ *Siz allaqachon yo'nalish tanlagansiz!*\n\n✅ Tanlagan yo'nalishingiz: *{yonalish}*\n📝 Endi \"📝 Hujjat topshirish\" tugmasi orqali hujjatlaringizni topshirishingiz mumkin.\n\n❌ Agar boshqa yo'nalish tanlamoqchi bo'lsangiz, avval admin bilan bog'lanishingiz kerak.",
-        'limit_exceeded': "⚠️ *Siz maksimal ({limit}) marta hujjat topshirgansiz!*\n\n📞 Iltimos, admin bilan bog'lanishingiz kerak:\n💬 Telegram: {admin_username}\n📞 Telefon: {admin_phone}\n\nSizning ma'lumotlaringiz ko'rib chiqiladi.",
-        'limit_warning': "⚠️ *Diqqat! Siz {count}/{limit} marta hujjat topshirgansiz.*\n\nYana {remaining} marta topshirish imkoniyatingiz bor.\n\n📋 Hujjat topshirishni davom ettirishingiz mumkin:",
+        'already_submitted_docs': "⚠️ *Siz allaqachon barcha hujjatlarni topshirgansiz!*\n\n✅ Sizning ma'lumotlaringiz qabul qilingan.\n👨‍💼 Admin tez orada siz bilan bog'lanadi.\n\n📞 Savollaringiz bo'lsa administratorga murojaat qiling: {admin}",
         'format_rasm': "🖼️ Rasm (JPEG, PNG)",
         'format_fayl': "📎 Fayl (PDF, DOC)",
         'enter_name': "✍️ *Ismingizni kiriting:*",
@@ -105,8 +99,9 @@ LANG_TEXTS = {
         'all_docs_success': "🎉 *BARCHA HUJJATLAR TOPSHIRILDI!*\n\n👨‍💼 Admin tez orada siz bilan bog'lanadi.\n\n⭐ Botimizdan foydalanganingiz uchun rahmat!",
         'select_bakalavr_title': "🎓 *BAKALAVRIAT YO'NALISHLARIDAN BIRINI TANLANG:*",
         'select_magistratura_title': "🎓 *MAGISTRATURA YO'NALISHLARIDAN BIRINI TANLANG:*",
-        'reg_success': "🎉 *Yo'nalish muvaffaqiyatli tanlandi!*\n\n✅ Tanlagan yo'nalishingiz: *{yonalish}*\n📝 Endi \"📝 Hujjat topshirish\" tugmasi orqali hujjatlaringizni topshirishingiz mumkin.",
-        'already_registered': "✨ *Siz allaqachon yo'nalish tanlagansiz!*\n\n📝 Endi \"📝 Hujjat topshirish\" tugmasi orqali hujjatlaringizni topshirishingiz mumkin.",
+        'reg_success': "🎉 *Yo'nalish muvaffaqiyatli tanlandi!*\n\n✅ Ma'lumotlaringiz qabul qilindi.\n📝 Endi \"📝 Hujjat topshirish\" tugmasi orqali hujjatlaringizni topshirishingiz mumkin.",
+        'already_registered': "✅ *Siz allaqachon ro'yxatdan o'tgansiz!*\n\n📌 Tanlagan yo'nalishingiz: *{yonalish}*\n📝 Hujjatlaringizni topshirish uchun \"📝 Hujjat topshirish\" tugmasini bosing.",
+        'already_selected_yonalish': "⚠️ *Siz allaqachon yo'nalish tanlagansiz!*\n\n📌 Tanlagan yo'nalishingiz: *{yonalish}*\n📝 Endi faqat hujjat topshirishingiz mumkin.",
         'reg_cancelled': "❌ Jarayon bekor qilindi.",
         'unknown': "❓ *Tushunarsiz buyruq!*\n\n📋 Iltimos, menyu tugmalaridan foydalaning.",
         'error_need_file': "⚠️ *Fayl formatida yuboring!*\n\n✅ Formatlar: PDF, DOC, TXT",
@@ -115,7 +110,7 @@ LANG_TEXTS = {
         'step_name': "Ismingiz", 'step_surname': "Familiyangiz",
         'step_age': "Yoshingiz", 'step_phone': "Telefon raqamingiz",
         'step_format': "Hujjat formati", 'step_document': "Hujjat fayli/rasmi",
-        'channel_caption': "📋 *YANGI HUJJAT!*\n\n👤 Foydalanuvchi: {user}\n🆔 ID: `{uid}`\n📂 Hujjat: *{doc_name}*\n📊 Topshirishlar soni: #{count}",
+        'channel_caption': "📋 *YANGI HUJJAT!*\n\n👤 Foydalanuvchi: {user}\n🆔 ID: `{uid}`\n📂 Hujjat: *{doc_name}*",
         'yonalish_channel_caption': "🎓 *BAKALAVRIAT TANLANDI!*\n\n👤 Foydalanuvchi: {user}\n🆔 ID: `{uid}`\n📞 Tel: `{phone}`\n📚 Yo'nalish: *{yonalish}*\n👤 Ism: {ism}\n👤 Familiya: {familya}\n🎂 Yosh: {yosh}",
         'magistratura_channel_caption': "📚 *MAGISTRATURA TANLANDI!*\n\n👤 Foydalanuvchi: {user}\n🆔 ID: `{uid}`\n📞 Tel: `{phone}`\n🎓 Magistratura: *{yonalish}*\n👤 Ism: {ism}\n👤 Familiya: {familya}\n🎂 Yosh: {yosh}",
         'manzil_text': "📍 *UNIVERSITET MANZILI*\n\n🏛 M.Auezov nomidagi JQU\n🇺🇿 Chirchiq filiali\n🏙 Toshkent viloyati, Chirchiq shahri\n\n🗺 [Google Maps da ko'rish](https://maps.google.com)",
@@ -136,14 +131,13 @@ LANG_TEXTS = {
         'cancel': "❌ Отмена",
         'change_lang': "🌐 Сменить язык",
 
-        # ━━ ОБ УНИВЕРСИТЕТЕ ━━
         'about_text': (
             "🏛 *ЮЖНО-КАЗАХСТАНСКИЙ УНИВЕРСИТЕТ ИМ. М.АУЕЗОВА*\n"
             "📍 *Чирчикский филиал*\n\n"
             "📅 Филиал открыт: *1 сентября 2024 года*\n"
             "🏙 Адрес: г. Чирчик, Ташкентская область\n"
             "🎓 Обучение: Бакалавриат (4 года) + Магистратура (2 года)\n"
-            "📚 Направлений: *15* (11 бак. + 4 маг.)\n"
+            "📚 Направлений: *16* (11 бак. + 5 маг.)\n"
             "📜 Диплом: действителен в Узбекистане *и* Казахстане\n\n"
             "🏛 *Основной университет (Шымкент):*\n"
             "• Основан: 1943 год\n"
@@ -156,13 +150,11 @@ LANG_TEXTS = {
         ),
 
         'bakalavr_text': "👑 *НАПРАВЛЕНИЯ БАКАЛАВРИАТА* (11)\n\n🔬 Биотехнология\n🌍 Экология\n💻 Информационные системы\n⚙️ Автоматизация\n🚚 Транспорт\n⚡ Электроэнергетика\n🧑‍🏫 Педагогика\n🧠 Искусственный интеллект\n💼 Учет и аудит\n✈️ Туризм\n⚖️ Юриспруденция\n\n📚 *Срок обучения:* 4 года",
-        'magistratura_text': "🎓 *НАПРАВЛЕНИЯ МАГИСТРАТУРЫ* (4)\n\n📊 Экономика\n⚖️ Юриспруденция\n💻 Информационные системы\n🌍 Экология\n\n📚 *Срок обучения:* 2 года",
+        'magistratura_text': "🎓 *НАПРАВЛЕНИЯ МАГИСТРАТУРЫ* (5)\n\n📊 Экономика\n⚖️ Юриспруденция\n💻 Информационные системы\n🌍 Экология\n📈 Менеджмент\n\n📚 *Срок обучения:* 2 года",
         'hujjat_intro': "📋 *СПИСОК ДОКУМЕНТОВ*\n\n1️⃣ Диплом/Аттестат\n2️⃣ Копия паспорта\n3️⃣ Мед-справка 0.86\n4️⃣ Фото 3x4 (6 шт)\n\n📌 *Вы выбрали направление бакалавриата*\n▸ *1-этап: Диплом или Аттестат*\n❓ Выберите формат:",
         'mag_hujjat_intro': "📋 *СПИСОК ДОКУМЕНТОВ*\n\n1️⃣ Диплом/Аттестат\n2️⃣ Копия паспорта\n3️⃣ Мед-справка 0.86\n4️⃣ Фото 3x4 (6 шт)\n\n📌 *Вы выбрали направление магистратуры*\n▸ *1-этап: Диплом или Аттестат*\n❓ Выберите формат:",
         'need_select_yonalish': "⚠️ *Сначала нужно выбрать направление!*\n\n📋 Пожалуйста, нажмите одну из кнопок:\n• 📋 Направления бакалавриата\n• 🎓 Направления магистратуры\n\nЗатем вы сможете подать документы.",
-        'already_selected_yonalish': "⚠️ *Вы уже выбрали направление!*\n\n✅ Ваше направление: *{yonalish}*\n📝 Теперь вы можете подать документы через кнопку \"📝 Подать документы\".\n\n❌ Если хотите выбрать другое направление, сначала свяжитесь с администратором.",
-        'limit_exceeded': "⚠️ *Вы превысили лимит ({limit}) подачи документов!*\n\n📞 Пожалуйста, свяжитесь с администратором:\n💬 Telegram: {admin_username}\n📞 Телефон: {admin_phone}\n\nВаши данные будут рассмотрены.",
-        'limit_warning': "⚠️ *Внимание! Вы подали документы {count}/{limit} раз.*\n\nУ вас осталось {remaining} попыток.\n\n📋 Вы можете продолжить подачу документов:",
+        'already_submitted_docs': "⚠️ *Вы уже подали все документы!*\n\n✅ Ваши данные приняты.\n👨‍💼 Администратор свяжется с вами.\n\n📞 По вопросам обращайтесь к администратору: {admin}",
         'format_rasm': "🖼️ Изображение (JPEG, PNG)",
         'format_fayl': "📎 Файл (PDF, DOC)",
         'enter_name': "✍️ *Введите имя:*",
@@ -176,8 +168,9 @@ LANG_TEXTS = {
         'all_docs_success': "🎉 *ВСЕ ДОКУМЕНТЫ ПОДАНЫ!*\n\n👨‍💼 Администратор свяжется с вами.\n\n⭐ Спасибо за использование бота!",
         'select_bakalavr_title': "🎓 *ВЫБЕРИТЕ НАПРАВЛЕНИЕ БАКАЛАВРИАТА:*",
         'select_magistratura_title': "🎓 *ВЫБЕРИТЕ НАПРАВЛЕНИЕ МАГИСТРАТУРЫ:*",
-        'reg_success': "🎉 *Направление успешно выбрано!*\n\n✅ Ваше направление: *{yonalish}*\n📝 Теперь вы можете подать документы через кнопку \"📝 Подать документы\".",
-        'already_registered': "✨ *Вы уже выбрали направление!*\n\n📝 Теперь вы можете подать документы через кнопку \"📝 Подать документы\".",
+        'reg_success': "🎉 *Направление успешно выбрано!*\n\n✅ Ваши данные приняты.\n📝 Теперь вы можете подать документы через кнопку \"📝 Подать документы\".",
+        'already_registered': "✅ *Вы уже зарегистрированы!*\n\n📌 Ваше направление: *{yonalish}*\n📝 Для подачи документов нажмите \"📝 Подать документы\".",
+        'already_selected_yonalish': "⚠️ *Вы уже выбрали направление!*\n\n📌 Ваше направление: *{yonalish}*\n📝 Теперь вы можете только подать документы.",
         'reg_cancelled': "❌ Процесс отменен.",
         'unknown': "❓ *Неизвестная команда!*\n\n📋 Используйте кнопки меню.",
         'error_need_file': "⚠️ *Отправьте файл!*\n\n✅ Форматы: PDF, DOC, TXT",
@@ -186,7 +179,7 @@ LANG_TEXTS = {
         'step_name': "Ваше имя", 'step_surname': "Ваша фамилия",
         'step_age': "Ваш возраст", 'step_phone': "Номер телефона",
         'step_format': "Формат документа", 'step_document': "Файл/Фото документа",
-        'channel_caption': "📋 *НОВЫЙ ДОКУМЕНТ!*\n\n👤 Пользователь: {user}\n🆔 ID: `{uid}`\n📂 Документ: *{doc_name}*\n📊 Подач: #{count}",
+        'channel_caption': "📋 *НОВЫЙ ДОКУМЕНТ!*\n\n👤 Пользователь: {user}\n🆔 ID: `{uid}`\n📂 Документ: *{doc_name}*",
         'yonalish_channel_caption': "🎓 *ВЫБРАН БАКАЛАВРИАТ!*\n\n👤 Пользователь: {user}\n🆔 ID: `{uid}`\n📞 Тел: `{phone}`\n📚 Направление: *{yonalish}*\n👤 Имя: {ism}\n👤 Фамилия: {familya}\n🎂 Возраст: {yosh}",
         'magistratura_channel_caption': "📚 *ВЫБРАНА МАГИСТРАТУРА!*\n\n👤 Пользователь: {user}\n🆔 ID: `{uid}`\n📞 Тел: `{phone}`\n🎓 Магистратура: *{yonalish}*\n👤 Имя: {ism}\n👤 Фамилия: {familya}\n🎂 Возраст: {yosh}",
         'manzil_text': "📍 *АДРЕС УНИВЕРСИТЕТА*\n\n🏛 ЮКУ им. М.Ауезова\n🇺🇿 Чирчикский филиал\n🏙 Ташкентская область, г. Чирчик\n\n🗺 [Google Maps](https://maps.google.com)",
@@ -207,14 +200,13 @@ LANG_TEXTS = {
         'cancel': "❌ Болдырмау",
         'change_lang': "🌐 Тілді өзгерту",
 
-        # ━━ УНИВЕРСИТЕТ ТУРАЛЫ ━━
         'about_text': (
             "🏛 *М.ӘУЕЗОВ АТЫНДАҒЫ ОҢТҮСТІК ҚАЗАҚСТАН УНИВЕРСИТЕТІ*\n"
             "📍 *Шыршық филиалы*\n\n"
             "📅 Филиал ашылды: *2024 жылғы 1 қыркүйек*\n"
             "🏙 Мекенжай: Шыршық қ., Ташкент облысы\n"
             "🎓 Оқу: Бакалавриат (4 жыл) + Магистратура (2 жыл)\n"
-            "📚 Бағыттар: *15* (11 бак. + 4 маг.)\n"
+            "📚 Бағыттар: *16* (11 бак. + 5 маг.)\n"
             "📜 Диплом: Өзбекстан *және* Қазақстанда жарамды\n\n"
             "🏛 *Бас университет (Шымкент):*\n"
             "• Құрылған: 1943 жыл\n"
@@ -227,13 +219,11 @@ LANG_TEXTS = {
         ),
 
         'bakalavr_text': "👑 *БАКАЛАВРИАТ БАҒЫТТАРЫ* (11)\n\n🔬 Биотехнология\n🌍 Экология\n💻 Ақпараттық жүйелер\n⚙️ Автоматтандыру\n🚚 Көлік\n⚡ Электроэнергетика\n🧑‍🏫 Педагогика\n🧠 Жасанды интеллект\n💼 Есеп және аудит\n✈️ Туризм\n⚖️ Юриспруденция\n\n📚 *Оқу мерзімі:* 4 жыл",
-        'magistratura_text': "🎓 *МАГИСТРАТУРА БАҒЫТТАРЫ* (4)\n\n📊 Экономика\n⚖️ Юриспруденция\n💻 Ақпараттық жүйелер\n🌍 Экология\n\n📚 *Оқу мерзімі:* 2 жыл",
+        'magistratura_text': "🎓 *МАГИСТРАТУРА БАҒЫТТАРЫ* (5)\n\n📊 Экономика\n⚖️ Юриспруденция\n💻 Ақпараттық жүйелер\n🌍 Экология\n📈 Менеджмент\n\n📚 *Оқу мерзімі:* 2 жыл",
         'hujjat_intro': "📋 *ҚҰЖАТТАР ТІЗІМІ*\n\n1️⃣ Диплом/Аттестат\n2️⃣ Паспорт көшірмесі\n3️⃣ 0.86 Мед-анықтама\n4️⃣ 3x4 сурет (6 дана)\n\n📌 *Сіз бакалавриат бағытын таңдадыңыз*\n▸ *1-кезең: Диплом/Аттестат*\n❓ Форматты таңдаңыз:",
         'mag_hujjat_intro': "📋 *ҚҰЖАТТАР ТІЗІМІ*\n\n1️⃣ Диплом/Аттестат\n2️⃣ Паспорт көшірмесі\n3️⃣ 0.86 Мед-анықтама\n4️⃣ 3x4 сурет (6 дана)\n\n📌 *Сіз магистратура бағытын таңдадыңыз*\n▸ *1-кезең: Диплом/Аттестат*\n❓ Форматты таңдаңыз:",
         'need_select_yonalish': "⚠️ *Алдымен бағыт таңдау керек!*\n\n📋 Өтінемін, келесі түймелердің бірін басыңыз:\n• 📋 Бакалавриат бағыттары\n• 🎓 Магистратура бағыттары\n\nСодан кейін құжат тапсыра аласыз.",
-        'already_selected_yonalish': "⚠️ *Сіз бағытты таңдадыңыз!*\n\n✅ Таңдаған бағытыңыз: *{yonalish}*\n📝 Енді \"📝 Құжат тапсыру\" түймесі арқылы құжаттарыңызды тапсыра аласыз.\n\n❌ Басқа бағыт таңдағыңыз келсе, алдымен әкімшіге хабарласыңыз.",
-        'limit_exceeded': "⚠️ *Сіз лимиттен ({limit}) асып кеттіңіз!*\n\n📞 Әкімшіге хабарласыңыз:\n💬 Telegram: {admin_username}\n📞 Телефон: {admin_phone}\n\nДеректеріңіз қаралады.",
-        'limit_warning': "⚠️ *Назар аударыңыз! Сіз {count}/{limit} рет құжат тапсырдыңыз.*\n\nСізде тағы {remaining} рет тапсыру мүмкіндігі бар.\n\n📋 Құжат тапсыруды жалғастыра беруге болады:",
+        'already_submitted_docs': "⚠️ *Сіз барлық құжаттарды тапсырғансыз!*\n\n✅ Деректеріңіз қабылданды.\n👨‍💼 Әкімші жақын арада хабарласады.\n\n📞 Сұрақтарыңыз болса әкімшіге хабарласыңыз: {admin}",
         'format_rasm': "🖼️ Сурет (JPEG, PNG)",
         'format_fayl': "📎 Файл (PDF, DOC)",
         'enter_name': "✍️ *Атыңызды жазыңыз:*",
@@ -247,8 +237,9 @@ LANG_TEXTS = {
         'all_docs_success': "🎉 *БАРЛЫҚ ҚҰЖАТТАР ТАПСЫРЫЛДЫ!*\n\n👨‍💼 Әкімші жақын арада хабарласады.\n\n⭐ Ботты қолданғаныңызға рахмет!",
         'select_bakalavr_title': "🎓 *БАКАЛАВРИАТ БАҒЫТТАРЫН ТАҢДАҢЫЗ:*",
         'select_magistratura_title': "🎓 *МАГИСТРАТУРА БАҒЫТТАРЫН ТАҢДАҢЫЗ:*",
-        'reg_success': "🎉 *Бағыт сәтті таңдалды!*\n\n✅ Таңдаған бағытыңыз: *{yonalish}*\n📝 Енді \"📝 Құжат тапсыру\" түймесі арқылы құжаттарыңызды тапсыра аласыз.",
-        'already_registered': "✨ *Сіз бағытты таңдадыңыз!*\n\n📝 Енді \"📝 Құжат тапсыру\" түймесі арқылы құжаттарыңызды тапсыра аласыз.",
+        'reg_success': "🎉 *Бағыт сәтті таңдалды!*\n\n✅ Деректеріңіз қабылданды.\n📝 Енді \"📝 Құжат тапсыру\" түймесі арқылы құжаттарыңызды тапсыра аласыз.",
+        'already_registered': "✅ *Сіз тіркелгенсіз!*\n\n📌 Таңдаған бағытыңыз: *{yonalish}*\n📝 Құжат тапсыру үшін \"📝 Құжат тапсыру\" түймесін басыңыз.",
+        'already_selected_yonalish': "⚠️ *Сіз бағытты таңдағансыз!*\n\n📌 Таңдаған бағытыңыз: *{yonalish}*\n📝 Енді тек құжат тапсыра аласыз.",
         'reg_cancelled': "❌ Процесс болдырылды.",
         'unknown': "❓ *Белгісіз команда!*\n\n📋 Мәзір түймелерін пайдаланыңыз.",
         'error_need_file': "⚠️ *Файл жіберіңіз!*\n\n✅ Форматтар: PDF, DOC, TXT",
@@ -257,7 +248,7 @@ LANG_TEXTS = {
         'step_name': "Атыңыз", 'step_surname': "Тегіңіз",
         'step_age': "Жасыңыз", 'step_phone': "Телефон нөміріңіз",
         'step_format': "Құжат форматы", 'step_document': "Құжат файлы/суреті",
-        'channel_caption': "📋 *ЖАҢА ҚҰЖАТ!*\n\n👤 Қолданушы: {user}\n🆔 ID: `{uid}`\n📂 Құжат: *{doc_name}*\n📊 Тапсырулар саны: #{count}",
+        'channel_caption': "📋 *ЖАҢА ҚҰЖАТ!*\n\n👤 Қолданушы: {user}\n🆔 ID: `{uid}`\n📂 Құжат: *{doc_name}*",
         'yonalish_channel_caption': "🎓 *БАКАЛАВРИАТ ТАҢДАЛДЫ!*\n\n👤 Қолданушы: {user}\n🆔 ID: `{uid}`\n📞 Тел: `{phone}`\n📚 Бағыт: *{yonalish}*\n👤 Аты: {ism}\n👤 Тегі: {familya}\n🎂 Жасы: {yosh}",
         'magistratura_channel_caption': "📚 *МАГИСТРАТУРА ТАҢДАЛДЫ!*\n\n👤 Қолданушы: {user}\n🆔 ID: `{uid}`\n📞 Тел: `{phone}`\n🎓 Магистратура: *{yonalish}*\n👤 Аты: {ism}\n👤 Тегі: {familya}\n🎂 Жасы: {yosh}",
         'manzil_text': "📍 *УНИВЕРСИТЕТ МЕКЕНЖАЙЫ*\n\n🏛 М.Әуезов атындағы ОҚУ\n🇺🇿 Шыршық филиалы\n🏙 Ташкент облысы, Шыршық қаласы\n\n🗺 [Google Maps](https://maps.google.com)",
@@ -305,14 +296,17 @@ MAGISTRATURA_YONALISHLAR = {
     'uz': {
         "Iqtisodiyot": "📊 Iqtisodiyot", "Yurisprudensiya": "⚖️ Yurisprudensiya",
         "Axborot_tizimlari": "💻 Axborot tizimlari", "Ekologiya": "🌍 Ekologiya",
+        "Menejment": "📈 Menejment"
     },
     'ru': {
         "Iqtisodiyot": "📊 Экономика", "Yurisprudensiya": "⚖️ Юриспруденция",
         "Axborot_tizimlari": "💻 Информационные системы", "Ekologiya": "🌍 Экология",
+        "Menejment": "📈 Менеджмент"
     },
     'kk': {
         "Iqtisodiyot": "📊 Экономика", "Yurisprudensiya": "⚖️ Юриспруденция",
         "Axborot_tizimlari": "💻 Ақпараттық жүйелер", "Ekologiya": "🌍 Экология",
+        "Menejment": "📈 Менеджмент"
     }
 }
 
@@ -327,26 +321,7 @@ def init_db():
         CREATE TABLE IF NOT EXISTS bakalavr_royxat (id INTEGER PRIMARY KEY, first_name TEXT, last_name TEXT, user_name TEXT, vaqt TEXT, ism TEXT, familya TEXT, yosh INTEGER, telefon TEXT, yonalish TEXT);
         CREATE TABLE IF NOT EXISTS magistratura_royxat (id INTEGER PRIMARY KEY, first_name TEXT, last_name TEXT, user_name TEXT, vaqt TEXT, ism TEXT, familya TEXT, yosh INTEGER, telefon TEXT, yonalish TEXT);
         CREATE TABLE IF NOT EXISTS hujjat_status (user_id INTEGER PRIMARY KEY, doc1 INTEGER DEFAULT 0, doc2 INTEGER DEFAULT 0, doc3 INTEGER DEFAULT 0, doc4 INTEGER DEFAULT 0, last_update TEXT);
-        CREATE TABLE IF NOT EXISTS hujjat_topshirishlar (id INTEGER PRIMARY KEY AUTOINCREMENT, user_id INTEGER, vaqt TEXT, hujjat_turi TEXT, file_id TEXT);
     """)
-    con.commit()
-    con.close()
-
-def get_hujjat_topshirish_soni(user_id):
-    """Foydalanuvchining necha marta hujjat topshirganini hisoblaydi"""
-    con = db_connect()
-    cur = con.cursor()
-    cur.execute("SELECT COUNT(*) FROM hujjat_topshirishlar WHERE user_id=?", (user_id,))
-    count = cur.fetchone()[0]
-    con.close()
-    return count
-
-def add_hujjat_topshirish(user_id, hujjat_turi, file_id):
-    """Hujjat topshirishni qayd qiladi"""
-    con = db_connect()
-    cur = con.cursor()
-    cur.execute("INSERT INTO hujjat_topshirishlar (user_id, vaqt, hujjat_turi, file_id) VALUES (?, ?, ?, ?)",
-                (user_id, str(datetime.datetime.now()), hujjat_turi, file_id))
     con.commit()
     con.close()
 
@@ -372,6 +347,16 @@ def check_already_registered(user_id, table_name):
     res = cur.fetchone()
     con.close()
     return bool(res)
+
+def check_all_docs_submitted(user_id):
+    con = db_connect()
+    cur = con.cursor()
+    cur.execute("SELECT doc1, doc2, doc3, doc4 FROM hujjat_status WHERE user_id=?", (user_id,))
+    row = cur.fetchone()
+    con.close()
+    if row:
+        return row[0] == 1 and row[1] == 1 and row[2] == 1 and row[3] == 1
+    return False
 
 def get_user_lang(user_id):
     con = db_connect()
@@ -528,39 +513,6 @@ async def lang_callback(update, context):
         return TANLA
     return TIL_TANLASH
 
-async def check_hujjat_limit(update, context):
-    """Hujjat topshirish limitini tekshiradi"""
-    user_id = update.effective_user.id
-    lang = get_user_lang(user_id)
-    t = LANG_TEXTS[lang]
-    
-    topshirishlar_soni = get_hujjat_topshirish_soni(user_id)
-    
-    if topshirishlar_soni >= MAX_HUJJAT_TOPSHIRISH:
-        await update.message.reply_text(
-            t['limit_exceeded'].format(
-                limit=MAX_HUJJAT_TOPSHIRISH,
-                admin_username=ADMIN_USERNAME,
-                admin_phone=ADMIN_PHONE
-            ),
-            parse_mode="Markdown"
-        )
-        return False
-    
-    # Agar limitga yaqinlashayotgan bo'lsa, ogohlantirish
-    if topshirishlar_soni >= MAX_HUJJAT_TOPSHIRISH - 2:
-        qolgan = MAX_HUJJAT_TOPSHIRISH - topshirishlar_soni
-        await update.message.reply_text(
-            t['limit_warning'].format(
-                count=topshirishlar_soni,
-                limit=MAX_HUJJAT_TOPSHIRISH,
-                remaining=qolgan
-            ),
-            parse_mode="Markdown"
-        )
-    
-    return True
-
 async def main_menu_dispatcher(update, context):
     msg = update.message.text
     user_id = update.effective_user.id
@@ -587,15 +539,19 @@ async def main_menu_dispatcher(update, context):
         return TANLA
 
     if msg == t['menu_hujjat']:
-        # Limitni tekshirish
-        if not await check_hujjat_limit(update, context):
+        # Tekshirish: foydalanuvchi barcha hujjatlarni topshirganmi?
+        if check_all_docs_submitted(user_id):
+            admin_link = f"[{ADMIN_USERNAME}](tg://user?id={ADMIN_USERNAME.replace('@', '')})" if ADMIN_USERNAME else ADMIN_USERNAME
+            await update.message.reply_text(t['already_submitted_docs'].format(admin=ADMIN_USERNAME), parse_mode="Markdown")
             return TANLA
         
+        # Tekshirish: foydalanuvchi yo'nalish tanlaganmi?
         yonalish_type, yonalish_name = get_user_selected_yonalish(user_id)
         if not yonalish_type:
             await update.message.reply_text(t['need_select_yonalish'], parse_mode="Markdown")
             return TANLA
         
+        # Yo'nalish tanlangan, hujjat topshirish jarayonini boshlaymiz
         if yonalish_type == 'bakalavr':
             await update.message.reply_text(t['hujjat_intro'], parse_mode="Markdown", reply_markup=format_tanlash_keyboard(lang, 1))
         else:
@@ -607,31 +563,21 @@ async def main_menu_dispatcher(update, context):
         return TANLA
 
     if msg == t['menu_bakalavr_tanlash']:
-        yonalish_type, yonalish_name = get_user_selected_yonalish(user_id)
-        if yonalish_type:
-            await update.message.reply_text(
-                t['already_selected_yonalish'].format(yonalish=yonalish_name),
-                parse_mode="Markdown"
-            )
-            return TANLA
-        
+        # Tekshirish: foydalanuvchi allaqachon ro'yxatdan o'tganmi?
         if check_already_registered(user_id, "bakalavr_royxat"):
-            await update.message.reply_text(t['already_registered'], parse_mode="Markdown")
+            yonalish_type, yonalish_name = get_user_selected_yonalish(user_id)
+            yonalish_text = yonalish_name if yonalish_name else "noma'lum"
+            await update.message.reply_text(t['already_registered'].format(yonalish=yonalish_text), parse_mode="Markdown")
             return TANLA
         await update.message.reply_text(t['enter_name'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
         return YONALISH_ISM
 
     if msg == t['menu_magistratura_tanlash']:
-        yonalish_type, yonalish_name = get_user_selected_yonalish(user_id)
-        if yonalish_type:
-            await update.message.reply_text(
-                t['already_selected_yonalish'].format(yonalish=yonalish_name),
-                parse_mode="Markdown"
-            )
-            return TANLA
-        
+        # Tekshirish: foydalanuvchi allaqachon ro'yxatdan o'tganmi?
         if check_already_registered(user_id, "magistratura_royxat"):
-            await update.message.reply_text(t['already_registered'], parse_mode="Markdown")
+            yonalish_type, yonalish_name = get_user_selected_yonalish(user_id)
+            yonalish_text = yonalish_name if yonalish_name else "noma'lum"
+            await update.message.reply_text(t['already_registered'].format(yonalish=yonalish_text), parse_mode="Markdown")
             return TANLA
         await update.message.reply_text(t['enter_name'], parse_mode="Markdown", reply_markup=cancel_back_markup(lang))
         return MAG_ISM
@@ -662,20 +608,6 @@ async def hujjat_handler(update, context, step):
     user_id = update.effective_user.id
     lang = get_user_lang(user_id)
     t = LANG_TEXTS[lang]
-    
-    # Limitni yana bir marta tekshirish (har bir hujjat uchun)
-    topshirishlar_soni = get_hujjat_topshirish_soni(user_id)
-    if topshirishlar_soni >= MAX_HUJJAT_TOPSHIRISH:
-        await update.message.reply_text(
-            t['limit_exceeded'].format(
-                limit=MAX_HUJJAT_TOPSHIRISH,
-                admin_username=ADMIN_USERNAME,
-                admin_phone=ADMIN_PHONE
-            ),
-            parse_mode="Markdown"
-        )
-        return TANLA
-    
     if update.message and update.message.text:
         guard = await process_step_guard(update, context, HUJJAT_STATES[step])
         if guard == "FORCE_CAN_MENU": return TANLA
@@ -687,27 +619,9 @@ async def hujjat_handler(update, context, step):
     if fmt == 'rasm' and not update.message.photo:
         await update.message.reply_text(t['error_need_photo'], parse_mode="Markdown")
         return HUJJAT_STATES[step]
-    
     user = update.message.from_user
     username = get_username_link(user)
-    
-    # Hujjat topshirishni qayd qilish uchun file_id ni olish
-    file_id = None
-    if update.message.document:
-        file_id = update.message.document.file_id
-        hujjat_turi = f"document_{step}_{HUJJAT_NOMLAR[lang][step]}"
-    elif update.message.photo:
-        file_id = update.message.photo[-1].file_id
-        hujjat_turi = f"photo_{step}_{HUJJAT_NOMLAR[lang][step]}"
-    
-    # Topshirishlar sonini olish
-    topshirishlar_soni = get_hujjat_topshirish_soni(user_id) + 1
-    
-    caption = t['channel_caption'].format(
-        user=username, uid=user.id, 
-        doc_name=HUJJAT_NOMLAR[lang][step],
-        count=topshirishlar_soni
-    )
+    caption = t['channel_caption'].format(user=username, uid=user.id, doc_name=HUJJAT_NOMLAR[lang][step])
     try:
         if update.message.document:
             await context.bot.send_document(CHANNEL_USERNAME, update.message.document.file_id, caption=caption, parse_mode="Markdown")
@@ -715,11 +629,6 @@ async def hujjat_handler(update, context, step):
             await context.bot.send_photo(CHANNEL_USERNAME, update.message.photo[-1].file_id, caption=caption, parse_mode="Markdown")
     except Exception as e:
         logger.error(f"Kanalga yuborish xato: {e}")
-    
-    # Hujjat topshirishni bazaga yozish
-    if file_id:
-        add_hujjat_topshirish(user_id, hujjat_turi, file_id)
-    
     update_hujjat_status(user_id, step)
     if step < 4:
         ns = step + 1
@@ -729,10 +638,7 @@ async def hujjat_handler(update, context, step):
         )
         return HUJJAT_FORMAT_STATES[ns]
     else:
-        # Barcha hujjatlar topshirilgandan so'ng, jami topshirishlar sonini ko'rsatish
-        jami_topshirishlar = get_hujjat_topshirish_soni(user_id)
-        success_msg = t['all_docs_success'] + f"\n\n📊 Siz jami {jami_topshirishlar}/{MAX_HUJJAT_TOPSHIRISH} marta hujjat topshirgansiz."
-        await update.message.reply_text(success_msg, parse_mode="Markdown", reply_markup=main_menu_markup(lang))
+        await update.message.reply_text(t['all_docs_success'], parse_mode="Markdown", reply_markup=main_menu_markup(lang))
         return TANLA
 
 async def hujjat_1(update, context): return await hujjat_handler(update, context, 1)
@@ -801,6 +707,12 @@ async def bakalavr_callback(update, context):
     lang = get_user_lang(user_id)
     if key not in BAKALAVR_YONALISHLAR[lang]: return TANLA
     yonalish = BAKALAVR_YONALISHLAR[lang][key]
+    
+    # Tekshirish: foydalanuvchi allaqachon ro'yxatdan o'tganmi?
+    if check_already_registered(user_id, "bakalavr_royxat"):
+        await query.edit_message_text(LANG_TEXTS[lang]['already_selected_yonalish'].format(yonalish=yonalish), parse_mode="Markdown")
+        return TANLA
+    
     con = db_connect()
     cur = con.cursor()
     cur.execute("INSERT OR REPLACE INTO bakalavr_royxat VALUES (?,?,?,?,?,?,?,?,?,?)",
@@ -811,6 +723,7 @@ async def bakalavr_callback(update, context):
     con.commit()
     con.close()
     
+    # Foydalanuvchi tanlagan yo'nalishni saqlaymiz
     set_user_selected_yonalish(user_id, 'bakalavr', yonalish)
     
     username = get_username_link(query.from_user)
@@ -823,10 +736,7 @@ async def bakalavr_callback(update, context):
         await context.bot.send_message(CHANNEL_USERNAME, caption, parse_mode="Markdown")
     except Exception as e:
         logger.error(f"Kanalga yuborish xato: {e}")
-    await query.edit_message_text(
-        LANG_TEXTS[lang]['reg_success'].format(yonalish=yonalish),
-        parse_mode="Markdown"
-    )
+    await query.edit_message_text(LANG_TEXTS[lang]['reg_success'], parse_mode="Markdown")
     await context.bot.send_message(user_id, "🏠 Bosh menyu", reply_markup=main_menu_markup(lang))
     return TANLA
 
@@ -891,6 +801,12 @@ async def magistratura_callback(update, context):
     lang = get_user_lang(user_id)
     if key not in MAGISTRATURA_YONALISHLAR[lang]: return TANLA
     yonalish = MAGISTRATURA_YONALISHLAR[lang][key]
+    
+    # Tekshirish: foydalanuvchi allaqachon ro'yxatdan o'tganmi?
+    if check_already_registered(user_id, "magistratura_royxat"):
+        await query.edit_message_text(LANG_TEXTS[lang]['already_selected_yonalish'].format(yonalish=yonalish), parse_mode="Markdown")
+        return TANLA
+    
     con = db_connect()
     cur = con.cursor()
     cur.execute("INSERT OR REPLACE INTO magistratura_royxat VALUES (?,?,?,?,?,?,?,?,?,?)",
@@ -901,6 +817,7 @@ async def magistratura_callback(update, context):
     con.commit()
     con.close()
     
+    # Foydalanuvchi tanlagan yo'nalishni saqlaymiz
     set_user_selected_yonalish(user_id, 'magistratura', yonalish)
     
     username = get_username_link(query.from_user)
@@ -913,10 +830,7 @@ async def magistratura_callback(update, context):
         await context.bot.send_message(CHANNEL_USERNAME, caption, parse_mode="Markdown")
     except Exception as e:
         logger.error(f"Kanalga yuborish xato: {e}")
-    await query.edit_message_text(
-        LANG_TEXTS[lang]['reg_success'].format(yonalish=yonalish),
-        parse_mode="Markdown"
-    )
+    await query.edit_message_text(LANG_TEXTS[lang]['reg_success'], parse_mode="Markdown")
     await context.bot.send_message(user_id, "🏠 Bosh menyu", reply_markup=main_menu_markup(lang))
     return TANLA
 
