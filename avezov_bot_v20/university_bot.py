@@ -68,7 +68,7 @@ LANG_TEXTS = {
             "📅 Filial ochilgan: *2024-yil, 1-sentabr*\n"
             "🏙 Manzil: Chirchiq shahri, Toshkent viloyati\n"
             "🎓 Ta'lim: Bakalavriat (4 yil) + Magistratura (2 yil)\n"
-            "📚 Yo'nalishlar: *16 ta* (11 bak. + 5 mag.)\n"
+            "📚 Yo'nalishlar: *15 ta* (11 bak. + 4 mag.)\n"
             "📜 Diplom: O'zbekiston *va* Qozog'istonda amal qiladi\n\n"
             "🏛 *Asosiy universitet (Shymkent):*\n"
             "• Tashkil etilgan: 1943-yil\n"
@@ -81,7 +81,7 @@ LANG_TEXTS = {
         ),
 
         'bakalavr_text': "👑 *BAKALAVRIAT YO'NALISHLARI* (11 ta)\n\n🔬 Biotexnologiya\n🌍 Ekologiya\n💻 Axborot tizimlar\n⚙️ Avtomatizatsiya\n🚚 Transport\n⚡ Elektroenergetika\n🧑‍🏫 Pedagogika\n🧠 Sun'iy intellekt\n💼 Hisob va audit\n✈️ Turizm\n⚖️ Yurisprudensiya\n\n📚 *O'qish muddati:* 4 yil",
-        'magistratura_text': "🎓 *MAGISTRATURA YO'NALISHLARI* (5 ta)\n\n📊 Iqtisodiyot\n⚖️ Yurisprudensiya\n💻 Axborot tizimlari\n🌍 Ekologiya\n📈 Menejment\n\n📚 *O'qish muddati:* 2 yil",
+        'magistratura_text': "🎓 *MAGISTRATURA YO'NALISHLARI* (4 ta)\n\n📊 Iqtisodiyot\n⚖️ Yurisprudensiya\n💻 Axborot tizimlari\n🌍 Ekologiya\n\n📚 *O'qish muddati:* 2 yil",
         'hujjat_intro': "📋 *KERAKLI HUJJATLAR RO'YXATI*\n\n1️⃣ Diplom/Attestat\n2️⃣ Pasport nusxasi\n3️⃣ 0.86 Med-ma'lumotnoma\n4️⃣ 3x4 rasm (6 dona)\n\n📌 *Siz bakalavriat yo'nalishini tanlagansiz*\n▸ *1-Bosqich: Diplom yoki Attestat*\n❓ Formatni tanlang:",
         'mag_hujjat_intro': "📋 *KERAKLI HUJJATLAR RO'YXATI*\n\n1️⃣ Diplom/Attestat\n2️⃣ Pasport nusxasi\n3️⃣ 0.86 Med-ma'lumotnoma\n4️⃣ 3x4 rasm (6 dona)\n\n📌 *Siz magistratura yo'nalishini tanlagansiz*\n▸ *1-Bosqich: Diplom yoki Attestat*\n❓ Formatni tanlang:",
         'need_select_yonalish': "⚠️ *Avval yo'nalish tanlashingiz kerak!*\n\n📋 Iltimos, avval quyidagi tugmalardan birini bosing:\n• 📋 Bakalavriat yo'nalishlari\n• 🎓 Magistratura yo'nalishlari\n\nKeyin hujjat topshirishingiz mumkin.",
@@ -137,7 +137,7 @@ LANG_TEXTS = {
             "📅 Филиал открыт: *1 сентября 2024 года*\n"
             "🏙 Адрес: г. Чирчик, Ташкентская область\n"
             "🎓 Обучение: Бакалавриат (4 года) + Магистратура (2 года)\n"
-            "📚 Направлений: *16* (11 бак. + 5 маг.)\n"
+            "📚 Направлений: *15* (11 бак. + 4 маг.)\n"
             "📜 Диплом: действителен в Узбекистане *и* Казахстане\n\n"
             "🏛 *Основной университет (Шымкент):*\n"
             "• Основан: 1943 год\n"
@@ -150,7 +150,7 @@ LANG_TEXTS = {
         ),
 
         'bakalavr_text': "👑 *НАПРАВЛЕНИЯ БАКАЛАВРИАТА* (11)\n\n🔬 Биотехнология\n🌍 Экология\n💻 Информационные системы\n⚙️ Автоматизация\n🚚 Транспорт\n⚡ Электроэнергетика\n🧑‍🏫 Педагогика\n🧠 Искусственный интеллект\n💼 Учет и аудит\n✈️ Туризм\n⚖️ Юриспруденция\n\n📚 *Срок обучения:* 4 года",
-        'magistratura_text': "🎓 *НАПРАВЛЕНИЯ МАГИСТРАТУРЫ* (5)\n\n📊 Экономика\n⚖️ Юриспруденция\n💻 Информационные системы\n🌍 Экология\n📈 Менеджмент\n\n📚 *Срок обучения:* 2 года",
+        'magistratura_text': "🎓 *НАПРАВЛЕНИЯ МАГИСТРАТУРЫ* (4)\n\n📊 Экономика\n⚖️ Юриспруденция\n💻 Информационные системы\n🌍 Экология\n\n📚 *Срок обучения:* 2 года",
         'hujjat_intro': "📋 *СПИСОК ДОКУМЕНТОВ*\n\n1️⃣ Диплом/Аттестат\n2️⃣ Копия паспорта\n3️⃣ Мед-справка 0.86\n4️⃣ Фото 3x4 (6 шт)\n\n📌 *Вы выбрали направление бакалавриата*\n▸ *1-этап: Диплом или Аттестат*\n❓ Выберите формат:",
         'mag_hujjat_intro': "📋 *СПИСОК ДОКУМЕНТОВ*\n\n1️⃣ Диплом/Аттестат\n2️⃣ Копия паспорта\n3️⃣ Мед-справка 0.86\n4️⃣ Фото 3x4 (6 шт)\n\n📌 *Вы выбрали направление магистратуры*\n▸ *1-этап: Диплом или Аттестат*\n❓ Выберите формат:",
         'need_select_yonalish': "⚠️ *Сначала нужно выбрать направление!*\n\n📋 Пожалуйста, нажмите одну из кнопок:\n• 📋 Направления бакалавриата\n• 🎓 Направления магистратуры\n\nЗатем вы сможете подать документы.",
@@ -206,7 +206,7 @@ LANG_TEXTS = {
             "📅 Филиал ашылды: *2024 жылғы 1 қыркүйек*\n"
             "🏙 Мекенжай: Шыршық қ., Ташкент облысы\n"
             "🎓 Оқу: Бакалавриат (4 жыл) + Магистратура (2 жыл)\n"
-            "📚 Бағыттар: *16* (11 бак. + 5 маг.)\n"
+            "📚 Бағыттар: *15* (11 бак. + 4 маг.)\n"
             "📜 Диплом: Өзбекстан *және* Қазақстанда жарамды\n\n"
             "🏛 *Бас университет (Шымкент):*\n"
             "• Құрылған: 1943 жыл\n"
@@ -219,7 +219,7 @@ LANG_TEXTS = {
         ),
 
         'bakalavr_text': "👑 *БАКАЛАВРИАТ БАҒЫТТАРЫ* (11)\n\n🔬 Биотехнология\n🌍 Экология\n💻 Ақпараттық жүйелер\n⚙️ Автоматтандыру\n🚚 Көлік\n⚡ Электроэнергетика\n🧑‍🏫 Педагогика\n🧠 Жасанды интеллект\n💼 Есеп және аудит\n✈️ Туризм\n⚖️ Юриспруденция\n\n📚 *Оқу мерзімі:* 4 жыл",
-        'magistratura_text': "🎓 *МАГИСТРАТУРА БАҒЫТТАРЫ* (5)\n\n📊 Экономика\n⚖️ Юриспруденция\n💻 Ақпараттық жүйелер\n🌍 Экология\n📈 Менеджмент\n\n📚 *Оқу мерзімі:* 2 жыл",
+        'magistratura_text': "🎓 *МАГИСТРАТУРА БАҒЫТТАРЫ* (4)\n\n📊 Экономика\n⚖️ Юриспруденция\n💻 Ақпараттық жүйелер\n🌍 Экология\n\n📚 *Оқу мерзімі:* 2 жыл",
         'hujjat_intro': "📋 *ҚҰЖАТТАР ТІЗІМІ*\n\n1️⃣ Диплом/Аттестат\n2️⃣ Паспорт көшірмесі\n3️⃣ 0.86 Мед-анықтама\n4️⃣ 3x4 сурет (6 дана)\n\n📌 *Сіз бакалавриат бағытын таңдадыңыз*\n▸ *1-кезең: Диплом/Аттестат*\n❓ Форматты таңдаңыз:",
         'mag_hujjat_intro': "📋 *ҚҰЖАТТАР ТІЗІМІ*\n\n1️⃣ Диплом/Аттестат\n2️⃣ Паспорт көшірмесі\n3️⃣ 0.86 Мед-анықтама\n4️⃣ 3x4 сурет (6 дана)\n\n📌 *Сіз магистратура бағытын таңдадыңыз*\n▸ *1-кезең: Диплом/Аттестат*\n❓ Форматты таңдаңыз:",
         'need_select_yonalish': "⚠️ *Алдымен бағыт таңдау керек!*\n\n📋 Өтінемін, келесі түймелердің бірін басыңыз:\n• 📋 Бакалавриат бағыттары\n• 🎓 Магистратура бағыттары\n\nСодан кейін құжат тапсыра аласыз.",
@@ -292,21 +292,19 @@ BAKALAVR_YONALISHLAR = {
     }
 }
 
+# MAGISTRATURA YO'NALISHLARI - Menejment olib tashlandi
 MAGISTRATURA_YONALISHLAR = {
     'uz': {
         "Iqtisodiyot": "📊 Iqtisodiyot", "Yurisprudensiya": "⚖️ Yurisprudensiya",
-        "Axborot_tizimlari": "💻 Axborot tizimlari", "Ekologiya": "🌍 Ekologiya",
-        "Menejment": "📈 Menejment"
+        "Axborot_tizimlari": "💻 Axborot tizimlari", "Ekologiya": "🌍 Ekologiya"
     },
     'ru': {
         "Iqtisodiyot": "📊 Экономика", "Yurisprudensiya": "⚖️ Юриспруденция",
-        "Axborot_tizimlari": "💻 Информационные системы", "Ekologiya": "🌍 Экология",
-        "Menejment": "📈 Менеджмент"
+        "Axborot_tizimlari": "💻 Информационные системы", "Ekologiya": "🌍 Экология"
     },
     'kk': {
         "Iqtisodiyot": "📊 Экономика", "Yurisprudensiya": "⚖️ Юриспруденция",
-        "Axborot_tizimlari": "💻 Ақпараттық жүйелер", "Ekologiya": "🌍 Экология",
-        "Menejment": "📈 Менеджмент"
+        "Axborot_tizimlari": "💻 Ақпараттық жүйелер", "Ekologiya": "🌍 Экология"
     }
 }
 
@@ -539,19 +537,16 @@ async def main_menu_dispatcher(update, context):
         return TANLA
 
     if msg == t['menu_hujjat']:
-        # Tekshirish: foydalanuvchi barcha hujjatlarni topshirganmi?
         if check_all_docs_submitted(user_id):
             admin_link = f"[{ADMIN_USERNAME}](tg://user?id={ADMIN_USERNAME.replace('@', '')})" if ADMIN_USERNAME else ADMIN_USERNAME
             await update.message.reply_text(t['already_submitted_docs'].format(admin=ADMIN_USERNAME), parse_mode="Markdown")
             return TANLA
         
-        # Tekshirish: foydalanuvchi yo'nalish tanlaganmi?
         yonalish_type, yonalish_name = get_user_selected_yonalish(user_id)
         if not yonalish_type:
             await update.message.reply_text(t['need_select_yonalish'], parse_mode="Markdown")
             return TANLA
         
-        # Yo'nalish tanlangan, hujjat topshirish jarayonini boshlaymiz
         if yonalish_type == 'bakalavr':
             await update.message.reply_text(t['hujjat_intro'], parse_mode="Markdown", reply_markup=format_tanlash_keyboard(lang, 1))
         else:
@@ -563,7 +558,6 @@ async def main_menu_dispatcher(update, context):
         return TANLA
 
     if msg == t['menu_bakalavr_tanlash']:
-        # Tekshirish: foydalanuvchi allaqachon ro'yxatdan o'tganmi?
         if check_already_registered(user_id, "bakalavr_royxat"):
             yonalish_type, yonalish_name = get_user_selected_yonalish(user_id)
             yonalish_text = yonalish_name if yonalish_name else "noma'lum"
@@ -573,7 +567,6 @@ async def main_menu_dispatcher(update, context):
         return YONALISH_ISM
 
     if msg == t['menu_magistratura_tanlash']:
-        # Tekshirish: foydalanuvchi allaqachon ro'yxatdan o'tganmi?
         if check_already_registered(user_id, "magistratura_royxat"):
             yonalish_type, yonalish_name = get_user_selected_yonalish(user_id)
             yonalish_text = yonalish_name if yonalish_name else "noma'lum"
@@ -708,7 +701,6 @@ async def bakalavr_callback(update, context):
     if key not in BAKALAVR_YONALISHLAR[lang]: return TANLA
     yonalish = BAKALAVR_YONALISHLAR[lang][key]
     
-    # Tekshirish: foydalanuvchi allaqachon ro'yxatdan o'tganmi?
     if check_already_registered(user_id, "bakalavr_royxat"):
         await query.edit_message_text(LANG_TEXTS[lang]['already_selected_yonalish'].format(yonalish=yonalish), parse_mode="Markdown")
         return TANLA
@@ -723,7 +715,6 @@ async def bakalavr_callback(update, context):
     con.commit()
     con.close()
     
-    # Foydalanuvchi tanlagan yo'nalishni saqlaymiz
     set_user_selected_yonalish(user_id, 'bakalavr', yonalish)
     
     username = get_username_link(query.from_user)
@@ -802,7 +793,6 @@ async def magistratura_callback(update, context):
     if key not in MAGISTRATURA_YONALISHLAR[lang]: return TANLA
     yonalish = MAGISTRATURA_YONALISHLAR[lang][key]
     
-    # Tekshirish: foydalanuvchi allaqachon ro'yxatdan o'tganmi?
     if check_already_registered(user_id, "magistratura_royxat"):
         await query.edit_message_text(LANG_TEXTS[lang]['already_selected_yonalish'].format(yonalish=yonalish), parse_mode="Markdown")
         return TANLA
@@ -817,7 +807,6 @@ async def magistratura_callback(update, context):
     con.commit()
     con.close()
     
-    # Foydalanuvchi tanlagan yo'nalishni saqlaymiz
     set_user_selected_yonalish(user_id, 'magistratura', yonalish)
     
     username = get_username_link(query.from_user)
