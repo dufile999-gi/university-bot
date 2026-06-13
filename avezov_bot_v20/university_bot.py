@@ -104,6 +104,18 @@ LANG_TEXTS = {
         'already_selected_yonalish': "⚠️ *Siz allaqachon yo'nalish tanlagansiz!*\n\n📌 Tanlagan yo'nalishingiz: *{yonalish}*\n📝 Endi faqat hujjat topshirishingiz mumkin.",
         'reg_cancelled': "❌ Jarayon bekor qilindi.",
         'unknown': "❓ *Tushunarsiz buyruq!*\n\n📋 Iltimos, menyu tugmalaridan foydalaning.",
+        'completed_info': (
+            "🔒 *Ariza qabul qilindi!*\n"
+            "━━━━━━━━━━━━━━━━━━━━━━\n"
+            "✅ Siz yo'nalish tanlab, barcha\n"
+            "   hujjatlarni muvaffaqiyatli topshirdingiz.\n\n"
+            "👨‍💼 Admin tez orada siz bilan bog'lanadi.\n"
+            "📞 Savollar: {phone}\n"
+            "💬 Telegram: {username}\n"
+            "━━━━━━━━━━━━━━━━━━━━━━\n"
+            "ℹ️ Faqat ma'lumot bo'limlari ochiq."
+        ),
+        'menu_info_only': "ℹ️ Ma'lumot",
         'error_need_file': "⚠️ *Fayl formatida yuboring!*\n\n✅ Formatlar: PDF, DOC, TXT",
         'error_need_photo': "⚠️ *Rasm formatida yuboring!*\n\n✅ Formatlar: JPEG, PNG, WEBP",
         'warning_in_progress': "⚠️ *Siz ro'yxatdan o'tish jarayonidasiz!*\n\n📝 Kutilmoqda: *{current_step}*\n\n❌ Bekor qilish uchun tugmani bosing.",
@@ -173,6 +185,18 @@ LANG_TEXTS = {
         'already_selected_yonalish': "⚠️ *Вы уже выбрали направление!*\n\n📌 Ваше направление: *{yonalish}*\n📝 Теперь вы можете только подать документы.",
         'reg_cancelled': "❌ Процесс отменен.",
         'unknown': "❓ *Неизвестная команда!*\n\n📋 Используйте кнопки меню.",
+        'completed_info': (
+            "🔒 *Заявка принята!*\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "✅ Вы выбрали направление и подали\n"
+            "   все документы успешно.\n\n"
+            "👨‍💼 Администратор свяжется с вами.\n"
+            "📞 Вопросы: {phone}\n"
+            "💬 Telegram: {username}\n"
+            "━━━━━━━━━━━━━━━━━━━━━━━━\n"
+            "ℹ️ Доступны только информационные разделы."
+        ),
+        'menu_info_only': "ℹ️ Информация",
         'error_need_file': "⚠️ *Отправьте файл!*\n\n✅ Форматы: PDF, DOC, TXT",
         'error_need_photo': "⚠️ *Отправьте фото!*\n\n✅ Форматы: JPEG, PNG, WEBP",
         'warning_in_progress': "⚠️ *Вы в процессе регистрации!*\n\n📝 Ожидается: *{current_step}*\n\n❌ Нажмите Отмена для выхода.",
@@ -242,6 +266,18 @@ LANG_TEXTS = {
         'already_selected_yonalish': "⚠️ *Сіз бағытты таңдағансыз!*\n\n📌 Таңдаған бағытыңыз: *{yonalish}*\n📝 Енді тек құжат тапсыра аласыз.",
         'reg_cancelled': "❌ Процесс болдырылды.",
         'unknown': "❓ *Белгісіз команда!*\n\n📋 Мәзір түймелерін пайдаланыңыз.",
+        'completed_info': (
+            "🔒 *Өтініш қабылданды!*\n"
+            "━━━━━━━━━━━━━━━━━━━━━━\n"
+            "✅ Сіз бағыт таңдап, барлық\n"
+            "   құжаттарды сәтті тапсырдыңыз.\n\n"
+            "👨‍💼 Әкімші жақын арада хабарласады.\n"
+            "📞 Сұрақтар: {phone}\n"
+            "💬 Telegram: {username}\n"
+            "━━━━━━━━━━━━━━━━━━━━━━\n"
+            "ℹ️ Тек ақпараттық бөлімдер қолжетімді."
+        ),
+        'menu_info_only': "ℹ️ Ақпарат",
         'error_need_file': "⚠️ *Файл жіберіңіз!*\n\n✅ Форматтар: PDF, DOC, TXT",
         'error_need_photo': "⚠️ *Сурет жіберіңіз!*\n\n✅ Форматтар: JPEG, PNG, WEBP",
         'warning_in_progress': "⚠️ *Сіз тіркелу процесіндесіз!*\n\n📝 Күтілуде: *{current_step}*\n\n❌ Болдырмау түймесін басыңыз.",
@@ -380,8 +416,20 @@ def update_hujjat_status(user_id, doc_num):
     con.commit()
     con.close()
 
-def main_menu_markup(lang):
+def main_menu_markup(lang, completed=False):
+    """
+    completed=True  → faqat ma'lumot tugmalar (yo'nalish/hujjat yashiriladi)
+    completed=False → to'liq menyu
+    """
     t = LANG_TEXTS[lang]
+    if completed:
+        # Hujjat topshirib bo'lgan foydalanuvchi uchun — faqat info
+        return ReplyKeyboardMarkup([
+            [t['menu_about']],
+            [t['menu_bakalavr'], t['menu_magistratura']],
+            [t['menu_manzil'], t['menu_contact']],
+            [t['change_lang']],
+        ], resize_keyboard=True)
     return ReplyKeyboardMarkup([
         [t['menu_about']],
         [t['menu_bakalavr'], t['menu_magistratura']],
@@ -459,7 +507,8 @@ async def process_step_guard(update, context, current_state):
     msg = update.message.text if update.message else None
     if msg:
         if is_cancel_or_back(msg, lang):
-            await update.message.reply_text(t['reg_cancelled'], reply_markup=main_menu_markup(lang))
+            is_done = check_all_docs_submitted(update.effective_user.id)
+            await update.message.reply_text(t['reg_cancelled'], reply_markup=main_menu_markup(lang, completed=is_done))
             return "FORCE_CAN_MENU"
         if is_any_menu_button(msg, lang):
             step_map = {
@@ -507,7 +556,8 @@ async def lang_callback(update, context):
         set_user_lang(query.from_user.id, lang)
         context.user_data['lang'] = lang
         await query.edit_message_text(LANG_TEXTS[lang]['lang_selected'], parse_mode="Markdown")
-        await query.message.reply_text(LANG_TEXTS[lang]['welcome'], parse_mode="Markdown", reply_markup=main_menu_markup(lang))
+        is_done = check_all_docs_submitted(query.from_user.id)
+        await query.message.reply_text(LANG_TEXTS[lang]['welcome'], parse_mode="Markdown", reply_markup=main_menu_markup(lang, completed=is_done))
         return TANLA
     return TIL_TANLASH
 
@@ -558,6 +608,14 @@ async def main_menu_dispatcher(update, context):
         return TANLA
 
     if msg == t['menu_bakalavr_tanlash']:
+        # Hujjat topshirib bo'lgan bo'lsa — butunlay bloklash
+        if check_all_docs_submitted(user_id):
+            await update.message.reply_text(
+                t['completed_info'].format(phone=ADMIN_PHONE, username=ADMIN_USERNAME),
+                parse_mode="Markdown",
+                reply_markup=main_menu_markup(lang, completed=True)
+            )
+            return TANLA
         if check_already_registered(user_id, "bakalavr_royxat"):
             yonalish_type, yonalish_name = get_user_selected_yonalish(user_id)
             yonalish_text = yonalish_name if yonalish_name else "noma'lum"
@@ -567,6 +625,14 @@ async def main_menu_dispatcher(update, context):
         return YONALISH_ISM
 
     if msg == t['menu_magistratura_tanlash']:
+        # Hujjat topshirib bo'lgan bo'lsa — butunlay bloklash
+        if check_all_docs_submitted(user_id):
+            await update.message.reply_text(
+                t['completed_info'].format(phone=ADMIN_PHONE, username=ADMIN_USERNAME),
+                parse_mode="Markdown",
+                reply_markup=main_menu_markup(lang, completed=True)
+            )
+            return TANLA
         if check_already_registered(user_id, "magistratura_royxat"):
             yonalish_type, yonalish_name = get_user_selected_yonalish(user_id)
             yonalish_text = yonalish_name if yonalish_name else "noma'lum"
@@ -580,7 +646,8 @@ async def main_menu_dispatcher(update, context):
         await update.message.reply_text(text, parse_mode="Markdown")
         return TANLA
 
-    await update.message.reply_text(t['unknown'], parse_mode="Markdown", reply_markup=main_menu_markup(lang))
+    is_done = check_all_docs_submitted(user_id)
+    await update.message.reply_text(t['unknown'], parse_mode="Markdown", reply_markup=main_menu_markup(lang, completed=is_done))
     return TANLA
 
 async def format_callback(update, context):
@@ -631,7 +698,7 @@ async def hujjat_handler(update, context, step):
         )
         return HUJJAT_FORMAT_STATES[ns]
     else:
-        await update.message.reply_text(t['all_docs_success'], parse_mode="Markdown", reply_markup=main_menu_markup(lang))
+        await update.message.reply_text(t['all_docs_success'], parse_mode="Markdown", reply_markup=main_menu_markup(lang, completed=True))
         return TANLA
 
 async def hujjat_1(update, context): return await hujjat_handler(update, context, 1)
